@@ -1,0 +1,11 @@
+<div class="service_users" ng-show="user.type == 'ServiceUser'">
+  <ul>
+    <li ng-repeat="entry in entries">{{ entry }}</li>
+  </ul>
+</div>
+
+<div class="clinicians" ng-show="user.type === 'Clinician'">
+  <ul>
+    <li ng-repeat="serviceUser in serviceUsers">{{ serviceUser }}</li>
+  </ul>
+</div>

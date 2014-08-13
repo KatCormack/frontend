@@ -1,0 +1,32 @@
+<form class="form-horizontal" ng-submit="login()" name="loginForm">
+  <fieldset>
+    <!-- Form Name -->
+    <legend>Login</legend>
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="email">Email address or mobile phone number</label>
+      <div class="col-md-8">
+        <input id="email" name="email" type="text" placeholder="email@example.com or 07999999999" class="form-control input-md" ng-model="user.email">
+
+      </div>
+    </div>
+
+    <!-- Password input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="password">Password</label>
+      <div class="col-md-8">
+        <input id="password" name="password" type="password" placeholder="password" class="form-control input-md" ng-model="user.password">
+
+      </div>
+    </div>
+
+    <!-- Button -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="login"></label>
+      <div class="col-md-4">
+        <input type="submit" value="Login" class="btn btn-primary">
+      </div>
+    </div>
+
+  </fieldset>
+</form>
