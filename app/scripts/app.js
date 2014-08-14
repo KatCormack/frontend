@@ -47,6 +47,18 @@ angular.module('buddyClientApp', [
             controller: 'UserDashboardCtrl'
         });
 
+        $stateProvider.state('serviceUser', {
+            abstract: true,
+            template: '<ui-view>',
+            data: {
+                access: AccessLevels.serviceUser
+            }
+        }).state('serviceUser.diary', {
+            url: '/diary',
+            templateUrl: 'views/diary.html',
+            controller: 'DiaryCtrl'
+        });
+
         $urlRouterProvider.otherwise('/');
         $locationProvider.html5Mode(true);
     });
