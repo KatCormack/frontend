@@ -1,0 +1,10 @@
+body {
+  min-height: 2000px;
+  padding-top: 70px;
+}
+
+[ng-click],
+[data-ng-click],
+[x-ng-click] {
+    cursor: pointer;
+}

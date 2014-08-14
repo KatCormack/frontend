@@ -18,7 +18,7 @@ angular.module('buddyClientApp').
                 var LocalService = $injector.get('LocalService');
                 if (response.status === 401 || response.status === 403) {
                     LocalService.unset('auth_token');
-                    $injector.get('$state').go('anon.home');
+                    $injector.get('$state').go('anon.login');
                 }
                 return $q.reject(response);
             }

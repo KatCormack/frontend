@@ -1,13 +1,12 @@
-<form class="form-horizontal">
+<form class="form-horizontal" ng-submit="login()" name="loginForm">
   <fieldset>
     <!-- Form Name -->
     <legend>Login</legend>
-
     <!-- Text input-->
     <div class="form-group">
-      <label class="col-md-4 control-label" for="email">Email</label>
-      <div class="col-md-6">
-        <input id="email" name="email" type="text" placeholder="noname@example.com" class="form-control input-md" required="">
+      <label class="col-md-4 control-label" for="email">Email address or mobile phone number</label>
+      <div class="col-md-8">
+        <input id="email" name="email" type="text" placeholder="email@example.com or 07999999999" class="form-control input-md" ng-model="user.email">
 
       </div>
     </div>
@@ -15,8 +14,8 @@
     <!-- Password input-->
     <div class="form-group">
       <label class="col-md-4 control-label" for="password">Password</label>
-      <div class="col-md-6">
-        <input id="password" name="password" type="password" placeholder="password" class="form-control input-md" required="">
+      <div class="col-md-8">
+        <input id="password" name="password" type="password" placeholder="password" class="form-control input-md" ng-model="user.password">
 
       </div>
     </div>
@@ -25,7 +24,7 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="login"></label>
       <div class="col-md-4">
-        <button id="login" name="login" class="btn btn-primary">Login</button>
+        <input type="submit" value="Login" class="btn btn-primary">
       </div>
     </div>
 
