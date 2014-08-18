@@ -1,30 +1,32 @@
 <form class="form-horizontal" ng-submit="login()" name="loginForm">
-  <fieldset>
+  <fieldset class="col-md-4 col-md-offset-4">
     <!-- Form Name -->
-    <legend>Login</legend>
+    <legend class="text-center">Login to Buddy</legend>
     <!-- Text input-->
     <div class="form-group">
-      <label class="col-md-4 control-label" for="email">Email address or mobile phone number</label>
-      <div class="col-md-8">
-        <input id="email" name="email" type="text" placeholder="email@example.com or 07999999999" class="form-control input-md" ng-model="user.email">
-
+      <div class="col-md-12">
+        <input id="email" name="email" type="text" placeholder="email or mobile number" class="form-control input-md" ng-model="user.email">
       </div>
     </div>
 
     <!-- Password input-->
     <div class="form-group">
-      <label class="col-md-4 control-label" for="password">Password</label>
-      <div class="col-md-8">
+      <div class="col-md-12">
         <input id="password" name="password" type="password" placeholder="password" class="form-control input-md" ng-model="user.password">
-
       </div>
+    </div>
+
+    <div class="checkbox">
+      <label>
+        <input id="remember-me" name="remember_me" type="checkbox"  ng-model="user.remember_me">
+        Remember me on this computer
+      </label>
     </div>
 
     <!-- Button -->
     <div class="form-group">
-      <label class="col-md-4 control-label" for="login"></label>
-      <div class="col-md-4">
-        <input type="submit" value="Login" class="btn btn-primary">
+      <div class="col-md-12">
+        <input type="submit" value="Login" class="btn btn-info btn-block btn-lg">
       </div>
     </div>
 

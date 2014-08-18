@@ -1,20 +1,18 @@
 'use strict';
 
 angular.module('buddyClientApp')
-    .constant('ExpiryTime', 3600)
+    .constant('ExpiryTime', 3600000)
     .factory('LocalService', function(ExpiryTime) {
         return {
             get: function(key) {
-                var expiryKey = key + 'Expiry'
-                if (expiry = localStorage.getWithoutExpiry(expiryKey)) {
-                    this.setWithoutExpiry(expiryKey, new Date().getTime() + ExpiryTime);
-                    return this.getWithoutExpiry(expiryKey);
-                } else {
-                    return undefined;
+                var expiry = this.getWithoutExpiry(key + "Expiry")
+                if (expiry && expiry > new Date().getTime()) {
+                    this.setWithoutExpiry(key + "Expiry", new Date().getTime() + ExpiryTime)
+                    return this.getWithoutExpiry(key)
                 }
             },
             set: function(key, val) {
-                this.setWithoutExpiry(expiryKey, new Date().getTime() + ExpiryTime)
+                this.setWithoutExpiry(key + "Expiry", new Date().getTime() + ExpiryTime)
                 return this.setWithoutExpiry(key, val);
             },
             unset: function(key) {
