@@ -5,14 +5,14 @@ angular.module('buddyClientApp')
     .factory('LocalService', function(ExpiryTime) {
         return {
             get: function(key) {
-                var expiry = this.getWithoutExpiry(key + "Expiry")
+                var expiry = this.getWithoutExpiry(key + 'Expiry');
                 if (expiry && expiry > new Date().getTime()) {
-                    this.setWithoutExpiry(key + "Expiry", new Date().getTime() + ExpiryTime)
-                    return this.getWithoutExpiry(key)
+                    this.setWithoutExpiry(key + 'Expiry', new Date().getTime() + ExpiryTime);
+                    return this.getWithoutExpiry(key);
                 }
             },
             set: function(key, val) {
-                this.setWithoutExpiry(key + "Expiry", new Date().getTime() + ExpiryTime)
+                this.setWithoutExpiry(key + 'Expiry', new Date().getTime() + ExpiryTime);
                 return this.setWithoutExpiry(key, val);
             },
             unset: function(key) {

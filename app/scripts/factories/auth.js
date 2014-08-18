@@ -20,13 +20,13 @@ angular.module('buddyClientApp').
                 return LocalService.get('auth_token');
             },
             isClinician: function() {
-                return this.isAuthenticated() && CurrentUser.user().type == 'Clinician';
+                return this.isAuthenticated() && CurrentUser.user().type === 'Clinician';
             },
             isClinicianAdmin: function() {
                 return this.isClinician() && CurrentUser.user().can_administer_account;
             },
             isServiceUser: function() {
-                return this.isAuthenticated() && CurrentUser.user().type == 'ServiceUser';
+                return this.isAuthenticated() && CurrentUser.user().type === 'ServiceUser';
             },
             login: function(credentials) {
                 var login = $http.post(APIHost + '/api/v1/auth/login', credentials);

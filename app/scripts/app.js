@@ -89,7 +89,7 @@ angular.module('buddyClientApp', [
             url: '/clinicians',
             templateUrl: 'views/clinicians.html',
             controller: 'CliniciansCtrl'
-        })
+        });
 
         $urlRouterProvider.otherwise('/');
         $locationProvider.html5Mode(true);

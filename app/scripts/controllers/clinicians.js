@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('buddyClientApp')
-    .controller('CliniciansCtrl', function ($scope, Clinician) {
+    .controller('CliniciansCtrl', function ($scope, Clinician, Team) {
         $scope.teams = Team.query();
 
         $scope.clinicians = Clinician.query();
