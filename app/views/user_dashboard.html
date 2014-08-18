@@ -1,12 +1,3 @@
-<div class="service_users" ng-show="user.type == 'ServiceUser'">
-  <ul>
-    <li ng-repeat="entry in entries">{{ entry }}</li>
-  </ul>
-  <p><a href="/diary">View my diary</a></p>
-</div>
-
-<div class="clinicians" ng-show="user.type === 'Clinician'">
-  <ul>
-    <li ng-repeat="serviceUser in serviceUsers">{{ serviceUser }}</li>
-  </ul>
+<div ng-show="auth.isClinician()">
+  <p><a ng-href="/service_users">Service Users</a></p>
 </div>

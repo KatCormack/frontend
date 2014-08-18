@@ -59,6 +59,38 @@ angular.module('buddyClientApp', [
             controller: 'DiaryCtrl'
         });
 
+        $stateProvider.state('clinician', {
+            abstract: true,
+            template: '<ui-view>',
+            data: {
+                access: AccessLevels.clinician
+            }
+        }).state('clinician.serviceUsers', {
+            url: '/service_users',
+            templateUrl: 'views/service_users.html',
+            controller: 'ServiceUsersCtrl'
+        }).state('clinician.teams', {
+            url: '/teams',
+            templateUrl: 'views/teams/index.html',
+            controller: 'TeamsCtrl'
+        }).state('clinician.team', {
+            url: '/teams/:team_id',
+            templateUrl: '/views/teams/show.html',
+            controller: 'TeamCtrl'
+        });
+
+        $stateProvider.state('clinicianAdmin', {
+            abstract: true,
+            template: '<ui-view>',
+            data: {
+                access: AccessLevels.clinicianAdmin
+            }
+        }).state('clinicianAdmin.clinicians', {
+            url: '/clinicians',
+            templateUrl: 'views/clinicians.html',
+            controller: 'CliniciansCtrl'
+        })
+
         $urlRouterProvider.otherwise('/');
         $locationProvider.html5Mode(true);
     });

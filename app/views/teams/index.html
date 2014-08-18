@@ -1,0 +1,14 @@
+<table class="table table-bordered table-hover table-striped">
+  <thead>
+    <tr>
+      <th>Account</th>
+      <th>Settings</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="team in teams">
+      <td><a ng-href="/teams/{{team.id}}">{{ team.name }}</a></td>
+      <td>Settings</td>
+    </tr>
+  </tbody>
+</table>

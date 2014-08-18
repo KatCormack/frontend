@@ -8,16 +8,25 @@ angular.module('buddyClientApp').
                     return this.isAuthenticated();
                 }
                 else if (access === AccessLevels.clinician) {
-                    return this.isAuthenticated() && CurrentUser.user().type === 'Clinician';
+                    return this.isClinician();
                 }
                 else if (access === AccessLevels.service_user) {
-                    return this.isAuthenticated() && CurrentUser.user().type === 'ServiceUser';
+                    return this.isServiceUser();
                 } else {
                     return true;
                 }
             },
             isAuthenticated: function() {
                 return LocalService.get('auth_token');
+            },
+            isClinician: function() {
+                return this.isAuthenticated() && CurrentUser.user().type == 'Clinician';
+            },
+            isClinicianAdmin: function() {
+                return this.isClinician() && CurrentUser.user().can_administer_account;
+            },
+            isServiceUser: function() {
+                return this.isAuthenticated() && CurrentUser.user().type == 'ServiceUser';
             },
             login: function(credentials) {
                 var login = $http.post(APIHost + '/api/v1/auth/login', credentials);
