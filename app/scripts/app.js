@@ -5,6 +5,7 @@ angular.module('buddyClientApp', [
     'ngResource',
     'ngSanitize',
     'ui.router',
+    'ui.bootstrap'
 ])
     .constant('APIHost', 'http://localhost:3000')
     .constant('AccessLevels',{
