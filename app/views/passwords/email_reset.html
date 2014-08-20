@@ -1,1 +1,39 @@
+<form class="form-horizontal" ng-submit="resetPassword()" name="resetPasswordForm">
+  <fieldset class="col-md-4 col-md-offset-4">
+    <!-- Form Name -->
+    <legend class="text-center">You have been invited to use Buddy with your service users</legend>
+    <div class="form-group">
+      <div class="col-md-12">
+        <input id="email" name="email" type="text" placeholder="email or mobile number" class="form-control input-md" ng-model="user.email" disabled="disabled">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-md-12">
+        <input id="full_name" name="full_name" type="text" placeholder="Your full name" class="form-control input-md" ng-model="user.full_name">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-md-12">
+        <input id="password" name="password" type="password" placeholder="Password" class="form-control input-md" ng-model="user.password">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-md-12">
+        <input id="password_confirmation" name="password_confirmation" type="password" placeholder="Confirm Password" class="form-control input-md" ng-model="user.password_confirmation">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-md-12">
+        <input type="submit" value="Start using Buddy" class="btn btn-info btn-block btn-lg">
+      </div>
+    </div>
+
+
+  </fieldset>
+</form>
+
 {{ user }}
