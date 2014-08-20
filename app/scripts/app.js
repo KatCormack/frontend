@@ -32,8 +32,12 @@ angular.module('buddyClientApp', [
             controller: 'MainCtrl'
         }).state('anon.login', {
             url: '/login',
-            templateUrl: 'views/login.html',
+            templateUrl: '/views/login.html',
             controller: 'LoginCtrl'
+        }).state('anon.emailPasswordReset', {
+            url: '/p/:userId/:token',
+            templateUrl: '/views/passwords/email_reset.html',
+            controller: 'EmailPasswordResetCtrl'
         });
 
         $stateProvider.state('user', {
@@ -44,7 +48,7 @@ angular.module('buddyClientApp', [
             }
         }).state('user.dashboard', {
             url: '/dashboard',
-            templateUrl: 'views/user_dashboard.html',
+            templateUrl: '/views/user_dashboard.html',
             controller: 'UserDashboardCtrl'
         });
 
@@ -56,7 +60,7 @@ angular.module('buddyClientApp', [
             }
         }).state('serviceUser.diary', {
             url: '/diary',
-            templateUrl: 'views/diary.html',
+            templateUrl: '/views/diary.html',
             controller: 'DiaryCtrl'
         });
 
@@ -68,11 +72,11 @@ angular.module('buddyClientApp', [
             }
         }).state('clinician.serviceUsers', {
             url: '/service_users',
-            templateUrl: 'views/service_users.html',
+            templateUrl: '/views/service_users.html',
             controller: 'ServiceUsersCtrl'
         }).state('clinician.teams', {
             url: '/teams',
-            templateUrl: 'views/teams/index.html',
+            templateUrl: '/views/teams/index.html',
             controller: 'TeamsCtrl'
         }).state('clinician.team', {
             url: '/teams/:team_id',
@@ -88,7 +92,7 @@ angular.module('buddyClientApp', [
             }
         }).state('clinicianAdmin.clinicians', {
             url: '/clinicians',
-            templateUrl: 'views/clinicians.html',
+            templateUrl: '/views/clinicians.html',
             controller: 'CliniciansCtrl'
         });
 
