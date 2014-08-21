@@ -7,8 +7,8 @@ angular.module('buddyClientApp')
                 $scope.errors = [];
                 Auth.login({user_session: $scope.user}).success(function() {
                     $state.go('user.dashboard');
-                }).error(function(err) {
-                    $scope.errors.push(err);
+                }).error(function() {
+                    $scope.login_error = true;
                 });
             }
         };

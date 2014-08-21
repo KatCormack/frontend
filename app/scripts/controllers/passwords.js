@@ -3,7 +3,6 @@
 angular.module('buddyClientApp')
     .controller('PasswordForgotCtrl', function($scope, $state, Password) {
         $scope.password = {};
-        $scope.forgotPassword = ForgotPasswordService.forgotPassword();
         $scope.forgotPassword = function() {
             Password.save($scope.password, function() {
                 $state.go('anon.passwordSent', {email_or_mobile: $scope.password.email_or_mobile});
