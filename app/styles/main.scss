@@ -8,3 +8,27 @@ body {
 [x-ng-click] {
     cursor: pointer;
 }
+
+p.error {
+	color: #d9534f;
+}
+
+input.error {
+	border-color: #d9534f;
+}
+
+.popover {
+	background-color: #d9534f;
+}
+
+.popover.right .arrow:after {
+	border-right-color: #d9534f;
+}
+
+.popover-content {
+	color: white;
+}
+
+.email-or-mobile {
+	font-size: 1.6em;
+}

@@ -1,6 +1,9 @@
 'use strict';
 
 angular.module('buddyClientApp')
+    .factory('Password', function($resource, APIHost) {
+        return $resource(APIHost + '/api/v1/passwords.json');
+    })
     .factory('Entry', function($resource, APIHost) {
         return $resource(APIHost + '/api/v1/entries.json', {id: '@id'}, {update: {method: 'PUT'}});
     })

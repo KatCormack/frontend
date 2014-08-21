@@ -34,6 +34,14 @@ angular.module('buddyClientApp', [
             url: '/login',
             templateUrl: '/views/login.html',
             controller: 'LoginCtrl'
+        }).state('anon.passwordReset', {
+            url: '/passwords/forgot',
+            templateUrl: '/views/passwords/forgot.html',
+            controller: 'PasswordForgotCtrl'
+        }).state('anon.passwordSent', {
+            url: '/passwords/sent/:email_or_mobile',
+            templateUrl: '/views/passwords/sent.html',
+            controller: 'PasswordSentCtrl',
         }).state('anon.emailPasswordReset', {
             url: '/p/:userId/:token',
             templateUrl: '/views/passwords/email_reset.html',

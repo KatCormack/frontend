@@ -1,0 +1,24 @@
+<form class="form-horizontal" ng-submit="forgotPassword()" name="loginForm">
+  <fieldset class="col-md-4 col-md-offset-4">
+    <!-- Form Name -->
+    <legend class="text-center">Reset your password</legend>
+    <p>Enter the email or mobile phone number you want to use to login to Buddy and we will send you instructions on how to reset your password.</p>
+
+    <!-- Text input-->
+    <div class="form-group">
+      <div class="col-md-12">
+        <input id="email" name="email" type="text" placeholder="email or mobile number" class="form-control input-md" ng-model="password.email_or_mobile">
+      </div>
+    </div>
+
+    <!-- Button -->
+    <div class="form-group">
+      <div class="col-md-12">
+        <input type="submit" value="Reset my password" class="btn btn-info btn-block btn-lg">
+      </div>
+    </div>
+
+    <p>Or if you remember your password just <a href="/login">login</a></p>
+
+  </fieldset>
+</form>
