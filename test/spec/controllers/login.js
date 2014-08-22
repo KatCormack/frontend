@@ -24,6 +24,8 @@ describe('Controller: LoginCtrl', function () {
             Auth: Auth,
             $state: state,
         });
+        scope.loginForm = {}
+        scope.loginForm.$valid = true;
     }));
 
 
@@ -40,8 +42,6 @@ describe('Controller: LoginCtrl', function () {
             }
         }
         Auth.login = function() { return auth_obj }
-        scope.loginForm = {}
-        scope.loginForm.$valid = true;
         scope.login();
         expect(state.transitionTo).toBe('user.dashboard')
         expect(scope.login_error).not.toBe(true)
@@ -60,8 +60,6 @@ describe('Controller: LoginCtrl', function () {
             }
         }
         Auth.login = function() { return auth_obj }
-        scope.loginForm = {}
-        scope.loginForm.$valid = true;
         scope.login();
         expect(state.transitionTo).not.toBe('user.dashboard')
         expect(scope.login_error).toBe(true)
