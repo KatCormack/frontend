@@ -22,7 +22,6 @@ describe('Controller: EmailPasswordResetCtrl', function () {
         $httpBackend = _$httpBackend_;
         APIHost = _APIHost_;
         mockClinician = {type: 'Clinician', id: 4, full_name: 'Test User'};
-
     }));
 
     describe("when finding a clinician from the credentials", function() {
@@ -85,10 +84,58 @@ describe('Controller: EmailPasswordResetCtrl', function () {
                 scope.resetPassword();
                 $httpBackend.flush();
                 expect(state.transitionTo).toBe('user.dashboard');
+                expect(scope.user.password_error).toBe(false);
+                expect(scope.user.password_confirmation_error).toBe(false);
             });
 
         });
 
 
     });
+});
+
+
+describe('Controller: PasswordForgotCtrl', function () {
+    beforeEach(module('buddyClientApp'));
+
+    var PasswordForgotCtrl,
+    APIHost,
+    scope,
+    state,
+    $httpBackend;
+
+    beforeEach(inject(function ($controller, $rootScope, _$httpBackend_, _APIHost_) {
+        scope = $rootScope.$new();
+        state = {}
+        state.params = {}
+        state.go = function(arg) {
+            this.transitionTo = arg;
+        }
+        $httpBackend = _$httpBackend_;
+        APIHost = _APIHost_;
+    }));
+
+    describe("when requesting a new password", function() {
+        beforeEach(angular.mock.inject(function($httpBackend) {
+            $httpBackend.when('POST', APIHost + "/api/v1/passwords.json").respond(200, '');
+        }));
+
+        beforeEach(inject(function($controller, $rootScope) {
+            PasswordForgotCtrl = $controller('PasswordForgotCtrl', {
+                $scope: scope,
+                $state: state
+            });
+        }));
+
+
+        it('should send you to the password sent page', function() {
+            scope.password = {email_or_mobile: "foo@bar.com"}
+            scope.forgotPassword();
+            $httpBackend.flush();
+            expect(state.transitionTo).toBe('anon.passwordSent');
+        })
+    });
+
+
+
 });
