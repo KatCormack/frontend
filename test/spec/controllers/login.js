@@ -15,16 +15,16 @@ describe('Controller: LoginCtrl', function () {
     beforeEach(inject(function ($controller, $rootScope) {
         scope = $rootScope.$new();
         Auth = {};
-        state = {}
+        state = {};
         state.go = function(arg) {
             this.transitionTo = arg;
-        }
+        };
         LoginCtrl = $controller('LoginCtrl', {
             $scope: scope,
             Auth: Auth,
             $state: state,
         });
-        scope.loginForm = {}
+        scope.loginForm = {};
         scope.loginForm.$valid = true;
     }));
 
@@ -40,11 +40,11 @@ describe('Controller: LoginCtrl', function () {
             error: function(invokingFunc) {
                 return this;
             }
-        }
-        Auth.login = function() { return auth_obj }
+        };
+        Auth.login = function() { return auth_obj };
         scope.login();
-        expect(state.transitionTo).toBe('user.dashboard')
-        expect(scope.login_error).not.toBe(true)
+        expect(state.transitionTo).toBe('user.dashboard');
+        expect(scope.login_error).not.toBe(true);
     });
 
     it('should error if the credentials are wrong', function () {
@@ -59,10 +59,10 @@ describe('Controller: LoginCtrl', function () {
                 return this;
             }
         }
-        Auth.login = function() { return auth_obj }
+        Auth.login = function() { return auth_obj; };
         scope.login();
-        expect(state.transitionTo).not.toBe('user.dashboard')
-        expect(scope.login_error).toBe(true)
+        expect(state.transitionTo).not.toBe('user.dashboard');
+        expect(scope.login_error).toBe(true);
     });
 
 });
