@@ -5,7 +5,8 @@ angular.module('buddyClientApp', [
     'ngResource',
     'ngSanitize',
     'ui.router',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'angularMoment'
 ])
     .constant('APIHost', 'http://localhost:3000')
     .constant('AccessLevels',{
@@ -29,11 +30,13 @@ angular.module('buddyClientApp', [
         }).state('anon.home', {
             url: '/',
             templateUrl: 'views/main.html',
-            controller: 'MainCtrl'
+            controller: 'MainCtrl',
+            activetab: 'home',
         }).state('anon.login', {
             url: '/login',
             templateUrl: '/views/login.html',
-            controller: 'LoginCtrl'
+            controller: 'LoginCtrl',
+            activetab: 'login',
         }).state('anon.passwordReset', {
             url: '/passwords/forgot',
             templateUrl: '/views/passwords/forgot.html',
@@ -57,7 +60,8 @@ angular.module('buddyClientApp', [
         }).state('user.dashboard', {
             url: '/dashboard',
             templateUrl: '/views/user_dashboard.html',
-            controller: 'UserDashboardCtrl'
+            controller: 'UserDashboardCtrl',
+            activetab: 'dashboard'
         });
 
         $stateProvider.state('serviceUser', {
@@ -81,15 +85,18 @@ angular.module('buddyClientApp', [
         }).state('clinician.serviceUsers', {
             url: '/service_users',
             templateUrl: '/views/service_users.html',
-            controller: 'ServiceUsersCtrl'
+            controller: 'ServiceUsersCtrl',
+            activetab: 'serviceUsers'
         }).state('clinician.teams', {
             url: '/teams',
             templateUrl: '/views/teams/index.html',
-            controller: 'TeamsCtrl'
+            controller: 'TeamsCtrl',
+            activetab: 'teams'
         }).state('clinician.team', {
             url: '/teams/:team_id',
             templateUrl: '/views/teams/show.html',
-            controller: 'TeamCtrl'
+            controller: 'TeamCtrl',
+            activetab: 'teams'
         });
 
         $stateProvider.state('clinicianAdmin', {
@@ -101,7 +108,8 @@ angular.module('buddyClientApp', [
         }).state('clinicianAdmin.clinicians', {
             url: '/clinicians',
             templateUrl: '/views/clinicians.html',
-            controller: 'CliniciansCtrl'
+            controller: 'CliniciansCtrl',
+            activetab: 'clinicians'
         });
 
         $urlRouterProvider.otherwise('/');

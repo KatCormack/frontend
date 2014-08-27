@@ -39,13 +39,13 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li ng-show="auth.isAuthenticated()"><a href="/dashboard">Dashboard</a></li>
-            <li ng-show="auth.isClinician()"><a href="/service_users">Service Users</a></li>
-            <li ng-show="auth.isClinicianAdmin()"><a href="/clinicians">Clinicians</a></li>
-            <li ng-show="auth.isClinicianAdmin()"><a href="/teams">Teams</a></li>
+            <li ng-show="auth.isAuthenticated()" active-nav="dashboard"><a href="/dashboard">Dashboard</a></li>
+            <li ng-show="auth.isClinician()" active-nav="serviceUsers"><a href="/service_users">Service Users</a></li>
+            <li ng-show="auth.isClinicianAdmin()" active-nav="clinicians"><a href="/clinicians">Clinicians</a></li>
+            <li ng-show="auth.isClinicianAdmin()" active-nav="teams"><a href="/teams">Teams</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li ng-hide="auth.isAuthenticated()"><a href="/login">Login</a></li>
+            <li ng-hide="auth.isAuthenticated()" active-nav="login"><a href="/login">Login</a></li>
             <li ng-show="auth.isAuthenticated()" class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
@@ -91,6 +91,8 @@
     <script src="/bower_components/angular-route/angular-route.js"></script>
     <script src="/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="/bower_components/moment/moment.js"></script>
+    <script src="/bower_components/angular-moment/angular-moment.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -112,6 +114,7 @@
     <script src="/scripts/controllers/clinicians.js"></script>
     <script src="/scripts/controllers/teams.js"></script>
     <script src="/scripts/controllers/passwords.js"></script>
+    <script src="/scripts/directives/active_nav.js"></script>
     <!-- endbuild -->
   </body>
 </html>

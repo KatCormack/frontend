@@ -9,7 +9,6 @@
     "commit": "e6a143815b4d3027088acc8f075b193173bceed3"
   },
   "_source": "git://github.com/karma-runner/grunt-karma.git",
-  "_target": "~0.8.3",
-  "_originalSource": "grunt-karma",
-  "_direct": true
+  "_target": "0.8.3",
+  "_originalSource": "grunt-karma"
 }

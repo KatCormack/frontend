@@ -16,7 +16,8 @@
     <tbody>
       <tr ng-repeat="serviceUser in serviceUsers">
         <td>{{ serviceUser.full_name }}</td>
-        <td>{{ (serviceUser.current_session_time | date: "d MMMM 'at' HH:mm" ) || 'None' }}</td>
+        <td ng-show="serviceUser.current_session_time"><span am-time-ago="serviceUser.current_session_time"></span></td>
+        <td ng-hide="serviceUser.current_session_time">None</td>
         <td>Settings</td>
       </tr>
     </tbody>
