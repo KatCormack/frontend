@@ -7,12 +7,11 @@ angular.module('buddyClientApp')
             scope: false,
             link: function(scope, element) {
                 scope.$watch('state.current.activetab', function() {
-                    element.removeClass("active");
-                    if (element.attr("active-nav") === scope.state.current.activetab) {
-                        element.addClass("active");
+                    element.removeClass('active');
+                    if (element.attr('active-nav') === scope.state.current.activetab) {
+                        element.addClass('active');
                     }
-                })
+                });
             }
-        }
-
+        };
     });

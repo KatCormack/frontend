@@ -1,0 +1,13 @@
+<div class="modal-header">
+  Reschedule session
+</div>
+<div class="modal-body">
+  <div class="row">
+    <div class="col-md-6">
+      <p class="input-group">
+        <input type="text" datepicker-popup="dd/MM/yyyy" is-open="$parent.opened" min-date="minDate" ng-required="true" close-text="Close" ng-click="open($event)" ng-model="session.date" />
+        <hour-select ng-model="session.hour"></hour-select>
+        <minute-select ng-model="session.minute"></minute-select>
+      </p>
+    </div>
+</div>

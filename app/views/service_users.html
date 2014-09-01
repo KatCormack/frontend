@@ -1,9 +1,8 @@
 <div class="col-md-12 container">
   <div class="btn-group">
-    <button type="button" class="btn btn-default" ng-click="addServiceUser()">Add a service user</button>
+    <a ng-href="/service_users/new" class="btn btn-default">Add a service user</a>
   </div>
 </div>
-
 <div class="col-md-12">
   <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
     <li class="active"><a href="#az" data-toggle="tab">A-Z</a></li>
@@ -22,8 +21,12 @@
         </thead>
         <tbody>
           <tr ng-repeat="serviceUser in serviceUsers | orderBy:last_name.toUpperCase() | filter:{deactivated_at: null}">
-            <td>{{ serviceUser.full_name }}</td>
-            <td ng-show="serviceUser.current_session_time"><span am-time-ago="serviceUser.current_session_time"></span></td>
+            <td><a ng-href="/service_users/{{serviceUser.id}}">{{ serviceUser.full_name }}</a></td>
+            <td ng-show="serviceUser.current_session_time">
+              <a ng-click="rescheduleSession(serviceUser.current_session_id)">
+                <span am-time-ago="serviceUser.current_session_time"></span>
+              </a>
+            </td>
             <td ng-hide="serviceUser.current_session_time">None</td>
             <td>Settings</td>
           </tr>
@@ -41,7 +44,7 @@
         </thead>
         <tbody>
           <tr ng-repeat="serviceUser in serviceUsers | orderBy:last_name.toUpperCase() | filter:{deactivated_at: '!!'}">
-            <td>{{ serviceUser.full_name }}</td>
+            <td><a ng-href="/service_users/{{serviceUser.id}}">{{ serviceUser.full_name }}</a></td>
             <td ng-show="serviceUser.current_session_time"><span am-time-ago="serviceUser.current_session_time"></span></td>
             <td ng-hide="serviceUser.current_session_time">None</td>
             <td>Settings</td>

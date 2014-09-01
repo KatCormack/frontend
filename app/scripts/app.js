@@ -16,6 +16,9 @@ angular.module('buddyClientApp', [
         clinician: 3,
         clinicianAdmin: 4
     })
+    .run(function($rootScope){
+        $rootScope._ = _;
+    })
     .config(function ($urlRouterProvider, $locationProvider, $httpProvider, $stateProvider, AccessLevels) {
         $httpProvider.defaults.useXDomain = true;
         $httpProvider.interceptors.push('AuthInterceptor');
@@ -31,12 +34,12 @@ angular.module('buddyClientApp', [
             url: '/',
             templateUrl: 'views/main.html',
             controller: 'MainCtrl',
-            activetab: 'home',
+            activetab: 'home'
         }).state('anon.login', {
             url: '/login',
             templateUrl: '/views/login.html',
             controller: 'LoginCtrl',
-            activetab: 'login',
+            activetab: 'login'
         }).state('anon.passwordReset', {
             url: '/passwords/forgot',
             templateUrl: '/views/passwords/forgot.html',
@@ -87,6 +90,11 @@ angular.module('buddyClientApp', [
             templateUrl: '/views/service_users.html',
             controller: 'ServiceUsersCtrl',
             activetab: 'serviceUsers'
+        }).state('clinician.newServiceUser', {
+            url: '/service_users/new',
+            templateUrl: '/views/service_users/new.html',
+            controller: 'NewServiceUsersCtrl',
+            activetab: 'serviceUsers'
         }).state('clinician.serviceUserDiary', {
             url: '/service_users/:id',
             templateUrl: '/views/service_users/show.html',
@@ -120,3 +128,10 @@ angular.module('buddyClientApp', [
         $urlRouterProvider.otherwise('/');
         $locationProvider.html5Mode(true);
     });
+
+
+var pad = function(n, width, z) {
+    z = z || '0';
+    n = n + '';
+    return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
+}
