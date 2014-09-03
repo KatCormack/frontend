@@ -100,6 +100,11 @@ angular.module('buddyClientApp', [
             templateUrl: '/views/service_users/show.html',
             controller: 'ServiceUserDiaryCtrl',
             activetab: 'serviceUsers'
+        }).state('clinician.editServiceUser', {
+            url: '/service_users/:id/edit',
+            templateUrl: '/views/service_users/edit.html',
+            controller: 'EditServiceUserCtrl',
+            activetab: 'serviceUsers'
         }).state('clinician.teams', {
             url: '/teams',
             templateUrl: '/views/teams/index.html',

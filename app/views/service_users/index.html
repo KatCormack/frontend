@@ -28,7 +28,7 @@
               </a>
             </td>
             <td ng-hide="serviceUser.current_session_time">None</td>
-            <td>Settings</td>
+            <td><a ng-href="/service_users/{{serviceUser.id}}/edit">Settings</a></td>
           </tr>
         </tbody>
       </table>
@@ -47,7 +47,7 @@
             <td><a ng-href="/service_users/{{serviceUser.id}}">{{ serviceUser.full_name }}</a></td>
             <td ng-show="serviceUser.current_session_time"><span am-time-ago="serviceUser.current_session_time"></span></td>
             <td ng-hide="serviceUser.current_session_time">None</td>
-            <td>Settings</td>
+            <td><a ng-href="/service_users/{{serviceUser.id}}/edit">Settings</a></td>
           </tr>
         </tbody>
       </table>
@@ -66,7 +66,7 @@
             <td><a ng-href="/service_users/{{serviceUser.id}}">{{ serviceUser.full_name }}</a></td>
             <td ng-show="serviceUser.current_session_time"><span am-time-ago="serviceUser.current_session_time"></span></td>
             <td ng-hide="serviceUser.current_session_time">None</td>
-            <td>Settings</td>
+            <td><a ng-href="/service_users/{{serviceUser.id}}/edit">Settings</a></td>
           </tr>
         </tbody>
       </table>

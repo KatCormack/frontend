@@ -45,9 +45,10 @@ angular.module('buddyClientApp')
                 }
             });
         };
+
         var user = CurrentUser.user();
         $scope.teams = Team.query({}, function() {
-            $scope.service_user.team_id = $scope.teams[0].id;
+            $scope.service_user.account_id = $scope.teams[0].id;
             refreshClinicians();
             $scope.service_user.clinician_id = user.id;
         });
@@ -65,7 +66,7 @@ angular.module('buddyClientApp')
             $scope.service_user.session_time = moment($scope.service_user.session_date, "DD/MM/YYYY")
             $scope.service_user.session_time.hour($scope.service_user.session_hour);
             $scope.service_user.session_time.minute($scope.service_user.session_minute);
-            TeamServiceUser.save({user: $scope.service_user, account_id: $scope.service_user.team_id}, function() {
+            TeamServiceUser.save({user: $scope.service_user, account_id: $scope.service_user.account_id}, function() {
                 $state.go('clinician.serviceUsers');
             }, function(response) {
                 _.each(response.data, function(value, key) { response.data[key] = value[0] });
@@ -73,4 +74,27 @@ angular.module('buddyClientApp')
             });
         }
 
+    }).controller('EditServiceUserCtrl', function($scope, $state, ServiceUser, TeamServiceUser, Team, TeamClinician) {
+        $scope.service_user = ServiceUser.get({id: $state.params.id}, function() {
+            $scope.service_user.account_id = $scope.service_user.primary_account_id;
+        })
+        var refreshClinicians = function() {
+            $scope.clinicians = TeamClinician.query({account_id: $scope.teams[0].id}, function() {
+                if (!_.detect($scope.clinicians, function(x) { return x.id == $scope.service_user.clinician_id })) {
+                    $scope.service_user.clinician_id = null;
+                }
+            });
+        };
+        $scope.teams = Team.query({}, function() {
+            refreshClinicians();
+        });
+
+        $scope.submit = function() {
+            TeamServiceUser.update({id: $scope.service_user.id, user: $scope.service_user, account_id: $scope.service_user.account_id}, function() {
+
+            }, function(response) {
+                _.each(response.data, function(value, key) { response.data[key] = value[0] });
+                $scope.errors = response.data;
+            });
+        };
     });
