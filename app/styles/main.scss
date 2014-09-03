@@ -9,7 +9,7 @@ body {
     cursor: pointer;
 }
 
-p.error {
+label.error, p.error {
 	color: #d9534f;
 }
 
@@ -64,4 +64,23 @@ legend {
 
 .as-background {
 	color: white;
+}
+
+.required label:after { 
+   content:" *";
+   color:red;
+}
+
+label.error span {
+	font-size: 0.8em;
+	font-style: italic;
+	color: #bbb;	
+}
+
+label.error span:after {
+	content: ")"
+}
+
+label.error span:before {
+	content: "("
 }

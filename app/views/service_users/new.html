@@ -2,26 +2,38 @@
   <h1>Add a service user</h1>
   <form ng-submit="submit()">
     <div class="col-md-6">
-      <div class="form-group">
-        <label for="service_user_first_name">First Name</label>
+      <div class="form-group required">
+        <label for="service_user_first_name" ng-class="{error: errors.first_name}">
+          First Name
+          <span class="error-inline" ng-show="errors.first_name">{{ errors.first_name }}</span>
+        </label>
         <input type="text" ng-model="service_user.first_name" placeholder="" class="form-control input-md" id="service_user_first_name">
       </div>
     </div>
     <div class="col-md-6">
-      <div class="form-group">
-        <label for="service_user_last_name">Last Name</label>
+      <div class="form-group required">
+        <label for="service_user_last_name" ng-class="{error: errors.last_name}">
+          Last Name
+          <span class="error-inline" ng-show="errors.last_name">{{ errors.last_name }}</span>
+        </label>
         <input type="text" ng-model="service_user.last_name" placeholder="" class="form-control input-md" id="service_user_last_name">
       </div>
     </div>
     <div class="col-md-6">
-      <div class="form-group">
-        <label for="service_user_mobile">Mobile Phone Number</label>
+      <div class="form-group required">
+        <label for="service_user_mobile" ng-class="{error: errors.mobile}">
+          Mobile Phone Number
+          <span class="error-inline" ng-show="errors.mobile">{{ errors.mobile }}</span>
+        </label>
         <input type="text" ng-model="service_user.mobile" placeholder="" class="form-control input-md" id="service_user_mobile">
       </div>
     </div>
     <div class="col-md-6">
       <div class="form-group">
-        <label for="service_user_email">Email Address</label>
+        <label for="service_user_email" ng-class="{error: errors.email}">
+          Email Address
+          <span class="error-inline" ng-show="errors.email">{{ errors.email }}</span>
+        </label>
         <input type="text" ng-model="service_user.email" placeholder="" class="form-control input-md" id="service_user_email">
       </div>
     </div>
@@ -32,29 +44,29 @@
       </div>
     </div>
     <div class="col-md-6">
-      <div class="form-group">
+      <div class="form-group required">
         <label for="service_user_clinician">Primary Clinician</label>
         <select class="form-control" ng-model="service_user.clinician_id" ng-options="clinician.id as clinician.full_name for clinician in clinicians"></select>
       </div>
     </div>
     <div class="form-row col-md-6">
       <div class="form-group">
-        <div class="col-md-6">
+        <div class="col-md-6 required">
           <label for="service_user_session_date">Next session time</label>
-          <input type="text" datepicker-popup="dd/MM/yyyy" is-open="$parent.opened" min-date="minDate" ng-required="true" close-text="Close" ng-click="open($event)" ng-model="service_user.session_date" class="form-control input-md" />
+          <input type="text" datepicker-popup="dd/MM/yyyy" is-open="opened" min-date="minDate" ng-required="true" close-text="Close" ng-click="open()" ng-model="service_user.session_date" class="form-control input-md" />
         </div>
         <div class="col-md-3">
-          <label class="as-background">Hour </label>
-          <hour-select ng-model="session.hour"></hour-select>
+          <label class="as-background">Hour</label>
+          <hour-select ng-model="service_user.session_hour"></hour-select>
         </div>
         <div class="col-md-3">
           <label class="as-background">Minute</label>
-          <minute-select ng-model="session.hour"></hour-select>
+          <minute-select ng-model="service_user.session_minute"></hour-select>
         </div>
       </div>
     </div>
     <div class="col-md-6">
-      <div class="form-group">
+      <div class="form-group required">
         <label for="service_user_clinician">Team</label>
         <select class="form-control" ng-model="service_user.team_id" ng-options="team.id as team.name for team in teams">
         </select>
@@ -66,17 +78,20 @@
 
     <div class="col-md-12">
       <div class="col-md-1">
-        <input type="checkbox" value="">
+        <input type="checkbox" ng-model="service_user.agree_to_terms" value="1" id="service_user_agree_to_terms">
       </div>
-      <div class="col-md-11">
-        <label>
+      <div class="col-md-11" class="required">
+        <label for="service_user_agree_to_terms" ng-class="{error: errors.agree_to_terms}">
           I have explained to the service user how Buddy works and the terms and conditions of use. I have emphasised that Buddy is not monitored on a daily basis and that it cannot be used as a way of accessing emergency support. I have explained where this kind of support can be obtained.
+          <span class="error-inline" ng-show="errors.agree_to_terms">{{ errors.agree_to_terms }}</span>
         </label>
       </div>
     </div>
 
     <div class="col-md-12">
-
+      <div class="btn-group">
+        <input type="submit" class="btn btn-default" value="Save">
+      </div>
     </div>
   </form>
 </div>

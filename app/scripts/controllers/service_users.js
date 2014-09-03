@@ -34,8 +34,10 @@ angular.module('buddyClientApp')
     }).controller('ServiceUserDiaryCtrl', function($scope, ServiceUser, $state, Entry) {
         $scope.user = ServiceUser.get({id: $state.params.id});
         $scope.entries = Entry.query({user_id: $state.params.id});
-    }).controller('NewServiceUsersCtrl', function($scope, Team, TeamClinician, CurrentUser) {
+    }).controller('NewServiceUsersCtrl', function($scope, Team, TeamClinician, CurrentUser, TeamServiceUser) {
         $scope.service_user = {};
+        $scope.errors = {};
+
         var refreshClinicians = function() {
             $scope.clinicians = TeamClinician.query({account_id: $scope.teams[0].id}, function() {
                 if (!_.detect($scope.clinicians, function(x) { return x.id == $scope.service_user.clinician_id })) {
@@ -49,7 +51,26 @@ angular.module('buddyClientApp')
             refreshClinicians();
             $scope.service_user.clinician_id = user.id;
         });
-        $scope.open = function($event) {
+        $scope.service_user.session_scheduled_time = moment().add('months', 1);
+        $scope.service_user.session_date = $scope.service_user.session_scheduled_time.format("DD/MM/YYYY");
+        $scope.service_user.session_hour = $scope.service_user.session_scheduled_time.format("HH");
+        $scope.service_user.session_minute = "00";
+
+        $scope.open = function() {
             $scope.opened = true;
         };
+
+        $scope.submit = function() {
+            $scope.service_user.session_scheduled_time = moment($scope.service_user.session_date, "DD/MM/YYYY")
+            $scope.service_user.session_scheduled_time.hour($scope.service_user.session_hour);
+            $scope.service_user.session_scheduled_time.minute($scope.service_user.session_minute);
+            TeamServiceUser.save({user: $scope.service_user, account_id: $scope.service_user.team_id}, function() {
+
+            }, function(response) {
+                _.each(response.data, function(value, key) { response.data[key] = value[0] });
+                $scope.errors = response.data;
+                console.log(response);
+            });
+        }
+
     });
