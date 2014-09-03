@@ -1,5 +1,7 @@
 <div class="col-md-8 col-md-push-2 form-container">
-  <h1>Add a service user</h1>
+  <legend>
+    <h1>Add a service user</h1>
+  </legend>
   <form ng-submit="submit()">
     <div class="col-md-6">
       <div class="form-group required">
@@ -80,7 +82,7 @@
       <div class="col-md-1">
         <input type="checkbox" ng-model="service_user.agree_to_terms" value="1" id="service_user_agree_to_terms">
       </div>
-      <div class="col-md-11 required">
+      <div class="col-md-11 required form-group">
         <label for="service_user_agree_to_terms" ng-class="{error: errors.agree_to_terms}">
           I have explained to the service user how Buddy works and the terms and conditions of use. I have emphasised that Buddy is not monitored on a daily basis and that it cannot be used as a way of accessing emergency support. I have explained where this kind of support can be obtained.
           <span class="error-inline" ng-show="errors.agree_to_terms">{{ errors.agree_to_terms }}</span>
@@ -88,9 +90,12 @@
       </div>
     </div>
 
-    <div class="col-md-12">
-      <div class="btn-group">
-        <input type="submit" class="btn btn-default" value="Save">
+    <div class="col-md-12 footer">
+      <div class="col-md-6 text-right">
+        <input type="submit" class="btn btn-default right" value="Create user">
+      </div>
+      <div class="col-md-6 cancel-button">
+        <a href="/service_users">Cancel</a>
       </div>
     </div>
   </form>

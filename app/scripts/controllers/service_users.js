@@ -34,7 +34,7 @@ angular.module('buddyClientApp')
     }).controller('ServiceUserDiaryCtrl', function($scope, ServiceUser, $state, Entry) {
         $scope.user = ServiceUser.get({id: $state.params.id});
         $scope.entries = Entry.query({user_id: $state.params.id});
-    }).controller('NewServiceUsersCtrl', function($scope, Team, TeamClinician, CurrentUser, TeamServiceUser) {
+    }).controller('NewServiceUsersCtrl', function($scope, $state, Team, TeamClinician, CurrentUser, TeamServiceUser) {
         $scope.service_user = {};
         $scope.errors = {};
 
@@ -66,11 +66,10 @@ angular.module('buddyClientApp')
             $scope.service_user.session_time.hour($scope.service_user.session_hour);
             $scope.service_user.session_time.minute($scope.service_user.session_minute);
             TeamServiceUser.save({user: $scope.service_user, account_id: $scope.service_user.team_id}, function() {
-                $scope.errors = {};
+                $state.go('clinician.serviceUsers');
             }, function(response) {
                 _.each(response.data, function(value, key) { response.data[key] = value[0] });
                 $scope.errors = response.data;
-                console.log(response);
             });
         }
 

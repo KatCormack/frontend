@@ -87,7 +87,7 @@ angular.module('buddyClientApp', [
             }
         }).state('clinician.serviceUsers', {
             url: '/service_users',
-            templateUrl: '/views/service_users.html',
+            templateUrl: '/views/service_users/index.html',
             controller: 'ServiceUsersCtrl',
             activetab: 'serviceUsers'
         }).state('clinician.newServiceUser', {

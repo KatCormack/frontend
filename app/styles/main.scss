@@ -9,10 +9,6 @@ body {
     cursor: pointer;
 }
 
-label.error, p.error {
-	color: #d9534f;
-}
-
 input.error {
 	border-color: #d9534f;
 }
@@ -71,16 +67,39 @@ legend {
    color:red;
 }
 
-label.error span {
+
+.form-group label.error span:after {
+	content: ")"
+}
+
+.form-group label.error span:before {
+	content: "("
+}
+
+.form-container .footer {
+	padding-bottom: 20px;
+}
+
+.cancel-button {
+	padding-top: 7px;
+}
+
+.form-group label {
+	font-weight: normal;
+	color: #333;
+}
+
+.form-group label.error span {
 	font-size: 0.8em;
 	font-style: italic;
 	color: #bbb;	
 }
 
-label.error span:after {
-	content: ")"
+.form-group label.error, p.error {
+	color: #d9534f;
 }
 
-label.error span:before {
-	content: "("
+legend h1 {
+	font-weight: normal;
+	color: pink;
 }
