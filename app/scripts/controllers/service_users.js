@@ -91,7 +91,7 @@ angular.module('buddyClientApp')
 
         $scope.submit = function() {
             TeamServiceUser.update({id: $scope.service_user.id, user: $scope.service_user, account_id: $scope.service_user.account_id}, function() {
-
+                $state.go('clinician.serviceUsers');
             }, function(response) {
                 _.each(response.data, function(value, key) { response.data[key] = value[0] });
                 $scope.errors = response.data;
