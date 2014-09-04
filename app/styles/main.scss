@@ -37,11 +37,12 @@ legend {
 	padding-bottom: 5px;
 }
 
-.NewServiceUsersCtrl, .EditServiceUserCtrl {
+.NewServiceUsersCtrl, .EditServiceUserCtrl, .LoginCtrl {
 	background-color: #eee;
 }
 
 .form-container {
+	padding-top: 20px;
 	background-color: white;
 }
 
@@ -101,7 +102,8 @@ legend {
 
 legend h1 {
 	font-weight: normal;
-	color: pink;
+	color: #558FC1;
+	font-size: 0.95em;
 }
 
 .user-count.badge {
@@ -111,3 +113,29 @@ legend h1 {
 .panel-table {
 	margin-bottom: 0px !important;
 }
+
+
+.btn-buddy {
+	color: white;
+	background-color: #558FC1;
+	border-color: #5681B3;
+}
+
+.navbar-buddy {
+	color: white;
+	background-color: #558FC1;
+	border-color: #5681B3;
+}
+
+.navbar-buddy a {
+	color: white;
+}
+
+.navbar-buddy a:hover {
+	color: #ddd
+}
+
+.heading {
+	background-color: #eee;
+}
+
