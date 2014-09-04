@@ -41,11 +41,11 @@ legend {
 	background-color: #eee;
 }
 
-.ServiceUsersCtrl .navbar, .SearchCtrl .navbar {
+.ServiceUsersCtrl .navbar, .SearchCtrl .navbar, .CliniciansCtrl .navbar {
 	margin-bottom: 0px;
 }
 
-body.ServiceUsersCtrl, body.SearchCtrl {
+body.ServiceUsersCtrl, body.SearchCtrl, body.CliniciansCtrl {
 	padding-top: 50px;
 }
 

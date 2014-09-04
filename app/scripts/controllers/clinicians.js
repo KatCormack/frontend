@@ -14,6 +14,10 @@ angular.module('buddyClientApp')
         $scope.cancel = function() {
             $modalInstance.dismiss('cancel');
         };
+        $scope.search = function() {
+            $state.go('clinician.search', {search: $scope.search_term});
+        };
+
     })
     .controller('CliniciansCtrl', function ($scope, Clinician, Team, Page, $modal) {
         Page.setTitle('Buddy - Clinicians');

@@ -32,8 +32,8 @@ angular.module('buddyClientApp')
             });
         };
         $scope.search = function() {
-            $state.go('clinician.search', {search: $scope.search_term})
-        }
+            $state.go('clinician.search', {search: $scope.search_term});
+        };
     }).controller('ServiceUserDiaryCtrl', function($scope, ServiceUser, $state, Entry) {
         $scope.user = ServiceUser.get({id: $state.params.id});
         $scope.entries = Entry.query({user_id: $state.params.id});
