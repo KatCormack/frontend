@@ -31,6 +31,15 @@ angular.module('buddyClientApp')
                 }
             });
         };
+        $scope.scheduleSession = function(serviceUser) {
+            $modal.open({
+                templateUrl: '/views/sessions/reschedule.html',
+                controller: 'ScheduleSessionCtrl',
+                resolve: {
+                    userId: function() { return serviceUser.id; }
+                }
+            })
+        }
         $scope.search = function() {
             $state.go('clinician.search', {search: $scope.search_term});
         };
@@ -38,6 +47,7 @@ angular.module('buddyClientApp')
             console.log(serviceUser);
         };
         $scope.deactivate = function(serviceUser) {
+
         };
     }).controller('ServiceUserDiaryCtrl', function($scope, ServiceUser, $state, Entry) {
         $scope.user = ServiceUser.get({id: $state.params.id});

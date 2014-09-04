@@ -41,7 +41,11 @@
                 <span am-time-ago="serviceUser.current_session_time"></span>
               </a>
             </td>
-            <td ng-hide="serviceUser.current_session_time">None</td>
+            <td ng-hide="serviceUser.current_session_time">
+              <a ng-click="scheduleSession(serviceUser)">Rechedule</a>
+              or
+              <a ng-click="deactivate(serviceUser)">deactivate</a>
+            </td>
             <td class="expand-link"><a ng-href="/service_users/{{serviceUser.id}}/edit">Settings</a></td>
           </tr>
         </tbody>
@@ -91,9 +95,9 @@
                   <td class="expand-link"><a ng-href="/service_users/{{serviceUser.id}}">{{ serviceUser.full_name }}</a></td>
                   <td ng-show="serviceUser.current_session_time"><span am-time-ago="serviceUser.current_session_time"></span></td>
                   <td ng-hide="serviceUser.current_session_time">
-                    Reschedule
+                    <a ng-click="newSession(serviceUser)">Reschedule</a>
                     or
-                    deactivate
+                    <a ng-click="deactivate(serviceUser)">deactivate</a>
                   </td>
                   <td class="expand-link"><a ng-href="/service_users/{{serviceUser.id}}/edit">Settings</a></td>
                 </tr>
