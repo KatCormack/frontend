@@ -35,14 +35,14 @@
         </thead>
         <tbody>
           <tr ng-repeat="serviceUser in serviceUsers | orderBy:last_name.toUpperCase() | filter:{deactivated_at: null}">
-            <td><a ng-href="/service_users/{{serviceUser.id}}">{{ serviceUser.full_name }}</a></td>
+            <td class="expand-link"><a ng-href="/service_users/{{serviceUser.id}}">{{ serviceUser.full_name }}</a></td>
             <td ng-show="serviceUser.current_session_time">
               <a ng-click="rescheduleSession(serviceUser.current_session_id)">
                 <span am-time-ago="serviceUser.current_session_time"></span>
               </a>
             </td>
             <td ng-hide="serviceUser.current_session_time">None</td>
-            <td><a ng-href="/service_users/{{serviceUser.id}}/edit">Settings</a></td>
+            <td class="expand-link"><a ng-href="/service_users/{{serviceUser.id}}/edit">Settings</a></td>
           </tr>
         </tbody>
       </table>
@@ -52,16 +52,15 @@
         <thead>
           <tr>
             <th>Name</th>
-            <th>Next session</th>
+            <th>Reactivate user</th>
             <th>Settings</th>
           </tr>
         </thead>
         <tbody>
           <tr ng-repeat="serviceUser in serviceUsers | orderBy:last_name.toUpperCase() | filter:{deactivated_at: '!!'}">
-            <td><a ng-href="/service_users/{{serviceUser.id}}">{{ serviceUser.full_name }}</a></td>
-            <td ng-show="serviceUser.current_session_time"><span am-time-ago="serviceUser.current_session_time"></span></td>
-            <td ng-hide="serviceUser.current_session_time">None</td>
-            <td><a ng-href="/service_users/{{serviceUser.id}}/edit">Settings</a></td>
+            <td class="expand-link"><a ng-href="/service_users/{{serviceUser.id}}">{{ serviceUser.full_name }}</a></td>
+            <td><a ng-click="reactivate(serviceUser)">Reactivate</a></td>
+            <td class="expand-link"><a ng-href="/service_users/{{serviceUser.id}}/edit">Settings</a></td>
           </tr>
         </tbody>
       </table>
@@ -89,10 +88,14 @@
               </thead>
               <tbody>
                 <tr ng-repeat="serviceUser in serviceUsers | orderBy:last_name.toUpperCase() | filter:{clinician_id: user.id, current_session_time: null}">
-                  <td><a ng-href="/service_users/{{serviceUser.id}}">{{ serviceUser.full_name }}</a></td>
+                  <td class="expand-link"><a ng-href="/service_users/{{serviceUser.id}}">{{ serviceUser.full_name }}</a></td>
                   <td ng-show="serviceUser.current_session_time"><span am-time-ago="serviceUser.current_session_time"></span></td>
-                  <td ng-hide="serviceUser.current_session_time">None</td>
-                  <td><a ng-href="/service_users/{{serviceUser.id}}/edit">Settings</a></td>
+                  <td ng-hide="serviceUser.current_session_time">
+                    Reschedule
+                    or
+                    deactivate
+                  </td>
+                  <td class="expand-link"><a ng-href="/service_users/{{serviceUser.id}}/edit">Settings</a></td>
                 </tr>
               </tbody>
             </table>
@@ -118,13 +121,13 @@
               </thead>
               <tbody>
                 <tr ng-repeat="serviceUser in serviceUsers | orderBy:'-current_session_time' | filter:{clinician_id: user.id, current_session_time: '!!'}">
-                  <td><a ng-href="/service_users/{{serviceUser.id}}">{{ serviceUser.full_name }}</a></td>
+                  <td class="expand-link"><a ng-href="/service_users/{{serviceUser.id}}">{{ serviceUser.full_name }}</a></td>
                   <td ng-show="serviceUser.current_session_time">
                     <a ng-click="rescheduleSession(serviceUser.current_session_id)">
                       <span am-time-ago="serviceUser.current_session_time"></span>
                     </a>
                   </td>
-                  <td><a ng-href="/service_users/{{serviceUser.id}}/edit">Settings</a></td>
+                  <td class="expand-link"><a ng-href="/service_users/{{serviceUser.id}}/edit">Settings</a></td>
                 </tr>
               </tbody>
             </table>

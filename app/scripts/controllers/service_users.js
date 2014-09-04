@@ -8,7 +8,7 @@ angular.module('buddyClientApp')
         jQuery(document).ready(function () {
             $('#tabs').tab();
             $('#tabs a[href="' + window.location.hash + '"]').tab('show');
-            $(document).on('click', 'td', function() {
+            $(document).on('click', 'td.expand-link', function() {
                 $location.path($(this).find('a').attr('ng-href'));
                 $location.hash('');
                 $scope.$apply();
@@ -33,6 +33,11 @@ angular.module('buddyClientApp')
         };
         $scope.search = function() {
             $state.go('clinician.search', {search: $scope.search_term});
+        };
+        $scope.reactivate = function(serviceUser) {
+            console.log(serviceUser);
+        };
+        $scope.deactivate = function(serviceUser) {
         };
     }).controller('ServiceUserDiaryCtrl', function($scope, ServiceUser, $state, Entry) {
         $scope.user = ServiceUser.get({id: $state.params.id});
