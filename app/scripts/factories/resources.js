@@ -13,6 +13,9 @@ angular.module('buddyClientApp')
     .factory('Clinician', function($resource, APIHost) {
         return $resource(APIHost + '/api/v1/clinicians/:id.json', {id: '@id'}, {update: {method: 'PUT'}});
     })
+    .factory('ClinicianSearch', function($resource, APIHost) {
+        return $resource(APIHost + '/api/v1/clinicians/search.json');
+    })
     .factory('ServiceUser', function($resource, APIHost) {
         return $resource(APIHost + '/api/v1/service_users/:id.json', {id: '@id'}, {update: {method: 'PUT'}});
     })
@@ -21,6 +24,9 @@ angular.module('buddyClientApp')
     })
     .factory('ServiceUserSession', function($resource, APIHost) {
         return $resource(APIHost + '/api/v1/service_users/:service_user_id/sessions.json', {id: '@id', service_user_id: '@service_user_id'}, {update: {method: 'PUT'}});
+    })
+    .factory('ServiceUserSearch', function($resource, APIHost) {
+        return $resource(APIHost + '/api/v1/service_users/search.json');
     })
     .factory('Team', function($resource, APIHost) {
         return $resource(APIHost + '/api/v1/accounts/:id.json', {id: '@id'}, {update: {method: 'PUT'}});

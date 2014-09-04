@@ -32,7 +32,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="serviceUser in serviceUsers | orderBy:last_name.toUpperCase() | filter:{clinician_id: user.id, current_session_time: null}">
+            <tr ng-repeat="serviceUser in serviceUsers | orderBy:last_name.toUpperCase()">
               <td><a ng-href="/service_users/{{serviceUser.id}}">{{ serviceUser.full_name }}</a></td>
               <td ng-show="serviceUser.current_session_time"><span am-time-ago="serviceUser.current_session_time"></span></td>
               <td ng-hide="serviceUser.current_session_time">None</td>
@@ -53,16 +53,13 @@
           <thead>
             <tr>
               <th>Name</th>
-              <th>Next session</th>
               <th>Settings</th>
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="serviceUser in serviceUsers | orderBy:last_name.toUpperCase() | filter:{clinician_id: user.id, current_session_time: null}">
-              <td><a ng-href="/service_users/{{serviceUser.id}}">{{ serviceUser.full_name }}</a></td>
-              <td ng-show="serviceUser.current_session_time"><span am-time-ago="serviceUser.current_session_time"></span></td>
-              <td ng-hide="serviceUser.current_session_time">None</td>
-              <td><a ng-href="/service_users/{{serviceUser.id}}/edit">Settings</a></td>
+            <tr ng-repeat="clinician in clinicians | orderBy:last_name.toUpperCase()">
+              <td class="expand-link"><a ng-href="/clinician/{{clinician.id}}">{{ clinician.full_name }}</a></td>
+              <td class="expand-link"><a ng-href="/clinicians/{{clinician.id}}/edit">Settings</a></td>
             </tr>
           </tbody>
         </table>
