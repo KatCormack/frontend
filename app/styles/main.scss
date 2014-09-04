@@ -167,3 +167,18 @@ legend h1 {
 }
 
 td.expand-link { cursor: pointer; cursor: hand; }
+
+.navbar-buddy .open > a, .navbar-buddy .open > a:hover, .navbar-buddy .open > a:focus, .navbar-buddy a:hover {
+	background-color: #5681B3 !important;
+	color: #ddd !important;
+}
+
+.navbar-buddy ul.dropdown-menu {
+	background-color: #558FC1 !important;
+}
+
+.navbar-buddy .dropdown-menu > li > a {
+	color: white;
+}
+
+
