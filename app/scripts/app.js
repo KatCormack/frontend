@@ -129,7 +129,7 @@ angular.module('buddyClientApp', [
             }
         }).state('clinicianAdmin.clinicians', {
             url: '/clinicians',
-            templateUrl: '/views/clinicians.html',
+            templateUrl: '/views/clinicians/index.html',
             controller: 'CliniciansCtrl',
             activetab: 'clinicians'
         });
