@@ -115,6 +115,10 @@ angular.module('buddyClientApp', [
             templateUrl: '/views/teams/show.html',
             controller: 'TeamCtrl',
             activetab: 'teams'
+        }).state('clinician.search', {
+            url: '/search/:search',
+            templateUrl: '/views/search.html',
+            controller: 'SearchCtrl'
         });
 
         $stateProvider.state('clinicianAdmin', {

@@ -3,7 +3,7 @@
 angular.module('buddyClientApp')
     .controller('AddServiceUserCtrl', function($scope, ServiceUser, Team) {
         $scope.teams = Team.query({});
-    }).controller('ServiceUsersCtrl', function ($scope, TeamServiceUser, $modal, CurrentUser, $location) {
+    }).controller('ServiceUsersCtrl', function ($scope, TeamServiceUser, $modal, CurrentUser, $location, $state) {
         $scope.user = CurrentUser.user();
         jQuery(document).ready(function () {
             $('#tabs').tab();
@@ -31,6 +31,9 @@ angular.module('buddyClientApp')
                 }
             });
         };
+        $scope.search = function() {
+            $state.go('clinician.search', {search: $scope.search_term})
+        }
     }).controller('ServiceUserDiaryCtrl', function($scope, ServiceUser, $state, Entry) {
         $scope.user = ServiceUser.get({id: $state.params.id});
         $scope.entries = Entry.query({user_id: $state.params.id});

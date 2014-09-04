@@ -41,6 +41,14 @@ legend {
 	background-color: #eee;
 }
 
+.ServiceUsersCtrl .navbar, .SearchCtrl .navbar {
+	margin-bottom: 0px;
+}
+
+body.ServiceUsersCtrl, body.SearchCtrl {
+	padding-top: 50px;
+}
+
 .form-container {
 	padding-top: 20px;
 	background-color: white;
@@ -137,5 +145,23 @@ legend h1 {
 
 .heading {
 	background-color: #eee;
+	padding-bottom: 20px;
 }
 
+.heading-unit {
+	padding-top: 40px;
+}
+
+
+.heading-unit-header {
+	padding-top: 20px;
+	color: #558FC1;
+}
+
+.list-container {
+	padding-top: 30px;
+}
+
+.list-pills {
+	padding-bottom: 20px;
+}

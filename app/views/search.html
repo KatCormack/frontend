@@ -1,0 +1,73 @@
+<div class="heading col-md-12">
+  <div class="col-md-6 heading-unit-header">
+    <h1>Search</h1>
+  </div>
+  <div class="col-md-6 heading-unit">
+    <form ng-submit="search()">
+      <div class="input-group">
+        <input type="text" class="form-control" ng-model="search_term" placeholder="Search for a user">
+        <span class="input-group-btn">
+          <input type="submit" value="S" class="btn btn-buddy">
+        </span>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="col-md-12">
+  <div class="panel-group">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          Service Users
+        </h4>
+      </div>
+      <div>
+        <table class="table table-bordered table-hover table-striped panel-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Next session</th>
+              <th>Settings</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="serviceUser in serviceUsers | orderBy:last_name.toUpperCase() | filter:{clinician_id: user.id, current_session_time: null}">
+              <td><a ng-href="/service_users/{{serviceUser.id}}">{{ serviceUser.full_name }}</a></td>
+              <td ng-show="serviceUser.current_session_time"><span am-time-ago="serviceUser.current_session_time"></span></td>
+              <td ng-hide="serviceUser.current_session_time">None</td>
+              <td><a ng-href="/service_users/{{serviceUser.id}}/edit">Settings</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          Clinicians
+        </h4>
+      </div>
+      <div>
+        <table class="table table-bordered table-hover table-striped panel-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Next session</th>
+              <th>Settings</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="serviceUser in serviceUsers | orderBy:last_name.toUpperCase() | filter:{clinician_id: user.id, current_session_time: null}">
+              <td><a ng-href="/service_users/{{serviceUser.id}}">{{ serviceUser.full_name }}</a></td>
+              <td ng-show="serviceUser.current_session_time"><span am-time-ago="serviceUser.current_session_time"></span></td>
+              <td ng-hide="serviceUser.current_session_time">None</td>
+              <td><a ng-href="/service_users/{{serviceUser.id}}/edit">Settings</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,14 +1,24 @@
-<div class="container heading">
-  <h1>Service Users</h1>
-</div>
-
-<div class="col-md-12 container">
-  <div class="btn-group">
-    <a ng-href="/service_users/new" class="btn btn-default">Add a service user</a>
+<div class="heading col-md-12">
+  <div class="col-md-6 heading-unit-header">
+    <h1>Service Users</h1>
+  </div>
+  <div class="col-md-4 heading-unit">
+    <form ng-submit="search()">
+      <div class="input-group">
+        <input type="text" class="form-control" ng-model="search_term" placeholder="Search for a user">
+        <span class="input-group-btn">
+          <input type="submit" value="S" class="btn btn-buddy">
+        </span>
+      </div>
+    </form>
+  </div>
+  <div class="col-md-2 text-right heading-unit">
+    <a ng-href="/service_users/new" class="btn btn-buddy">Add a service user</a>
   </div>
 </div>
-<div class="col-md-12">
-  <ul id="tabs" class="nav nav-pills" data-tabs="tabs">
+
+<div class="col-md-12 list-container">
+  <ul id="tabs" class="nav nav-pills list-pills" data-tabs="tabs">
     <li class="active"><a href="#az" data-toggle="tab">A-Z</a></li>
     <li><a href="#deactivated" data-toggle="tab">Deactivated</a></li>
     <li><a href="#mine" data-toggle="tab">My users</a></li>
