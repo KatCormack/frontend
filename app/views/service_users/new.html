@@ -53,16 +53,16 @@
     </div>
     <div class="form-row col-md-6">
       <div class="form-group">
-        <div class="col-md-6 required">
+        <div class="modal-input-group input-group col-md-6 by-timepicker">
           <label for="service_user_session_time">Next session time</label>
           <input type="text" datepicker-popup="dd/MM/yyyy" is-open="opened" min-date="minDate" ng-required="true" close-text="Close" ng-click="open()" ng-model="service_user.session_time" class="form-control input-md" />
         </div>
-        <div class="col-md-6">
+        <div class="modal-input-group input-group col-md-6">
           <timepicker ng-model="service_user.session_time" hour-step="hstep" minute-step="mstep"></timepicker>
         </div>
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6 by-timepicker">
       <div class="form-group required">
         <label for="service_user_clinician">Team</label>
         <select class="form-control" ng-model="service_user.account_id" ng-options="team.id as team.name for team in teams">

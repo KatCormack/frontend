@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('buddyClientApp')
-    .controller('RescheduleSessionCtrl', function(sessionId, Session, $scope) {
+    .controller('RescheduleSessionCtrl', function(sessionId, Session, $scope, $modalInstance) {
         $scope.title = "Reschedule session";
         $scope.button_value = "Reschedule";
         $scope.hstep = 1;
@@ -12,9 +12,11 @@ angular.module('buddyClientApp')
             $scope.opened = true;
         };
         $scope.submit = function() {
-            Session.update({id: sessionId, session: $scope.session});
+            Session.update({id: sessionId, session: $scope.session}, function(res) {
+                $modalInstance.close(res);
+            });
         }
-    }).controller('ScheduleSessionCtrl', function($scope, userId, ServiceUserSession) {
+    }).controller('ScheduleSessionCtrl', function($scope, userId, ServiceUserSession, $modalInstance) {
         $scope.title = "Schedule new session";
         $scope.button_value = "Schedule";
         $scope.session = {}
@@ -24,7 +26,7 @@ angular.module('buddyClientApp')
         };
         $scope.submit = function() {
             ServiceUserSession.save({service_user_id: userId, session: $scope.session}, function(res) {
-
+                $modalInstance.close(res);
             });
         }
     });

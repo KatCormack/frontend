@@ -5,13 +5,13 @@
   <div class="row">
     <form ng-submit="submit()">
       <div class="form-group">
-        <div class="modal-input-group input-group">
+        <div class="modal-input-group input-group by-timepicker-in-modal">
           <input type="text" datepicker-popup="dd/MM/yyyy" is-open="$parent.opened" min-date="minDate" ng-required="true" close-text="Close" ng-click="open($event)" ng-model="session.scheduled_time" class="form-control" />
         </div>
         <div class="modal-input-group input-group">
           <timepicker ng-model="session.scheduled_time" hour-step="hstep" minute-step="mstep"></timepicker>
         </div>
-        <div class="modal-input-group input-group">
+        <div class="modal-input-group-last input-group by-timepicker-in-modal">
           <input type="submit" value="{{ button_value }}" class="btn-buddy btn">
         </div>
       </div>

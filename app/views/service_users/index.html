@@ -37,7 +37,7 @@
           <tr ng-repeat="serviceUser in serviceUsers | orderBy:last_name.toUpperCase() | filter:{deactivated_at: null}">
             <td class="expand-link"><a ng-href="/service_users/{{serviceUser.id}}">{{ serviceUser.full_name }}</a></td>
             <td ng-show="serviceUser.current_session_time">
-              <a ng-click="rescheduleSession(serviceUser.current_session_id)">
+              <a ng-click="rescheduleSession(serviceUser)">
                 <span am-time-ago="serviceUser.current_session_time"></span>
               </a>
             </td>
@@ -127,7 +127,7 @@
                 <tr ng-repeat="serviceUser in serviceUsers | orderBy:'-current_session_time' | filter:{clinician_id: user.id, current_session_time: '!!'}">
                   <td class="expand-link"><a ng-href="/service_users/{{serviceUser.id}}">{{ serviceUser.full_name }}</a></td>
                   <td ng-show="serviceUser.current_session_time">
-                    <a ng-click="rescheduleSession(serviceUser.current_session_id)">
+                    <a ng-click="rescheduleSession(serviceUser)">
                       <span am-time-ago="serviceUser.current_session_time"></span>
                     </a>
                   </td>

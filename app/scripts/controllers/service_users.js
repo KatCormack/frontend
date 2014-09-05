@@ -15,30 +15,29 @@ angular.module('buddyClientApp')
             });
         });
         $scope.serviceUsers = TeamServiceUser.query({account_id: $scope.user.account_ids[0]});
-        $scope.addServiceUser = function() {
-            $modal.open({
-                templateUrl: '/views/service_users/new.html',
-                controller: 'AddServiceUserCtrl',
-                resolve: { }
-            });
-        };
-        $scope.rescheduleSession = function(sessionId) {
-            $modal.open({
+        $scope.rescheduleSession = function(serviceUser) {
+            var modalInstance = $modal.open({
                 templateUrl: '/views/sessions/reschedule.html',
                 controller: 'RescheduleSessionCtrl',
                 resolve:  {
-                    sessionId: function() { return sessionId; }
+                    sessionId: function() { return serviceUser.current_session_id; }
                 }
+            });
+            modalInstance.result.then(function(result) {
+                serviceUser.current_session_time = result.scheduled_time;
             });
         };
         $scope.scheduleSession = function(serviceUser) {
-            $modal.open({
+            var modalInstance = $modal.open({
                 templateUrl: '/views/sessions/reschedule.html',
                 controller: 'ScheduleSessionCtrl',
                 resolve: {
                     userId: function() { return serviceUser.id; }
                 }
-            })
+            });
+            modalInstance.result.then(function(result) {
+                serviceUser.current_session_time = result.scheduled_time;
+            });
         }
         $scope.search = function() {
             $state.go('clinician.search', {search: $scope.search_term});
