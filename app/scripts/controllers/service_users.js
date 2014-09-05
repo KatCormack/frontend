@@ -70,10 +70,12 @@ angular.module('buddyClientApp')
             refreshClinicians();
             $scope.service_user.clinician_id = user.id;
         });
-        $scope.service_user.session_time = moment().add('months', 1);
-        $scope.service_user.session_date = $scope.service_user.session_time.format("DD/MM/YYYY");
-        $scope.service_user.session_hour = $scope.service_user.session_time.format("HH");
-        $scope.service_user.session_minute = "00";
+
+        $scope.hstep = 1;
+        $scope.mstep = 15;
+        $scope.service_user.session_time = new Date();
+        $scope.service_user.session_time.setMonth($scope.service_user.session_time.getMonth() + 1);
+        $scope.service_user.session_time.setMinutes(0);
 
         $scope.minDate = new Date();
         $scope.open = function() {
@@ -81,9 +83,6 @@ angular.module('buddyClientApp')
         };
 
         $scope.submit = function() {
-            $scope.service_user.session_time = moment($scope.service_user.session_date, "DD/MM/YYYY")
-            $scope.service_user.session_time.hour($scope.service_user.session_hour);
-            $scope.service_user.session_time.minute($scope.service_user.session_minute);
             TeamServiceUser.save({user: $scope.service_user, account_id: $scope.service_user.account_id}, function() {
                 $state.go('clinician.serviceUsers');
             }, function(response) {

@@ -6,13 +6,10 @@
     <form ng-submit="submit()">
       <div class="form-group">
         <div class="modal-input-group input-group">
-          <input type="text" datepicker-popup="dd/MM/yyyy" is-open="$parent.opened" min-date="minDate" ng-required="true" close-text="Close" ng-click="open($event)" ng-model="session.date" class="form-control" />
+          <input type="text" datepicker-popup="dd/MM/yyyy" is-open="$parent.opened" min-date="minDate" ng-required="true" close-text="Close" ng-click="open($event)" ng-model="session.scheduled_time" class="form-control" />
         </div>
         <div class="modal-input-group input-group">
-          <hour-select ng-model="session.hour"></hour-select>
-        </div>
-        <div class="modal-input-group input-group">
-          <minute-select ng-model="session.minute"></minute-select>
+          <timepicker ng-model="session.scheduled_time" hour-step="hstep" minute-step="mstep"></timepicker>
         </div>
         <div class="modal-input-group input-group">
           <input type="submit" value="{{ button_value }}" class="btn-buddy btn">
