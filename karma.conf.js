@@ -21,6 +21,8 @@ module.exports = function(config) {
             'app/bower_components/angular-ui-router/release/angular-ui-router.js',
             'app/bower_components/sass-bootstrap/dist/js/bootstrap.js',
             'app/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+            'app/bower_components/angular-moment/angular-moment.js',
+            'app/bower_components/underscore/underscore.js',
             'app/scripts/*.js',
             'app/scripts/**/*.js',
             'test/mock/**/*.js',

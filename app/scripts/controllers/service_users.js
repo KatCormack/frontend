@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('buddyClientApp')
-    .controller('AddServiceUserCtrl', function($scope, ServiceUser, Team) {
+    .controller('AddServiceUserCtrl', function($scope, Team) {
         $scope.teams = Team.query({});
     }).controller('ServiceUsersCtrl', function ($scope, TeamServiceUser, $modal, CurrentUser, $location, $state) {
         $scope.user = CurrentUser.user();
