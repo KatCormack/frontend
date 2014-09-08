@@ -1,8 +1,8 @@
 <!doctype html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" ng-app="buddyClientApp"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" ng-app="buddyClientApp"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9" ng-app="buddyClientApp"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" ng-app="buddyClientApp"> <!--<![endif]-->
+<!--[if lt IE 7]>      <html xmlns:ng="http://angularjs.org" class="no-js lt-ie9 lt-ie8 lt-ie7" ng-app="buddyClientApp" id="ng-app"> <![endif]-->
+<!--[if IE 7]>         <html xmlns:ng="http://angularjs.org" class="no-js lt-ie9 lt-ie8" ng-app="buddyClientApp" id="ng-app"> <![endif]-->
+<!--[if IE 8]>         <html xmlns:ng="http://angularjs.org" class="no-js lt-ie9" ng-app="buddyClientApp" id="ng-app"> <![endif]-->
+<!--[if gt IE 8]><!--> <html xmlns:ng="http://angularjs.org" class="no-js" ng-app="buddyClientApp" id="ng-app"> <!--<![endif]-->
   <head ng-controller="HeadCtrl">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,26 +14,25 @@
     <!-- build:css({.tmp,app}) styles/main.css -->
     <link rel="stylesheet" href="/styles/main.css">
     <!-- endbuild -->
-
-
-
-    <!--[if lte IE 8]>
-        <!-- build:js scripts/html5shiv.js -->
-        <script src="/shivs/html5shiv.js"></script>
-        <!-- endbuild -->
-        <![endif]-->
-    <!--[if lte IE 8]>
-        <!-- build:js scripts/respond.js -->
-        <script src="/shivs/respond.js"></script>
-        <!-- endbuild -->
-        <![endif]-->
-
-
     <!-- build:css styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="/bower_components/sass-bootstrap/dist/css/bootstrap.css" />
     <!-- endbower -->
     <!-- endbuild -->
+
+    <!--[if lte IE 8]>
+        <!-- build:js scripts/html5shiv.js -->
+        <script src="/shivs/html5shiv.js"></script>
+        <!-- endbuild -->
+        <!-- build:js scripts/respond.js -->
+        <script src="/shivs/respond.js"></script>
+        <!-- endbuild -->
+        <!-- build:js scripts/json2.js -->
+        <script src="/shivs/json2.js"></script>
+        <!-- endbuild -->
+        <![endif]-->
+
+
   </head>
   <body ng-controller="BodyCtrl" set-body-class="">
     <!--[if lt IE 7]>
