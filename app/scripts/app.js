@@ -20,13 +20,14 @@ angular.module('buddyClientApp', [
         $rootScope._ = _;
     })
     .config(function ($urlRouterProvider, $locationProvider, $httpProvider, $stateProvider, AccessLevels) {
+        $httpProvider.defaults.headers.common['Cache-Control'] = 'no-cache'
         $httpProvider.defaults.useXDomain = true;
         $httpProvider.interceptors.push('AuthInterceptor');
         delete $httpProvider.defaults.headers.common['X-Requested-With'];
 
         $stateProvider.state('anon', {
             abstract: true,
-            template: '<ui-view/>',
+            template: '<div ui-view=""></div>',
             data: {
                 access: AccessLevels.anon
             }
@@ -136,6 +137,7 @@ angular.module('buddyClientApp', [
 
         $urlRouterProvider.otherwise('/');
         $locationProvider.html5Mode(true);
+
     });
 
 
