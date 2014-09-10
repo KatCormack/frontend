@@ -6,7 +6,8 @@ angular.module('buddyClientApp', [
     'ngSanitize',
     'ui.router',
     'ui.bootstrap',
-    'angularMoment'
+    'angularMoment',
+    'angularUtils.filters.ordinalDate'
 ])
     .constant('APIHost', 'http://localhost:3000')
     .constant('AccessLevels',{

@@ -131,7 +131,10 @@
                     <td class="expand-link"><a ng-href="/service_users/{{serviceUser.id}}">{{ serviceUser.full_name }}</a></td>
                     <td ng-show="serviceUser.current_session_time">
                       <a ng-click="rescheduleSession(serviceUser)">
+                        {{ serviceUser.current_session_time | ordinalDate: 'HH:mm / d MMMM yyyy' }}
+<!--
                         <span am-time-ago="serviceUser.current_session_time"></span>
+-->
                       </a>
                     </td>
                     <td class="expand-link"><a ng-href="/service_users/{{serviceUser.id}}/edit">Settings</a></td>
