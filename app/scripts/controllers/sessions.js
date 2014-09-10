@@ -20,7 +20,7 @@ angular.module('buddyClientApp')
         $scope.title = "Schedule new session";
         $scope.button_value = "Schedule";
         $scope.session = {}
-        $scope.session.scheduled_time = moment().add('months', 1).toDate();
+        $scope.session.scheduled_time = moment().add(1, 'months').toDate();
         $scope.open = function($event) {
             $scope.opened = true;
         };

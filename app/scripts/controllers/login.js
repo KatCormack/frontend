@@ -3,12 +3,10 @@
 angular.module('buddyClientApp')
     .controller('LoginCtrl', function ($scope, $state, Auth) {
         $scope.login = function() {
-            if ($scope.loginForm.$valid) {
-                Auth.login({user_session: $scope.user}).success(function() {
-                    $state.go('user.dashboard');
-                }).error(function() {
-                    $scope.login_error = true;
-                });
-            }
+            Auth.login({user_session: $scope.user}).success(function() {
+                $state.go('user.dashboard');
+            }).error(function() {
+                $scope.login_error = true;
+            });
         };
     });
