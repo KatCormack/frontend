@@ -20,8 +20,15 @@ angular.module('buddyClientApp', [
     .run(function($rootScope){
         $rootScope._ = _;
     })
-    .config(function ($urlRouterProvider, $locationProvider, $httpProvider, $stateProvider, AccessLevels, $provide) {
+    .config(function ($urlRouterProvider, $locationProvider, $httpProvider, $stateProvider, AccessLevels, $uiViewScrollProvider) {
+        /* without useAnchorScroll() the application scrolls to where
+         * the child <ui-view> is. This is not the behaviour that we
+         * want */
+        $uiViewScrollProvider.useAnchorScroll();
+        /* Fix IE stupid caching */
         $httpProvider.defaults.headers.common['Cache-Control'] = 'no-cache'
+        /* Cross domain AJAX requests? probably have to remove this
+         * because IE *still* doesnt like this */
         $httpProvider.defaults.useXDomain = true;
         $httpProvider.interceptors.push('AuthInterceptor');
         delete $httpProvider.defaults.headers.common['X-Requested-With'];
