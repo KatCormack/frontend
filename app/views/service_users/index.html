@@ -99,7 +99,7 @@
                   <tr ng-repeat="serviceUser in serviceUsers | orderBy:last_name.toUpperCase() | filter:{clinician_id: user.id, current_session_time: null}">
                     <td class="expand-link"><a ng-href="/service_users/{{serviceUser.id}}">{{ serviceUser.full_name }}</a></td>
                     <td ng-hide="serviceUser.current_session_time">
-                      <a ng-click="newSession(serviceUser)">Reschedule</a>
+                      <a ng-click="scheduleSession(serviceUser)">Reschedule</a>
                       or
                       <a ng-click="deactivate(serviceUser)">deactivate</a>
                     </td>
