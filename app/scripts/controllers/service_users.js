@@ -113,4 +113,19 @@ angular.module('buddyClientApp')
                 $scope.errors = response.data;
             });
         };
+    }).controller('DeactivateServiceUserCtrl', function($scope, $state, ServiceUser, TeamServiceUser, $location) {
+        $scope.returnTo = unescape($state.params.returnTo || '/service_users')
+        $scope.serviceUser = ServiceUser.get({id: $state.params.id})
+        $scope.deactivationReasons = [
+            "Completed treatment",
+            "Self discharge",
+            "Not using Buddy",
+            "Lost phone",
+            "Other"
+        ];
+        $scope.submit = function() {
+            $scope.serviceUser.deactivated_at = new Date();
+            TeamServiceUser.update({id: $state.params.id, user: $scope.serviceUser, account_id: $scope.serviceUser.account_id});
+            $location.path($scope.returnTo);
+        };
     });

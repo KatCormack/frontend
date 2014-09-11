@@ -107,6 +107,11 @@ angular.module('buddyClientApp', [
             templateUrl: '/views/service_users/edit.html',
             controller: 'EditServiceUserCtrl',
             activetab: 'serviceUsers'
+        }).state('clinician.deactivateServiceUser', {
+            url: '/service_users/:id/deactivate',
+            templateUrl: '/views/service_users/deactivate.html',
+            controller: 'DeactivateServiceUserCtrl',
+            activetab: 'serviceUsers'
         }).state('clinician.teams', {
             url: '/teams',
             templateUrl: '/views/teams/index.html',

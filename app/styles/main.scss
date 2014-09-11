@@ -37,7 +37,7 @@ legend {
 	padding-bottom: 5px;
 }
 
-.NewServiceUsersCtrl, .EditServiceUserCtrl, .LoginCtrl {
+.NewServiceUsersCtrl, .EditServiceUserCtrl, .LoginCtrl, .DeactivateServiceUserCtrl {
 	background-color: #eee;
 }
 
@@ -194,7 +194,6 @@ td.expand-link { cursor: pointer; cursor: hand; }
 .by-timepicker {
 	padding-top: 11px;
 }
-
 
 .by-timepicker-in-modal {
 	padding-top: 37px;

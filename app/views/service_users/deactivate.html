@@ -1,0 +1,14 @@
+<div class="col-md-8 col-md-push-2 form-container">
+  <form ng-submit="submit()" class="col-md-push-1 col-md-10">
+    <legend>Deactivate {{ serviceUser.full_name }}</legend>
+    <p>Please select a reason for deactivation</p>
+    <div class="radio" ng-repeat="reason in deactivationReasons">
+      <label>
+        <input type="radio" ng-value="reason" ng-model="serviceUser.deactivation_reason">
+        {{ reason }}
+      </label>
+    </div>
+    <p>Deactivating a user will stop them from receiving texts from Buddy. The user can continue to use the web portal but won't show up in the &ldquo;Sessions&rdquo; tab. You can reactivate a user by going to the &ldquo;Deactivated&rdquo; tab and clicking &ldquo;Reactivate&rdquo;. </p>
+    <button type="submit" class="btn btn-buddy">Deactivate</button> or <a ng-href="{{ returnTo }}">cancel</a>
+  </form>
+</div>

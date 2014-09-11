@@ -49,7 +49,7 @@
               <td ng-hide="serviceUser.current_session_time">
                 <a ng-click="scheduleSession(serviceUser)">Rechedule</a>
                 or
-                <a ng-click="deactivate(serviceUser)">deactivate</a>
+                <a ng-href="/service_users/{{serviceUser.id}}/deactivate?returnTo=%2Fservice_users">deactivate</a>
               </td>
               <td class="expand-link"><a ng-href="/service_users/{{serviceUser.id}}/edit">Settings</a></td>
             </tr>
