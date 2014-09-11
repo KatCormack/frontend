@@ -207,3 +207,9 @@ td.expand-link { cursor: pointer; cursor: hand; }
 .help-text {
 	color: #999;
 }
+
+.ng-hide { display: none!important; }
+
+.panel-heading.active .user-count {
+	display: none;
+}

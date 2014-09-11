@@ -13,7 +13,13 @@ angular.module('buddyClientApp')
                 $location.hash('');
                 $scope.$apply();
             });
+            $('#accordion').on('show.bs.collapse', function(e) {
+                $(e.target).prev('.panel-heading').addClass('active');
+            }).on('hide.bs.collapse', function(e) {
+                $(e.target).prev('.panel-heading').removeClass('active');
+            });
         });
+
         $scope.serviceUsers = TeamServiceUser.query({account_id: $scope.user.account_ids[0]});
         $scope.rescheduleSession = function(serviceUser) {
             var modalInstance = $modal.open({
@@ -115,6 +121,7 @@ angular.module('buddyClientApp')
         };
     }).controller('DeactivateServiceUserCtrl', function($scope, $state, ServiceUser, TeamServiceUser, $location) {
         $scope.returnTo = unescape($state.params.returnTo || '/service_users')
+        console.log($scope.returnTo);
         $scope.serviceUser = ServiceUser.get({id: $state.params.id})
         $scope.deactivationReasons = [
             "Completed treatment",
