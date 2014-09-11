@@ -20,7 +20,7 @@ angular.module('buddyClientApp', [
     .run(function($rootScope){
         $rootScope._ = _;
     })
-    .config(function ($urlRouterProvider, $locationProvider, $httpProvider, $stateProvider, AccessLevels) {
+    .config(function ($urlRouterProvider, $locationProvider, $httpProvider, $stateProvider, AccessLevels, $provide) {
         $httpProvider.defaults.headers.common['Cache-Control'] = 'no-cache'
         $httpProvider.defaults.useXDomain = true;
         $httpProvider.interceptors.push('AuthInterceptor');
@@ -58,7 +58,7 @@ angular.module('buddyClientApp', [
 
         $stateProvider.state('user', {
             abstract: true,
-            template: '<ui-view>',
+            template: '<div ui-view="" autoscroll="false">',
             data: {
                 access: AccessLevels.user
             }
@@ -71,7 +71,7 @@ angular.module('buddyClientApp', [
 
         $stateProvider.state('serviceUser', {
             abstract: true,
-            template: '<ui-view>',
+            template: '<div ui-view="" autoscroll="false">',
             data: {
                 access: AccessLevels.serviceUser
             }
@@ -83,7 +83,7 @@ angular.module('buddyClientApp', [
 
         $stateProvider.state('clinician', {
             abstract: true,
-            template: '<ui-view>',
+            template: '<div ui-view="" autoscroll="true">',
             data: {
                 access: AccessLevels.clinician
             }
