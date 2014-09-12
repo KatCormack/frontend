@@ -1,35 +1,41 @@
 <div class="heading col-md-12">
-  <div class="col-md-6 heading-unit-header">
-    <h1>Clinicians</h1>
-  </div>
-  <div class="col-md-4 heading-unit">
-    <form ng-submit="search()">
-      <div class="input-group">
-        <input type="text" class="form-control" ng-model="search_term" placeholder="Search for a user">
-        <span class="input-group-btn">
-          <input type="submit" value="S" class="btn btn-buddy">
-        </span>
-      </div>
-    </form>
-  </div>
-  <div class="col-md-2 text-right heading-unit">
-    <button type="button" class="btn btn-buddy" ng-click="addClinician()">Add a clinician</button>
+  <div class="container">
+    <div class="col-md-5 col-md-push-1 heading-unit-header">
+      <h1>Clinicians</h1>
+    </div>
+    <div class="col-md-3 heading-unit">
+      <form ng-submit="search()">
+        <div class="input-group">
+          <input type="text" class="form-control" ng-model="search_term" placeholder="Search for a user">
+          <span class="input-group-btn">
+            <button class="btn btn-buddy btn-search">
+              <span class="iconic" data-glyph="magnifying-glass" title="search" aria-hidden="true"></span>
+            </button>
+          </span>
+        </div>
+      </form>
+    </div>
+    <div class="col-md-3 text-right heading-unit">
+      <a ng-href="/clinicians/new" class="btn btn-buddy">Add a clinician</a>
+    </div>
   </div>
 </div>
 
-<div class="col-md-12 list-container">
-  <table class="table table-bordered table-hover table-striped">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Settings</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr ng-repeat="clinician in clinicians">
-        <td>{{ clinician.full_name }}</td>
-        <td>Settings</td>
-      </tr>
-    </tbody>
-  </table>
+<div class="container">
+  <div class="col-md-push-1 col-md-10 list-container">
+    <table class="table table-bordered table-hover table-striped">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Settings</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="clinician in clinicians">
+          <td>{{ clinician.full_name }}</td>
+          <td>Settings</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

@@ -49,10 +49,8 @@ angular.module('buddyClientApp')
             $state.go('clinician.search', {search: $scope.search_term});
         };
         $scope.reactivate = function(serviceUser) {
-            console.log(serviceUser);
-        };
-        $scope.deactivate = function(serviceUser) {
-
+            serviceUser.deactivated_at = null;
+            TeamServiceUser.update({user: serviceUser, id: serviceUser.id, account_id: serviceUser.account_id})
         };
     }).controller('ServiceUserDiaryCtrl', function($scope, ServiceUser, $state, Entry) {
         $scope.user = ServiceUser.get({id: $state.params.id});
