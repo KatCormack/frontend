@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="/styles/main.css">
     <!-- endbuild -->
 
-    <!--[if lte IE9]>
+    <!--[if lte IE 9]>
     <!-- build:css({.tmp,app}) styles/iconic-legacy.css -->
     <link rel="stylesheet" href="/iconic/font/css/iconic-glyphs-legacy.css">
     <!-- endbuild -->
@@ -46,6 +46,7 @@
           document.createElement('ng-include');
           document.createElement('ng-pluralize');
           document.createElement('ng-view');
+          document.createElement('timepicker');
 
           // Optionally these for CSS
           document.createElement('ng:include');
@@ -130,6 +131,12 @@
     <!-- endbower -->
     <!-- endbuild -->
 
+    <!--[if lt IE 9]>
+    <!-- build:js scripts/placeholder.js -->
+    <script src="/shivs/placeholder.js"></script>
+    <!-- endbuild -->
+    <![endif] -->
+
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <script src="/iconic/js/iconic.min.js"></script>
     <script src="/scripts/filters/ordinal_date.js"></script>
@@ -157,5 +164,8 @@
     <script src="/scripts/directives/time_select.js"></script>
     <script src="/scripts/directives/body_class.js"></script>
     <!-- endbuild -->
+
+
+
   </body>
 </html>

@@ -27,13 +27,21 @@
       <thead>
         <tr>
           <th>Name</th>
-          <th>Settings</th>
+          <th>Last logged in</th>
         </tr>
       </thead>
       <tbody>
         <tr ng-repeat="clinician in clinicians">
-          <td>{{ clinician.full_name }}</td>
-          <td>Settings</td>
+          <td class="expand-link">
+            <a ng-href="/clinicians/{{clinician.id}}/edit">
+              {{ clinician.full_name }}<br />
+              <span class="clinician-id">CLIN.{{ clinician.id }}  {{ clinician.last_request_at.timestamp }}</span>
+            </a>
+          </td>
+          <td class="clinician-last-request-at">
+            <span ng-show="clinician.last_request_at" am-time-ago="clinician.last_request_at" ng-class="{inactive: clinician.last_request_at < twoWeeksAgo}"></span>
+            <span ng-hide="clinician.last_request_at" class="invitation-sent">Invitation sent <span am-time-ago="clinician.created_at"></span></span>
+          </td>
         </tr>
       </tbody>
     </table>

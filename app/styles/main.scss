@@ -213,3 +213,20 @@ td.expand-link { cursor: pointer; cursor: hand; }
 .panel-heading.active .user-count {
 	display: none;
 }
+
+.clinician-id {
+	color: #999;
+	font-size: 0.8em;
+}
+
+.clinician-last-request-at {
+	vertical-align: middle !important;
+}
+
+.invitation-sent {
+	color: #f0ad4e;
+}
+
+.inactive {
+	color: #d9534f;
+}

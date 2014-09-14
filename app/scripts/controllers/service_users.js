@@ -4,10 +4,11 @@ angular.module('buddyClientApp')
     .controller('AddServiceUserCtrl', function($scope, Team) {
         $scope.teams = Team.query({});
     }).controller('ServiceUsersCtrl', function ($scope, TeamServiceUser, $modal, CurrentUser, $location, $state) {
+
         $scope.user = CurrentUser.user();
         jQuery(document).ready(function () {
-            $('#tabs').tab();
-            $('#tabs a[href="' + window.location.hash + '"]').tab('show');
+            $('.tab-pane').hide();
+            $('#az').show();
             $(document).on('click', 'td.expand-link', function() {
                 $location.path($(this).find('a').attr('ng-href'));
                 $location.hash('');
@@ -19,6 +20,11 @@ angular.module('buddyClientApp')
                 $(e.target).prev('.panel-heading').removeClass('active');
             });
         });
+
+        $scope.anchor = function(tab) {
+            $(".tab-pane").hide();
+            $("#" + tab).show();
+        }
 
         $scope.serviceUsers = TeamServiceUser.query({account_id: $scope.user.account_ids[0]});
         $scope.rescheduleSession = function(serviceUser) {

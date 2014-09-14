@@ -146,6 +146,16 @@ angular.module('buddyClientApp', [
             templateUrl: '/views/clinicians/index.html',
             controller: 'CliniciansCtrl',
             activetab: 'clinicians'
+        }).state('clinicianAdmin.editClinician', {
+            url: '/clinicians/:id/edit',
+            templateUrl: '/views/clinicians/edit.html',
+            controller: 'EditClinicianCtrl',
+            activetab: 'clinicians'
+        }).state('clinicianAdmin.addClinician', {
+            url: '/clinicians/new',
+            templateUrl: '/views/clinicians/new.html',
+            controller: 'AddClinicianCtrl',
+            activetab: 'clinicians'
         });
 
         $urlRouterProvider.otherwise('/');
