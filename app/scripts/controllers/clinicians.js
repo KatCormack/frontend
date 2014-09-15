@@ -8,6 +8,20 @@ angular.module('buddyClientApp')
     })
     .controller('CliniciansCtrl', function ($scope, Clinician, Team, Page, $modal, $location) {
         Page.setTitle('Buddy - Clinicians');
+        jQuery(document).ready(function () {
+            $('.tab-pane').hide();
+            $('#az').show();
+            $(document).on('click', 'td.expand-link', function() {
+                $location.path($(this).find('a').attr('ng-href'));
+                $location.hash('');
+                $scope.$apply();
+            });
+        });
+        $scope.anchor = function(tab) {
+            $(".tab-pane").hide();
+            $("#" + tab).show();
+        }
+
         $scope.teams = Team.query();
         $scope.clinicians = Clinician.query({}, function() {
             _.map($scope.clinicians, function(clinician) {
@@ -20,11 +34,6 @@ angular.module('buddyClientApp')
         };
         $scope.twoWeeksAgo = new Date()
         $scope.twoWeeksAgo.setDate($scope.twoWeeksAgo.getDate() - 14);
-        $(document).on('click', 'td.expand-link', function() {
-            $location.path($(this).find('a').attr('ng-href'));
-            $location.hash('');
-            $scope.$apply();
-        });
     })
     .controller('EditClinicianCtrl', function($scope, $state, Clinician) {
         $scope.clinician = Clinician.get({id: $state.params.id})
