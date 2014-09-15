@@ -81,13 +81,15 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <li ng-hide="auth.isAuthenticated()" active-nav="login"><a ng-href="/login">Login</a></li>
-              <li ng-show="auth.isAuthenticated()" class="dropdown">
+              <li ng-show="auth.isAuthenticated() && auth.isClinician()" class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                   <li><a href="#">Settings</a></li>
                   <li><a ng-click="logout()">Logout</a></li>
                 </ul>
               </li>
+              <li><a ng-click="logout()" ng-show="auth.isServiceUser()">Logout</a></li>
+
             </ul>
           </div>
         </div>
