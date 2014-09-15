@@ -61,7 +61,7 @@
     <div class="col-md-12">
       <ul class="list-group">
         <li href="#" class="list-group-item active" ng-repeat="team in teams">
-          <input type="checkbox" ng-model="clinician.teams" ng-true-value="{{ team.id }}">
+          <input type="checkbox" ng-model="team.selected">
           <label class="list-group-label">
             {{ team.name }}
           </label>
@@ -74,7 +74,7 @@
         <input type="submit" class="btn btn-buddy right" value="Create user">
       </div>
       <div class="col-md-6 cancel-button">
-        <a href="/service_users">Cancel</a>
+        <a href="/clinicians">Cancel</a>
       </div>
     </div>
   </form>

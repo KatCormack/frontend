@@ -1,13 +1,16 @@
 'use strict';
 
 angular.module('buddyClientApp')
-    .controller('NewClinicianCtrl', function($scope, TeamClinician, Team, CurrentUser) {
+    .controller('NewClinicianCtrl', function($scope, Clinician, Team, CurrentUser) {
         $scope.clinician = {}
         $scope.clinician.teams = [];
-        $scope.teams = Team.query({});
+        $scope.teams = Team.query({})
         $scope.current_team = CurrentUser.user().account_ids[0];
         $scope.submit = function() {
-            console.log($scope.clinician);
+            var selectedTeams = _.select($scope.teams, function(team) { return team.selected })
+            var teamIds = _.map(selectedTeams, function(team) { return team.id})
+            $scope.clinician.account_ids = teamIds
+            Clinician.save({user: $scope.clinician});
         }
     })
     .controller('CliniciansCtrl', function ($scope, Clinician, Team, Page, $modal, $location) {
