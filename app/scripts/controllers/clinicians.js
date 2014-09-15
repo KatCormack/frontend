@@ -1,10 +1,14 @@
 'use strict';
 
 angular.module('buddyClientApp')
-    .controller('AddClinicianCtrl', function($scope, TeamClinician, Team, CurrentUser) {
+    .controller('NewClinicianCtrl', function($scope, TeamClinician, Team, CurrentUser) {
         $scope.clinician = {}
+        $scope.clinician.teams = [];
         $scope.teams = Team.query({});
-        $scope.clinician.team = CurrentUser.user().account_ids[0];
+        $scope.current_team = CurrentUser.user().account_ids[0];
+        $scope.submit = function() {
+            console.log($scope.clinician);
+        }
     })
     .controller('CliniciansCtrl', function ($scope, Clinician, Team, Page, $modal, $location) {
         Page.setTitle('Buddy - Clinicians');

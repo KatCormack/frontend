@@ -37,7 +37,7 @@ legend {
 	padding-bottom: 5px;
 }
 
-.NewServiceUsersCtrl, .EditServiceUserCtrl, .LoginCtrl, .DeactivateServiceUserCtrl {
+.NewServiceUsersCtrl, .EditServiceUserCtrl, .LoginCtrl, .DeactivateServiceUserCtrl, .NewClinicianCtrl {
 	background-color: #eee;
 }
 
@@ -229,4 +229,14 @@ td.expand-link { cursor: pointer; cursor: hand; }
 
 .inactive {
 	color: #d9534f;
+}
+
+.list-group-label {
+	font-weight: normal;
+	padding-left: 2px;
+}
+
+.teams-header {
+	font-weight: bold;
+	padding-right: 20px;
 }

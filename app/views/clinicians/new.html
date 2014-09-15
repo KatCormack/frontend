@@ -1,17 +1,81 @@
-<div class="modal-header">
-  Add clinicians
+<div class="col-md-8 col-md-push-2 form-container">
+  <legend>
+    <h1>Add a clinician</h1>
+  </legend>
+  <form ng-submit="submit()">
+    <div class="col-md-6">
+      <div class="form-group required">
+        <label for="clinician_first_name" ng-class="{error: errors.first_name}">
+          First Name
+          <span class="error-inline" ng-show="errors.first_name">{{ errors.first_name }}</span>
+        </label>
+        <input type="text" ng-model="clinician.first_name" placeholder="" class="form-control input-md" id="clinician_first_name">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group required">
+        <label for="clinician_last_name" ng-class="{error: errors.last_name}">
+          Last Name
+          <span class="error-inline" ng-show="errors.last_name">{{ errors.last_name }}</span>
+        </label>
+        <input type="text" ng-model="clinician.last_name" placeholder="" class="form-control input-md" id="clinician_last_name">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group required">
+        <label for="clinician_email" ng-class="{error: errors.email}">
+          Email Address
+          <span class="error-inline" ng-show="errors.email">{{ errors.email }}</span>
+        </label>
+        <input type="text" ng-model="clinician.email" placeholder="" class="form-control input-md" id="clinician_email">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group required">
+        <label>
+          <input type="checkbox" ng-model="clinician.may_manage_account" value="1" id="clinician_may_manage_account">
+          May manage account
+        </label>
+        <br />
+        <label>
+          <input type="checkbox" ng-model="clinician.has_caseload" value="1" id="clinician_has_caseload">
+          Has caseload
+        </label>
+      </div>
+    </div>
+
+    <div class="col-md-8 footer">
+      <span class="teams-header">
+        Teams ({{ teams.length }})
+        </span>
+      <span class="help-text">
+        Choose which team(s) this clinician is a part of
+      </span>
+    </div>
+    <div class="col-md-4 text-right footer">
+      <span class="text-right">
+        select all
+      </span>
+    </div>
+
+    <div class="col-md-12">
+      <ul class="list-group">
+        <li href="#" class="list-group-item active" ng-repeat="team in teams">
+          <input type="checkbox" ng-model="clinician.teams" ng-true-value="{{ team.id }}">
+          <label class="list-group-label">
+            {{ team.name }}
+          </label>
+        </li>
+      </ul>
+    </div>
+
+    <div class="col-md-12 footer">
+      <div class="col-md-6 text-right">
+        <input type="submit" class="btn btn-buddy right" value="Create user">
+      </div>
+      <div class="col-md-6 cancel-button">
+        <a href="/service_users">Cancel</a>
+      </div>
+    </div>
+  </form>
 </div>
-<form ng-submit="submit()">
-  <div class="modal-body">
-    <div class="form-group">
-      <input type="email" ng-model="clinicians.email" placeholder="email addresss" class="form-control input-md">
-    </div>
-    <div class="form-group">
-      <select ng-model="clinicians.team" class="form-control input-md" ng-options="team.id as team.name for team in teams"></select>
-    </div>
-  </div>
-  <div class="modal-footer">
-    <input type="submit" value="Create" class="btn btn-info">
-    <a class="btn btn-danger" ng-click="cancel()">Cancel</a>
-  </div>
-</form>

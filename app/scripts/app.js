@@ -154,7 +154,7 @@ angular.module('buddyClientApp', [
         }).state('clinicianAdmin.addClinician', {
             url: '/clinicians/new',
             templateUrl: '/views/clinicians/new.html',
-            controller: 'AddClinicianCtrl',
+            controller: 'NewClinicianCtrl',
             activetab: 'clinicians'
         });
 
