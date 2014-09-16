@@ -46,8 +46,10 @@ angular.module('buddyClientApp')
         $scope.twoWeeksAgo = new Date()
         $scope.twoWeeksAgo.setDate($scope.twoWeeksAgo.getDate() - 14);
     })
-    .controller('EditClinicianCtrl', function($scope, $state, Clinician) {
+    .controller('EditClinicianCtrl', function($scope, $state, Team, Clinician, ClinicianServiceUser) {
         $scope.clinician = Clinician.get({id: $state.params.id})
-    })
-
-;
+        $scope.teams = Team.query({}, function() {
+            $scope.teams = _.map($scope.teams, function(team) { team.selected = true; return team });
+        });
+        $scope.serviceUsers = ClinicianServiceUser.query({clinician_id: $state.params.id});
+    });

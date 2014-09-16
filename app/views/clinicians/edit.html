@@ -1,1 +1,92 @@
-{{ clinician }}
+<div class="col-md-8 col-md-push-2 form-container">
+  <legend>
+    <h1>{{ clinician.full_name }}</h1>
+  </legend>
+  <form ng-submit="submit()">
+    <div class="col-md-6">
+      <div class="form-group required">
+        <label for="clinician_first_name" ng-class="{error: errors.first_name}">
+          First Name
+          <span class="error-inline" ng-show="errors.first_name">{{ errors.first_name }}</span>
+        </label>
+        <input type="text" ng-model="clinician.first_name" placeholder="" class="form-control input-md" id="clinician_first_name">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group required">
+        <label for="clinician_last_name" ng-class="{error: errors.last_name}">
+          Last Name
+          <span class="error-inline" ng-show="errors.last_name">{{ errors.last_name }}</span>
+        </label>
+        <input type="text" ng-model="clinician.last_name" placeholder="" class="form-control input-md" id="clinician_last_name">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group required">
+        <label for="clinician_email" ng-class="{error: errors.email}">
+          Email Address
+          <span class="error-inline" ng-show="errors.email">{{ errors.email }}</span>
+        </label>
+        <input type="text" ng-model="clinician.email" placeholder="" class="form-control input-md" id="clinician_email">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group required">
+        <label>
+          <input type="checkbox" ng-model="clinician.can_administer_account" value="1" id="clinician_can_administer_account">
+          May manage account
+        </label>
+        <br />
+        <label>
+          <input type="checkbox" ng-model="clinician.has_caseload" value="1" id="clinician_has_caseload">
+          Has caseload
+        </label>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <label>Service Users ({{ serviceUsers.length }})</label>
+      <ul class="list-group">
+        <li href="#" class="list-group-item active" ng-repeat="serviceUser in serviceUsers">
+          <label class="list-group-label">
+            {{ serviceUser.full_name }}
+          </label>
+        </li>
+      </ul>
+    </div>
+
+    <div class="col-md-8 footer">
+      <span class="teams-header">
+        <label ng-class="{error: errors.account_ids}">Teams ({{ teams.length }})</label>
+      </span>
+      <span class="help-text">
+        Choose which team(s) this clinician is a part of
+      </span>
+    </div>
+    <div class="col-md-4 text-right footer">
+      <span class="text-right">
+        select all
+      </span>
+    </div>
+
+    <div class="col-md-12">
+      <ul class="list-group">
+        <li href="#" class="list-group-item active" ng-repeat="team in teams">
+          <input type="checkbox" ng-model="team.selected">
+          <label class="list-group-label">
+            {{ team.name }}
+          </label>
+        </li>
+      </ul>
+    </div>
+
+    <div class="col-md-12 footer">
+      <div class="col-md-6 text-right">
+        <input type="submit" class="btn btn-buddy right" value="Create user">
+      </div>
+      <div class="col-md-6 cancel-button">
+        <a href="/clinicians">Cancel</a>
+      </div>
+    </div>
+  </form>
+</div>
