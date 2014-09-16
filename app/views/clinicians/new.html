@@ -46,8 +46,8 @@
 
     <div class="col-md-8 footer">
       <span class="teams-header">
-        Teams ({{ teams.length }})
-        </span>
+        <label ng-class="{error: errors.account_ids}">Teams ({{ teams.length }})</label>
+      </span>
       <span class="help-text">
         Choose which team(s) this clinician is a part of
       </span>
