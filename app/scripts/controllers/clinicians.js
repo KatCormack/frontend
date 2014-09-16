@@ -8,6 +8,7 @@ angular.module('buddyClientApp')
         $scope.submit = function() {
             var selectedTeams = _.select($scope.teams, function(team) { return team.selected })
             var teamIds = _.map(selectedTeams, function(team) { return team.id})
+            $scope.clinician.account_ids = teamIds;
             Clinician.save({user: $scope.clinician}, function() {
                 $state.go('clinicianAdmin.clinicians')
             }, function(response) {
