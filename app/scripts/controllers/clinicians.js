@@ -61,20 +61,22 @@ angular.module('buddyClientApp')
         });
         $scope.clinicians = Clinician.query();
         $scope.checkUsers = function() {
+            var count = 0;
             _.each($scope.serviceUsers, function(user) {
                 console.log(user);
                 var selectedTeamIds = _.map(_.filter($scope.teams, function(team) { return team.selected; }), function(team) { return team.id });
                 user.needsMoving = (selectedTeamIds.indexOf(user.account_id) === -1 && user.clinician_id == $state.params.id)
-            })
+                if (user.needsMoving) { count ++; }
+            });
+            return count;
         };
         $scope.submit = function() {
-            // first thing is first - check to see whether we have
-            // removed any teams
-            var deselectedTeams = _.filter($scope.teams, function(team) { return !team.selected; });
-            if (deselectedTeams.length > 0) {
-                // now we need to see whether the service users belong
-                // to any teams and need moving to another clinician
-
+            if ($scope.checkUsers() > 0) {
+                Clinician.update({user: $scope.clinician, id: $state.params.id, validate_only: true}, function() {
+                }, function(response) {
+                    _.each(response.data, function(value, key) { response.data[key] = value[0] });
+                    $scope.errors = response.data;
+                });
             } else {
                 Clinician.update({user: $scope.clinician, id: $state.params.id}, function() {
                     $state.go('clinicianAdmin.clinicians');
