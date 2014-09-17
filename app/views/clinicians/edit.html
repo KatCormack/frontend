@@ -55,7 +55,7 @@
             </label>
           </div>
           <div class="col-md-4">
-            <select class="form-control" ng-options="clinician.id as clinician.full_name for clinician in teamClinicians[serviceUser.account_id]" ng-model="serviceUser.clinician_id"></select>
+            <select class="form-control" ng-options="clinician.id as clinician.full_name for clinician in teamClinicians[serviceUser.account_id]" ng-model="serviceUser.clinician_id" ng-change="checkUsers()"></select>
           </div>
         </div>
       </div>
