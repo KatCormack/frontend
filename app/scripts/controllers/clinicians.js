@@ -46,10 +46,40 @@ angular.module('buddyClientApp')
         $scope.twoWeeksAgo = new Date()
         $scope.twoWeeksAgo.setDate($scope.twoWeeksAgo.getDate() - 14);
     })
-    .controller('EditClinicianCtrl', function($scope, $state, Team, Clinician, ClinicianServiceUser) {
+    .controller('EditClinicianCtrl', function($scope, $state, Team, Clinician, ClinicianServiceUser, TeamClinician) {
         $scope.clinician = Clinician.get({id: $state.params.id})
         $scope.teams = Team.query({}, function() {
             $scope.teams = _.map($scope.teams, function(team) { team.selected = true; return team });
         });
-        $scope.serviceUsers = ClinicianServiceUser.query({clinician_id: $state.params.id});
+        $scope.teamClinicians = [];
+        $scope.serviceUsers = ClinicianServiceUser.query({clinician_id: $state.params.id}, function() {
+            _.each($scope.serviceUsers, function(serviceUser) {
+                if (!$scope.teamClinicians[serviceUser.account_id]) {
+                    $scope.teamClinicians[serviceUser.account_id] = TeamClinician.query({account_id: serviceUser.account_id});
+                }
+            })
+        });
+        $scope.clinicians = Clinician.query();
+        $scope.checkUsers = function() {
+            _.each($scope.serviceUsers, function(user) {
+                console.log(user);
+                var selectedTeamIds = _.map(_.filter($scope.teams, function(team) { return team.selected; }), function(team) { return team.id });
+                user.needsMoving = (selectedTeamIds.indexOf(user.account_id) === -1 && user.clinician_id == $state.params.id)
+            })
+        };
+        $scope.submit = function() {
+            // first thing is first - check to see whether we have
+            // removed any teams
+            var deselectedTeams = _.filter($scope.teams, function(team) { return !team.selected; });
+            if (deselectedTeams.length > 0) {
+                // now we need to see whether the service users belong
+                // to any teams and need moving to another clinician
+
+            } else {
+                Clinician.update({user: $scope.clinician, id: $state.params.id}, function() {
+                    $state.go('clinicianAdmin.clinicians');
+                });
+            }
+        };
+
     });

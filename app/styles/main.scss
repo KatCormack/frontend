@@ -240,3 +240,17 @@ td.expand-link { cursor: pointer; cursor: hand; }
 	font-weight: bold;
 	padding-right: 20px;
 }
+
+.as-table:before, .as-table:after {
+	content: " ";
+	display: table !important;
+}
+
+.list-group-item.alert {
+	border-color: #ebccd1 !important; /* bastard */
+	background-color: #f2dede !important;
+}
+
+.clinician-name {
+	padding-top: 4px;
+}
