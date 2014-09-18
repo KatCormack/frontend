@@ -45,17 +45,23 @@
     </div>
 
     <div class="col-md-12">
-      <label>Service Users ({{ serviceUsers.length }})</label>
+      <label>
+        Service Users ({{ serviceUsers.length }})
+        <span class="error-inline" ng-show="checkUsers() > 0"><br />You must assign a new Primary Clinician or deactivate these users to continue</span>
+      </label>
       <div class="list-group">
         <!-- need a polyfill here for ie7 -->
-        <div href="#" class="list-group-item as-table" ng-repeat="serviceUser in serviceUsers" ng-class="{'alert-danger': serviceUser.needsMoving, alert: serviceUser.needsMoving }">
-          <div class="col-md-8 clinician-name">
+        <div href="#" class="list-group-item as-table" ng-repeat="serviceUser in serviceUsers | orderBy: 'last_name'" ng-class="{'alert-danger': serviceUser.needsMoving, alert: serviceUser.needsMoving }">
+          <div class="col-md-4 service-user-list-attribute">
             <label class="list-group-label">
               {{ serviceUser.full_name }}
             </label>
           </div>
+          <div class="col-md-4 service-user-list-attribute">
+            Deactivate user
+          </div>
           <div class="col-md-4">
-            <select class="form-control" ng-options="clinician.id as clinician.full_name for clinician in teamClinicians[serviceUser.account_id]" ng-model="serviceUser.clinician_id" ng-change="checkUsers()"></select>
+            <select class="form-control" ng-options="clinician.id as clinician.full_name for clinician in teamClinicians[serviceUser.account_id] | orderBy: 'last_name' | filter: {deactivated_at: null}" ng-model="serviceUser.clinician_id" ng-change="checkUsers()"></select>
           </div>
         </div>
       </div>
@@ -63,22 +69,26 @@
 
     <div class="col-md-8 footer">
       <span class="teams-header">
-        <label ng-class="{error: errors.account_ids}">Teams ({{ teams.length }})</label>
+        <label ng-class="{error: errors.account_ids}">
+          Teams ({{ teams.length }})
+          <span class="help-text">
+            Choose which team(s) this clinician is a part of
+          </span>
+          <span class="error-inline" ng-show="errors.team"><br />You must belong to atleast one team</span>
+        </label>
       </span>
-      <span class="help-text">
-        Choose which team(s) this clinician is a part of
-      </span>
+
     </div>
     <div class="col-md-4 text-right footer">
       <span class="text-right">
-        select all
+        <a ng-click="selectAllTeams()">select all</a>
       </span>
     </div>
 
     <div class="col-md-12">
       <ul class="list-group">
         <li href="#" class="list-group-item active" ng-repeat="team in teams">
-          <input type="checkbox" ng-model="team.selected" ng-change="checkUsers()">
+          <input type="checkbox" ng-model="team.selected" ng-change="checkUsers(); checkTeams()">
           <label class="list-group-label">
             {{ team.name }}
           </label>
@@ -88,11 +98,11 @@
 
     <div class="col-md-12 footer">
       <div class="col-md-6 text-right">
-        <input type="submit" class="btn btn-buddy right" value="Save">
+        <input type="submit" class="btn btn-buddy right" value="Save" ng-disabled="checkUsers() > 0 || checkTeams() == 0">
       </div>
       <div class="col-md-6 cancel-button">
         <a href="/clinicians">Cancel</a>
       </div>
     </div>
-</div>
   </form>
+</div>

@@ -48,7 +48,7 @@
     <div class="col-md-6">
       <div class="form-group required">
         <label for="service_user_clinician">Primary Clinician</label>
-        <select class="form-control" ng-model="service_user.clinician_id" ng-options="clinician.id as clinician.full_name for clinician in clinicians"></select>
+        <select class="form-control" ng-model="service_user.clinician_id" ng-options="clinician.id as clinician.full_name for clinician in clinicians | orderBy: 'last_name' | filter: {deactivated_at: null}"></select>
       </div>
     </div>
     <div class="col-md-6">

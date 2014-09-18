@@ -16,6 +16,9 @@ angular.module('buddyClientApp')
                 $scope.errors = response.data;
             });
         }
+        $scope.selectAllTeams = function() {
+            _.each($scope.teams, function(team) { team.selected = true; });
+        }
     })
     .controller('CliniciansCtrl', function ($scope, Clinician, Team, Page, $modal, $location) {
         Page.setTitle('Buddy - Clinicians');
@@ -46,8 +49,9 @@ angular.module('buddyClientApp')
         $scope.twoWeeksAgo = new Date()
         $scope.twoWeeksAgo.setDate($scope.twoWeeksAgo.getDate() - 14);
     })
-    .controller('EditClinicianCtrl', function($scope, $state, Team, Clinician, ClinicianServiceUser, TeamClinician) {
+    .controller('EditClinicianCtrl', function($scope, $state, Team, Clinician, ClinicianServiceUser, TeamClinician, ClinicianServiceUserRelationship, Membership) {
         $scope.clinician = Clinician.get({id: $state.params.id})
+        $scope.errors = {};
         $scope.teams = Team.query({}, function() {
             $scope.teams = _.map($scope.teams, function(team) { team.selected = true; return team });
         });
@@ -59,19 +63,27 @@ angular.module('buddyClientApp')
                 }
             })
         });
+        $scope.selectAllTeams = function() {
+            _.each($scope.teams, function(team) { team.selected = true; });
+        }
         $scope.clinicians = Clinician.query();
         $scope.checkUsers = function() {
             var count = 0;
             _.each($scope.serviceUsers, function(user) {
-                console.log(user);
                 var selectedTeamIds = _.map(_.filter($scope.teams, function(team) { return team.selected; }), function(team) { return team.id });
                 user.needsMoving = (selectedTeamIds.indexOf(user.account_id) === -1 && user.clinician_id == $state.params.id)
                 if (user.needsMoving) { count ++; }
             });
             return count;
         };
+        $scope.checkTeams = function() {
+            var selectedTeamIds = _.map(_.filter($scope.teams, function(team) { return team.selected; }), function(team) { return team.id });
+            $scope.errors.team = (selectedTeamIds.length == 0);
+            return selectedTeamIds.length;
+        }
         $scope.submit = function() {
-            if ($scope.checkUsers() > 0) {
+            $scope.checkTeams();
+           if ($scope.checkUsers() > 0 || $scope.errors.team) {
                 Clinician.update({user: $scope.clinician, id: $state.params.id, validate_only: true}, function() {
                 }, function(response) {
                     _.each(response.data, function(value, key) { response.data[key] = value[0] });
@@ -79,6 +91,42 @@ angular.module('buddyClientApp')
                 });
             } else {
                 Clinician.update({user: $scope.clinician, id: $state.params.id}, function() {
+                    // move the service users from one clinician to the other
+                    // get the service users
+                    var usersToMove = _.select($scope.serviceUsers, function(u) { return u.clinician_id != $state.params.id });
+                    _.each(usersToMove, function(user) {
+                        // create the new relationship
+                        ClinicianServiceUserRelationship.save({
+                            service_user_id: user.id,
+                            clinician_id: user.clinician_id
+                        }, function() {
+                            // destroy the old relationship
+                            ClinicianServiceUserRelationship.remove({
+                                service_user_id: user.id,
+                                clinician_id: $scope.clinician.id
+                            });
+                        });
+                    });
+                    // get newly selected teams
+                    var selectedTeamIds = _.map(_.filter($scope.teams, function(team) { return team.selected; }), function(team) { return team.id });
+                    // join and leave old teams
+                    _.each(selectedTeamIds, function(id) {
+                        $scope.clinician.account_ids.remove(id);
+                    });
+                    var teamsToRemove = $scope.clinician.account_ids
+                    _.each($scope.clinician.account_ids, function(id) {
+                        selectedTeamIds.remove(id);
+                    });
+                    var teamsToAdd = selectedTeamIds
+                    // leave old teams
+                    _.each(teamsToRemove, function(team) {
+                        Membership.remove({user_id: $scope.clinician.id, account_id: team});
+                    });
+                    // join new teams
+                    _.each(teamsToAdd, function(team) {
+                        Membership.save({user_id: $scope.clinician.id, account_id: team});
+                    });
+
                     $state.go('clinicianAdmin.clinicians');
                 });
             }

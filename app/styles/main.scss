@@ -37,7 +37,7 @@ legend {
 	padding-bottom: 5px;
 }
 
-.NewServiceUsersCtrl, .EditServiceUserCtrl, .LoginCtrl, .DeactivateServiceUserCtrl, .NewClinicianCtrl {
+.NewServiceUsersCtrl, .EditServiceUserCtrl, .LoginCtrl, .DeactivateServiceUserCtrl, .NewClinicianCtrl, .EditClinicianCtrl {
 	background-color: #eee;
 }
 
@@ -104,8 +104,9 @@ body.ServiceUsersCtrl, body.SearchCtrl, body.CliniciansCtrl {
 	color: #bbb;	
 }
 
-.form-group label.error, p.error, label.error {
+.form-group label.error, p.error, label.error, .error-inline {
 	color: #d9534f;
+	font-weight: normal;
 }
 
 legend h1 {
@@ -206,6 +207,7 @@ td.expand-link { cursor: pointer; cursor: hand; }
 
 .help-text {
 	color: #999;
+	font-weight: normal;
 }
 
 .ng-hide { display: none!important; }
@@ -251,6 +253,6 @@ td.expand-link { cursor: pointer; cursor: hand; }
 	background-color: #f2dede !important;
 }
 
-.clinician-name {
+.service-user-list-attribute {
 	padding-top: 4px;
 }
