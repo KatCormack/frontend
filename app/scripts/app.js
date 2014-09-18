@@ -17,8 +17,14 @@ angular.module('buddyClientApp', [
         clinician: 3,
         clinicianAdmin: 4
     })
-    .run(function($rootScope){
+    .run(function($rootScope, $state, Auth){
         $rootScope._ = _;
+        $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+            if (!Auth.authorize(toState.data.access)) {
+                event.preventDefault();
+                $state.go('anon.login');
+            }
+        });
     })
     .config(function ($urlRouterProvider, $locationProvider, $httpProvider, $stateProvider, AccessLevels, $uiViewScrollProvider) {
         /* without useAnchorScroll() the application scrolls to where

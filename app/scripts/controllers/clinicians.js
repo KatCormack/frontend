@@ -131,5 +131,11 @@ angular.module('buddyClientApp')
                 });
             }
         };
+        $scope.hasUsers = function() {
+            return _.filter($scope.serviceUsers, function(user)  { return (user.clinician_id == $scope.clinician.id && !user.deactivated_at) }).length > 0;
+        }
+        $scope.deactivate = function($event) {
+            $event.preventDefault();
+        }
 
     });

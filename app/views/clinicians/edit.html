@@ -95,7 +95,16 @@
         </li>
       </ul>
     </div>
-
+    <div class="col-md-12 text-center footer">
+      <span ng-show="clinician.deactivated_at">
+        This user has been deactivated
+        <a ng-click="reactivate(clinician)">Reactivate this user</a>
+      </span>
+      <p ng-hide="clinician.deactivated_at">To deactivate this clinician please re-assign or deactivate the following service users </p>
+      <button class="btn btn-buddy" ng-disabled="hasUsers()" ng-click="deactivate($event)" ng-hide="clinician.deactivated_at">
+        Deactivate this user
+      </button>
+    </div>
     <div class="col-md-12 footer">
       <div class="col-md-6 text-right">
         <input type="submit" class="btn btn-buddy right" value="Save" ng-disabled="checkUsers() > 0 || checkTeams() == 0">

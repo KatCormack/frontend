@@ -12,6 +12,9 @@ angular.module('buddyClientApp').
                 }
                 else if (access === AccessLevels.service_user) {
                     return this.isServiceUser();
+                }
+                else if (access === AccessLevels.clinicianAdmin) {
+                    return this.isClinicianAdmin();
                 } else {
                     return true;
                 }
