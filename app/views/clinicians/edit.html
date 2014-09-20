@@ -48,6 +48,7 @@
       <label>
         Service Users ({{ serviceUsers.length }})
         <span class="error-inline" ng-show="checkUsers() > 0"><br />You must assign a new Primary Clinician or deactivate these users to continue</span>
+        <p id="deactivate-service-users-error" class="error-inline" ng-show="deactivationClicked">To deactivate this clinician please re-assign or deactivate the following service users </p>
       </label>
       <div class="list-group">
         <!-- need a polyfill here for ie7 -->
@@ -58,7 +59,9 @@
             </label>
           </div>
           <div class="col-md-4 service-user-list-attribute">
-            Deactivate user
+            <a ng-href="/service_users/{{service_user.id}}/deactivate?returnTo=%2Fclinicians%2F{{clinician.id}}%2Fedit">
+              Deactivate user
+            </a>
           </div>
           <div class="col-md-4">
             <select class="form-control" ng-options="clinician.id as clinician.full_name for clinician in teamClinicians[serviceUser.account_id] | orderBy: 'last_name' | filter: {deactivated_at: null}" ng-model="serviceUser.clinician_id" ng-change="checkUsers()"></select>
@@ -100,8 +103,8 @@
         This user has been deactivated
         <a ng-click="reactivate(clinician)">Reactivate this user</a>
       </span>
-      <p ng-hide="clinician.deactivated_at">To deactivate this clinician please re-assign or deactivate the following service users </p>
-      <button class="btn btn-buddy" ng-disabled="hasUsers()" ng-click="deactivate($event)" ng-hide="clinician.deactivated_at">
+
+      <button class="btn btn-buddy" ng-click="deactivate($event)" ng-hide="clinician.deactivated_at">
         Deactivate this user
       </button>
     </div>

@@ -41,7 +41,7 @@ angular.module('buddyClientApp', [
 
         $stateProvider.state('anon', {
             abstract: true,
-            template: '<div ui-view=""></div>',
+            template: '<div ui-view="" autoscroll="true"></div>',
             data: {
                 access: AccessLevels.anon
             }
@@ -71,7 +71,7 @@ angular.module('buddyClientApp', [
 
         $stateProvider.state('user', {
             abstract: true,
-            template: '<div ui-view="" autoscroll="false">',
+            template: '<div ui-view="" autoscroll="true">',
             data: {
                 access: AccessLevels.user
             }
@@ -84,7 +84,7 @@ angular.module('buddyClientApp', [
 
         $stateProvider.state('serviceUser', {
             abstract: true,
-            template: '<div ui-view="" autoscroll="false">',
+            template: '<div ui-view="" autoscroll="true">',
             data: {
                 access: AccessLevels.serviceUser
             }
@@ -143,7 +143,7 @@ angular.module('buddyClientApp', [
 
         $stateProvider.state('clinicianAdmin', {
             abstract: true,
-            template: '<ui-view>',
+            template: '<div ui-view="" autoscroll="true">',
             data: {
                 access: AccessLevels.clinicianAdmin
             }

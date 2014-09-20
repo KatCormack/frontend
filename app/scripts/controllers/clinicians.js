@@ -3,6 +3,7 @@
 angular.module('buddyClientApp')
     .controller('NewClinicianCtrl', function($scope, $state, Clinician, Team, CurrentUser) {
         $scope.clinician = {}
+        $scope.clinician.has_caseload = true;
         $scope.teams = Team.query({})
         $scope.current_team = CurrentUser.user().account_ids[0];
         $scope.submit = function() {
@@ -136,6 +137,9 @@ angular.module('buddyClientApp')
         }
         $scope.deactivate = function($event) {
             $event.preventDefault();
+            if ($scope.hasUsers() > 0) {
+                $scope.deactivationClicked = true;
+            }
         }
 
     });
