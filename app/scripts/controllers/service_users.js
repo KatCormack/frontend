@@ -22,9 +22,9 @@ angular.module('buddyClientApp')
         });
 
         $scope.anchor = function(tab) {
-            $(".tab-pane").hide();
-            $("#" + tab).show();
-        }
+            $('.tab-pane').hide();
+            $('#' + tab).show();
+        };
 
         $scope.serviceUsers = TeamServiceUser.query({account_id: $scope.user.account_ids[0]});
         $scope.rescheduleSession = function(serviceUser) {
@@ -50,13 +50,13 @@ angular.module('buddyClientApp')
             modalInstance.result.then(function(result) {
                 serviceUser.current_session_time = result.scheduled_time;
             });
-        }
+        };
         $scope.search = function() {
             $state.go('clinician.search', {search: $scope.search_term});
         };
         $scope.reactivate = function(serviceUser) {
             serviceUser.deactivated_at = null;
-            TeamServiceUser.update({user: serviceUser, id: serviceUser.id, account_id: serviceUser.account_id})
+            TeamServiceUser.update({user: serviceUser, id: serviceUser.id, account_id: serviceUser.account_id});
         };
     }).controller('ServiceUserDiaryCtrl', function($scope, ServiceUser, $state, Entry) {
         $scope.user = ServiceUser.get({id: $state.params.id});
@@ -67,7 +67,7 @@ angular.module('buddyClientApp')
 
         var refreshClinicians = function() {
             $scope.clinicians = TeamClinician.query({account_id: $scope.teams[0].id}, function() {
-                if (!_.detect($scope.clinicians, function(x) { return x.id == $scope.service_user.clinician_id })) {
+                if (!_.detect($scope.clinicians, function(x) { return x.id === $scope.service_user.clinician_id; })) {
                     $scope.service_user.clinician_id = null;
                 }
             });
@@ -95,18 +95,18 @@ angular.module('buddyClientApp')
             TeamServiceUser.save({user: $scope.service_user, account_id: $scope.service_user.account_id}, function() {
                 $state.go('clinician.serviceUsers');
             }, function(response) {
-                _.each(response.data, function(value, key) { response.data[key] = value[0] });
+                _.each(response.data, function(value, key) { response.data[key] = value[0]; });
                 $scope.errors = response.data;
             });
-        }
+        };
 
     }).controller('EditServiceUserCtrl', function($scope, $state, ServiceUser, TeamServiceUser, Team, TeamClinician) {
         $scope.service_user = ServiceUser.get({id: $state.params.id}, function() {
             $scope.service_user.account_id = $scope.service_user.primary_account_id;
-        })
+        });
         var refreshClinicians = function() {
             $scope.clinicians = TeamClinician.query({account_id: $scope.teams[0].id}, function() {
-                if (!_.detect($scope.clinicians, function(x) { return x.id == $scope.service_user.clinician_id })) {
+                if (!_.detect($scope.clinicians, function(x) { return x.id === $scope.service_user.clinician_id; })) {
                     $scope.service_user.clinician_id = null;
                 }
             });
@@ -119,25 +119,25 @@ angular.module('buddyClientApp')
             TeamServiceUser.update({id: $scope.service_user.id, user: $scope.service_user, account_id: $scope.service_user.account_id}, function() {
                 $state.go('clinician.serviceUsers');
             }, function(response) {
-                _.each(response.data, function(value, key) { response.data[key] = value[0] });
+                _.each(response.data, function(value, key) { response.data[key] = value[0]; });
                 $scope.errors = response.data;
             });
         };
     }).controller('DeactivateServiceUserCtrl', function($scope, $state, ServiceUser, TeamServiceUser, $location) {
-        $scope.returnTo = unescape($state.params.returnTo || '/service_users')
-        $scope.serviceUser = ServiceUser.get({id: $state.params.id})
+        $scope.returnTo = unescape($state.params.returnTo || '/service_users');
+        $scope.serviceUser = ServiceUser.get({id: $state.params.id});
         $scope.deactivationReasons = [
-            "Completed treatment",
-            "Self discharge",
-            "Not using Buddy",
-            "Lost phone",
-            "Other"
+            'Completed treatment',
+            'Self discharge',
+            'Not using Buddy',
+            'Lost phone',
+            'Other'
         ];
         $scope.submit = function() {
             $scope.serviceUser.deactivated_at = new Date();
             TeamServiceUser.update({id: $state.params.id, user: $scope.serviceUser, account_id: $scope.serviceUser.account_id}, function() {
                 $location.path($scope.returnTo);
-                $location.search('returnTo', null)
+                $location.search('returnTo', null);
             });
         };
     });

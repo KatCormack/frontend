@@ -1,9 +1,11 @@
+'use strict';
+
 angular.module( 'angularUtils.filters.ordinalDate', [] )
 
     .filter('ordinalDate', function($filter) {
 
         var getOrdinalSuffix = function(number) {
-            var suffixes = ["'th'", "'st'", "'nd'", "'rd'"];
+            var suffixes = ['\'th', '\'st', '\'nd', '\'rd'];
             var relevantDigits = (number < 30) ? number % 20 : number % 30;
             return (relevantDigits <= 3) ? suffixes[relevantDigits] : suffixes[0];
         };

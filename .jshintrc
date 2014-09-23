@@ -22,6 +22,7 @@
     "$": false,
     "jQuery": false,
     "moment": false,
-    "_": false
+    "_": false,
+    "unescape": false
   } 
 }

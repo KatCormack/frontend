@@ -8,7 +8,7 @@ angular.module('buddyClientApp')
             link: function(scope, element) {
                 scope.$watch('state.current.controller', function() {
                     element.removeClass();
-                    element.addClass(scope.state.current.controller)
+                    element.addClass(scope.state.current.controller);
                 });
             }
         };
