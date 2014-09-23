@@ -19,4 +19,15 @@ secrets['deployment_tags'].each do |tag|
   servers += compute.servers.select {|s| s.name.include?(stage) && s.name.include?(tag)}.map(&:ipv4_address)
 end
 
-puts servers.inspect
+
+IO.popen("grunt build") do |output|
+  output.each do |line|
+    puts line
+  end
+end
+
+servers.each do |server|
+  IO.popen("rsync -avuz dist/ #{secrets['deployment_user']}@#{server}:#{secrets['deployment_path']}") do |output|
+    puts line
+  end
+end
