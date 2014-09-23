@@ -6,7 +6,7 @@ angular.module('buddyClientApp')
             restrict: 'E',
             replace: true,
             controller:function($scope) {
-                $scope.hourRange = _.map(_.range(0,24), function(i) { return pad(i, 2); });
+                $scope.hourRange = _.map(_.range(0,24), function(i) { return i.pad(2); });
             },
             template: '<select ng-options="h as h for h in hourRange" class="form-control"></select>'
         };

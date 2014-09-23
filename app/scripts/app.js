@@ -170,10 +170,9 @@ angular.module('buddyClientApp', [
     });
 
 
-var pad = function(n, width, z) {
+String.prototype.pad = function(width, z) {
     z = z || '0';
-    n = n + '';
-    return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
+    return this.length >= width ? this : new Array(width - this.length + 1).join(z) + this;
 };
 
 
