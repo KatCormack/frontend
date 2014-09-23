@@ -19,7 +19,7 @@ angular.module('buddyClientApp', [
     })
     .run(function($rootScope, $state, Auth){
         $rootScope._ = _;
-        $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+        $rootScope.$on('$stateChangeStart', function(event, toState) {
             if (!Auth.authorize(toState.data.access)) {
                 event.preventDefault();
                 $state.go('anon.login');
@@ -32,7 +32,7 @@ angular.module('buddyClientApp', [
          * want */
         $uiViewScrollProvider.useAnchorScroll();
         /* Fix IE stupid caching */
-        $httpProvider.defaults.headers.common['Cache-Control'] = 'no-cache'
+        $httpProvider.defaults.headers.common['Cache-Control'] = 'no-cache';
         /* Cross domain AJAX requests? probably have to remove this
          * because IE *still* doesnt like this */
         $httpProvider.defaults.useXDomain = true;
@@ -174,7 +174,7 @@ var pad = function(n, width, z) {
     z = z || '0';
     n = n + '';
     return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
-}
+};
 
 
 if(!Array.prototype.indexOf) {
