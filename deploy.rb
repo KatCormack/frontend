@@ -28,6 +28,8 @@ end
 
 servers.each do |server|
   IO.popen("rsync -avuz dist/ #{secrets['deployment_user']}@#{server}:#{secrets['deployment_path']}") do |output|
-    puts line
+    output.each do |line|
+      puts line
+    end
   end
 end
