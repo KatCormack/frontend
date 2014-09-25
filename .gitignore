@@ -4,3 +4,4 @@ dist
 .sass-cache
 app/iconic/*
 secrets.json
+app/fonts/iconic-*.*
