@@ -9,6 +9,7 @@
 
 module.exports = function (grunt) {
     var modRewrite = require('connect-modrewrite');
+    grunt.loadNpmTasks('grunt-ng-annotate');
 
     // Load grunt tasks automatically
     require('load-grunt-tasks')(grunt);
@@ -266,7 +267,7 @@ module.exports = function (grunt) {
 
         // Allow the use of non-minsafe AngularJS files. Automatically makes it
         // minsafe compatible so Uglify does not destroy the ng references
-        ngmin: {
+        ngAnnotate: {
             dist: {
                 files: [{
                     expand: true,
@@ -402,7 +403,7 @@ module.exports = function (grunt) {
         'concurrent:dist',
         'autoprefixer',
         'concat',
-        'ngmin',
+        'ngAnnotate',
         'copy:dist',
         'cdnify',
         'cssmin',
