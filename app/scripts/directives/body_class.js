@@ -7,7 +7,7 @@ angular.module('buddyClientApp')
             scope: false,
             link: function(scope, element) {
                 scope.$watch('state.current.controller', function() {
-                    element.removeClass();
+                    element.removeAttr('class')
                     element.addClass(scope.state.current.controller);
                 });
             }
