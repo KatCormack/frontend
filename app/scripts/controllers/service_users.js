@@ -59,8 +59,18 @@ angular.module('buddyClientApp')
             TeamServiceUser.update({user: serviceUser, id: serviceUser.id, account_id: serviceUser.account_id});
         };
     }).controller('ServiceUserDiaryCtrl', function($scope, ServiceUser, $state, Entry) {
-        $scope.user = ServiceUser.get({id: $state.params.id});
+        $scope.user = ServiceUser.get({id: $state.params.id}, function() {
+            $scope.sessionScheduledTime = $scope.user.session_scheduled_time;
+        });
         $scope.entries = Entry.query({user_id: $state.params.id});
+
+        jQuery(document).ready(function() {
+
+        });
+        $scope.show = function(id) {
+
+        }
+
     }).controller('NewServiceUsersCtrl', function($scope, $state, Team, TeamClinician, CurrentUser, TeamServiceUser) {
         $scope.service_user = {};
         $scope.errors = {};

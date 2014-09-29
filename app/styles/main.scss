@@ -37,8 +37,12 @@ legend {
 	padding-bottom: 5px;
 }
 
-.NewServiceUsersCtrl, .EditServiceUserCtrl, .LoginCtrl, .DeactivateServiceUserCtrl, .NewClinicianCtrl, .EditClinicianCtrl {
+.NewServiceUsersCtrl, .EditServiceUserCtrl, .LoginCtrl, .DeactivateServiceUserCtrl, .NewClinicianCtrl, .EditClinicianCtrl, .ServiceUserDiaryCtrl {
 	background-color: #eee;
+}
+
+.ServiceUserDiaryCtrl  {
+	padding-top: 50px;
 }
 
 .ServiceUsersCtrl .navbar, .SearchCtrl .navbar, .CliniciansCtrl .navbar {
@@ -255,4 +259,39 @@ td.expand-link { cursor: pointer; cursor: hand; }
 
 .service-user-list-attribute {
 	padding-top: 4px;
+}
+
+.nav-stacked li {
+	border-bottom: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+	margin-top: 0px !important;
+}
+
+.nav-stacked li a {
+	padding: 15px !important;
+}
+
+.nav-stacked li.active {
+	background-color: #eee;
+}
+
+#diary-menu {
+	padding-right: 0px;
+}
+
+#next-session {
+	padding-left: 0px;
+	padding-right: 0px;
+	border-bottom: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+	background: white;
+}
+
+.diary-page-contents {
+	padding: 20px;
+}
+
+.nav-stacked {
+	background: white;
 }
