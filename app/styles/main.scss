@@ -283,15 +283,28 @@ td.expand-link { cursor: pointer; cursor: hand; }
 #next-session {
 	padding-left: 0px;
 	padding-right: 0px;
-	border-bottom: 1px solid #ccc;
-	border-right: 1px solid #ccc;
-	background: white;
+}
+
+.diary-page-contents-wrapper {
+	padding-left: 0px !important;
+	padding-right: 0px !important;
 }
 
 .diary-page-contents {
 	padding: 20px;
+	border-bottom: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+	background: white;	
+	padding-left: 0px !important;
+	padding-right: 0px !important;
 }
 
 .nav-stacked {
 	background: white;
+}
+
+.entry {
+	margin: 10px;
+	padding: 30px;
+	border: 1px solid;
 }

@@ -1,6 +1,6 @@
 <div class="container diary">
   <div class="row">
-    <div class="col-md-3" id="diary-menu">
+    <div class="col-md-4" id="diary-menu">
       <ul class="nav nav-stacked buddy-nav" id="sidebar">
         <li>
           <a ng-click="show('nextSession')">
@@ -34,32 +34,135 @@
             Goals
             <span>
               <ng-pluralize count="entries"
-                            when="{'0': 'No goals set,
-                                  'one': '1 goal set,
-                                  'other': '{} goals set}">
+                            when="{'0': 'No goals set',
+                                  'one': '1 goal set',
+                                  'other': '{} goals set'}">
               </ng-pluralize>
             </span>
           </a>
         </li>
       </ul>
     </div>
-    <div class="col-md-9" id="next-session">
-      <div class="col-md-12 diary-page-contents" id="nextSession">
-        {{ user }}
+    <div class="col-md-8" id="next-session">
+      <div class="col-md-12 diary-page-contents-wrapper diary-page-contents" id="nextSession">
+        <form ng-submit="submit()">
+          <div class="form-group">
+            <div class="modal-input-group input-group by-timepicker-in-modal">
+              <input type="text" datepicker-popup="dd/MM/yyyy" is-open="$parent.opened" min-date="minDate" ng-required="true" close-text="Close" ng-click="open($event)" ng-model="sessionScheduledTime" class="form-control" />
+            </div>
+            <div class="input-group">
+              <timepicker ng-model="sessionScheduledTime" hour-step="hstep" minute-step="mstep"></timepicker>
+            </div>
+            <div class="input-group by-timepicker-in-modal">
+              <input type="submit" value="Save changes" class="btn-buddy btn">
+            </div>
+          </div>
+        </form>
       </div>
-      <div class="col-md-12 diary-page-contents" id="settings">
+      <div class="col-md-12 diary-page-contents-wrapper diary-page-contents" id="settings">
+        <form ng-submit="submit()">
+          <div class="col-md-6">
+            <div class="form-group required">
+              <label for="service_user_first_name" ng-class="{error: errors.first_name}">
+                First Name
+                <span class="error-inline" ng-show="errors.first_name">{{ errors.first_name }}</span>
+              </label>
+              <input type="text" ng-model="service_user.first_name" placeholder="" class="form-control input-md" id="service_user_first_name">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group required">
+              <label for="service_user_last_name" ng-class="{error: errors.last_name}">
+                Last Name
+                <span class="error-inline" ng-show="errors.last_name">{{ errors.last_name }}</span>
+              </label>
+              <input type="text" ng-model="service_user.last_name" placeholder="" class="form-control input-md" id="service_user_last_name">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group required">
+              <label for="service_user_mobile" ng-class="{error: errors.mobile}">
+                Mobile Phone Number
+                <span class="error-inline" ng-show="errors.mobile">{{ errors.mobile }}</span>
+              </label>
+              <input type="text" ng-model="service_user.mobile" placeholder="" class="form-control input-md" id="service_user_mobile">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="service_user_email" ng-class="{error: errors.email}">
+                Email Address
+                <span class="error-inline" ng-show="errors.email">{{ errors.email }}</span>
+              </label>
+              <input type="text" ng-model="service_user.email" placeholder="" class="form-control input-md" id="service_user_email">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="service_user_nhs_number">NHS Number</label>
+              <input type="text" ng-model="service_user.nhs_number" placeholder="" class="form-control input-md" id="service_user_nhs_number">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group required">
+              <label for="service_user_clinician">Primary Clinician</label>
+              <select class="form-control" ng-model="service_user.clinician_id" ng-options="clinician.id as clinician.full_name for clinician in clinicians | orderBy: 'last_name' | filter: {deactivated_at: null}"></select>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="service_user_license_expiry_date">License Expiry Date</label>
+              <input type="text" ng-model="service_user.license_expiry_date" placeholder="" class="form-control input-md" id="service_user_license_expiry_date" disabled="disabled">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group required">
+              <label for="service_user_clinician">Team</label>
+              <select class="form-control" ng-model="service_user.account_id" ng-options="team.id as team.name for team in teams">
+              </select>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <hr>
+          </div>
+
+          <div class="col-md-12 text-center footer">
+            <span ng-show="service_user.deactivated_at">
+              This user has been deactivated
+              <a ng-click="reactivate(service_user.id)">Reactivate this user</a>
+            </span>
+            <a ng-hide="service_user.deactivated_at" ng-href="/service_users/{{service_user.id}}/deactivate?returnTo=%2Fservice_users%2F{{service_user.id}}%2Fedit">
+              Deactivate this user
+            </a>
+          </div>
+
+          <div class="col-md-12 footer">
+            <div class="col-md-6 text-right">
+              <input type="submit" class="btn btn-default right" value="Save">
+            </div>
+            <div class="col-md-6 cancel-button">
+              <a href="/service_users">Cancel</a>
+            </div>
+          </div>
+        </form>
+
+      </div>
+      <div class="col-md-12 diary-page-contents-wrapper" id="diaryEntries">
+        <div class="diary-page-contents col-md-12 text-center">
+          <h2>Diary Entries and Mood Graph</h2>
+        </div>
+        <div class="col-md-12" ng-repeat="session in sessions">
+          {{ session }}
+          <div ng-repeat="entry in session.entries" class="entry" ng-class="entry.rating_class">{{ entry }}</div>
+        </div>
+      </div>
+      <div class="col-md-12 diary-page-contents diary-page-contents-wrapper" id="sessionPlan">
         {{ entries }}
       </div>
-      <div class="col-md-12 diary-page-contents" id="diaryEntries">
+      <div class="col-md-12 diary-page-contents diary-page-contents-wrapper" id="textMessage">
         {{ entries }}
       </div>
-      <div class="col-md-12 diary-page-contents" id="sessionPlan">
-        {{ entries }}
-      </div>
-      <div class="col-md-12 diary-page-contents" id="textMessage">
-        {{ entries }}
-      </div>
-      <div class="col-md-12 diary-page-contents" id="goals">
+      <div class="col-md-12 diary-page-contents diary-page-contents-wrapper" id="goals">
         {{ entries }}
       </div>
     </div>

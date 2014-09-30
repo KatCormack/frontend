@@ -8,7 +8,6 @@ angular.module( 'angularUtils.filters.ordinalDate', [] )
             var suffixes = ["'th'", "'st'", "'nd'", "'rd'"];
             var relevantDigits = (number < 30) ? number % 20 : number % 30;
             var returnVal = (relevantDigits <= 3) ? suffixes[relevantDigits] : suffixes[0];
-            console.log(returnVal);
             return returnVal;
         };
 
@@ -62,7 +61,6 @@ angular.module( 'angularUtils.filters.ordinalDate', [] )
             for (var i = matchingIndices.length; i > 0; i --) {
                 format = insertAtIndex(format, matchingIndices[i-1], suffix);
             }
-            console.log(format)
             return $filter('date')(date, format);
         };
     });

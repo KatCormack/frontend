@@ -58,14 +58,23 @@ angular.module('buddyClientApp')
             serviceUser.deactivated_at = null;
             TeamServiceUser.update({user: serviceUser, id: serviceUser.id, account_id: serviceUser.account_id});
         };
-    }).controller('ServiceUserDiaryCtrl', function($scope, ServiceUser, $state, Entry) {
+    }).controller('ServiceUserDiaryCtrl', function($scope, ServiceUser, $state, Entry, Session) {
+        $scope.hstep = 1;
+        $scope.mstep = 15;
         $scope.user = ServiceUser.get({id: $state.params.id}, function() {
             $scope.sessionScheduledTime = $scope.user.session_scheduled_time;
         });
-        $scope.entries = Entry.query({user_id: $state.params.id});
+
+        $scope.sessions = Session.query({user_id: $state.params.id}, function() {
+            var presentSession = {id: 'present'}
+            presentSession.entries = Entry.query({session_id: 'present', user_id: $state.params.id});
+            $scope.sessions.unshift(presentSession);
+        });
+
 
         jQuery(document).ready(function() {
-
+            $(".diary-page-contents-wrapper").hide();
+            $("#diaryEntries").show();
         });
         $scope.show = function(id) {
 

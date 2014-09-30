@@ -7,7 +7,6 @@ angular.module('buddyClientApp')
         $scope.hstep = 1;
         $scope.mstep = 15;
         $scope.session = Session.get({id: sessionId});
-
         $scope.open = function() {
             $scope.opened = true;
         };
