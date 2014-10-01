@@ -19,7 +19,7 @@
           <a ng-click="show('diaryEntries')">
             Diary entries
             <span>
-              <ng-pluralize count="entries"
+              <ng-pluralize count="entries.length"
                             when="{'0': 'No entries',
                                   'one': '1 entry',
                                   'other': '{} entries'}">
@@ -33,7 +33,7 @@
           <a ng-click="show('goals')">
             Goals
             <span>
-              <ng-pluralize count="entries"
+              <ng-pluralize count="goals.length"
                             when="{'0': 'No goals set',
                                   'one': '1 goal set',
                                   'other': '{} goals set'}">
@@ -151,8 +151,31 @@
         <div class="diary-page-contents col-md-12 text-center">
           <h2>Diary Entries and Mood Graph</h2>
         </div>
-        <div class="col-md-12" ng-repeat="session in sessions">
-          {{ session }}
+        <div class="col-md-12 session" ng-repeat="session in sessions" ng-class="{closed: !visible, present: session.id === 'present'}">
+          <div class="col-md-2">
+            <div class="calendar col-md-12 text-center">
+              <div class="calendar-top">
+                SESSION
+              </div>
+              <div class="calendar-bottom">
+                {{ session.index }}
+              </div>
+            </div>
+          </div>
+          <div class="col-md-10">
+            Session: {{ session.scheduled_time | ordinalDate: 'd MMMM'}}<br />
+            <ng-pluralize count="session.entries.length"
+                          when="{'0': 'No entries',
+                                'one': '1 entry',
+                                'other': '{} entries'}">
+            </ng-pluralize>
+            <div class="progress">
+              <div class="progress-bar" ng-style="{{value}}" ng-repeat="(key, value) in session.progress" ng-class="key">
+              </div>
+            </div>
+          </div>
+
+
           <div ng-repeat="entry in session.entries" class="entry" ng-class="entry.rating_class">{{ entry }}</div>
         </div>
       </div>

@@ -72,17 +72,40 @@ angular.module('buddyClientApp')
                 });
             };
             var allEntries = Entry.query({user_id: $state.params.id}, function() {
+                $scope.entries = allEntries;
                 $scope.sessions.reverse();
+                var currentIndex = 1;
                 _.each($scope.sessions, function(session) {
+                    session.index = currentIndex;
                     var entries = _.select(allEntries, function(entry) {
                         return entry.created_at <= session.scheduled_time;
-                    })
+                    });
                     session.entries = entries;
-                    _.each(entries,
-                           function(entry) { removeValue(allEntries, entry); })
-                        });
+                    _.each(entries, function(entry) { removeValue(allEntries, entry); })
+                        currentIndex++;
+                });
+
                 $scope.sessions.reverse();
-                $scope.sessions.unshift({id: 'present', entries: allEntries});
+                $scope.sessions.unshift({id: 'present', entries: allEntries, visible: true});
+                _.each($scope.sessions, function(session) {
+                    session.progress = {}
+                    var entryLength = session.entries.length
+                    if (entryLength > 0) {
+                        var counts = _.countBy(session.entries, function(entry) {
+                            return "rating-" + entry.rating;
+                        });
+                        console.log(session.entries)
+                        console.log(counts)
+                        _.each(counts, function(count, idx) {
+                            counts[idx] = "{width: '" + (parseFloat(count) / parseFloat(entryLength)) * 100 + "%'}"
+                        });
+                        session.progress = counts;
+                        console.log(counts);
+                    }
+
+
+                })
+
             });
 
 
