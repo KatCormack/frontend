@@ -66,9 +66,27 @@ angular.module('buddyClientApp')
         });
 
         $scope.sessions = Session.query({user_id: $state.params.id}, function() {
-            var presentSession = {id: 'present'}
-            presentSession.entries = Entry.query({session_id: 'present', user_id: $state.params.id});
-            $scope.sessions.unshift(presentSession);
+            var removeValue = function(array, id) {
+                return _.reject(array, function(item) {
+                    return item === id;
+                });
+            };
+            var allEntries = Entry.query({user_id: $state.params.id}, function() {
+                $scope.sessions.reverse();
+                _.each($scope.sessions, function(session) {
+                    var entries = _.select(allEntries, function(entry) {
+                        return entry.created_at <= session.scheduled_time;
+                    })
+                    session.entries = entries;
+                    _.each(entries,
+                           function(entry) { removeValue(allEntries, entry); })
+                        });
+                $scope.sessions.reverse();
+                $scope.sessions.unshift({id: 'present', entries: allEntries});
+            });
+
+
+
         });
 
 
