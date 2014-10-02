@@ -1,20 +1,29 @@
-<div class="modal-header">
-  {{ title }}
-</div>
-<div class="modal-body">
-  <div class="row">
-    <form ng-submit="submit()">
-      <div class="form-group">
+<form ng-submit="submit()">
+  <div class="modal-header">
+    <h1 class="text-center">{{ title }}</h1>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="form-group text-center">
         <div class="modal-input-group input-group by-timepicker-in-modal">
           <input type="text" datepicker-popup="dd/MM/yyyy" is-open="$parent.opened" min-date="minDate" ng-required="true" close-text="Close" ng-click="open($event)" ng-model="session.scheduled_time" class="form-control" />
         </div>
         <div class="modal-input-group input-group">
           <timepicker ng-model="session.scheduled_time" hour-step="hstep" minute-step="mstep"></timepicker>
         </div>
-        <div class="modal-input-group-last input-group by-timepicker-in-modal">
-          <input type="submit" value="{{ button_value }}" class="btn-buddy btn">
-        </div>
       </div>
-    </form>
+    </div>
+    <div class="row">
+      Has this person stopped using Buddy?
+      <a ng-hide="service_user.deactivated_at" ng-href="/service_users/{{session.user_id}}/deactivate?returnTo=%2Fservice_users" ng-click="cancel()">
+        Deactivate this user
+      </a>
+
+    </div>
   </div>
-</div>
+  <div class="modal-footer">
+    <div class="modal-input-group-last input-group by-timepicker-in-modal">
+      <input type="submit" value="{{ button_value }}" class="btn-buddy btn">
+    </div>
+  </div>
+</form>

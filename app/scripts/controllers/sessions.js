@@ -10,6 +10,9 @@ angular.module('buddyClientApp')
         $scope.open = function() {
             $scope.opened = true;
         };
+        $scope.cancel = function() {
+            $modalInstance.dismiss('cancel');
+        }
         $scope.submit = function() {
             Session.update({id: sessionId, session: $scope.session}, function(res) {
                 $modalInstance.close(res);

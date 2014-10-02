@@ -24,7 +24,7 @@
 <div class="container">
   <div class="col-md-push-1 col-md-10 list-container">
     <ul id="tabs" class="nav nav-pills list-pills" data-tabs="tabs">
-      <li class="active"><a ng-click="anchor('az')" data-toggle="tab">A-Z</a></li>
+      <li class="active"><a ng-click="anchor('az')" data-toggle="tab">Clinicians</a></li>
       <li><a ng-click="anchor('deactivated')" data-toggle="tab">Deactivated</a></li>
     </ul>
     <div id="my-tab-content" class="tab-content">
@@ -67,7 +67,7 @@
               <td class="expand-link">
                 <a ng-href="/clinicians/{{clinician.id}}/edit">
                   {{ clinician.full_name }}<br />
-                  <span class="clinician-id">CLIN.{{ clinician.id }}  {{ clinician.last_request_at.timestamp }}</span>
+                  <span class="buddy-id">CLIN.{{ clinician.id }}  {{ clinician.last_request_at.timestamp }}</span>
                 </a>
               </td>
               <td class="clinician-last-request-at">

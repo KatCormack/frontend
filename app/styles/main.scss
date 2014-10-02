@@ -1,6 +1,6 @@
 body {
-  min-height: 2000px;
-  padding-top: 70px;
+  min-height: 1200px;
+  padding-top: 95px;
 }
 
 [ng-click],
@@ -41,16 +41,12 @@ legend {
 	background-color: #eee;
 }
 
-.ServiceUserDiaryCtrl  {
-	padding-top: 50px;
-}
-
 .ServiceUsersCtrl .navbar, .SearchCtrl .navbar, .CliniciansCtrl .navbar {
 	margin-bottom: 0px;
 }
 
-body.ServiceUsersCtrl, body.SearchCtrl, body.CliniciansCtrl {
-	padding-top: 50px;
+body.ServiceUsersCtrl, body.SearchCtrl, body.CliniciansCtrl, body.ServiceUserDiaryCtrl  {
+	padding-top: 56px;
 }
 
 .form-container {
@@ -220,12 +216,12 @@ td.expand-link { cursor: pointer; cursor: hand; }
 	display: none;
 }
 
-.clinician-id {
+.buddy-id {
 	color: #999;
 	font-size: 0.8em;
 }
 
-.clinician-last-request-at {
+.clinician-last-request-at, td.settings, td.reactivate-user {
 	vertical-align: middle !important;
 }
 
@@ -379,10 +375,6 @@ td.expand-link { cursor: pointer; cursor: hand; }
 	padding: 10px 40px !important;
 }
 
-.list-row td {
-	line-height: 2.5em !important;
-}
-
 .table > tbody > tr > td:hover {
 	background-color: #e3f1fd !important;
 }
@@ -390,4 +382,12 @@ td.expand-link { cursor: pointer; cursor: hand; }
 td a:hover {
 	text-decoration: none;
 	color: #428bca !important;
+}
+
+.navbar-nav > li > a {
+	line-height: 26px !important; 
+}
+
+a.navbar-brand {
+	padding: 10px;
 }

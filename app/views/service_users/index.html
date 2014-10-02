@@ -40,18 +40,20 @@
           </thead>
           <tbody>
             <tr ng-repeat="serviceUser in serviceUsers | orderBy:'last_name' | filter:{deactivated_at: null}" class="list-row">
-              <td class="expand-link"><a ng-href="/service_users/{{serviceUser.id}}">{{ serviceUser.full_name }}</a></td>
-              <td ng-show="serviceUser.current_session_time">
+              <td class="expand-link"><a ng-href="/service_users/{{serviceUser.id}}">{{ serviceUser.full_name }}<br />
+                  <span class="buddy-id">{{ serviceUser.buddy_id }}</span>
+              </a></td>
+              <td class="expand-link reactivate-user" ng-show="serviceUser.current_session_time">
                 <a ng-click="rescheduleSession(serviceUser)">
                   {{ serviceUser.current_session_time | ordinalDate: 'HH:mm / d MMMM yyyy' }}
                 </a>
               </td>
-              <td ng-hide="serviceUser.current_session_time">
+              <td ng-hide="serviceUser.current_session_time" class="expand-link reactivate-user">
                 <a ng-click="scheduleSession(serviceUser)">Reschedule</a>
                 or
                 <a ng-href="/service_users/{{serviceUser.id}}/deactivate?returnTo=%2Fservice_users">deactivate</a>
               </td>
-              <td class="expand-link"><a ng-href="/service_users/{{serviceUser.id}}/edit">Settings</a></td>
+              <td class="settings expand-link"><a ng-href="/service_users/{{serviceUser.id}}/edit">Settings</a></td>
             </tr>
           </tbody>
         </table>
@@ -67,9 +69,11 @@
           </thead>
           <tbody>
             <tr ng-repeat="serviceUser in serviceUsers | orderBy:'last_name' | filter:{deactivated_at: '!!'}" class="list-row">
-              <td class="expand-link"><a ng-href="/service_users/{{serviceUser.id}}">{{ serviceUser.full_name }}</a></td>
-              <td><a ng-click="reactivate(serviceUser)">Reactivate</a></td>
-              <td class="expand-link"><a ng-href="/service_users/{{serviceUser.id}}/edit">Settings</a></td>
+              <td class="expand-link"><a ng-href="/service_users/{{serviceUser.id}}">{{ serviceUser.full_name }}<br />
+                  <span class="buddy-id">{{ serviceUser.buddy_id }}</span>
+              </a></td>
+              <td class="reactivate-user expand-link"><a ng-click="reactivate(serviceUser)">Reactivate</a></td>
+              <td class="expand-link settings"><a ng-href="/service_users/{{serviceUser.id}}/edit">Settings</a></td>
             </tr>
           </tbody>
         </table>
@@ -77,7 +81,7 @@
 
       <div class="tab-pane" id="sessions">
         <div class="panel-group" id="accordion">
-          <div class="panel panel-default">
+          <div class="panel panel-default" ng-show="(serviceUsers | filter: {clinician_id: user.id, current_session_time: null}).length > 0">
             <div class="panel-heading">
               <h4 class="panel-title">
                 <a data-toggle="collapse" data-parent="#accordion" href="#unscheduled">
@@ -87,7 +91,7 @@
               </h4>
             </div>
             <div id="unscheduled" class="panel-collapse collapse">
-              <table class="table table-bordered  table-striped panel-table" ng-show="(serviceUsers | filter: {clinician_id: user.id, current_session_time: null}).length > 0">
+              <table class="table table-bordered  table-striped panel-table">
                 <thead>
                   <tr>
                     <th>Name</th>
@@ -97,19 +101,21 @@
                 </thead>
                 <tbody>
                   <tr ng-repeat="serviceUser in serviceUsers | orderBy:'last_name' | filter:{clinician_id: user.id, current_session_time: null}" class="list-row">
-                    <td class="expand-link"><a ng-href="/service_users/{{serviceUser.id}}">{{ serviceUser.full_name }}</a></td>
-                    <td ng-hide="serviceUser.current_session_time">
+                    <td class="expand-link"><a ng-href="/service_users/{{serviceUser.id}}">{{ serviceUser.full_name }}<br />
+                        <span class="buddy-id">{{ serviceUser.buddy_id }}</span>
+                    </a></td>
+                    <td class="reactivate-user" ng-hide="serviceUser.current_session_time">
                       <a ng-click="scheduleSession(serviceUser)">Reschedule</a>
                       or
                       <a ng-click="deactivate(serviceUser)">deactivate</a>
                     </td>
-                    <td class="expand-link"><a ng-href="/service_users/{{serviceUser.id}}/edit">Settings</a></td>
+                    <td class="expand-link settings"><a ng-href="/service_users/{{serviceUser.id}}/edit">Settings</a></td>
                   </tr>
                 </tbody>
               </table>
             </div>
           </div>
-          <div class="panel panel-default">
+          <div class="panel panel-default" ng-show="(serviceUsers | filter: {clinician_id: user.id, current_session_time: '!!'}).length > 0">
             <div class="panel-heading active">
               <h4 class="panel-title">
                 <a data-toggle="collapse" data-parent="#accordion" href="#scheduled">
@@ -119,7 +125,7 @@
               </h4>
             </div>
             <div id="scheduled" class="panel-collapse collapse in">
-              <table class="table table-bordered  table-striped panel-table" ng-show="(serviceUsers | filter: {clinician_id: user.id, current_session_time: '!!'}).length > 0">
+              <table class="table table-bordered  table-striped panel-table">
                 <thead>
                   <tr>
                     <th>Name</th>
@@ -129,13 +135,16 @@
                 </thead>
                 <tbody>
                   <tr ng-repeat="serviceUser in serviceUsers | orderBy:'current_session_time' | filter:{clinician_id: user.id, current_session_time: '!!'}" class="list-row">
-                    <td class="expand-link"><a ng-href="/service_users/{{serviceUser.id}}">{{ serviceUser.full_name }}</a></td>
-                    <td ng-show="serviceUser.current_session_time" class="expand-link">
+                    <td class="expand-link"><a ng-href="/service_users/{{serviceUser.id}}">
+                        {{ serviceUser.full_name }}<br />
+                        <span class="buddy-id">{{ serviceUser.buddy_id }}</span>
+                    </a></td>
+                    <td ng-show="serviceUser.current_session_time" class="expand-link reactivate-user">
                       <a ng-click="rescheduleSession(serviceUser)">
                         {{ serviceUser.current_session_time | ordinalDate: 'HH:mm / d MMMM yyyy' }}
                       </a>
                     </td>
-                    <td class="expand-link"><a ng-href="/service_users/{{serviceUser.id}}/edit">Settings</a></td>
+                    <td class="settings expand-link"><a ng-href="/service_users/{{serviceUser.id}}/edit">Settings</a></td>
                   </tr>
                 </tbody>
               </table>
