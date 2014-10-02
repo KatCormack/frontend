@@ -8,11 +8,15 @@ angular.module('buddyClientApp')
         $scope.user = CurrentUser.user();
         jQuery(document).ready(function () {
             $('.tab-pane').hide();
-            $('#az').show();
+            $('#sessions').show();
             $(document).on('click', 'td.expand-link', function() {
-                $location.path($(this).find('a').attr('ng-href'));
-                $location.hash('');
-                $scope.$apply();
+                if ($(this).find('a').attr('ng-click')) {
+                    angular.element(this).find('a').triggerHandler('click');
+                } else {
+                    $location.path($(this).find('a').attr('ng-href'));
+                    $location.hash('');
+                    $scope.$apply();
+                }
             });
             $('#accordion').on('show.bs.collapse', function(e) {
                 $(e.target).prev('.panel-heading').addClass('active');

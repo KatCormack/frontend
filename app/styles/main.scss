@@ -369,3 +369,25 @@ td.expand-link { cursor: pointer; cursor: hand; }
 .rating-selector.active, .rating-selector:hover {
 	background-color: #ddd;
 }
+
+.nav-pills li a {
+	border-radius: 30px !important;
+	margin-right: 10px;
+}
+
+.nav-pills li a.az {
+	padding: 10px 40px !important;
+}
+
+.list-row td {
+	line-height: 2.5em !important;
+}
+
+.table > tbody > tr > td:hover {
+	background-color: #e3f1fd !important;
+}
+
+td a:hover {
+	text-decoration: none;
+	color: #428bca !important;
+}

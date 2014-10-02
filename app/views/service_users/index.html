@@ -1,6 +1,6 @@
 <div class="heading col-md-12">
   <div class="container">
-    <div class="col-md-5 col-md-push-1 heading-unit-header">
+    <div class="col-md-4 col-md-push-1 heading-unit-header">
       <h1>Service Users</h1>
     </div>
     <div class="col-md-3 heading-unit">
@@ -24,13 +24,13 @@
 <div class="container">
   <div class="col-md-push-1 col-md-10 list-container">
     <ul id="tabs" class="nav nav-pills list-pills" data-tabs="tabs">
-      <li class="active"><a ng-click="anchor('az')" data-toggle="tab">A-Z</a></li>
+      <li class="active"><a ng-click="anchor('sessions')" data-toggle="tab">Sessions</a></li>
+      <li ><a ng-click="anchor('az')" data-toggle="tab" class="az">A-Z</a></li>
       <li><a ng-click="anchor('deactivated')" data-toggle="tab">Deactivated</a></li>
-      <li><a ng-click="anchor('mine')" data-toggle="tab">My users</a></li>
     </ul>
     <div id="my-tab-content" class="tab-content">
       <div class="tab-pane active" id="az">
-        <table class="table table-bordered table-hover table-striped">
+        <table class="table table-bordered  table-striped">
           <thead>
             <tr>
               <th>Name</th>
@@ -39,7 +39,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="serviceUser in serviceUsers | orderBy:'last_name' | filter:{deactivated_at: null}">
+            <tr ng-repeat="serviceUser in serviceUsers | orderBy:'last_name' | filter:{deactivated_at: null}" class="list-row">
               <td class="expand-link"><a ng-href="/service_users/{{serviceUser.id}}">{{ serviceUser.full_name }}</a></td>
               <td ng-show="serviceUser.current_session_time">
                 <a ng-click="rescheduleSession(serviceUser)">
@@ -57,7 +57,7 @@
         </table>
       </div>
       <div class="tab-pane" id="deactivated">
-        <table class="table table-bordered table-hover table-striped">
+        <table class="table table-bordered  table-striped">
           <thead>
             <tr>
               <th>Name</th>
@@ -66,7 +66,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="serviceUser in serviceUsers | orderBy:'last_name' | filter:{deactivated_at: '!!'}">
+            <tr ng-repeat="serviceUser in serviceUsers | orderBy:'last_name' | filter:{deactivated_at: '!!'}" class="list-row">
               <td class="expand-link"><a ng-href="/service_users/{{serviceUser.id}}">{{ serviceUser.full_name }}</a></td>
               <td><a ng-click="reactivate(serviceUser)">Reactivate</a></td>
               <td class="expand-link"><a ng-href="/service_users/{{serviceUser.id}}/edit">Settings</a></td>
@@ -75,7 +75,7 @@
         </table>
       </div>
 
-      <div class="tab-pane" id="mine">
+      <div class="tab-pane" id="sessions">
         <div class="panel-group" id="accordion">
           <div class="panel panel-default">
             <div class="panel-heading">
@@ -87,7 +87,7 @@
               </h4>
             </div>
             <div id="unscheduled" class="panel-collapse collapse">
-              <table class="table table-bordered table-hover table-striped panel-table" ng-show="(serviceUsers | filter: {clinician_id: user.id, current_session_time: null}).length > 0">
+              <table class="table table-bordered  table-striped panel-table" ng-show="(serviceUsers | filter: {clinician_id: user.id, current_session_time: null}).length > 0">
                 <thead>
                   <tr>
                     <th>Name</th>
@@ -96,7 +96,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr ng-repeat="serviceUser in serviceUsers | orderBy:'last_name' | filter:{clinician_id: user.id, current_session_time: null}">
+                  <tr ng-repeat="serviceUser in serviceUsers | orderBy:'last_name' | filter:{clinician_id: user.id, current_session_time: null}" class="list-row">
                     <td class="expand-link"><a ng-href="/service_users/{{serviceUser.id}}">{{ serviceUser.full_name }}</a></td>
                     <td ng-hide="serviceUser.current_session_time">
                       <a ng-click="scheduleSession(serviceUser)">Reschedule</a>
@@ -119,7 +119,7 @@
               </h4>
             </div>
             <div id="scheduled" class="panel-collapse collapse in">
-              <table class="table table-bordered table-hover table-striped panel-table" ng-show="(serviceUsers | filter: {clinician_id: user.id, current_session_time: '!!'}).length > 0">
+              <table class="table table-bordered  table-striped panel-table" ng-show="(serviceUsers | filter: {clinician_id: user.id, current_session_time: '!!'}).length > 0">
                 <thead>
                   <tr>
                     <th>Name</th>
@@ -128,9 +128,9 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr ng-repeat="serviceUser in serviceUsers | orderBy:'-current_session_time' | filter:{clinician_id: user.id, current_session_time: '!!'}">
+                  <tr ng-repeat="serviceUser in serviceUsers | orderBy:'current_session_time' | filter:{clinician_id: user.id, current_session_time: '!!'}" class="list-row">
                     <td class="expand-link"><a ng-href="/service_users/{{serviceUser.id}}">{{ serviceUser.full_name }}</a></td>
-                    <td ng-show="serviceUser.current_session_time">
+                    <td ng-show="serviceUser.current_session_time" class="expand-link">
                       <a ng-click="rescheduleSession(serviceUser)">
                         {{ serviceUser.current_session_time | ordinalDate: 'HH:mm / d MMMM yyyy' }}
                       </a>
