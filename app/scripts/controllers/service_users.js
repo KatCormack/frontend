@@ -86,7 +86,7 @@ angular.module('buddyClientApp')
                 });
 
                 $scope.sessions.reverse();
-                $scope.sessions.unshift({id: 'present', entries: allEntries, visible: true});
+                $scope.sessions.unshift({id: 'present', entries: _.select(allEntries, function(entry) { entry.created_at >= $scope.sessions[0].scheduled_time }), visible: true});
                 _.each($scope.sessions, function(session) {
                     session.progress = {}
                     var entryLength = session.entries.length
@@ -94,18 +94,22 @@ angular.module('buddyClientApp')
                         var counts = _.countBy(session.entries, function(entry) {
                             return "rating-" + entry.rating;
                         });
-                        console.log(session.entries)
-                        console.log(counts)
                         _.each(counts, function(count, idx) {
                             counts[idx] = "{width: '" + (parseFloat(count) / parseFloat(entryLength)) * 100 + "%'}"
                         });
                         session.progress = counts;
-                        console.log(counts);
                     }
-
-
-                })
-
+                });
+                var entryLength = $scope.entries.length;
+                if (entryLength > 0) {
+                    var counts = _.countBy($scope.entries, function(entry) {
+                        return "rating-" + entry.rating;
+                    });
+                    _.each(counts, function(count, idx) {
+                        counts[idx] = "{width: '" + (parseFloat(count) / parseFloat(entryLength)) * 100 + "%'}"
+                    });
+                    $scope.progress = counts || {}
+                }
             });
 
 
@@ -119,6 +123,12 @@ angular.module('buddyClientApp')
         });
         $scope.show = function(id) {
 
+        };
+        $scope.toggleEntries = function(session) {
+            session.visible = !session.visible;
+        };
+        $scope.setDiaryFilter = function(val) {
+            $scope.diaryFilter = val;
         }
 
     }).controller('NewServiceUsersCtrl', function($scope, $state, Team, TeamClinician, CurrentUser, TeamServiceUser) {

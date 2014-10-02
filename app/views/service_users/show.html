@@ -150,33 +150,93 @@
       <div class="col-md-12 diary-page-contents-wrapper" id="diaryEntries">
         <div class="diary-page-contents col-md-12 text-center">
           <h2>Diary Entries and Mood Graph</h2>
-        </div>
-        <div class="col-md-12 session" ng-repeat="session in sessions" ng-class="{closed: !visible, present: session.id === 'present'}">
-          <div class="col-md-2">
-            <div class="calendar col-md-12 text-center">
-              <div class="calendar-top">
-                SESSION
-              </div>
-              <div class="calendar-bottom">
-                {{ session.index }}
-              </div>
-            </div>
-          </div>
-          <div class="col-md-10">
-            Session: {{ session.scheduled_time | ordinalDate: 'd MMMM'}}<br />
-            <ng-pluralize count="session.entries.length"
-                          when="{'0': 'No entries',
-                                'one': '1 entry',
-                                'other': '{} entries'}">
-            </ng-pluralize>
+          <div class="col-md-12">
             <div class="progress">
-              <div class="progress-bar" ng-style="{{value}}" ng-repeat="(key, value) in session.progress" ng-class="key">
+              <div class="progress-bar" ng-style="{{value}}" ng-repeat="(key, value) in progress" ng-class="key">
               </div>
             </div>
           </div>
-
-
-          <div ng-repeat="entry in session.entries" class="entry" ng-class="entry.rating_class">{{ entry }}</div>
+          <div class="col-md-12">
+            <div class="col-md-2 rating-selector"
+                 ng-class="{active: diaryFilter == null}"
+                 ng-click="setDiaryFilter(null)">
+              All
+            </div>
+            <div class="col-md-2 rating-selector"
+                 ng-class="{active: diaryFilter === 1}"
+                 ng-click="setDiaryFilter(1)">
+              Well Below Average
+            </div>
+            <div class="col-md-2 rating-selector"
+                 ng-class="{active: diaryFilter === 2}"
+                 ng-click="setDiaryFilter(2)">
+              Below Average
+            </div>
+            <div class="col-md-2 rating-selector"
+                 ng-class="{active: diaryFilter === 3}"
+                 ng-click="setDiaryFilter(3)">
+              Average
+            </div>
+            <div class="col-md-2 rating-selector"
+                 ng-class="{active: diaryFilter === 4}"
+                 ng-click="setDiaryFilter(4)">
+              Above Average
+            </div>
+            <div class="col-md-2 rating-selector"
+                 ng-class="{active: diaryFilter === 5}"
+                 ng-click="setDiaryFilter(5)">
+              Well Above Average
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 session-container" ng-repeat="session in sessions" ng-class="{closed: !session.visible, present: session.id === 'present'}">
+          <div class="col-md-12 session">
+            <div class="col-md-2 calendar-container">
+              <div class="calendar col-md-12 text-center">
+                <div class="calendar-top">
+                  SESSION
+                </div>
+                <div class="calendar-bottom">
+                  {{ session.index }}
+                </div>
+              </div>
+            </div>
+            <div class="col-md-10 progress-container">
+              Session: {{ session.scheduled_time | ordinalDate: 'd MMMM'}}<br />
+              <ng-pluralize count="session.entries.length"
+                            when="{'0': 'No entries',
+                                  'one': '1 entry',
+                                  'other': '{} entries'}">
+              </ng-pluralize>
+              <div class="progress">
+                <div class="progress-bar" ng-style="{{value}}" ng-repeat="(key, value) in session.progress" ng-class="key">
+                </div>
+              </div>
+            </div>
+            <p class="text-right" ng-show="session.entries.length > 0">
+              <a ng-click="toggleEntries(session)">
+                <span ng-show="session.visible">Hide entries</span>
+                <span ng-hide="session.visible">Show entries</span>
+              </a>
+            </p>
+          </div>
+          <div ng-repeat="entry in session.entries" class="entry col-md-12"
+               ng-class="{'{{entry.rating_class}}': true, 'first': $index === 0, 'hidden': diaryFilter != null && diaryFilter !== entry.rating}">
+            <div class="col-md-2">
+              <div class="calendar col-md-12 text-center">
+                <div class="calendar-top">
+                  {{ entry.created_at | date: 'MMMM' }}
+                </div>
+                <div class="calendar-bottom">
+                  {{ entry.created_at | date: 'd' }}
+                </div>
+              </div>
+            </div>
+            <div class="col-md-10">
+              {{ entry.body }}
+              <p class="text-right">{{ entry.rating }}</p>
+            </div>
+          </div>
         </div>
       </div>
       <div class="col-md-12 diary-page-contents diary-page-contents-wrapper" id="sessionPlan">
