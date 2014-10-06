@@ -11,9 +11,9 @@
           </li>
           <li>
             <a ng-click="show('settings')">
-              {{ user.full_name }}
-              <span>{{ user.buddy_id }}</span><br />
-              <span>{{ user.mobile }}</span>
+              {{ user.full_name }}<br />
+              <span class="buddy-id">{{ user.buddy_id }}</span><br />
+              <span class="mobile">{{ user.mobile }}</span>
             </a>
           </li>
           <li class="active">
@@ -157,33 +157,33 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-12">
-              <div class="col-md-2 rating-selector"
+            <div class="col-md-12 rating-selectors">
+              <div class="col-md-2 rating-selector rating-selector-all"
                    ng-class="{active: diaryFilter == null}"
                    ng-click="setDiaryFilter(null)">
                 All
               </div>
-              <div class="col-md-2 rating-selector"
+              <div class="col-md-2 rating-selector rating-selector-one"
                    ng-class="{active: diaryFilter === 1}"
                    ng-click="setDiaryFilter(1)">
                 Well Below Average
               </div>
-              <div class="col-md-2 rating-selector"
+              <div class="col-md-2 rating-selector rating-selector-two"
                    ng-class="{active: diaryFilter === 2}"
                    ng-click="setDiaryFilter(2)">
                 Below Average
               </div>
-              <div class="col-md-2 rating-selector"
+              <div class="col-md-2 rating-selector rating-selector-three"
                    ng-class="{active: diaryFilter === 3}"
                    ng-click="setDiaryFilter(3)">
                 Average
               </div>
-              <div class="col-md-2 rating-selector"
+              <div class="col-md-2 rating-selector rating-selector-four"
                    ng-class="{active: diaryFilter === 4}"
                    ng-click="setDiaryFilter(4)">
                 Above Average
               </div>
-              <div class="col-md-2 rating-selector"
+              <div class="col-md-2 rating-selector rating-selector-five"
                    ng-class="{active: diaryFilter === 5}"
                    ng-click="setDiaryFilter(5)">
                 Well Above Average
@@ -226,16 +226,17 @@
               <div class="col-md-2">
                 <div class="calendar col-md-12 text-center">
                   <div class="calendar-top">
-                    {{ entry.created_at | date: 'MMMM' }}
+                    {{ entry.created_at | date: 'MMMM' | uppercase }}
                   </div>
                   <div class="calendar-bottom">
-                    {{ entry.created_at | date: 'd' }}
+                    {{ entry.created_at | ordinalDate: 'd' }}<br />
+                    {{ entry.created_at | date: 'EEEE' | uppercase }}
                   </div>
                 </div>
               </div>
               <div class="col-md-10">
                 {{ entry.body }}
-                <p class="text-right">{{ entry.rating }}</p>
+                <p class="text-right mood">{{ entry.mood }}</p>
               </div>
             </div>
           </div>

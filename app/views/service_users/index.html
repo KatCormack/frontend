@@ -49,9 +49,7 @@
                 </a>
               </td>
               <td ng-hide="serviceUser.current_session_time" class="expand-link reactivate-user">
-                <a ng-click="scheduleSession(serviceUser)">Reschedule</a>
-                or
-                <a ng-href="/service_users/{{serviceUser.id}}/deactivate?returnTo=%2Fservice_users">deactivate</a>
+                <a ng-click="scheduleSession(serviceUser)">Reschedule or deactivate</a>
               </td>
               <td class="settings expand-link"><a ng-href="/service_users/{{serviceUser.id}}/edit">Settings</a></td>
             </tr>
@@ -105,9 +103,7 @@
                         <span class="buddy-id">{{ serviceUser.buddy_id }}</span>
                     </a></td>
                     <td class="reactivate-user" ng-hide="serviceUser.current_session_time">
-                      <a ng-click="scheduleSession(serviceUser)">Reschedule</a>
-                      or
-                      <a ng-click="deactivate(serviceUser)">deactivate</a>
+                      <a ng-click="scheduleSession(serviceUser)">Reschedule or deactivate</a>
                     </td>
                     <td class="expand-link settings"><a ng-href="/service_users/{{serviceUser.id}}/edit">Settings</a></td>
                   </tr>

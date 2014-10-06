@@ -68,11 +68,13 @@ angular.module('buddyClientApp')
         $scope.user = ServiceUser.get({id: $state.params.id}, function() {
             $scope.sessionScheduledTime = $scope.user.session_scheduled_time;
         });
+        $scope.ratingName = function(rating) {
+        }
 
         $scope.sessions = Session.query({user_id: $state.params.id}, function() {
-            var removeValue = function(array, id) {
+            var removeEntries = function(array, entry) {
                 return _.reject(array, function(item) {
-                    return item === id;
+                    return item.id === entry.id;
                 });
             };
             var allEntries = Entry.query({user_id: $state.params.id}, function() {
@@ -85,12 +87,12 @@ angular.module('buddyClientApp')
                         return entry.created_at <= session.scheduled_time;
                     });
                     session.entries = entries;
-                    _.each(entries, function(entry) { removeValue(allEntries, entry); })
+                    _.each(entries, function(entry) { allEntries = removeEntries(allEntries, entry); })
                         currentIndex++;
                 });
 
                 $scope.sessions.reverse();
-                $scope.sessions.unshift({id: 'present', entries: _.select(allEntries, function(entry) { entry.created_at >= $scope.sessions[0].scheduled_time }), visible: true});
+                $scope.sessions.unshift({id: 'present', entries: allEntries, visible: true});
                 _.each($scope.sessions, function(session) {
                     session.progress = {}
                     var entryLength = session.entries.length
@@ -121,13 +123,13 @@ angular.module('buddyClientApp')
         });
 
 
-        jQuery(document).ready(function() {
-            $(".diary-page-contents-wrapper").hide();
-            $("#diaryEntries").show();
-        });
         $scope.show = function(id) {
-
+            $(".diary-page-contents-wrapper").hide();
+            $("#" + id).show();
         };
+        jQuery(document).ready(function() {
+            $scope.show('diaryEntries');
+        });
         $scope.toggleEntries = function(session) {
             session.visible = !session.visible;
         };

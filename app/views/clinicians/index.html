@@ -29,7 +29,7 @@
     </ul>
     <div id="my-tab-content" class="tab-content">
       <div class="tab-pane active" id="az">
-        <table class="table table-bordered table-hover table-striped">
+        <table class="table table-striped">
           <thead>
             <tr>
               <th>Name</th>
@@ -41,7 +41,7 @@
               <td class="expand-link">
                 <a ng-href="/clinicians/{{clinician.id}}/edit">
                   {{ clinician.full_name }}<br />
-                  <span class="clinician-id">CLIN.{{ clinician.id }}  {{ clinician.last_request_at.timestamp }}</span>
+                  <span class="buddy-id">CLIN.{{ clinician.id }}  {{ clinician.last_request_at.timestamp }}</span>
                 </a>
               </td>
               <td class="clinician-last-request-at">
@@ -55,7 +55,7 @@
     </div>
     <div id="my-tab-content" class="tab-content">
       <div class="tab-pane active" id="deactivated">
-        <table class="table table-bordered table-hover table-striped">
+        <table class="table table-striped">
           <thead>
             <tr>
               <th>Name</th>

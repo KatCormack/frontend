@@ -130,6 +130,12 @@ legend h1 {
 	border-color: #5681B3;
 }
 
+.btn-buddy:hover {
+	color: white !important;
+	background-color: #73a4cf;
+	border-color: #73a4cf;
+}
+
 .navbar-buddy {
 	color: white;
 	background-color: #558FC1;
@@ -320,46 +326,43 @@ td.expand-link { cursor: pointer; cursor: hand; }
 	display: none;
 }
 
-.rating-1.progress-bar, .rating-one {
-	background-color: red;
+.rating-1.progress-bar, .rating-one, .rating-selector-one.active, .rating-selector-one:hover {
+	background-color: red !important;
 }
 
-.rating-2.progress-bar, .rating-two {
-	background-color: yellow;
+.rating-2.progress-bar, .rating-two, .rating-selector-two.active, .rating-selector-two:hover {
+	background-color: yellow !important;
 }
 
-.rating-3.progress-bar, .rating-three {
-	background-color: pink;
+.rating-3.progress-bar, .rating-three, .rating-selector-three.active, .rating-selector-three:hover {
+	background-color: pink !important;
 }
 
-.rating-4.progress-bar, .rating-four {
-	background-color: green;
+.rating-4.progress-bar, .rating-four, .rating-selector-four.active, .rating-selector-four:hover {
+	background-color: green !important;
 }
 
-.rating-5.progress-bar, .rating-five {
-	background-color: purple;
-}
-
-.calendar-top {
-	background-color: #444;
-	color: white;
-	padding: 2px;
-
+.rating-5.progress-bar, .rating-five, .rating-selector-five.active, .rating-selector-five:hover {
+	background-color: purple !important;
 }
 
 .calendar-bottom {
 	background-color: #e9e9e9;
 	color: #444;
 	padding: 10px 2px;
-	font-weight: bold;
 }
 
 .calendar {
 	padding: 0px !important;
+	font-size: 0.7em;
+	font-weight: bolder;
+
 }
 
 .rating-selector {
-	min-height: 50px !important;
+	min-height: 65px !important;
+	vertical-align: middle !important; 
+	display:table-cell !important;
 }
 
 .rating-selector.active, .rating-selector:hover {
@@ -379,7 +382,7 @@ td.expand-link { cursor: pointer; cursor: hand; }
 	background-color: #e3f1fd !important;
 }
 
-td a:hover {
+.ServiceUsersCtrl td a:hover {
 	text-decoration: none;
 	color: #428bca !important;
 }
@@ -390,4 +393,28 @@ td a:hover {
 
 a.navbar-brand {
 	padding: 10px;
+}
+
+a:hover {
+	color: #73a4cf !important;
+}
+
+.navbar {
+	border-bottom: 3px solid #465A86 !important;
+}
+
+.panel-title {
+	font-size: 1.5em !important;
+	color: #558FC1 !important;
+}
+
+.mood {
+	font-style: italic;
+	font-size: 0.9em;
+	margin-top: 10px;
+}
+
+.rating-selectors {
+	display: table !important;
+	height: 80px;
 }

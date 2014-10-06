@@ -34,12 +34,12 @@
       <div class="form-group required">
         <label>
           <input type="checkbox" ng-model="clinician.can_administer_account" value="1" id="clinician_can_administer_account">
-          May manage account
+          &nbsp; May manage account
         </label>
         <br />
         <label>
           <input type="checkbox" ng-model="clinician.has_caseload" value="1" id="clinician_has_caseload">
-          Has caseload
+          &nbsp; Has caseload
         </label>
       </div>
     </div>
@@ -55,7 +55,8 @@
         <div href="#" class="list-group-item as-table" ng-repeat="serviceUser in serviceUsers | orderBy: 'last_name'" ng-class="{'alert-danger': serviceUser.needsMoving, alert: serviceUser.needsMoving }">
           <div class="col-md-4 service-user-list-attribute">
             <label class="list-group-label">
-              {{ serviceUser.full_name }}
+              {{ serviceUser.full_name }}<br />
+              <span class="buddy-id">{{ serviceUser.buddy_id }}</span>
             </label>
           </div>
           <div class="col-md-4 service-user-list-attribute">
@@ -104,9 +105,12 @@
         <a ng-click="reactivate(clinician)">Reactivate this user</a>
       </span>
 
-      <button class="btn btn-buddy" ng-click="deactivate($event)" ng-hide="clinician.deactivated_at">
-        Deactivate this user
-      </button>
+      <span ng-hide="clinician.deactivated_at">
+        Has this person left or stopped using Buddy?
+        <a ng-click="deactivate($event)">
+          Deactivate this user
+        </a>
+      </span>
     </div>
     <div class="col-md-12 footer">
       <div class="col-md-6 text-right">
