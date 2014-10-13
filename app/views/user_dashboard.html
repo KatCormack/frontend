@@ -1,24 +1,43 @@
-<div class="col-md-12">
-  <div class="col-md-push-3 col-md-3">
-    <div ng-show="auth.isClinician()">
-      <p><a ng-href="/service_users">Service Users</a></p>
+<div class="col-md-push-3 col-md-6 form-container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1 class="text-center">Dashboard</h1>
+      <div class="col-md-6 col-md-push-1">
+        <form ng-submit="search()">
+          <div class="input-group">
+            <input type="text" class="form-control" ng-model="search_term" placeholder="Search for a user">
+            <span class="input-group-btn">
+              <button class="btn btn-buddy btn-search">
+                <span class="iconic" data-glyph="magnifying-glass" title="search" aria-hidden="true"></span>
+              </button>
+            </span>
+          </div>
+        </form>
+      </div>
+      <div class="col-md-5 col-md-push-1">
+        <p>You can search, by name, phone number or NHS number</p>
+      </div>
     </div>
   </div>
-  <div class="col-md-push-3 col-md-3">
-    <div ng-show="auth.isClinician()">
-      <p><a ng-href="/service_users">Service Users</a></p>
+  <div class="row">
+    <div class="col-md-6 dashboard-box first">
+      <p><a href="/clinicians/new">Add a clinician</a> or<br />
+        <a href="/service_users/new">Add a service user</a></p>
+    </div>
+    <div class="col-md-6 dashboard-box">
+      <p><a href="/">Manage account</a><br />
+        <span>N active clinicians</span></p>
     </div>
   </div>
-</div>
-<div class="col-md-12">
-  <div class="col-md-push-3 col-md-3">
-    <div ng-show="auth.isClinician()">
-      <p><a ng-href="/service_users">Service Users</a></p>
+
+  <div class="row">
+    <div class="col-md-6 dashboard-box first">
+      <p><a href="/">Download reports</a><br />
+        <span>Learn how buddy is being used within your team</span></p>
     </div>
-  </div>
-  <div class="col-md-push-3 col-md-3">
-    <div ng-show="auth.isClinician()">
-      <p><a ng-href="/service_users">Service Users</a></p>
+    <div class="col-md-6 dashboard-box">
+      <p><a href="/">View the tutorial</a><br />
+        <span>Learn how to get started with Buddy</span></p>
     </div>
   </div>
 </div>

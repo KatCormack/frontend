@@ -12,5 +12,9 @@ angular.module('buddyClientApp')
                 $scope.$apply();
             });
         });
+        $scope.search = function() {
+            $state.go('clinician.search', {search: $scope.search_term});
+        };
+
 
     });

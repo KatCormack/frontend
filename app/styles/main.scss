@@ -37,7 +37,7 @@ legend {
 	padding-bottom: 5px;
 }
 
-.NewServiceUsersCtrl, .EditServiceUserCtrl, .LoginCtrl, .DeactivateServiceUserCtrl, .NewClinicianCtrl, .EditClinicianCtrl, .ServiceUserDiaryCtrl {
+.NewServiceUsersCtrl, .EditServiceUserCtrl, .LoginCtrl, .DeactivateServiceUserCtrl, .NewClinicianCtrl, .EditClinicianCtrl, .ServiceUserDiaryCtrl, .UserDashboardCtrl {
 	background-color: #eee;
 }
 
@@ -423,4 +423,16 @@ a:hover {
 .rating-selectors {
 	display: table !important;
 	height: 80px;
+}
+
+h2.no-results {
+	color: #558FC1;
+}
+
+.dashboard-box {
+	border-top: 1px solid #ccc;
+}
+
+.first.dashboard-box {
+	border-right: 1px solid #ccc;
 }
