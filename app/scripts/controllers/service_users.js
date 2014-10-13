@@ -192,8 +192,8 @@ angular.module('buddyClientApp')
         };
 
         $scope.submit = function() {
-            TeamServiceUser.save({user: $scope.service_user, account_id: $scope.service_user.account_id}, function() {
-                $state.go('user.dashboard');
+            var user = TeamServiceUser.save({user: $scope.service_user, account_id: $scope.service_user.account_id}, function() {
+                $state.go('clinician.serviceUserDiary', {id: user.id});
             }, function(response) {
                 _.each(response.data, function(value, key) { response.data[key] = value[0]; });
                 $scope.errors = response.data;

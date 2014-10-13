@@ -1,8 +1,8 @@
 <div class="col-md-push-3 col-md-6 form-container">
   <div class="row">
     <div class="col-md-12">
-      <h1 class="text-center">Dashboard</h1>
-      <div class="col-md-6 col-md-push-1">
+      <h1 class="text-center dashboard-header">Dashboard</h1>
+      <div class="col-md-6 col-md-push-1 dashboard-search">
         <form ng-submit="search()">
           <div class="input-group">
             <input type="text" class="form-control" ng-model="search_term" placeholder="Search for a user">
@@ -14,28 +14,40 @@
           </div>
         </form>
       </div>
-      <div class="col-md-5 col-md-push-1">
+      <div class="col-md-5 col-md-push-1 dashboard-search">
         <p>You can search, by name, phone number or NHS number</p>
       </div>
     </div>
   </div>
   <div class="row">
     <div class="col-md-6 dashboard-box first">
+      <div class="dashboard-icon plus-icon text-center">
+        <span class="iconic iconic-md" data-glyph="plus" title="plus" aria-hidden="true"></span>
+      </div>
       <p><a href="/clinicians/new">Add a clinician</a> or<br />
         <a href="/service_users/new">Add a service user</a></p>
     </div>
     <div class="col-md-6 dashboard-box">
-      <p><a href="/">Manage account</a><br />
-        <span>N active clinicians</span></p>
+      <div class="dashboard-icon calendar-icon text-center">
+        <span class="iconic iconic-md" data-glyph="calendar" title="calendar" aria-hidden="true"></span>
+      </div>
+      <p><a href="/clinicians">Manage clinicians</a><br />
+        <span>{{ (clinicians | filter: {deactivated_at: null}).length }} active clinicians</span></p>
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-6 dashboard-box first">
+      <div class="dashboard-icon data-transfer-icon text-center">
+        <span class="iconic iconic-md" data-glyph="data-transfer-download" title="data-transfer" aria-hidden="true"></span>
+      </div>
       <p><a href="/">Download reports</a><br />
         <span>Learn how buddy is being used within your team</span></p>
     </div>
     <div class="col-md-6 dashboard-box">
+      <div class="dashboard-icon question-mark-icon text-center">
+        <span class="iconic iconic-md" data-glyph="question-mark" title="question-mark" aria-hidden="true"></span>
+      </div>
       <p><a href="/">View the tutorial</a><br />
         <span>Learn how to get started with Buddy</span></p>
     </div>

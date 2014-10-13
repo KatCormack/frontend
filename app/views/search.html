@@ -43,7 +43,11 @@
             <tbody>
               <tr ng-repeat="serviceUser in serviceUsers | orderBy:last_name.toUpperCase()">
                 <td><a ng-href="/service_users/{{serviceUser.id}}">{{ serviceUser.full_name }}</a></td>
-                <td ng-show="serviceUser.current_session_time"><span am-time-ago="serviceUser.current_session_time"></span></td>
+                <td class="expand-link reactivate-user" ng-show="serviceUser.current_session_time">
+                  <a ng-click="rescheduleSession(serviceUser)">
+                    {{ serviceUser.current_session_time | ordinalDate: 'HH:mm / d MMMM yyyy' }}
+                  </a>
+                </td>
                 <td ng-hide="serviceUser.current_session_time">None</td>
                 <td><a ng-href="/service_users/{{serviceUser.id}}/edit">Settings</a></td>
               </tr>

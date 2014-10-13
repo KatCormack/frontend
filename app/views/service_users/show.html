@@ -5,21 +5,26 @@
         <ul class="nav nav-stacked buddy-nav" id="sidebar">
           <li>
             <a ng-click="show('nextSession')">
-              Next session:
-              <span class="next-session" ng-show="sessionScheduledTime">{{ sessionScheduledTime | ordinalDate: "MMMM d 'at' hh:mm" }}</span>
-              <span class="next-session" ng-hide="sessionScheduledTime">None</span>
+              <span class="iconic" data-glyph="calendar" title="calendar" aria-hidden="true"></span>
+              <span class="title">
+                           Next session:
+                           <span class="next-session" ng-show="sessionScheduledTime">{{ sessionScheduledTime | ordinalDate: "MMMM d 'at' hh:mm" }}</span>
+                           <span class="next-session" ng-hide="sessionScheduledTime">None</span>
+                    </span>
             </a>
           </li>
           <li>
             <a ng-click="show('settings')">
-              {{ user.full_name }}
+              <span class="iconic" data-glyph="person-genderless" title="person" aria-hidden="true"></span>
+              <span class="title">{{ user.full_name }}</span>
               <span class="buddy-id">{{ user.buddy_id }}</span><br />
               <span class="mobile">{{ user.mobile }}</span>
             </a>
           </li>
           <li class="active">
             <a ng-click="show('diaryEntries')">
-              Diary entries<br />
+              <span class="iconic" data-glyph="book" title="book" aria-hidden="true"></span>
+              <span class="title">Diary entries<br /></span>
               <span class="entry-count">
                 <ng-pluralize count="entries.length"
                               when="{'0': 'No entries',
@@ -29,11 +34,22 @@
               </span>
             </a>
           </li>
-          <li><a ng-click="show('sessionPlan')">Session plan</a></li>
-          <li><a ng-click="show('textMessage')">Text Message</a></li>
+          <li>
+            <a ng-click="show('sessionPlan')">
+              <span class="iconic" data-glyph="copywriting" title="copywriting" aria-hidden="true"></span>
+              <span class="title">Session plan</span>
+            </a>
+          </li>
+          <li>
+            <a ng-click="show('textMessage')">
+              <span class="iconic" data-glyph="comment-square" title="comment-square" aria-hidden="true"></span>
+              <span class="title">Text Message</span>
+            </a>
+          </li>
           <li>
             <a ng-click="show('goals')">
-              Goals<br />
+              <span class="iconic" data-glyph="circle-check" title="circle-check" aria-hidden="true"></span>
+              <span class="title">Goals<br /></span>
               <span class="goal-count">
                 <ng-pluralize count="goals.length"
                               when="{'0': 'No goals set',

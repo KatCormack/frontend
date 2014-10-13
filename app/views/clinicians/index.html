@@ -34,6 +34,9 @@
             <tr>
               <th>Name</th>
               <th>Last logged in</th>
+              <th class="text-center">Active users</th>
+              <th class="text-center">Inactive users</th>
+              <th class="text-center">Deactivated</th>
             </tr>
           </thead>
           <tbody>
@@ -47,6 +50,15 @@
               <td class="clinician-last-request-at">
                 <span ng-show="clinician.last_request_at" am-time-ago="clinician.last_request_at" ng-class="{inactive: clinician.last_request_at < twoWeeksAgo}"></span>
                 <span ng-hide="clinician.last_request_at" class="invitation-sent">Invitation sent <span am-time-ago="clinician.created_at"></span></span>
+              </td>
+              <td class="user-count text-center">
+                {{ clinician.active_service_user_count }}
+              </td>
+              <td class="user-count text-center">
+                {{ clinician.inactive_service_user_count }}
+              </td>
+              <td class="user-count text-center">
+                {{ clinician.deactivated_service_user_count }}
               </td>
             </tr>
           </tbody>

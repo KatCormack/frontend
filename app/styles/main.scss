@@ -1,5 +1,5 @@
 body {
-  min-height: 1200px;
+  min-height: 1000px;
   padding-top: 95px;
 }
 
@@ -59,8 +59,7 @@ body.ServiceUsersCtrl, body.SearchCtrl, body.CliniciansCtrl, body.ServiceUserDia
 }
 
 .form-row {
-	margin-right: 15px;
-	margin-left: -15px;
+	padding: 0px 0px 0px 5px !important;
 }
 
 .no-label {
@@ -112,7 +111,7 @@ body.ServiceUsersCtrl, body.SearchCtrl, body.CliniciansCtrl, body.ServiceUserDia
 legend h1 {
 	font-weight: normal;
 	color: #558FC1;
-	font-size: 0.95em;
+	font-size: 1.3em;
 }
 
 .user-count.badge {
@@ -227,7 +226,7 @@ td.expand-link { cursor: pointer; cursor: hand; }
 	font-size: 0.8em;
 }
 
-.clinician-last-request-at, td.settings, td.reactivate-user {
+.clinician-last-request-at, td.settings, td.reactivate-user, td.user-count {
 	vertical-align: middle !important;
 }
 
@@ -425,14 +424,50 @@ a:hover {
 	height: 80px;
 }
 
-h2.no-results {
+h2.no-results, h1.dashboard-header {
 	color: #558FC1;
 }
 
 .dashboard-box {
 	border-top: 1px solid #ccc;
+	padding: 50px 0px 50px 0px;
 }
 
 .first.dashboard-box {
 	border-right: 1px solid #ccc;
+}
+
+.dashboard-icon {
+	width: 60px;
+	height: 60px;
+	border-radius: 5px;
+	float: left;
+	margin: 0px 10px 0px 10px;
+	padding-top: 14px;
+	color: white;
+}
+
+.dashboard-icon.plus-icon {
+	background-color: #568FC2;	
+}
+
+.dashboard-icon.calendar-icon {
+	background-color: #00B39D;	
+}
+
+.dashboard-icon.data-transfer-icon {
+	background-color: #289EB5;
+}
+
+.dashboard-icon.question-mark-icon {
+	background-color: #7770AE;
+}
+
+.dashboard-header, .dashboard-search {
+	margin-bottom: 50px;
+}
+
+.buddy-nav .title {
+	padding-left: 5px;
+	padding-bottom: 200px;
 }
