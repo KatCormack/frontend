@@ -147,6 +147,8 @@ angular.module('buddyClientApp')
         $scope.show = function(id) {
             $(".diary-page-contents-wrapper").hide();
             $("#" + id).show();
+            $(".nav-item").removeClass("active")
+            $("." + id).addClass("active")
         };
 
 

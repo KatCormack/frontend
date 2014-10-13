@@ -3,7 +3,7 @@
     <div class="col-md-10 col-md-push-1">
       <div class="col-md-4" id="diary-menu">
         <ul class="nav nav-stacked buddy-nav" id="sidebar">
-          <li>
+          <li class="nextSession nav-item">
             <a ng-click="show('nextSession')">
               <span class="iconic" data-glyph="calendar" title="calendar" aria-hidden="true"></span>
               <span class="title">
@@ -13,7 +13,7 @@
                     </span>
             </a>
           </li>
-          <li>
+          <li class="settings nav-item">
             <a ng-click="show('settings')">
               <span class="iconic" data-glyph="person-genderless" title="person" aria-hidden="true"></span>
               <span class="title">{{ user.full_name }}</span>
@@ -21,7 +21,7 @@
               <span class="mobile">{{ user.mobile }}</span>
             </a>
           </li>
-          <li class="active">
+          <li class="active diaryEntries nav-item">
             <a ng-click="show('diaryEntries')">
               <span class="iconic" data-glyph="book" title="book" aria-hidden="true"></span>
               <span class="title">Diary entries<br /></span>
@@ -34,19 +34,19 @@
               </span>
             </a>
           </li>
-          <li>
+          <li class="sessionPlan nav-item">
             <a ng-click="show('sessionPlan')">
               <span class="iconic" data-glyph="copywriting" title="copywriting" aria-hidden="true"></span>
               <span class="title">Session plan</span>
             </a>
           </li>
-          <li>
+          <li class="textMessage nav-item">
             <a ng-click="show('textMessage')">
               <span class="iconic" data-glyph="comment-square" title="comment-square" aria-hidden="true"></span>
               <span class="title">Text Message</span>
             </a>
           </li>
-          <li>
+          <li class="goals nav-item">
             <a ng-click="show('goals')">
               <span class="iconic" data-glyph="circle-check" title="circle-check" aria-hidden="true"></span>
               <span class="title">Goals<br /></span>
