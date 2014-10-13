@@ -222,7 +222,7 @@ td.expand-link { cursor: pointer; cursor: hand; }
 	display: none;
 }
 
-.buddy-id {
+.buddy-id, .goal-count, .entry-count, .next-session, span.mobile {
 	color: #999;
 	font-size: 0.8em;
 }
@@ -344,6 +344,12 @@ td.expand-link { cursor: pointer; cursor: hand; }
 
 .rating-5.progress-bar, .rating-five, .rating-selector-five.active, .rating-selector-five:hover {
 	background-color: purple !important;
+}
+
+.calendar-top {
+	background-color: #444;
+	color: white;
+	padding: 2px;
 }
 
 .calendar-bottom {

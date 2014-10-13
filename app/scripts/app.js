@@ -17,6 +17,15 @@ angular.module('buddyClientApp', [
         clinician: 3,
         clinicianAdmin: 4
     })
+    .constant('Days', [
+        'sun',
+        'mon',
+        'tue',
+        'wed',
+        'thu',
+        'fri',
+        'sat'
+    ])
     .run(function($rootScope, $state, Auth){
         $rootScope._ = _;
         $rootScope.$on('$stateChangeStart', function(event, toState) {

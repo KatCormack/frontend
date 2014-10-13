@@ -1,70 +1,82 @@
 <div class="heading col-md-12">
-  <div class="col-md-6 heading-unit-header">
-    <h1>Search</h1>
-  </div>
-  <div class="col-md-6 heading-unit">
-    <form ng-submit="search()">
-      <div class="input-group">
-        <input type="text" class="form-control" ng-model="search_term" placeholder="Search for a user">
-        <span class="input-group-btn">
-          <input type="submit" value="S" class="btn btn-buddy">
-        </span>
-      </div>
-    </form>
+  <div class="container">
+    <div class="col-md-5 col-md-push-1 heading-unit-header">
+      <h1>Search</h1>
+    </div>
+    <div class="col-md-5 heading-unit col-md-push-1">
+      <form ng-submit="search()">
+        <div class="input-group">
+          <input type="text" class="form-control" ng-model="search_term" placeholder="Search for a user">
+          <span class="input-group-btn">
+            <button class="btn btn-buddy btn-search">
+              <span class="iconic" data-glyph="magnifying-glass" title="search" aria-hidden="true"></span>
+            </button>
+          </span>
+        </div>
+      </form>
+    </div>
   </div>
 </div>
 
-<div class="col-md-12 list-container">
-  <div class="panel-group">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h4 class="panel-title">
-          Service Users
-        </h4>
+<div class="container">
+  <div class="col-md-push-1 col-md-10 list-container">
+    <div class="panel-group">
+      <div class="panel panel-default" ng-show="serviceUsers.length > 0">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            Service Users
+          </h4>
+        </div>
+        <div>
+          <table class="table table-bordered table-hover table-striped panel-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Next session</th>
+                <th>Settings</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="serviceUser in serviceUsers | orderBy:last_name.toUpperCase()">
+                <td><a ng-href="/service_users/{{serviceUser.id}}">{{ serviceUser.full_name }}</a></td>
+                <td ng-show="serviceUser.current_session_time"><span am-time-ago="serviceUser.current_session_time"></span></td>
+                <td ng-hide="serviceUser.current_session_time">None</td>
+                <td><a ng-href="/service_users/{{serviceUser.id}}/edit">Settings</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-      <div>
-        <table class="table table-bordered table-hover table-striped panel-table">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Next session</th>
-              <th>Settings</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr ng-repeat="serviceUser in serviceUsers | orderBy:last_name.toUpperCase()">
-              <td><a ng-href="/service_users/{{serviceUser.id}}">{{ serviceUser.full_name }}</a></td>
-              <td ng-show="serviceUser.current_session_time"><span am-time-ago="serviceUser.current_session_time"></span></td>
-              <td ng-hide="serviceUser.current_session_time">None</td>
-              <td><a ng-href="/service_users/{{serviceUser.id}}/edit">Settings</a></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h4 class="panel-title">
-          Clinicians
-        </h4>
-      </div>
-      <div>
-        <table class="table table-bordered table-hover table-striped panel-table">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Settings</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr ng-repeat="clinician in clinicians | orderBy:last_name.toUpperCase()">
-              <td class="expand-link"><a ng-href="/clinician/{{clinician.id}}">{{ clinician.full_name }}</a></td>
-              <td class="expand-link"><a ng-href="/clinicians/{{clinician.id}}/edit">Settings</a></td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="col-md-12 text-center" ng-hide="serviceUsers.length > 0">
+        <h2>No service users found</h2>
       </div>
 
+      <div class="panel panel-default" ng-show="clinicians.length > 0">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            Clinicians
+          </h4>
+        </div>
+        <div>
+          <table class="table table-bordered table-hover table-striped panel-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Settings</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="clinician in clinicians | orderBy:last_name.toUpperCase()">
+                <td class="expand-link"><a ng-href="/clinician/{{clinician.id}}">{{ clinician.full_name }}</a></td>
+                <td class="expand-link"><a ng-href="/clinicians/{{clinician.id}}/edit">Settings</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-md-12 text-center" ng-hide="clinicians.length > 0">
+        <h2>No clinicians found</h2>
+      </div>
     </div>
   </div>
 </div>

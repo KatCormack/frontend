@@ -48,4 +48,7 @@ angular.module('buddyClientApp')
     })
     .factory('Membership', function($resource, APIHost) {
         return $resource(APIHost + '/api/v1/memberships');
+    })
+    .factory('ServiceUserGoal', function($resource, APIHost) {
+        return $resource(APIHost + '/api/v1/service_users/:user_id/goals/:id.json', {id: '@id', user_id: '@user_id'}, {update: {method: 'PUT'}});
     });

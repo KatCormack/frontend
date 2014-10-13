@@ -6,20 +6,21 @@
           <li>
             <a ng-click="show('nextSession')">
               Next session:
-              <span>{{ sessionScheduledTime | ordinalDate: "MMMM d 'at' hh:mm" }}</span>
+              <span class="next-session" ng-show="sessionScheduledTime">{{ sessionScheduledTime | ordinalDate: "MMMM d 'at' hh:mm" }}</span>
+              <span class="next-session" ng-hide="sessionScheduledTime">None</span>
             </a>
           </li>
           <li>
             <a ng-click="show('settings')">
-              {{ user.full_name }}<br />
+              {{ user.full_name }}
               <span class="buddy-id">{{ user.buddy_id }}</span><br />
               <span class="mobile">{{ user.mobile }}</span>
             </a>
           </li>
           <li class="active">
             <a ng-click="show('diaryEntries')">
-              Diary entries
-              <span>
+              Diary entries<br />
+              <span class="entry-count">
                 <ng-pluralize count="entries.length"
                               when="{'0': 'No entries',
                                     'one': '1 entry',
@@ -32,8 +33,8 @@
           <li><a ng-click="show('textMessage')">Text Message</a></li>
           <li>
             <a ng-click="show('goals')">
-              Goals
-              <span>
+              Goals<br />
+              <span class="goal-count">
                 <ng-pluralize count="goals.length"
                               when="{'0': 'No goals set',
                                     'one': '1 goal set',
@@ -132,14 +133,14 @@
                 This user has been deactivated
                 <a ng-click="reactivate(service_user.id)">Reactivate this user</a>
               </span>
-              <a ng-hide="service_user.deactivated_at" ng-href="/service_users/{{service_user.id}}/deactivate?returnTo=%2Fservice_users%2F{{service_user.id}}%2Fedit">
+              <a ng-hide="service_user.deactivated_at" ng-href="/service_users/{{service_user.id}}/deactivate?returnTo=%2Fservice_users%2F{{service_user.id}}">
                 Deactivate this user
               </a>
             </div>
 
             <div class="col-md-12 footer">
               <div class="col-md-6 text-right">
-                <input type="submit" class="btn btn-default right" value="Save">
+                <input type="submit" class="btn btn-buddy right" value="Save">
               </div>
               <div class="col-md-6 cancel-button">
                 <a href="/service_users">Cancel</a>
@@ -242,13 +243,77 @@
           </div>
         </div>
         <div class="col-md-12 diary-page-contents diary-page-contents-wrapper" id="sessionPlan">
-          {{ entries }}
+          <div class="col-md-12">
+            <p>What would you like to talk about during your next
+              session? Since your last session, what went well? Did you
+              meet your goals? What was stopping you?</p>
+            <form ng-submit="submitSessionPlan(currentSession)">
+              <div class="form-group">
+                <textarea ng-model="currentSession.session_plan" class="form-control" rows="3"></textarea>
+              </div>
+              <div class="form-group">
+                <input type="submit" value="Save session plan" class="btn btn-buddy">
+              </div>
+            </form>
+          </div>
         </div>
         <div class="col-md-12 diary-page-contents diary-page-contents-wrapper" id="textMessage">
           {{ entries }}
         </div>
-        <div class="col-md-12 diary-page-contents diary-page-contents-wrapper" id="goals">
-          {{ entries }}
+        <div class="col-md-9 diary-page-contents diary-page-contents-wrapper" id="goals">
+          <div class="current-goals col-md-12">
+            <form ng-submit="editGoal(goal)" ng-repeat="goal in goals">
+              <div class="col-md-9">
+                <label>
+                  <input type="checkbox">
+                  {{ goal.text }}
+                </label>
+              </div>
+              <div class="col-md-3">
+                <span ng-hide="goal.showEdit">edit</span>
+                <span ng-show="goal.showEdit">cancel</span>
+              </div>
+              <div class="col-md-12">
+
+              </div>
+            </form>
+          </div>
+
+
+          <form action="newGoalSubmit()">
+            <div class="form-group col-md-10 col-md-push-1">
+              <legend>New Goal</legend>
+              <div class="input-group col-md-8">
+                <input type="text" ng-model="newGoal.text" class="form-control" />
+              </div>
+              <div class="input-group col-md-4 text-right">
+                {{ 140-newGoal.text.length }}<br />
+                <a ng-click="showGoalExamples()">Examples</a>
+              </div>
+              <div class="col-md-12">
+                <label class="radio-inline"><input type="radio" ng-model="newGoal.type" value="regular">Regular</label>
+                <label class="radio-inline"><input type="radio" ng-model="newGoal.type" value="once">One-off</label>
+                <label class="radio-inline"><input type="radio" ng-model="newGoal.type" value="none">None</label>
+              </div>
+              <div class="col-md-12" ng-show="newGoal.type === 'regular'">
+                <label class="checkbox-inline" ng-repeat="day in Days">
+                  <input type="checkbox" ng-model="newGoal.day[day]"/>
+                  {{ day | limitTo: 1 | uppercase }}
+                </label>
+              </div>
+              <div class="input-group col-md-12" ng-show="newGoal.type === 'once'">
+                <input type="text" datepicker-popup="dd/MM/yyyy" is-open="$parent.opened" min-date="minDate" ng-required="true" close-text="Close" ng-click="open($event)" ng-model="newGoal.time" class="form-control" />
+              </div>
+              <div class="input-group col-md-12" ng-show="newGoal.type === 'regular' || newGoal.type === 'once'">
+                <timepicker ng-model="newGoal.time" hour-step="hstep" minute-step="mstep"></timepicker>
+              </div>
+              <div class="input-group col-md-12">
+                <input type="submit" value="Add Goal" class="btn-buddy btn">
+              </div>
+            </div>
+          </form>
+
+
         </div>
       </div>
     </div>

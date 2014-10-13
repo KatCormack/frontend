@@ -62,7 +62,16 @@ angular.module('buddyClientApp')
             serviceUser.deactivated_at = null;
             TeamServiceUser.update({user: serviceUser, id: serviceUser.id, account_id: serviceUser.account_id});
         };
-    }).controller('ServiceUserDiaryCtrl', function($scope, ServiceUser, $state, Entry, Session) {
+    }).controller('ServiceUserDiaryCtrl', function($scope, ServiceUser, $state, Entry, Session, ServiceUserGoal, Days, Team, TeamClinician) {
+        var refreshClinicians = function() {
+            $scope.clinicians = TeamClinician.query({account_id: $scope.service_user.account_id}, function() {
+                if (!_.detect($scope.clinicians, function(x) { return x.id === $scope.service_user.clinician_id; })) {
+                    $scope.service_user.clinician_id = null;
+                }
+            });
+        };
+
+
         $scope.hstep = 1;
         $scope.mstep = 15;
         $scope.user = ServiceUser.get({id: $state.params.id}, function() {
@@ -70,8 +79,13 @@ angular.module('buddyClientApp')
         });
         $scope.ratingName = function(rating) {
         }
-
+        $scope.service_user = ServiceUser.get({id: $state.params.id}, function() {
+            $scope.teams = Team.query({}, function() {
+                refreshClinicians();
+            });
+        });
         $scope.sessions = Session.query({user_id: $state.params.id}, function() {
+            $scope.currentSession = $scope.sessions[0];
             var removeEntries = function(array, entry) {
                 return _.reject(array, function(item) {
                     return item.id === entry.id;
@@ -122,11 +136,21 @@ angular.module('buddyClientApp')
 
         });
 
+        $scope.goals = ServiceUserGoal.query({user_id: $state.params.id})
+        var goalTime = new Date();
+        goalTime.setMinutes(0);
+
+        $scope.newGoal = {type: 'regular', time: goalTime, text: "", day:{}};
+        _.each(Days, function(day) { $scope.newGoal.day[day] = false; });
+        $scope.Days = Days;
 
         $scope.show = function(id) {
             $(".diary-page-contents-wrapper").hide();
             $("#" + id).show();
         };
+
+
+
         jQuery(document).ready(function() {
             $scope.show('diaryEntries');
         });
