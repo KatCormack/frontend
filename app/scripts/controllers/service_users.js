@@ -62,7 +62,7 @@ angular.module('buddyClientApp')
             serviceUser.deactivated_at = null;
             TeamServiceUser.update({user: serviceUser, id: serviceUser.id, account_id: serviceUser.account_id});
         };
-    }).controller('ServiceUserDiaryCtrl', function($scope, ServiceUser, $state, Entry, Session, ServiceUserGoal, Days, Team, TeamClinician) {
+    }).controller('ServiceUserDiaryCtrl', function($scope, ServiceUser, $state, Entry, Session, ServiceUserGoal, Days, Team, TeamClinician, Goal, ServiceUserSession) {
         var refreshClinicians = function() {
             $scope.clinicians = TeamClinician.query({account_id: $scope.service_user.account_id}, function() {
                 if (!_.detect($scope.clinicians, function(x) { return x.id === $scope.service_user.clinician_id; })) {
@@ -70,13 +70,42 @@ angular.module('buddyClientApp')
                 }
             });
         };
-
+        $scope.editGoal = function(goal) {
+            goal.editable = true;
+        }
+        $scope.cancelEditGoal = function(goal) {
+            goal.editable = false;
+        }
 
         $scope.hstep = 1;
         $scope.mstep = 15;
+
+        $scope.nextSession = {};
+
         $scope.user = ServiceUser.get({id: $state.params.id}, function() {
-            $scope.sessionScheduledTime = $scope.user.session_scheduled_time;
+            if ($scope.user.session_scheduled_time) {
+                $scope.sessionScheduledTime = $scope.user.session_scheduled_time;
+                $scope.nextSession = Session.get({id: $scope.user.session_id});
+            } else {
+                $scope.nextSession.scheduled_time = new Date();
+                $scope.nextSession.scheduled_time.setMinutes(0);
+            }
+
         });
+
+        $scope.updateSession = function(session) {
+            if (session.id) {
+                Session.update({session: session, id: session.id}, function(s) {
+                    $scope.sessionScheduledTime = session.scheduled_time;
+                })
+            } else {
+                ServiceUserSession.save({session: session, service_user_id: $scope.user.id}, function(s) {
+                    $scope.sessionScheduledTime = session.scheduled_time;
+                    $scope.nextSession = s;
+                })
+            }
+        }
+
         $scope.ratingName = function(rating) {
         }
         $scope.service_user = ServiceUser.get({id: $state.params.id}, function() {
@@ -131,12 +160,22 @@ angular.module('buddyClientApp')
                     $scope.progress = counts || {}
                 }
             });
-
-
-
         });
 
-        $scope.goals = ServiceUserGoal.query({user_id: $state.params.id})
+        $scope.goals = ServiceUserGoal.query({user_id: $state.params.id}, function() {
+            _.map($scope.goals, function(goal) { goal.removed = !!goal.removed_at; });
+        });
+
+        $scope.toggleGoalChanged = function(goal) {
+            if (goal.removed) {
+                goal.removed_at = new Date();
+            } else {
+                goal.removed_at = null;
+            }
+            goal.removed = !!goal.removed_at;
+            goal = Goal.update({goal: goal, id: goal.id});
+        };
+
         var goalTime = new Date();
         goalTime.setMinutes(0);
 
@@ -150,8 +189,6 @@ angular.module('buddyClientApp')
             $(".nav-item").removeClass("active")
             $("." + id).addClass("active")
         };
-
-
 
         jQuery(document).ready(function() {
             $scope.show('diaryEntries');
