@@ -16,9 +16,9 @@
           <li class="settings nav-item">
             <a ng-click="show('settings')">
               <span class="iconic" data-glyph="person-genderless" title="person" aria-hidden="true"></span>
-              <span class="title">{{ user.full_name }}</span>
-              <span class="buddy-id">{{ user.buddy_id }}</span><br />
-              <span class="mobile">{{ user.mobile }}</span>
+              <span class="title">{{ service_user.full_name }}</span>
+              <span class="buddy-id">{{ service_user.buddy_id }}</span><br />
+              <span class="mobile">{{ service_user.mobile }}</span>
             </a>
           </li>
           <li class="active diaryEntries nav-item">
@@ -274,51 +274,84 @@
             </form>
           </div>
         </div>
+
         <div class="col-md-12 diary-page-contents diary-page-contents-wrapper" id="textMessage">
           <h2 class="title text-center">Text message</h2>
-          <form ng-submit="updateTextMessage($scope.user)">
+
+          <form ng-submit="updateTextMessage()">
             <div class="col-md-12">
-              <select></select>
+              <select ng-model="service_user.type_of_message" ng-options="k as v for (k,v) in typesOfMessage"></select>
+            </div>
+            <div class="col-md-12" ng-show="service_user.type_of_message = 'custom'">
+              <textarea class="form-control" ng-model="service_user.daily_entry_text_message"></textarea>
             </div>
             <div class="col-md-12">
-              <textarea></textarea>
-            </div>
-            <div class="col-md-12">
-              <label class="checkbox-inline" ng-repeat="day in Days">
-                <input type="checkbox" ng-model="user.daily_entry_schedule[day]"/>
-                {{ day | limitTo: 3 | uppercase }}
+              <label class="checkbox-inline text-message-days" ng-repeat="day in Days">
+                <input type="checkbox" ng-model="service_user.daily_entry_schedule[day]"/>
+                {{ day | limitTo: 3 }}
               </label>
+            </div>
+            <div class="col-md-12">
+              <input type="submit" value="Save" class="btn btn-buddy" />
             </div>
           </form>
         </div>
+
         <div class="col-md-9 diary-page-contents diary-page-contents-wrapper" id="goals">
-          <div class="current-goals col-md-12">
-            <h2 class="text-center">Goals</h2>
-            <form ng-submit="" ng-repeat="goal in goals | filter: {removed_at: null} ">
-              <div class="col-md-9" ng-hide="goal.editable">
+          <div class="current-goals col-md-12" ng-show="(goals | filter: {removed_at: null, editable: '!'}).length > 0">
+            <h2 class="title text-center">Goals</h2>
+            <div class="row" ng-repeat="goal in goals | filter: {removed_at: null, editable: '!'}">
+              <div class="col-md-9">
                 <label>
                   <input type="checkbox" ng-model="goal.removed" ng-change="toggleGoalChanged(goal)">
                   {{ goal.text }}
                   <span></span>
                 </label>
               </div>
-              <div class="col-md-3" ng-hide="goal.editable">
+              <div class="col-md-3">
                 <a ng-click="editGoal(goal)">edit</a>
               </div>
-              <div class="col-md-9" ng-show="goal.editable">
-                <input type="text" ng-model="goal.text" />
-              </div>
-              <div class="col-md-3" ng-show="goal.editable">
-                <a ng-click="cancelEditGoal(goal)">cancel</a>
-              </div>
-
-            </form>
+            </div>
           </div>
 
+          <div class="editable-goals col-md-12" ng-show="(goals | filter: {editable: '!!'}).length > 0">
+            <div class="row" ng-repeat="goal in goals | filter: {editable: '!!'}">
+              <form action="updateGoal(goal)">
+                <div class="input-group col-md-8">
+                  <input type="text" ng-model="goal.text" class="form-control" />
+                </div>
+                <div class="input-group col-md-4 text-right">
+                  {{ 140-goal.text.length }}<br />
+                  <a ng-click="showGoalExamples()">Examples</a>
+                </div>
+                <div class="col-md-12">
+                  <label class="radio-inline"><input type="radio" ng-model="goal.reminder_type" value="recurring">Recurring</label>
+                  <label class="radio-inline"><input type="radio" ng-model="goal.reminder_type" value="once">One-off</label>
+                  <label class="radio-inline"><input type="radio" ng-model="goal.reminder_type" value="none">None</label>
+                </div>
+                <div class="col-md-12" ng-show="goal.reminder_type === 'recurring'">
+                  <label class="checkbox-inline" ng-repeat="day in Days">
+                    <input type="checkbox" ng-model="goal.day[day]"/>
+                    {{ day | limitTo: 1 | uppercase }}
+                  </label>
+                </div>
+                <div class="input-group col-md-12" ng-show="goal.reminder_type === 'once'">
+                  <input type="text" datepicker-popup="dd/MM/yyyy" is-open="$parent.opened" min-date="minDate" ng-required="true" close-text="Close" ng-click="open($event)" ng-model="goal.time" class="form-control"/>
+                </div>
+                <div class="input-group col-md-12" ng-show="goal.reminder_type === 'recurring' || goal.reminder_type === 'once'">
+                  <timepicker ng-model="goal.time" hour-step="hstep" minute-step="mstep" show-meridian="false"></timepicker>
+                </div>
+                <div class="input-group col-md-12">
+                  <input type="submit" value="Save goal" class="btn-buddy btn">
+                  <a ng-click="cancelEditGoal(goal)">cancel</a>
+                </div>
+              </form>
+            </div>
+          </div>
 
-          <form action="newGoalSubmit()">
-            <div class="form-group col-md-10 col-md-push-1">
-              <legend>New Goal</legend>
+          <div class="new-goal col-md-12">
+            <h2 class="text-center title">New Goal</h2>
+            <form action="newGoalSubmit()">
               <div class="input-group col-md-8">
                 <input type="text" ng-model="newGoal.text" class="form-control" />
               </div>
@@ -327,30 +360,31 @@
                 <a ng-click="showGoalExamples()">Examples</a>
               </div>
               <div class="col-md-12">
-                <label class="radio-inline"><input type="radio" ng-model="newGoal.type" value="regular">Regular</label>
-                <label class="radio-inline"><input type="radio" ng-model="newGoal.type" value="once">One-off</label>
-                <label class="radio-inline"><input type="radio" ng-model="newGoal.type" value="none">None</label>
+                <label class="radio-inline"><input type="radio" ng-model="newGoal.reminder_type" value="recurring">Recurring</label>
+                <label class="radio-inline"><input type="radio" ng-model="newGoal.reminder_type" value="once">One-off</label>
+                <label class="radio-inline"><input type="radio" ng-model="newGoal.reminder_type" value="none">None</label>
               </div>
-              <div class="col-md-12" ng-show="newGoal.type === 'regular'">
+              <div class="col-md-12" ng-show="newGoal.reminder_type === 'recurring'">
                 <label class="checkbox-inline" ng-repeat="day in Days">
                   <input type="checkbox" ng-model="newGoal.day[day]"/>
                   {{ day | limitTo: 1 | uppercase }}
                 </label>
               </div>
-              <div class="input-group col-md-12" ng-show="newGoal.type === 'once'">
+              <div class="input-group col-md-12" ng-show="newGoal.reminder_type === 'once'">
                 <input type="text" datepicker-popup="dd/MM/yyyy" is-open="$parent.opened" min-date="minDate" ng-required="true" close-text="Close" ng-click="open($event)" ng-model="newGoal.time" class="form-control"/>
               </div>
-              <div class="input-group col-md-12" ng-show="newGoal.type === 'regular' || newGoal.type === 'once'">
+              <div class="input-group col-md-12" ng-show="newGoal.reminder_type === 'regular' || newGoal.reminder_type === 'once'">
                 <timepicker ng-model="newGoal.time" hour-step="hstep" minute-step="mstep" show-meridian="false"></timepicker>
               </div>
               <div class="input-group col-md-12">
                 <input type="submit" value="Add Goal" class="btn-buddy btn">
               </div>
-            </div>
-          </form>
+            </form>
+          </div>
 
-          <div class="past-goals col-md-12">
-            <form ng-submit="" ng-repeat="goal in goals | filter: {removed_at: '!!'} ">
+          <div class="past-goals col-md-12" ng-show="(goals | filter: {removed_at: '!!'}).length > 0">
+            <h2 class="title text-center">Past goals</h2>
+            <div class="row" ng-repeat="goal in goals | filter: {removed_at: '!!'}">
               <div class="col-md-9" ng-hide="goal.editable">
                 <label>
                   <input type="checkbox" ng-model="goal.removed" ng-change="toggleGoalChanged(goal)">
@@ -358,20 +392,8 @@
                   <span></span>
                 </label>
               </div>
-              <div class="col-md-3" ng-hide="goal.editable">
-                <a ng-click="editGoal(goal)">edit</a>
-
-              </div>
-              <div class="col-md-9" ng-show="goal.editable">
-                <input type="text" ng-model="goal.text" />
-              </div>
-              <div class="col-md-3" ng-show="goal.editable">
-                <a ng-click="cancelEditGoal(goal)">cancel</a>
-              </div>
-
-            </form>
+            </div>
           </div>
-
 
 
         </div>

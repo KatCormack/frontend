@@ -82,16 +82,28 @@ angular.module('buddyClientApp')
 
         $scope.nextSession = {};
 
-        $scope.user = ServiceUser.get({id: $state.params.id}, function() {
-            if ($scope.user.session_scheduled_time) {
-                $scope.sessionScheduledTime = $scope.user.session_scheduled_time;
-                $scope.nextSession = Session.get({id: $scope.user.session_id});
-            } else {
-                $scope.nextSession.scheduled_time = new Date();
-                $scope.nextSession.scheduled_time.setMinutes(0);
-            }
+        $scope.typesOfMessage = {
+            'none': "None",
+            'custom': "Custom message",
+            'default': "Default message"
+        };
 
-        });
+        $scope.updateTextMessage = function() {
+            switch($scope.user.type_of_message) {
+                case 'custom':
+                $scope.user.send_daily_reminder_messages = true;
+                break;
+                case 'default':
+                $scope.user.send_daily_reminder_messages = true;
+                $scope.user.daily_entry_text_message = null;
+                break;
+                case 'none':
+                $scope.user.send_daily_reminder_messages = false;
+            }
+            ServiceUser.update({user: $scope.user, id: $scope.user.id}, function(res) {
+                $scope.user = res;
+            });
+        }
 
         $scope.updateSession = function(session) {
             if (session.id) {
@@ -112,6 +124,14 @@ angular.module('buddyClientApp')
             $scope.teams = Team.query({}, function() {
                 refreshClinicians();
             });
+            if ($scope.service_user.session_scheduled_time) {
+                $scope.sessionScheduledTime = $scope.service_user.session_scheduled_time;
+                $scope.nextSession = Session.get({id: $scope.service_user.session_id});
+            } else {
+                $scope.nextSession.scheduled_time = new Date();
+                $scope.nextSession.scheduled_time.setMinutes(0);
+            }
+
         });
         $scope.sessions = Session.query({user_id: $state.params.id}, function() {
             $scope.currentSession = $scope.sessions[0];
@@ -179,7 +199,7 @@ angular.module('buddyClientApp')
         var goalTime = new Date();
         goalTime.setMinutes(0);
 
-        $scope.newGoal = {type: 'regular', time: goalTime, text: "", day:{}};
+        $scope.newGoal = {reminder_type: 'recurring', time: goalTime, text: "", day:{}};
         _.each(Days, function(day) { $scope.newGoal.day[day] = false; });
         $scope.Days = Days;
 

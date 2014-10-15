@@ -471,3 +471,20 @@ h2.no-results, h1.dashboard-header, .title {
 	padding-left: 5px;
 	padding-bottom: 200px;
 }
+
+.text-message-days {
+	text-transform: capitalize;
+}
+
+.current-goals, .editable-goals {
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+	border-bottom: 1px solid #ccc;
+}
+
+.past-goals {
+	padding-top: 10px;
+	margin-top: 10px;
+	border-top: 1px solid #ccc;
+	
+}
