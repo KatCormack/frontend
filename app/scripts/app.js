@@ -9,7 +9,7 @@ angular.module('buddyClientApp', [
     'angularMoment',
     'angularUtils.filters.ordinalDate'
 ])
-    .constant('APIHost', '')
+    .constant('APIHost', 'https://www.buddyapp.co.uk')
     .constant('AccessLevels',{
         anon: 0,
         user: 1,
