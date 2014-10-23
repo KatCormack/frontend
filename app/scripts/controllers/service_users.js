@@ -4,7 +4,6 @@ angular.module('buddyClientApp')
     .controller('AddServiceUserCtrl', function($scope, Team) {
         $scope.teams = Team.query({});
     }).controller('ServiceUsersCtrl', function ($scope, TeamServiceUser, $modal, CurrentUser, $location, $state) {
-
         $scope.user = CurrentUser.user();
         jQuery(document).ready(function () {
             $('.tab-pane').hide();
@@ -62,7 +61,9 @@ angular.module('buddyClientApp')
             serviceUser.deactivated_at = null;
             TeamServiceUser.update({user: serviceUser, id: serviceUser.id, account_id: serviceUser.account_id});
         };
-    }).controller('ServiceUserDiaryCtrl', function($scope, ServiceUser, $state, Entry, Session, ServiceUserGoal, Days, Team, TeamClinician, Goal, ServiceUserSession) {
+    }).controller('ServiceUserDiaryCtrl', function($scope, ServiceUser, $state, Entry, Session, ServiceUserGoal, Days, Team, TeamClinician, Goal, ServiceUserSession, Hours) {
+        $scope.Hours = Hours;
+
         var refreshClinicians = function() {
             $scope.clinicians = TeamClinician.query({account_id: $scope.service_user.account_id}, function() {
                 if (!_.detect($scope.clinicians, function(x) { return x.id === $scope.service_user.clinician_id; })) {
@@ -218,7 +219,16 @@ angular.module('buddyClientApp')
         };
         $scope.setDiaryFilter = function(val) {
             $scope.diaryFilter = val;
-        }
+        };
+        $scope.submit = function() {
+            ServiceUser.update({id: $scope.service_user.id, user: $scope.service_user}, function(res) {
+                $scope.service_user = ServiceUser.get({id: $scope.service_user.id})
+            }, function(response) {
+                _.each(response.data, function(value, key) { response.data[key] = value[0]; });
+                $scope.errors = response.data;
+            });
+        };
+
 
     }).controller('NewServiceUsersCtrl', function($scope, $state, Team, TeamClinician, CurrentUser, TeamServiceUser) {
         $scope.service_user = {};

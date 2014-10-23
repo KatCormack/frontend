@@ -79,6 +79,7 @@
           </form>
         </div>
         <div class="col-md-12 diary-page-contents-wrapper diary-page-contents" id="settings">
+          <h2 class="text-center title">Settings</h2>
           <form ng-submit="submit()">
             <div class="col-md-6">
               <div class="form-group required">
@@ -212,11 +213,11 @@
             <div class="col-md-12 session">
               <div class="col-md-2 calendar-container">
                 <div class="calendar col-md-12 text-center">
-                  <div class="calendar-top">
+                  <div class="calendar-top calendar-session">
                     SESSION
                   </div>
                   <div class="calendar-bottom">
-                    {{ session.index }}
+                    <span class="session-number">{{ session.index }}</span><br />
                   </div>
                 </div>
               </div>
@@ -247,19 +248,20 @@
                     {{ entry.created_at | date: 'MMMM' | uppercase }}
                   </div>
                   <div class="calendar-bottom">
-                    {{ entry.created_at | ordinalDate: 'd' }}<br />
+                    <span class="number">{{ entry.created_at | date: 'dd' }}</span><br />
                     {{ entry.created_at | date: 'EEEE' | uppercase }}
                   </div>
                 </div>
               </div>
               <div class="col-md-10">
                 {{ entry.body }}
-                <p class="text-right mood">{{ entry.mood }}</p>
+                <p class="text-left mood">{{ entry.mood }}</p>
               </div>
             </div>
           </div>
         </div>
         <div class="col-md-12 diary-page-contents diary-page-contents-wrapper" id="sessionPlan">
+          <h2 class="title text-center">Session Plan</h2>
           <div class="col-md-12">
             <p>What would you like to talk about during your next
               session? Since your last session, what went well? Did you
@@ -280,9 +282,9 @@
 
           <form ng-submit="updateTextMessage()">
             <div class="col-md-12">
-              <select ng-model="service_user.type_of_message" ng-options="k as v for (k,v) in typesOfMessage"></select>
+              <select ng-model="service_user.type_of_message" ng-options="k as v for (k,v) in typesOfMessage" class="form-control"></select>
             </div>
-            <div class="col-md-12" ng-show="service_user.type_of_message = 'custom'">
+            <div class="col-md-12" ng-show="service_user.type_of_message=='custom'">
               <textarea class="form-control" ng-model="service_user.daily_entry_text_message"></textarea>
             </div>
             <div class="col-md-12">
@@ -290,6 +292,9 @@
                 <input type="checkbox" ng-model="service_user.daily_entry_schedule[day]"/>
                 {{ day | limitTo: 3 }}
               </label>
+            </div>
+            <div class="col-md-12">
+              <select ng-model="daily_entry_reminder_hour" ng-options="hour in Hours"></select>
             </div>
             <div class="col-md-12">
               <input type="submit" value="Save" class="btn btn-buddy" />

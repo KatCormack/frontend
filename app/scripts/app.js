@@ -26,6 +26,32 @@ angular.module('buddyClientApp', [
         'fri',
         'sat'
     ])
+    .constant('Hours', [
+        '00',
+        '01',
+        '02',
+        '03',
+        '04',
+        '05',
+        '06',
+        '07',
+        '08',
+        '09',
+        '10',
+        '11',
+        '12',
+        '13',
+        '14',
+        '15',
+        '16',
+        '17',
+        '18',
+        '19',
+        '20',
+        '21',
+        '22',
+        '23'
+    ])
     .run(function($rootScope, $state, Auth){
         $rootScope._ = _;
         $rootScope.$on('$stateChangeStart', function(event, toState) {
@@ -171,6 +197,10 @@ angular.module('buddyClientApp', [
             templateUrl: '/views/clinicians/new.html',
             controller: 'NewClinicianCtrl',
             activetab: 'clinicians'
+        }).state('clinicianAdmin.reports', {
+            url: '/reports',
+            templateUrl: '/views/reports/index.html',
+            controller: 'ReportsCtrl'
         });
 
         $urlRouterProvider.otherwise('/');
