@@ -147,12 +147,12 @@
             </div>
 
             <div class="col-md-12 text-center footer">
-              <span ng-show="service_user.deactivated_at">
+              <span class="deactivation-message" ng-show="service_user.deactivated_at">
                 This user has been deactivated
                 <a ng-click="reactivate(service_user.id)">Reactivate this user</a>
 
               </span>
-              <span ng-hide="service_user.deactivated_at">
+              <span class="deactivation-message" ng-hide="service_user.deactivated_at">
               Has this person stopped using Buddy?
                 <a ng-href="/service_users/{{service_user.id}}/deactivate?returnTo=%2Fservice_users%2F{{service_user.id}}">
                 Deactivate this user
