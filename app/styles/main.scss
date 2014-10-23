@@ -221,7 +221,17 @@ td.expand-link { cursor: pointer; cursor: hand; }
 	display: none;
 }
 
-.buddy-id, .goal-count, .entry-count, .next-session, span.mobile {
+.nav-stacked .goal-count, .nav-stacked .entry-count, .nav-stacked .next-session, .nav-stacked .mobile {
+	font-size: 0.7em;
+	margin-left: 26px;
+	line-height: 0.5em !important;
+}
+
+.nav-stacked .buddy-id {
+	font-size: 0.7em;
+}
+
+.buddy-id, .goal-count, .entry-count, .next-session, .mobile {
 	color: #999;
 	font-size: 0.8em;
 }
@@ -263,18 +273,23 @@ td.expand-link { cursor: pointer; cursor: hand; }
 }
 
 .nav-stacked li {
-	border-bottom: 1px solid #ccc;
-	border-left: 1px solid #ccc;
-	border-right: 1px solid #ccc;
+	border-bottom: 1px solid #eee;
+	border-left: 1px solid #eee;
+	border-right: 1px solid #eee;
 	margin-top: 0px !important;
+	font-size: 1.3em;
 }
 
 .nav-stacked li a {
 	padding: 15px !important;
 }
 
+.nav-stacked > li:hover > a:hover, .nav-stacked > li > a:focus {
+	background-color: #f8f8f8 !important;
+}
+
 .nav-stacked li.active {
-	background-color: #eee;
+	background-color: #f8f8f8;
 }
 
 #diary-menu {
@@ -293,8 +308,6 @@ td.expand-link { cursor: pointer; cursor: hand; }
 
 .diary-page-contents {
 	padding: 20px;
-	border-bottom: 1px solid #ccc;
-	border-right: 1px solid #ccc;
 	background: white;	
 	padding-left: 0px !important;
 	padding-right: 0px !important;
@@ -307,6 +320,7 @@ td.expand-link { cursor: pointer; cursor: hand; }
 .entry {
 	padding: 30px;
 	margin-bottom: 2px;
+	font-size: 1.2em;
 }
 
 
@@ -318,72 +332,80 @@ td.expand-link { cursor: pointer; cursor: hand; }
 	margin-left: 0px;
 }
 
+.session-container.closed .session {
+	border-bottom: 2px solid #dbdbdb;
+}
+
 .session-container.present .session, .session-container.closed .entry, .entry.hidden {
 	display: none;
 }
 
-.rating-1.progress-bar, .rating-selector-one.active, .rating-selector-one:hover, .rating-one .calendar-top {
+.rating-1.progress-bar, .rating-selector-one.active, .rating-one .calendar-top {
 	background-color: #00B39D !important;
 }
 
-.rating-one {
-	background-color: #CAE5E2;
+.rating-one, .rating-selector-one:hover {
+	background-color: #CAE5E2 !important;
 }
 
-.rating-one .mood {
+.rating-one .mood, .rating-selector-one {
 	color: #00B39D !important;
 }
 
-.rating-2.progress-bar, .rating-selector-two.active, .rating-selector-two:hover, .rating-two .calendar-top {
+.rating-2.progress-bar, .rating-selector-two.active, .rating-two .calendar-top {
 	background-color: #289EB5 !important;
 }
 
-.rating-two {
-	background-color: #D0E2E5;
+.rating-two, .rating-selector-two:hover {
+	background-color: #D0E2E5 !important;
 }
 
-.rating-two .mood {
+.rating-two .mood, .rating-selector-two {
 	color: #289EB5 !important;
 }
 
-.rating-3.progress-bar, .rating-selector-three.active, .rating-selector-three:hover, .rating-three .calendar-top {
+.rating-3.progress-bar, .rating-selector-three.active, .rating-three .calendar-top {
 	background-color: #568FC2 !important;
 }
 
-.rating-three {
-	background-color: #D7DFE7;
+.rating-three, .rating-selector-three:hover {
+	background-color: #D7DFE7 !important;
 }
 
-.rating-three .mood {
+.rating-three .mood, .rating-selector-three {
 	color: #568FC2 !important;
 }
 
-.rating-4.progress-bar, .rating-selector-four.active, .rating-selector-four:hover, .rating-four .calendar-top {
+.rating-4.progress-bar, .rating-selector-four.active, .rating-four .calendar-top {
 	background-color: #7770AE !important;
 }
 
-.rating-four {
-	background-color: #DCDBE4;
+.rating-four, .rating-selector-four:hover {
+	background-color: #DCDBE4 !important;
 }
 
-.rating-four .mood {
+.rating-four .mood, .rating-selector-four {
 	color: #7770AE !important;
 }
 
-.rating-5.progress-bar, .rating-selector-five.active, .rating-selector-five:hover, .rating-five .calendar-top {
+.rating-5.progress-bar, .rating-selector-five.active, .rating-five .calendar-top {
 	background-color: #9F54A1 !important;
 }
 
-.rating-five {
-	background-color: #E2D7E2;
+.rating-five, .rating-selector-five:hover {
+	background-color: #E2D7E2 !important;
 }
 
-.rating-five .mood {
+.rating-five .mood, .rating-selector-five {
 	color: #9F54A1 !important;
 }
 
 .calendar-top.calendar-session {
 	background-color: #568FC2;
+}
+
+.rating-selector a {
+	text-decoration: underline !important;
 }
 
 .calendar-top {
@@ -420,13 +442,15 @@ td.expand-link { cursor: pointer; cursor: hand; }
 }
 
 .rating-selector {
-	min-height: 65px !important;
+	min-height: 46px !important;
 	vertical-align: middle !important; 
 	display:table-cell !important;
+	font-size: 0.95em;
+	border-radius: 2px;
 }
 
 .rating-selector.active, .rating-selector:hover {
-	background-color: #ddd;
+	background-color: #f8f8f8;
 }
 
 .nav-pills li a {
@@ -534,21 +558,27 @@ h2.no-results, h1.dashboard-header, .title {
 .current-goals, .editable-goals {
 	padding-bottom: 10px;
 	margin-bottom: 10px;
-	border-bottom: 1px solid #ccc;
+	border-bottom: 1px solid #eee;
 }
 
 .past-goals {
 	padding-top: 10px;
 	margin-top: 10px;
-	border-top: 1px solid #ccc;
-	
+	border-top: 1px solid #eee;	
 }
 
-.progress {
+.session .progress {
 	height: 10px !important;
 	border-radius: 2px !important;
+}
 
-	
+.entry-details {
+	margin-bottom: 10px;
+	font-style: italic;
+	color: #8a8a8a;
+}
 
-
+.session-details {
+	font-size: 1.4em;
+	color: #568FC2;
 }

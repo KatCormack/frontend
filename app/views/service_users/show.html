@@ -7,7 +7,7 @@
             <a ng-click="show('nextSession')">
               <span class="iconic" data-glyph="calendar" title="calendar" aria-hidden="true"></span>
               <span class="title">
-                           Next session:
+                           Next session<br />
                            <span class="next-session" ng-show="sessionScheduledTime">{{ sessionScheduledTime | ordinalDate: "MMMM d 'at' HH:mm" }}</span>
                            <span class="next-session" ng-hide="sessionScheduledTime">None</span>
                     </span>
@@ -150,7 +150,7 @@
               <span ng-show="service_user.deactivated_at">
                 This user has been deactivated
                 <a ng-click="reactivate(service_user.id)">Reactivate this user</a>
-              
+
               </span>
               <span ng-hide="service_user.deactivated_at">
               Has this person stopped using Buddy?
@@ -213,7 +213,7 @@
               </div>
             </div>
           </div>
-          <div class="col-md-12 session-container" ng-repeat="session in sessions" ng-class="{closed: !session.visible, present: session.id === 'present'}">
+          <div class="col-md-12 session-container" ng-repeat="session in sessions" ng-class="{closed: !session.visible, present: session.id === 'present'}" ng-click="toggleEntries(session)">
             <div class="col-md-12 session">
               <div class="col-md-2 calendar-container">
                 <div class="calendar col-md-12 text-center">
@@ -226,23 +226,28 @@
                 </div>
               </div>
               <div class="col-md-10 progress-container">
-                Session: {{ session.scheduled_time | ordinalDate: 'd MMMM'}}<br />
-                <ng-pluralize count="session.entries.length"
-                              when="{'0': 'No entries',
-                                    'one': '1 entry',
-                                    'other': '{} entries'}">
-                </ng-pluralize>
+                <span class="session-details">Session: {{ session.scheduled_time | ordinalDate: 'd MMMM'}}</span>
+                <div class="row entry-details">
+                  <div class="col-md-6">
+                    <ng-pluralize count="session.entries.length"
+                                  when="{'0': 'No entries',
+                                        'one': '1 entry',
+                                        'other': '{} entries'}">
+                    </ng-pluralize>
+                  </div>
+                  <div class="col-md-6 text-right" ng-show="session.entries.length > 0">
+                    <a>
+                      <span ng-show="session.visible">Hide entries</span>
+                      <span ng-hide="session.visible">Show entries</span>
+                    </a>
+                  </div>
+                </div>
+
                 <div class="progress">
                   <div class="progress-bar" ng-style="{{value}}" ng-repeat="(key, value) in session.progress" ng-class="key">
                   </div>
                 </div>
               </div>
-              <p class="text-right" ng-show="session.entries.length > 0">
-                <a ng-click="toggleEntries(session)">
-                  <span ng-show="session.visible">Hide entries</span>
-                  <span ng-hide="session.visible">Show entries</span>
-                </a>
-              </p>
             </div>
             <div ng-repeat="entry in session.entries" class="entry col-md-12"
                  ng-class="{'{{entry.rating_class}}': true, 'first': $index === 0, 'hidden': diaryFilter != null && diaryFilter !== entry.rating}">
@@ -306,18 +311,18 @@
           </form>
         </div>
 
-        <div class="col-md-9 diary-page-contents diary-page-contents-wrapper" id="goals">
+        <div class="col-md-12 diary-page-contents diary-page-contents-wrapper" id="goals">
           <div class="current-goals col-md-12" ng-show="(goals | filter: {removed_at: null, editable: '!'}).length > 0">
             <h2 class="title text-center">Goals</h2>
             <div class="row" ng-repeat="goal in goals | filter: {removed_at: null, editable: '!'}">
-              <div class="col-md-9">
+              <div class="col-md-11">
                 <label>
                   <input type="checkbox" ng-model="goal.removed" ng-change="toggleGoalChanged(goal)">
                   {{ goal.text }}
                   <span></span>
                 </label>
               </div>
-              <div class="col-md-3">
+              <div class="col-md-1">
                 <a ng-click="editGoal(goal)">edit</a>
               </div>
             </div>
