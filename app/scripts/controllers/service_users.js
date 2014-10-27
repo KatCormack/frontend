@@ -63,7 +63,6 @@ angular.module('buddyClientApp')
         };
     }).controller('ServiceUserDiaryCtrl', function($scope, ServiceUser, $state, Entry, Session, ServiceUserGoal, Days, Team, TeamClinician, Goal, ServiceUserSession, Hours) {
         $scope.Hours = Hours;
-
         var refreshClinicians = function() {
             $scope.clinicians = TeamClinician.query({account_id: $scope.service_user.account_id}, function() {
                 if (!_.detect($scope.clinicians, function(x) { return x.id === $scope.service_user.clinician_id; })) {
@@ -122,6 +121,7 @@ angular.module('buddyClientApp')
         $scope.ratingName = function(rating) {
         }
         $scope.service_user = ServiceUser.get({id: $state.params.id}, function() {
+            $scope.service_user.daily_entry_reminder_hour = $scope.service_user.daily_entry_reminder_hour.toString();
             $scope.teams = Team.query({}, function() {
                 refreshClinicians();
             });
