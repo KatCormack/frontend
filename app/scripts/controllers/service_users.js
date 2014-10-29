@@ -61,7 +61,9 @@ angular.module('buddyClientApp')
             serviceUser.deactivated_at = null;
             TeamServiceUser.update({user: serviceUser, id: serviceUser.id, account_id: serviceUser.account_id});
         };
-    }).controller('ServiceUserDiaryCtrl', function($scope, ServiceUser, $state, Entry, Session, ServiceUserGoal, Days, Team, TeamClinician, Goal, ServiceUserSession, Hours) {
+    }).controller('ServiceUserDiaryCtrl', function($scope, ServiceUser, $state, Entry, Session, ServiceUserGoal, Days, Team, TeamClinician, Goal, ServiceUserSession, Hours, CurrentUser) {
+        var serviceUserId = $state.params.id || CurrentUser.user().id;
+
         $scope.Hours = Hours;
         var refreshClinicians = function() {
             $scope.clinicians = TeamClinician.query({account_id: $scope.service_user.account_id}, function() {
@@ -121,7 +123,8 @@ angular.module('buddyClientApp')
 
         $scope.ratingName = function(rating) {
         }
-        $scope.service_user = ServiceUser.get({id: $state.params.id}, function() {
+
+        $scope.service_user = ServiceUser.get({id: serviceUserId}, function() {
             $scope.service_user.daily_entry_reminder_hour = $scope.service_user.daily_entry_reminder_hour.toString();
             $scope.teams = Team.query({}, function() {
                 refreshClinicians();
@@ -135,14 +138,14 @@ angular.module('buddyClientApp')
             }
 
         });
-        $scope.sessions = Session.query({user_id: $state.params.id}, function() {
+        $scope.sessions = Session.query({user_id: serviceUserId}, function() {
             $scope.currentSession = $scope.sessions[0];
             var removeEntries = function(array, entry) {
                 return _.reject(array, function(item) {
                     return item.id === entry.id;
                 });
             };
-            var allEntries = Entry.query({user_id: $state.params.id}, function() {
+            var allEntries = Entry.query({user_id: serviceUserId}, function() {
                 $scope.entries = allEntries;
                 $scope.sessions.reverse();
                 var currentIndex = 1;
@@ -184,7 +187,7 @@ angular.module('buddyClientApp')
             });
         });
 
-        $scope.goals = ServiceUserGoal.query({user_id: $state.params.id}, function() {
+        $scope.goals = ServiceUserGoal.query({user_id: serviceUserId}, function() {
             _.map($scope.goals, function(goal) { goal.removed = !!goal.removed_at; });
         });
 

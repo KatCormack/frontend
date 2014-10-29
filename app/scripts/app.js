@@ -125,8 +125,8 @@ angular.module('buddyClientApp', [
             }
         }).state('serviceUser.diary', {
             url: '/diary',
-            templateUrl: '/views/diary.html',
-            controller: 'DiaryCtrl'
+            templateUrl: '/views/service_users/show.html',
+            controller: 'ServiceUserDiaryCtrl'
         });
 
         $stateProvider.state('clinician', {

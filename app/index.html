@@ -76,7 +76,7 @@
           </div>
           <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-              <li ng-show="auth.isAuthenticated()" active-nav="dashboard"><a ng-href="/dashboard">Dashboard</a></li>
+              <li ng-show="auth.isClinician()" active-nav="dashboard"><a ng-href="/dashboard">Dashboard</a></li>
               <li ng-show="auth.isClinician()" active-nav="serviceUsers"><a ng-href="/service_users">Service Users</a></li>
               <li ng-show="auth.isClinicianAdmin()" active-nav="clinicians"><a ng-href="/clinicians">Clinicians</a></li>
               <li ng-hide="auth.isAuthenticated()" active-nav="login"><a ng-href="/login">Login</a></li>
