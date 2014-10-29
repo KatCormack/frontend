@@ -89,19 +89,20 @@ angular.module('buddyClientApp')
         };
 
         $scope.updateTextMessage = function() {
-            switch($scope.user.type_of_message) {
+            switch($scope.service_user.type_of_message) {
                 case 'custom':
-                $scope.user.send_daily_reminder_messages = true;
+                $scope.service_user.send_daily_reminder_messages = true;
                 break;
                 case 'default':
-                $scope.user.send_daily_reminder_messages = true;
-                $scope.user.daily_entry_text_message = null;
+                $scope.service_user.send_daily_reminder_messages = true;
+                $scope.service_user.daily_entry_text_message = null;
                 break;
                 case 'none':
-                $scope.user.send_daily_reminder_messages = false;
+                $scope.service_user.send_daily_reminder_messages = false;
             }
-            ServiceUser.update({user: $scope.user, id: $scope.user.id}, function(res) {
-                $scope.user = res;
+            ServiceUser.update({user: $scope.service_user, id: $scope.service_user.id}, function(res) {
+                $scope.service_user = res;
+                $scope.service_user.daily_entry_reminder_hour = $scope.service_user.daily_entry_reminder_hour.toString();
             });
         }
 
@@ -227,6 +228,9 @@ angular.module('buddyClientApp')
                 _.each(response.data, function(value, key) { response.data[key] = value[0]; });
                 $scope.errors = response.data;
             });
+        };
+        $scope.submitSessionPlan = function(session) {
+            Session.update({id: session.id, session: session});
         };
 
 
