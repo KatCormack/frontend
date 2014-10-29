@@ -227,7 +227,8 @@ angular.module('buddyClientApp')
         };
         $scope.submit = function() {
             ServiceUser.update({id: $scope.service_user.id, user: $scope.service_user}, function(res) {
-                $scope.service_user = ServiceUser.get({id: $scope.service_user.id})
+                $scope.service_user = res;
+                $scope.service_user.daily_entry_reminder_hour = $scope.service_user.daily_entry_reminder_hour.toString();
             }, function(response) {
                 _.each(response.data, function(value, key) { response.data[key] = value[0]; });
                 $scope.errors = response.data;
