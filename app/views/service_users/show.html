@@ -3,14 +3,23 @@
     <div class="col-md-10 col-md-push-1">
       <div class="col-md-4" id="diary-menu">
         <ul class="nav nav-stacked buddy-nav" id="sidebar">
-          <li class="nextSession nav-item">
+          <li class="nextSession nav-item" ng-show="Auth.isServiceUser()">
+            <span class="iconic" data-glyph="calendar" title="calendar" aria-hidden="true"></span>
+            <span class="title">
+              Next session<br />
+              <span class="next-session" ng-show="sessionScheduledTime">{{ sessionScheduledTime | ordinalDate: "MMMM d 'at' HH:mm" }}</span>
+              <span class="next-session" ng-hide="sessionScheduledTime">None</span>
+            </span>
+          </li>
+
+          <li class="nextSession nav-item" ng-show="Auth.isClinician()">
             <a ng-click="show('nextSession')">
               <span class="iconic" data-glyph="calendar" title="calendar" aria-hidden="true"></span>
               <span class="title">
-                           Next session<br />
-                           <span class="next-session" ng-show="sessionScheduledTime">{{ sessionScheduledTime | ordinalDate: "MMMM d 'at' HH:mm" }}</span>
-                           <span class="next-session" ng-hide="sessionScheduledTime">None</span>
-                    </span>
+                Next session<br />
+                <span class="next-session" ng-show="sessionScheduledTime">{{ sessionScheduledTime | ordinalDate: "MMMM d 'at' HH:mm" }}</span>
+                <span class="next-session" ng-hide="sessionScheduledTime">None</span>
+              </span>
             </a>
           </li>
           <li class="settings nav-item">
