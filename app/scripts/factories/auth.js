@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('buddyClientApp').
-    factory('Auth', function($http, LocalService, AccessLevels, APIHost, CurrentUser) {
+    factory('Auth', function($http, LocalService, AccessLevels, APIHost, CurrentUser, $state) {
         return {
             authorize: function(access) {
                 if (access === AccessLevels.user) {
@@ -40,6 +40,7 @@ angular.module('buddyClientApp').
             },
             logout: function() {
                 // The backend doesn't care about logouts, delete the token and you're good to go.
+                $state.go('anon.home');
                 LocalService.unset('auth_token');
             },
             register: function(formData) {
