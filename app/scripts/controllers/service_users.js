@@ -75,10 +75,10 @@ angular.module('buddyClientApp')
         };
         $scope.editGoal = function(goal) {
             goal.editable = true;
-        }
+        };
         $scope.cancelEditGoal = function(goal) {
             goal.editable = false;
-        }
+        };
 
         $scope.hstep = 1;
         $scope.mstep = 15;
@@ -86,44 +86,41 @@ angular.module('buddyClientApp')
         $scope.nextSession = {};
 
         $scope.typesOfMessage = {
-            'none': "None",
-            'custom': "Custom message",
-            'default': "Default message"
+            'none': 'None',
+            'custom': 'Custom message',
+            'default': 'Default message'
         };
 
         $scope.updateTextMessage = function() {
             switch($scope.service_user.type_of_message) {
                 case 'custom':
-                $scope.service_user.send_daily_reminder_messages = true;
-                break;
+                    $scope.service_user.send_daily_reminder_messages = true;
+                    break;
                 case 'default':
-                $scope.service_user.send_daily_reminder_messages = true;
-                $scope.service_user.daily_entry_text_message = null;
-                break;
+                    $scope.service_user.send_daily_reminder_messages = true;
+                    $scope.service_user.daily_entry_text_message = null;
+                    break;
                 case 'none':
-                $scope.service_user.send_daily_reminder_messages = false;
+                    $scope.service_user.send_daily_reminder_messages = false;
             }
             ServiceUser.update({user: $scope.service_user, id: $scope.service_user.id}, function(res) {
                 $scope.service_user = res;
                 $scope.service_user.daily_entry_reminder_hour = $scope.service_user.daily_entry_reminder_hour.toString();
             });
-        }
+        };
 
         $scope.updateSession = function(session) {
             if (session.id) {
-                Session.update({session: session, id: session.id}, function(s) {
+                Session.update({session: session, id: session.id}, function() {
                     $scope.sessionScheduledTime = session.scheduled_time;
-                })
+                });
             } else {
                 ServiceUserSession.save({session: session, service_user_id: $scope.user.id}, function(s) {
                     $scope.sessionScheduledTime = session.scheduled_time;
                     $scope.nextSession = s;
-                })
+                });
             }
-        }
-
-        $scope.ratingName = function(rating) {
-        }
+        };
 
         $scope.service_user = ServiceUser.get({id: serviceUserId}, function() {
             $scope.service_user.daily_entry_reminder_hour = $scope.service_user.daily_entry_reminder_hour.toString();
@@ -156,21 +153,21 @@ angular.module('buddyClientApp')
                         return entry.created_at <= session.scheduled_time;
                     });
                     session.entries = entries;
-                    _.each(entries, function(entry) { allEntries = removeEntries(allEntries, entry); })
-                        currentIndex++;
+                    _.each(entries, function(entry) { allEntries = removeEntries(allEntries, entry); });
+                    currentIndex++;
                 });
 
                 $scope.sessions.reverse();
                 $scope.sessions.unshift({id: 'present', entries: allEntries, visible: true});
                 _.each($scope.sessions, function(session) {
-                    session.progress = {}
-                    var entryLength = session.entries.length
+                    session.progress = {};
+                    var entryLength = session.entries.length;
                     if (entryLength > 0) {
                         var counts = _.countBy(session.entries, function(entry) {
-                            return "rating-" + entry.rating;
+                            return 'rating-' + entry.rating;
                         });
                         _.each(counts, function(count, idx) {
-                            counts[idx] = "{width: '" + (parseFloat(count) / parseFloat(entryLength)) * 100 + "%'}"
+                            counts[idx] = '{width: "' + (parseFloat(count) / parseFloat(entryLength)) * 100 + '%"}';
                         });
                         session.progress = counts;
                     }
@@ -178,12 +175,12 @@ angular.module('buddyClientApp')
                 var entryLength = $scope.entries.length;
                 if (entryLength > 0) {
                     var counts = _.countBy($scope.entries, function(entry) {
-                        return "rating-" + entry.rating;
+                        return 'rating-' + entry.rating;
                     });
                     _.each(counts, function(count, idx) {
-                        counts[idx] = "{width: '" + (parseFloat(count) / parseFloat(entryLength)) * 100 + "%'}"
+                        counts[idx] = '{width: "' + (parseFloat(count) / parseFloat(entryLength)) * 100 + '%"}';
                     });
-                    $scope.progress = counts || {}
+                    $scope.progress = counts || {};
                 }
             });
         });
@@ -205,15 +202,15 @@ angular.module('buddyClientApp')
         var goalTime = new Date();
         goalTime.setMinutes(0);
 
-        $scope.newGoal = {reminder_type: 'recurring', time: goalTime, text: "", day:{}};
+        $scope.newGoal = {reminder_type: 'recurring', time: goalTime, text: '', day:{}};
         _.each(Days, function(day) { $scope.newGoal.day[day] = false; });
         $scope.Days = Days;
 
         $scope.show = function(id) {
-            $(".diary-page-contents-wrapper").hide();
-            $("#" + id).show();
-            $(".nav-item").removeClass("active")
-            $("." + id).addClass("active")
+            $('.diary-page-contents-wrapper').hide();
+            $('#' + id).show();
+            $('.nav-item').removeClass('active');
+            $('.' + id).addClass('active');
         };
 
         jQuery(document).ready(function() {

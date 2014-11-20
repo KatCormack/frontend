@@ -11,7 +11,7 @@ angular.module('buddyClientApp')
                     // working, as a workaround for now - we are
                     // removing the entire class attribute, then
                     // adding it afterwards
-                    element.removeAttr('class')
+                    element.removeAttr('class');
                     element.addClass(scope.state.current.controller);
                 });
             }

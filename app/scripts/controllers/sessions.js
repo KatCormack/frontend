@@ -12,7 +12,7 @@ angular.module('buddyClientApp')
         };
         $scope.cancel = function() {
             $modalInstance.dismiss('cancel');
-        }
+        };
         $scope.submit = function() {
             Session.update({id: sessionId, session: $scope.session}, function(res) {
                 $modalInstance.close(res);
