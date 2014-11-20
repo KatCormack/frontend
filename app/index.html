@@ -133,8 +133,14 @@
     <!-- endbuild -->
     <![endif] -->
 
-    <!-- build:js({.tmp,app}) /scripts/scripts.js -->
+    <!--[if lt IE 8]>
+    <!-- build:js /scripts/iconic.js -->
     <script src="/iconic/js/iconic.min.js"></script>
+    <!-- endbuild -->
+    <![endif] -->
+
+    <!-- build:js({.tmp,app}) /scripts/scripts.js -->
+
     <script src="/scripts/filters/ordinal_date.js"></script>
     <script src="/scripts/app.js"></script>
     <script src="/scripts/factories/auth.js"></script>
