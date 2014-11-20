@@ -61,7 +61,8 @@ angular.module('buddyClientApp', [
             }
         });
     })
-    .config(function ($urlRouterProvider, $locationProvider, $httpProvider, $stateProvider, AccessLevels, $uiViewScrollProvider) {
+    .config(function ($urlRouterProvider, $locationProvider, $httpProvider, $stateProvider, AccessLevels, $uiViewScrollProvider, $sceProvider) {
+        $sceProvider.enabled(false);
         /* without useAnchorScroll() the application scrolls to where
          * the child <ui-view> is. This is not the behaviour that we
          * want */
