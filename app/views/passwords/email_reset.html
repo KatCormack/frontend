@@ -1,8 +1,8 @@
-<form class="form-horizontal" ng-submit="resetPassword()" name="resetPasswordForm" id="reset-password-form" ng-show="user.id">
+<form class="form-horizontal" ng-submit="resetPassword()" name="resetPasswordForm" id="reset-password-form" ng-if="user.id">
   <fieldset class="col-md-4 col-md-offset-4">
-    <legend class="text-center" ng-hide="user.last_request_at">You have been invited to use Buddy with your service users</legend>
-    <legend class="text-center" ng-show="user.last_request_at">Reset password</legend>
-    <div class="form-group" ng-hide="user.last_request_at">
+    <legend class="text-center" ng-if="!user.last_request_at">You have been invited to use Buddy with your service users</legend>
+    <legend class="text-center" ng-if="user.last_request_at">Reset password</legend>
+    <div class="form-group" ng-if="!user.last_request_at">
       <div class="col-md-12">
         <input id="email" name="email" type="text" placeholder="email or mobile number" class="form-control input-md" ng-model="user.email" disabled="disabled">
       </div>
@@ -24,15 +24,15 @@
 
     <div class="form-group">
       <div class="col-md-12">
-        <input type="submit" ng-hide="user.last_request_at" value="Start using Buddy" class="btn btn-info btn-block btn-lg">
-        <input type="submit" ng-show="user.last_request_at" value="Change password and login" class="btn btn-info btn-block btn-lg">
+        <input type="submit" ng-if="!user.last_request_at" value="Start using Buddy" class="btn btn-info btn-block btn-lg">
+        <input type="submit" ng-if="user.last_request_at" value="Change password and login" class="btn btn-info btn-block btn-lg">
       </div>
     </div>
   </fieldset>
 </form>
 
 
-<form class="form-horizontal" ng-submit="forgotPassword()" name="loginForm" ng-hide="user.id">
+<form class="form-horizontal" ng-submit="forgotPassword()" name="loginForm" ng-if="!user.id">
   <fieldset class="col-md-4 col-md-offset-4">
     <!-- Form Name -->
     <legend class="text-center">Expired link</legend>

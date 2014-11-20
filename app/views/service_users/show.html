@@ -3,22 +3,22 @@
     <div class="col-md-10 col-md-push-1">
       <div class="col-md-4" id="diary-menu">
         <ul class="nav nav-stacked buddy-nav" id="sidebar">
-          <li class="nextSession nav-item" ng-show="Auth.isServiceUser()">
+          <li class="nextSession nav-item" ng-if="Auth.isServiceUser()">
             <span class="iconic" data-glyph="calendar" title="calendar" aria-hidden="true"></span>
             <span class="title">
               Next session<br />
-              <span class="next-session" ng-show="sessionScheduledTime">{{ sessionScheduledTime | ordinalDate: "MMMM d 'at' HH:mm" }}</span>
-              <span class="next-session" ng-hide="sessionScheduledTime">None</span>
+              <span class="next-session" ng-if="sessionScheduledTime">{{ sessionScheduledTime | ordinalDate: "MMMM d 'at' HH:mm" }}</span>
+              <span class="next-session" ng-if="!sessionScheduledTime">None</span>
             </span>
           </li>
 
-          <li class="nextSession nav-item" ng-show="Auth.isClinician()">
+          <li class="nextSession nav-item" ng-if="Auth.isClinician()">
             <a ng-click="show('nextSession')">
               <span class="iconic" data-glyph="calendar" title="calendar" aria-hidden="true"></span>
               <span class="title">
                 Next session<br />
-                <span class="next-session" ng-show="sessionScheduledTime">{{ sessionScheduledTime | ordinalDate: "MMMM d 'at' HH:mm" }}</span>
-                <span class="next-session" ng-hide="sessionScheduledTime">None</span>
+                <span class="next-session" ng-if="sessionScheduledTime">{{ sessionScheduledTime | ordinalDate: "MMMM d 'at' HH:mm" }}</span>
+                <span class="next-session" ng-if="!sessionScheduledTime">None</span>
               </span>
             </a>
           </li>
@@ -43,7 +43,7 @@
               </span>
             </a>
           </li>
-          <li class="sessionPlan nav-item" ng-show="Auth.isServiceUser()">
+          <li class="sessionPlan nav-item" ng-if="Auth.isServiceUser()">
             <a ng-click="show('sessionPlan')">
               <span class="iconic" data-glyph="copywriting" title="copywriting" aria-hidden="true"></span>
               <span class="title">Session plan</span>
@@ -94,7 +94,7 @@
               <div class="form-group required">
                 <label for="service_user_first_name" ng-class="{error: errors.first_name}">
                   First Name
-                  <span class="error-inline" ng-show="errors.first_name">{{ errors.first_name }}</span>
+                  <span class="error-inline" ng-if="errors.first_name">{{ errors.first_name }}</span>
                 </label>
                 <input type="text" ng-model="service_user.first_name" placeholder="" class="form-control input-md" id="service_user_first_name">
               </div>
@@ -103,7 +103,7 @@
               <div class="form-group required">
                 <label for="service_user_last_name" ng-class="{error: errors.last_name}">
                   Last Name
-                  <span class="error-inline" ng-show="errors.last_name">{{ errors.last_name }}</span>
+                  <span class="error-inline" ng-if="errors.last_name">{{ errors.last_name }}</span>
                 </label>
                 <input type="text" ng-model="service_user.last_name" placeholder="" class="form-control input-md" id="service_user_last_name">
               </div>
@@ -112,7 +112,7 @@
               <div class="form-group required">
                 <label for="service_user_mobile" ng-class="{error: errors.mobile}">
                   Mobile Phone Number
-                  <span class="error-inline" ng-show="errors.mobile">{{ errors.mobile }}</span>
+                  <span class="error-inline" ng-if="errors.mobile">{{ errors.mobile }}</span>
                 </label>
                 <input type="text" ng-model="service_user.mobile" placeholder="" class="form-control input-md" id="service_user_mobile">
               </div>
@@ -121,7 +121,7 @@
               <div class="form-group">
                 <label for="service_user_email" ng-class="{error: errors.email}">
                   Email Address
-                  <span class="error-inline" ng-show="errors.email">{{ errors.email }}</span>
+                  <span class="error-inline" ng-if="errors.email">{{ errors.email }}</span>
                 </label>
                 <input type="text" ng-model="service_user.email" placeholder="" class="form-control input-md" id="service_user_email">
               </div>
@@ -156,12 +156,12 @@
             </div>
 
             <div class="col-md-12 text-center footer">
-              <span class="deactivation-message" ng-show="service_user.deactivated_at">
+              <span class="deactivation-message" ng-if="service_user.deactivated_at">
                 This user has been deactivated
                 <a ng-click="reactivate(service_user.id)">Reactivate this user</a>
 
               </span>
-              <span class="deactivation-message" ng-hide="service_user.deactivated_at">
+              <span class="deactivation-message" ng-if="!service_user.deactivated_at">
               Has this person stopped using Buddy?
                 <a ng-href="/service_users/{{service_user.id}}/deactivate?returnTo=%2Fservice_users%2F{{service_user.id}}">
                 Deactivate this user
@@ -244,10 +244,10 @@
                                         'other': '{} entries'}">
                     </ng-pluralize>
                   </div>
-                  <div class="col-md-6 text-right" ng-show="session.entries.length > 0">
+                  <div class="col-md-6 text-right" ng-if="session.entries.length > 0">
                     <a>
-                      <span ng-show="session.visible">Hide entries</span>
-                      <span ng-hide="session.visible">Show entries</span>
+                      <span ng-if="session.visible">Hide entries</span>
+                      <span ng-if="!session.visible">Show entries</span>
                     </a>
                   </div>
                 </div>
@@ -304,7 +304,7 @@
                 <select ng-model="service_user.type_of_message" ng-options="k as v for (k,v) in typesOfMessage" class="form-control"></select>
               </div>
             </div>
-            <div class="form-group" ng-show="service_user.type_of_message=='custom'">
+            <div class="form-group" ng-if="service_user.type_of_message=='custom'">
               <div class="col-md-push-1 col-md-10">
                 <textarea class="form-control" ng-model="service_user.daily_entry_text_message"></textarea>
               </div>
@@ -330,7 +330,7 @@
         </div>
 
         <div class="col-md-12 diary-page-contents diary-page-contents-wrapper" id="goals">
-          <div class="current-goals col-md-12" ng-show="(goals | filter: {removed_at: null, editable: '!'}).length > 0">
+          <div class="current-goals col-md-12" ng-if="(goals | filter: {removed_at: null, editable: '!'}).length > 0">
             <h2 class="title text-center">Goals</h2>
             <div class="row" ng-repeat="goal in goals | filter: {removed_at: null, editable: '!'}">
               <div class="col-md-11">
@@ -346,7 +346,7 @@
             </div>
           </div>
 
-          <div class="editable-goals col-md-12" ng-show="(goals | filter: {editable: '!!'}).length > 0">
+          <div class="editable-goals col-md-12" ng-if="(goals | filter: {editable: '!!'}).length > 0">
             <div class="row" ng-repeat="goal in goals | filter: {editable: '!!'}">
               <form action="updateGoal(goal)">
                 <div class="input-group col-md-8">
@@ -361,16 +361,16 @@
                   <label class="radio-inline"><input type="radio" ng-model="goal.reminder_type" value="once">One-off</label>
                   <label class="radio-inline"><input type="radio" ng-model="goal.reminder_type" value="none">None</label>
                 </div>
-                <div class="col-md-12" ng-show="goal.reminder_type === 'recurring'">
+                <div class="col-md-12" ng-if="goal.reminder_type === 'recurring'">
                   <label class="checkbox-inline" ng-repeat="day in Days">
                     <input type="checkbox" ng-model="goal.day[day]"/>
                     {{ day | limitTo: 1 | uppercase }}
                   </label>
                 </div>
-                <div class="input-group col-md-12" ng-show="goal.reminder_type === 'once'">
+                <div class="input-group col-md-12" ng-if="goal.reminder_type === 'once'">
                   <input type="text" datepicker-popup="dd/MM/yyyy" is-open="$parent.opened" min-date="minDate" ng-required="true" close-text="Close" ng-click="open($event)" ng-model="goal.time" class="form-control"/>
                 </div>
-                <div class="input-group col-md-12" ng-show="goal.reminder_type === 'recurring' || goal.reminder_type === 'once'">
+                <div class="input-group col-md-12" ng-if="goal.reminder_type === 'recurring' || goal.reminder_type === 'once'">
                   <timepicker ng-model="goal.time" hour-step="hstep" minute-step="mstep" show-meridian="false"></timepicker>
                 </div>
                 <div class="input-group col-md-12">
@@ -396,16 +396,16 @@
                 <label class="radio-inline"><input type="radio" ng-model="newGoal.reminder_type" value="once">One-off</label>
                 <label class="radio-inline"><input type="radio" ng-model="newGoal.reminder_type" value="none">None</label>
               </div>
-              <div class="col-md-12" ng-show="newGoal.reminder_type === 'recurring'">
+              <div class="col-md-12" ng-if="newGoal.reminder_type === 'recurring'">
                 <label class="checkbox-inline" ng-repeat="day in Days">
                   <input type="checkbox" ng-model="newGoal.day[day]"/>
                   {{ day | limitTo: 1 | uppercase }}
                 </label>
               </div>
-              <div class="input-group col-md-12" ng-show="newGoal.reminder_type === 'once'">
+              <div class="input-group col-md-12" ng-if="newGoal.reminder_type === 'once'">
                 <input type="text" datepicker-popup="dd/MM/yyyy" is-open="$parent.opened" min-date="minDate" ng-required="true" close-text="Close" ng-click="open($event)" ng-model="newGoal.time" class="form-control"/>
               </div>
-              <div class="input-group col-md-12" ng-show="newGoal.reminder_type === 'regular' || newGoal.reminder_type === 'once'">
+              <div class="input-group col-md-12" ng-if="newGoal.reminder_type === 'regular' || newGoal.reminder_type === 'once'">
                 <timepicker ng-model="newGoal.time" hour-step="hstep" minute-step="mstep" show-meridian="false"></timepicker>
               </div>
               <div class="input-group col-md-12">
@@ -414,10 +414,10 @@
             </form>
           </div>
 
-          <div class="past-goals col-md-12" ng-show="(goals | filter: {removed_at: '!!'}).length > 0">
+          <div class="past-goals col-md-12" ng-if="(goals | filter: {removed_at: '!!'}).length > 0">
             <h2 class="title text-center">Past goals</h2>
             <div class="row" ng-repeat="goal in goals | filter: {removed_at: '!!'}">
-              <div class="col-md-9" ng-hide="goal.editable">
+              <div class="col-md-9" ng-if="!goal.editable">
                 <label>
                   <input type="checkbox" ng-model="goal.removed" ng-change="toggleGoalChanged(goal)">
                   {{ goal.text }}

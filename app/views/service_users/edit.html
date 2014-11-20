@@ -7,7 +7,7 @@
       <div class="form-group required">
         <label for="service_user_first_name" ng-class="{error: errors.first_name}">
           First Name
-          <span class="error-inline" ng-show="errors.first_name">{{ errors.first_name }}</span>
+          <span class="error-inline" ng-if="errors.first_name">{{ errors.first_name }}</span>
         </label>
         <input type="text" ng-model="service_user.first_name" placeholder="" class="form-control input-md" id="service_user_first_name">
       </div>
@@ -16,7 +16,7 @@
       <div class="form-group required">
         <label for="service_user_last_name" ng-class="{error: errors.last_name}">
           Last Name
-          <span class="error-inline" ng-show="errors.last_name">{{ errors.last_name }}</span>
+          <span class="error-inline" ng-if="errors.last_name">{{ errors.last_name }}</span>
         </label>
         <input type="text" ng-model="service_user.last_name" placeholder="" class="form-control input-md" id="service_user_last_name">
       </div>
@@ -25,7 +25,7 @@
       <div class="form-group required">
         <label for="service_user_mobile" ng-class="{error: errors.mobile}">
           Mobile Phone Number
-          <span class="error-inline" ng-show="errors.mobile">{{ errors.mobile }}</span>
+          <span class="error-inline" ng-if="errors.mobile">{{ errors.mobile }}</span>
         </label>
         <input type="text" ng-model="service_user.mobile" placeholder="" class="form-control input-md" id="service_user_mobile">
       </div>
@@ -34,7 +34,7 @@
       <div class="form-group">
         <label for="service_user_email" ng-class="{error: errors.email}">
           Email Address
-          <span class="error-inline" ng-show="errors.email">{{ errors.email }}</span>
+          <span class="error-inline" ng-if="errors.email">{{ errors.email }}</span>
         </label>
         <input type="text" ng-model="service_user.email" placeholder="" class="form-control input-md" id="service_user_email">
       </div>
@@ -69,11 +69,11 @@
     </div>
 
     <div class="col-md-12 text-center footer">
-      <span ng-show="service_user.deactivated_at">
+      <span ng-if="service_user.deactivated_at">
         This user has been deactivated
         <a ng-click="reactivate(service_user.id)">Reactivate this user</a>
       </span>
-      <span ng-hide="service_user.deactivated_at">
+      <span ng-if="!service_user.deactivated_at">
         Has this person stopped using Buddy?
         <a ng-href="/service_users/{{service_user.id}}/deactivate?returnTo=%2Fservice_users%2F{{service_user.id}}%2Fedit">
           Deactivate this user

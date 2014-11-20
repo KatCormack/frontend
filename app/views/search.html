@@ -19,13 +19,13 @@
 </div>
 
 <div class="container">
-  <div class="col-md-push-1 col-md-10 list-container text-center" ng-hide="(serviceUsers.length + clinicians.length) > 0">
+  <div class="col-md-push-1 col-md-10 list-container text-center" ng-if="!((serviceUsers.length + clinicians.length) > 0)">
     <h2 class="no-results">No users found</h2>
     <p>You can search by name, phone number or NHS number</p>
   </div>
   <div class="col-md-push-1 col-md-10 list-container">
     <div class="panel-group">
-      <div class="panel panel-default" ng-show="serviceUsers.length > 0">
+      <div class="panel panel-default" ng-if="serviceUsers.length > 0">
         <div class="panel-heading">
           <h4 class="panel-title">
             Service Users
@@ -43,12 +43,12 @@
             <tbody>
               <tr ng-repeat="serviceUser in serviceUsers | orderBy:last_name.toUpperCase()">
                 <td><a ng-href="/service_users/{{serviceUser.id}}">{{ serviceUser.full_name }}</a></td>
-                <td class="expand-link reactivate-user" ng-show="serviceUser.current_session_time">
+                <td class="expand-link reactivate-user" ng-if="serviceUser.current_session_time">
                   <a ng-click="rescheduleSession(serviceUser)">
                     {{ serviceUser.current_session_time | ordinalDate: 'HH:mm / d MMMM yyyy' }}
                   </a>
                 </td>
-                <td ng-hide="serviceUser.current_session_time">None</td>
+                <td ng-if="!serviceUser.current_session_time">None</td>
                 <td><a ng-href="/service_users/{{serviceUser.id}}/edit">Settings</a></td>
               </tr>
             </tbody>
@@ -56,7 +56,7 @@
         </div>
       </div>
 
-      <div class="panel panel-default" ng-show="clinicians.length > 0">
+      <div class="panel panel-default" ng-if="clinicians.length > 0">
         <div class="panel-heading">
           <h4 class="panel-title">
             Clinicians
