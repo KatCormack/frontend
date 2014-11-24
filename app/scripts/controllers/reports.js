@@ -8,8 +8,9 @@ angular.module('buddyClientApp')
                 type: 'GET',
                 dataType: 'text',
                 beforeSend: function(xhr){xhr.setRequestHeader('Authorization', 'Bearer ' + angular.fromJson(LocalService.get('auth_token')).token);},
-                success: function() {
-
+                success: function(data, status) {
+                  console.log(status);
+                  console.log(data);
                 }
             });
         };
