@@ -4,6 +4,7 @@ angular.module('buddyClientApp', [
     'ngCookies',
     'ngResource',
     'ngSanitize',
+    'ngAnimate',
     'ui.router',
     'ui.bootstrap',
     'angularMoment',
