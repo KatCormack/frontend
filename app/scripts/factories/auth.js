@@ -50,6 +50,6 @@ angular.module('buddyClientApp').
                     LocalService.set('auth_token', JSON.stringify(result));
                 });
                 return register;
-            },
+            }
         };
     });
