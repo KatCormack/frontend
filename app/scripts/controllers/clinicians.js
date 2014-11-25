@@ -137,17 +137,12 @@ angular.module('buddyClientApp')
         };
         $scope.deactivate = function($event) {
             $event.preventDefault();
+            $scope.deactivationClicked = false;
             if ($scope.hasUsers() > 0) {
                 $scope.deactivationClicked = true;
-                /*
-                var element = angular.element('.deactivate-service-users-error');
-                var options = {
-                    duration: 700,
-                    easing: 'easeInQuad',
-                    offset: 120,
-                }
-                smoothScroll(element, options);
-                */
+            } else {
+                $scope.clinician.deactivated_at = new Date();
+                Clinician.update({id: $scope.clinician.id, user: $scope.clinician})
             }
         };
 
