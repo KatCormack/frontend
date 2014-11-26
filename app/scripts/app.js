@@ -174,6 +174,10 @@ angular.module('buddyClientApp', [
             url: '/search/:search',
             templateUrl: '/views/search.html',
             controller: 'SearchCtrl'
+        }).state('clinician.tutorial', {
+            url: '/tutorial',
+            templateUrl: '/views/tutorial.html',
+            controller: 'TutorialCtrl'
         });
 
         $stateProvider.state('clinicianAdmin', {
