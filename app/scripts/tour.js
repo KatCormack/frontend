@@ -27,8 +27,31 @@ angular.module('buddyClientApp')
                         content: "Click here to create a new Service User",
                         target: ".add-service-user",
                         placement: "bottom",
-                        showNextButton: false
-                    }
+                        showNextButton: false,
+                        multipage: true
+                    },
+                    {
+                        title: "Adding a Service User",
+                        content: "Just fill out the basic details, set your next session time",
+                        target: ".create-service-user",
+                        placement: "bottom",
+                        showNextButton: false,
+                        multipage: true
+                    },
+                    {
+                        title: "Service Users",
+                        content: "All your Service Users are listed under this tab",
+                        target: ".nav-service-users",
+                        placement: "bottom"
+                    },
+                    {
+                        title: "Users",
+                        content: "You can reschedule a Service Users next appointment, change their settings or view their diary by clicking on their name",
+                        target: ".list-row .name",
+                        placement: "bottom",
+                        showNextButton: false,
+                        multipage: true
+                    },
                     ]
                 }
             }

@@ -13,13 +13,6 @@ angular.module('buddyClientApp')
         if (hopscotch.getState() === 'welcome-to-buddy:1') {
         	hopscotch.getCurrTour();
         	var tourStep = hopscotch.getCurrStepNum();
-        	hopscotch.startTour(HopscotchTour.tour(), tourStep);
-        }
-        $scope.addServiceUser = function() {
-        	var tourStep = hopscotch.getCurrStepNum();
-        	state.go('clinician.newServiceUser');
-        	if (tourStep === 2) {
-        		hopscotch.showStep(3);
-        	}
+        	hopscotch.startTour(HopscotchTour.tour(), 1);
         }
     });

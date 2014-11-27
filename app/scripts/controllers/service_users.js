@@ -29,7 +29,9 @@ angular.module('buddyClientApp')
             $('#' + tab).show();
         };
 
-        $scope.serviceUsers = TeamServiceUser.query({account_id: $scope.user.account_ids[0]});
+        $scope.serviceUsers = TeamServiceUser.query({account_id: $scope.user.account_ids[0]}, function() {
+            // are we running the tutorial? create an example User
+        });
         $scope.rescheduleSession = function(serviceUser) {
             var modalInstance = $modal.open({
                 templateUrl: '/views/sessions/reschedule.html',
@@ -236,7 +238,14 @@ angular.module('buddyClientApp')
         };
 
 
-    }).controller('NewServiceUsersCtrl', function($scope, $state, Team, TeamClinician, CurrentUser, TeamServiceUser) {
+    }).controller('NewServiceUsersCtrl', function($scope, $state, Team, TeamClinician, CurrentUser, TeamServiceUser, HopscotchTour) {
+        console.log(hopscotch.getState())
+        if (hopscotch.getState() === 'welcome-to-buddy:2') {
+            hopscotch.getCurrTour();
+            var tourStep = hopscotch.getCurrStepNum();
+            hopscotch.startTour(HopscotchTour.tour(), 3);
+        }
+
         $scope.service_user = {};
         $scope.errors = {};
 
