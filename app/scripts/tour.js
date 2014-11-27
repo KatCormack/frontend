@@ -35,8 +35,11 @@ angular.module('buddyClientApp')
                         content: "Just fill out the basic details, set your next session time",
                         target: ".create-service-user",
                         placement: "bottom",
-                        showNextButton: false,
-                        multipage: true
+                        multipage: true,
+                        onNext: function() {
+                            state.go('clinician.serviceUsers');
+                            return false;
+                        }
                     },
                     {
                         title: "Service Users",

@@ -3,7 +3,7 @@
 angular.module('buddyClientApp')
     .controller('AddServiceUserCtrl', function($scope, Team) {
         $scope.teams = Team.query({});
-    }).controller('ServiceUsersCtrl', function ($scope, TeamServiceUser, $modal, CurrentUser, $location, $state) {
+    }).controller('ServiceUsersCtrl', function ($scope, TeamServiceUser, $modal, CurrentUser, $location, $state, HopscotchTour, ExampleServiceUser) {
         $scope.user = CurrentUser.user();
         jQuery(document).ready(function () {
             $('.tab-pane').hide();
@@ -31,7 +31,16 @@ angular.module('buddyClientApp')
 
         $scope.serviceUsers = TeamServiceUser.query({account_id: $scope.user.account_ids[0]}, function() {
             // are we running the tutorial? create an example User
+            var exampleUser = ExampleServiceUser.generate($scope.user);
+            console.log(exampleUser);
+            $scope.serviceUsers.unshift(exampleUser);
+
+            var hopscotchState = hopscotch.getState();
+            if (hopscotchState === 'welcome-to-buddy:3' || hopscotchState === 'welcome-to-buddy:4') {
+                hopscotch.startTour(HopscotchTour.tour(), hopscotch.getCurrStepNum());
+            }
         });
+
         $scope.rescheduleSession = function(serviceUser) {
             var modalInstance = $modal.open({
                 templateUrl: '/views/sessions/reschedule.html',
@@ -63,7 +72,7 @@ angular.module('buddyClientApp')
             serviceUser.deactivated_at = null;
             TeamServiceUser.update({user: serviceUser, id: serviceUser.id, account_id: serviceUser.account_id});
         };
-    }).controller('ServiceUserDiaryCtrl', function($scope, ServiceUser, $state, Entry, Session, ServiceUserGoal, Days, Team, TeamClinician, Goal, ServiceUserSession, Hours, CurrentUser, Auth) {
+    }).controller('ServiceUserDiaryCtrl', function($scope, ServiceUser, $state, Entry, Session, ServiceUserGoal, Days, Team, TeamClinician, Goal, ServiceUserSession, Hours, CurrentUser, Auth, ExampleServiceUser) {
         $scope.Auth = Auth;
         var serviceUserId = $state.params.id || CurrentUser.user().id;
 
@@ -124,72 +133,78 @@ angular.module('buddyClientApp')
             }
         };
 
-        $scope.service_user = ServiceUser.get({id: serviceUserId}, function() {
-            $scope.service_user.daily_entry_reminder_hour = $scope.service_user.daily_entry_reminder_hour.toString();
-            $scope.teams = Team.query({}, function() {
-                refreshClinicians();
+        if (serviceUserId !== 'example') {
+            $scope.service_user = ServiceUser.get({id: serviceUserId}, function() {
+                $scope.service_user.daily_entry_reminder_hour = $scope.service_user.daily_entry_reminder_hour.toString();
+                $scope.teams = Team.query({}, function() {
+                    refreshClinicians();
+                });
+                if ($scope.service_user.session_scheduled_time) {
+                    $scope.sessionScheduledTime = $scope.service_user.session_scheduled_time;
+                    $scope.nextSession = Session.get({id: $scope.service_user.session_id});
+                } else {
+                    $scope.nextSession.scheduled_time = new Date();
+                    $scope.nextSession.scheduled_time.setMinutes(0);
+                }
+
             });
-            if ($scope.service_user.session_scheduled_time) {
-                $scope.sessionScheduledTime = $scope.service_user.session_scheduled_time;
-                $scope.nextSession = Session.get({id: $scope.service_user.session_id});
-            } else {
-                $scope.nextSession.scheduled_time = new Date();
-                $scope.nextSession.scheduled_time.setMinutes(0);
-            }
-
-        });
-        $scope.sessions = Session.query({user_id: serviceUserId}, function() {
-            $scope.currentSession = $scope.sessions[0];
-            var removeEntries = function(array, entry) {
-                return _.reject(array, function(item) {
-                    return item.id === entry.id;
-                });
-            };
-            var allEntries = Entry.query({user_id: serviceUserId}, function() {
-                $scope.entries = allEntries;
-                $scope.sessions.reverse();
-                var currentIndex = 1;
-                _.each($scope.sessions, function(session) {
-                    session.index = currentIndex;
-                    var entries = _.select(allEntries, function(entry) {
-                        return entry.created_at <= session.scheduled_time;
+            $scope.sessions = Session.query({user_id: serviceUserId}, function() {
+                $scope.currentSession = $scope.sessions[0];
+                var removeEntries = function(array, entry) {
+                    return _.reject(array, function(item) {
+                        return item.id === entry.id;
                     });
-                    session.entries = entries;
-                    _.each(entries, function(entry) { allEntries = removeEntries(allEntries, entry); });
-                    currentIndex++;
-                });
+                };
+                var allEntries = Entry.query({user_id: serviceUserId}, function() {
+                    $scope.entries = allEntries;
+                    $scope.sessions.reverse();
+                    var currentIndex = 1;
+                    _.each($scope.sessions, function(session) {
+                        session.index = currentIndex;
+                        var entries = _.select(allEntries, function(entry) {
+                            return entry.created_at <= session.scheduled_time;
+                        });
+                        session.entries = entries;
+                        _.each(entries, function(entry) { allEntries = removeEntries(allEntries, entry); });
+                        currentIndex++;
+                    });
 
-                $scope.sessions.reverse();
-                $scope.sessions.unshift({id: 'present', entries: allEntries, visible: true});
-                _.each($scope.sessions, function(session) {
-                    session.progress = {};
-                    var entryLength = session.entries.length;
+                    $scope.sessions.reverse();
+                    $scope.sessions.unshift({id: 'present', entries: allEntries, visible: true});
+                    _.each($scope.sessions, function(session) {
+                        session.progress = {};
+                        var entryLength = session.entries.length;
+                        if (entryLength > 0) {
+                            var counts = _.countBy(session.entries, function(entry) {
+                                return 'rating-' + entry.rating;
+                            });
+                            _.each(counts, function(count, idx) {
+                                counts[idx] = '{width: "' + (parseFloat(count) / parseFloat(entryLength)) * 100 + '%"}';
+                            });
+                            session.progress = counts;
+                            console.log(session.progress);
+                        }
+                    });
+                    var entryLength = $scope.entries.length;
                     if (entryLength > 0) {
-                        var counts = _.countBy(session.entries, function(entry) {
+                        var counts = _.countBy($scope.entries, function(entry) {
                             return 'rating-' + entry.rating;
                         });
                         _.each(counts, function(count, idx) {
                             counts[idx] = '{width: "' + (parseFloat(count) / parseFloat(entryLength)) * 100 + '%"}';
                         });
-                        session.progress = counts;
+                        $scope.progress = counts || {};
                     }
                 });
-                var entryLength = $scope.entries.length;
-                if (entryLength > 0) {
-                    var counts = _.countBy($scope.entries, function(entry) {
-                        return 'rating-' + entry.rating;
-                    });
-                    _.each(counts, function(count, idx) {
-                        counts[idx] = '{width: "' + (parseFloat(count) / parseFloat(entryLength)) * 100 + '%"}';
-                    });
-                    $scope.progress = counts || {};
-                }
             });
-        });
 
-        $scope.goals = ServiceUserGoal.query({user_id: serviceUserId}, function() {
-            _.map($scope.goals, function(goal) { goal.removed = !!goal.removed_at; });
-        });
+            $scope.goals = ServiceUserGoal.query({user_id: serviceUserId}, function() {
+                _.map($scope.goals, function(goal) { goal.removed = !!goal.removed_at; });
+            });
+        } else {
+            $scope.service_user = ExampleServiceUser.generate(CurrentUser.user().id);
+            $scope.sessions = $scope.service_user.sessions;
+        }
 
         $scope.toggleGoalChanged = function(goal) {
             if (goal.removed) {
@@ -239,10 +254,7 @@ angular.module('buddyClientApp')
 
 
     }).controller('NewServiceUsersCtrl', function($scope, $state, Team, TeamClinician, CurrentUser, TeamServiceUser, HopscotchTour) {
-        console.log(hopscotch.getState())
         if (hopscotch.getState() === 'welcome-to-buddy:2') {
-            hopscotch.getCurrTour();
-            var tourStep = hopscotch.getCurrStepNum();
             hopscotch.startTour(HopscotchTour.tour(), 3);
         }
 
