@@ -20,7 +20,7 @@ secrets['deployment_tags'].each do |tag|
 end
 
 
-IO.popen("grunt build") do |output|
+IO.popen("grunt build --force") do |output|
   output.each do |line|
     puts line
   end
