@@ -6,3 +6,4 @@ app/iconic/*
 secrets.json
 app/fonts/iconic-*.*
 .bundle
+tags
