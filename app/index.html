@@ -11,6 +11,11 @@
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
+    <!-- build:css /styles/vendor.css -->
+    <link rel="stylesheet" href="/bower_components/sass-bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/bower_components/ekko-lightbox/dist/ekko-lightbox.min.css" />
+    <!-- endbuild -->
+
     <!-- build:css({.tmp,app}) /styles/main.css -->
     <link rel="stylesheet" href="/iconic/font/css/iconic-glyphs.css">
     <link rel="stylesheet" href="/styles/main.css">
@@ -20,26 +25,6 @@
     <!-- build:css({.tmp,app}) /styles/iconic-legacy.css -->
     <link rel="stylesheet" href="/iconic/font/css/iconic-glyphs-legacy.css">
     <!-- endbuild -->
-    <![endif]-->
-
-
-    <!-- build:css /styles/vendor.css -->
-    <!-- bower:css -->
-    <link rel="stylesheet" href="/bower_components/sass-bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css" />
-    <!-- endbower -->
-    <!-- endbuild -->
-
-    <!--[if lte IE 8]>
-        <!-- build:js /scripts/html5shiv.js -->
-        <script src="/shivs/html5shiv.js"></script>
-        <!-- endbuild -->
-        <!-- build:js /scripts/respond.js -->
-        <script src="/shivs/respond.js"></script>
-        <!-- endbuild -->
-        <!-- build:js /scripts/json2.js -->
-        <script src="/shivs/json2.js"></script>
-        <!-- endbuild -->
     <![endif]-->
 
     <!--[if lte IE 8]>
@@ -54,6 +39,18 @@
           document.createElement('ng:pluralize');
           document.createElement('ng:view');
         </script>
+    <![endif]-->
+
+    <!--[if lte IE 8]>
+        <!-- build:js /scripts/html5shiv.js -->
+        <script src="/shivs/html5shiv.js"></script>
+        <!-- endbuild -->
+        <!-- build:js /scripts/respond.js -->
+        <script src="/shivs/respond.js"></script>
+        <!-- endbuild -->
+        <!-- build:js /scripts/json2.js -->
+        <script src="/shivs/json2.js"></script>
+        <!-- endbuild -->
     <![endif]-->
 
   </head>
@@ -71,24 +68,23 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/dashboard" ng-show="auth.isClinician()"><img src="/images/buddy_logo_white.png"></a>
-            <a class="navbar-brand" href="/" ng-show="auth.isServiceUser()"><img src="/images/buddy_logo_white.png"></a>
-            <a class="navbar-brand" href="/" ng-hide="auth.isAuthenticated()"><img src="/images/buddy_logo_white.png"></a>
+            <a class="navbar-brand" href="/dashboard" ng-if="auth.isClinician()"><img src="/images/buddy_logo_white.png"></a>
+            <a class="navbar-brand" href="/" ng-if="auth.isServiceUser()"><img src="/images/buddy_logo_white.png"></a>
+            <a class="navbar-brand" href="/" ng-if="!auth.isAuthenticated()"><img src="/images/buddy_logo_white.png"></a>
           </div>
           <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-              <li ng-show="auth.isClinician()" active-nav="dashboard"><a ng-href="/dashboard">Dashboard</a></li>
-              <li ng-show="auth.isClinician()" active-nav="serviceUsers"><a ng-href="/service_users">Service Users</a></li>
-              <li ng-show="auth.isClinicianAdmin()" active-nav="clinicians"><a ng-href="/clinicians">Clinicians</a></li>
-              <li ng-hide="auth.isAuthenticated()" active-nav="login"><a ng-href="/login">Login</a></li>
-              <li ng-show="auth.isAuthenticated() && auth.isClinician()" class="dropdown">
+              <li ng-if="auth.isClinician()" active-nav="serviceUsers"><a ng-href="/service_users">Service Users</a></li>
+              <li ng-if="auth.isClinicianAdmin()" active-nav="clinicians"><a ng-href="/clinicians">Clinicians</a></li>
+              <li ng-if="!auth.isAuthenticated()" active-nav="login"><a ng-href="/login">Login</a></li>
+              <li ng-if="auth.isAuthenticated() && auth.isClinician()" class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                   <li><a href="#">Settings</a></li>
                   <li><a ng-click="logout()">Logout</a></li>
                 </ul>
               </li>
-              <li><a ng-click="logout()" ng-show="auth.isServiceUser()">Logout</a></li>
+              <li><a href="#" ng-click="logout()" ng-show="auth.isServiceUser()">Logout</a></li>
 
             </ul>
           </div>
@@ -117,6 +113,7 @@
     <script src="/bower_components/angular-cookies/angular-cookies.js"></script>
     <script src="/bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="/bower_components/angular-route/angular-route.js"></script>
+    <script src="/bower_components/angular-animate/angular-animate.js"></script>
     <script src="/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="/bower_components/jquery/jquery.js"></script>
     <script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
@@ -127,22 +124,13 @@
     <script src="/bower_components/ekko-lightbox/dist/ekko-lightbox.js"></script>
     <!-- endbuild -->
 
-
-
     <!--[if lt IE 9]>
     <!-- build:js /scripts/placeholder.js -->
     <script src="/shivs/placeholder.js"></script>
     <!-- endbuild -->
     <![endif] -->
 
-    <!--[if lt IE 8]>
-    <!-- build:js /scripts/iconic.js -->
-    <script src="/iconic/js/iconic.min.js"></script>
-    <!-- endbuild -->
-    <![endif] -->
-
     <!-- build:js({.tmp,app}) /scripts/scripts.js -->
-
     <script src="/scripts/filters/ordinal_date.js"></script>
     <script src="/scripts/app.js"></script>
     <script src="/scripts/factories/auth.js"></script>

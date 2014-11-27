@@ -4,6 +4,7 @@ angular.module('buddyClientApp', [
     'ngCookies',
     'ngResource',
     'ngSanitize',
+    'ngAnimate',
     'ui.router',
     'ui.bootstrap',
     'angularMoment',
@@ -61,7 +62,8 @@ angular.module('buddyClientApp', [
             }
         });
     })
-    .config(function ($urlRouterProvider, $locationProvider, $httpProvider, $stateProvider, AccessLevels, $uiViewScrollProvider) {
+    .config(function ($urlRouterProvider, $locationProvider, $httpProvider, $stateProvider, AccessLevels, $uiViewScrollProvider, $sceProvider) {
+        $sceProvider.enabled(false);
         /* without useAnchorScroll() the application scrolls to where
          * the child <ui-view> is. This is not the behaviour that we
          * want */
@@ -97,7 +99,7 @@ angular.module('buddyClientApp', [
         }).state('anon.passwordSent', {
             url: '/passwords/sent/:email_or_mobile',
             templateUrl: '/views/passwords/sent.html',
-            controller: 'PasswordSentCtrl',
+            controller: 'PasswordSentCtrl'
         }).state('anon.emailPasswordReset', {
             url: '/p/:userId/:token',
             templateUrl: '/views/passwords/email_reset.html',

@@ -7,7 +7,7 @@
       <div class="form-group required">
         <label for="service_user_first_name" ng-class="{error: errors.first_name}">
           First Name
-          <span class="error-inline" ng-show="errors.first_name">{{ errors.first_name }}</span>
+          <span class="error-inline" ng-if="errors.first_name">{{ errors.first_name }}</span>
         </label>
         <input type="text" ng-model="service_user.first_name" placeholder="" class="form-control input-md" id="service_user_first_name">
       </div>
@@ -16,7 +16,7 @@
       <div class="form-group required">
         <label for="service_user_last_name" ng-class="{error: errors.last_name}">
           Last Name
-          <span class="error-inline" ng-show="errors.last_name">{{ errors.last_name }}</span>
+          <span class="error-inline" ng-if="errors.last_name">{{ errors.last_name }}</span>
         </label>
         <input type="text" ng-model="service_user.last_name" placeholder="" class="form-control input-md" id="service_user_last_name">
       </div>
@@ -25,7 +25,7 @@
       <div class="form-group required">
         <label for="service_user_mobile" ng-class="{error: errors.mobile}">
           Mobile Phone Number
-          <span class="error-inline" ng-show="errors.mobile">{{ errors.mobile }}</span>
+          <span class="error-inline" ng-if="errors.mobile">{{ errors.mobile }}</span>
         </label>
         <input type="text" ng-model="service_user.mobile" placeholder="" class="form-control input-md" id="service_user_mobile">
       </div>
@@ -34,7 +34,7 @@
       <div class="form-group">
         <label for="service_user_email" ng-class="{error: errors.email}">
           Email Address
-          <span class="error-inline" ng-show="errors.email">{{ errors.email }}</span>
+          <span class="error-inline" ng-if="errors.email">{{ errors.email }}</span>
         </label>
         <input type="text" ng-model="service_user.email" placeholder="" class="form-control input-md" id="service_user_email">
       </div>
@@ -80,7 +80,7 @@
       <div class="col-md-11 required form-group">
         <label for="service_user_agree_to_terms" ng-class="{error: errors.agree_to_terms}">
           I have explained to the service user how Buddy works and the terms and conditions of use. I have emphasised that Buddy is not monitored on a daily basis and that it cannot be used as a way of accessing emergency support. I have explained where this kind of support can be obtained.
-          <span class="error-inline" ng-show="errors.agree_to_terms">{{ errors.agree_to_terms }}</span>
+          <span class="error-inline" ng-if="errors.agree_to_terms">{{ errors.agree_to_terms }}</span>
         </label>
       </div>
     </div>

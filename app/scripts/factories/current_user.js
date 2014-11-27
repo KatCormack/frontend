@@ -9,6 +9,6 @@ angular.module('buddyClientApp').
                 } else {
                     return {};
                 }
-            },
+            }
         };
     });
