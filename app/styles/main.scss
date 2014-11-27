@@ -1,3 +1,13 @@
+$buddy-primary: #558FC1;
+$buddy-border: #5681B3;
+$buddy-secondary: #000;
+$buddy-accent: #F06F59;
+$buddy-tertiary: #04B39D;
+$buddy-dark-accent: #424242;
+$buddy-light-accent: #ebebeb;
+$buddy-sans-serif-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+$buddy-serif-family: "Georgia", "Palatino", "Palatino Linotype", "Times", "Times New Roman", serif;
+
 body {
   min-height: 1000px;
   padding-top: 95px;
@@ -110,7 +120,7 @@ body.ServiceUsersCtrl, body.SearchCtrl, body.CliniciansCtrl, body.ServiceUserDia
 
 legend h1 {
 	font-weight: normal;
-	color: #558FC1;
+	color: $buddy-primary;
 	font-size: 1.3em;
 }
 
@@ -125,8 +135,8 @@ legend h1 {
 
 .btn-buddy {
 	color: white;
-	background-color: #558FC1;
-	border-color: #5681B3;
+	background-color: $buddy-primary;
+	border-color: $buddy-border;
 }
 
 .btn-buddy:hover {
@@ -137,8 +147,8 @@ legend h1 {
 
 .navbar-buddy {
 	color: white;
-	background-color: #558FC1;
-	border-color: #5681B3;
+	background-color: $buddy-primary;
+	border-color: $buddy-border;
 }
 
 .navbar-buddy a {
@@ -161,7 +171,7 @@ legend h1 {
 
 .heading-unit-header {
 	padding-top: 20px;
-	color: #558FC1;
+	color: $buddy-primary;
 }
 
 .list-container {
@@ -175,12 +185,12 @@ legend h1 {
 td.expand-link { cursor: pointer; cursor: hand; }
 
 .navbar-buddy .open > a, .navbar-buddy .open > a:hover, .navbar-buddy .open > a:focus, .navbar-buddy a:hover {
-	background-color: #5681B3 !important;
+	background-color: $buddy-border !important;
 	color: #ddd !important;
 }
 
 .navbar-buddy ul.dropdown-menu {
-	background-color: #558FC1 !important;
+	background-color: $buddy-primary !important;
 }
 
 .navbar-buddy .dropdown-menu > li > a {
@@ -489,7 +499,7 @@ a:hover {
 
 .panel-title {
 	font-size: 1.5em !important;
-	color: #558FC1 !important;
+	color: $buddy-primary !important;
 }
 
 .mood {
@@ -504,7 +514,7 @@ a:hover {
 }
 
 h2.no-results, h1.dashboard-header, .title {
-	color: #558FC1;
+	color: $buddy-primary;
 }
 
 .dashboard-box {
@@ -581,4 +591,144 @@ h2.no-results, h1.dashboard-header, .title {
 .session-details {
 	font-size: 1.4em;
 	color: #568FC2;
+}
+
+/*
+  Home Page styles
+*/
+
+.MainCtrl {
+  .home {
+    font-family: $buddy-serif-family;
+    h1, h2, h3 ,h4, h5 {
+      font-family: $buddy-serif-family;
+    }
+    font-size: 1.4em;
+    .intro {
+      margin-top: -40px;
+      padding: 6.5em 15px;
+      background-color: #324D5C;
+      h1 {
+        font-size: 2.3em;
+        color: $buddy-primary;
+      }
+      p {
+        color: white;
+        a {
+          color: $buddy-accent;
+        }
+      }
+    }
+
+    .how-it-works {
+      background: url("/images/background_arrow.png") top center no-repeat;
+      padding-top: 3em;
+      padding-bottom: 2em;
+      h2 {
+        color: $buddy-primary;
+        font-size: 2em;
+        padding-bottom: 0.5em;
+        text-align: center;
+      }
+    }
+
+    .faq-info {
+      padding: 3em;
+      background: $buddy-light-accent;
+      p {
+        font-family: $buddy-sans-serif-family;
+        color: $buddy-dark-accent;
+        // font-size: 0.6em;
+      }
+      a, a:hover {
+        color: $buddy-dark-accent !important;
+        text-decoration: underline;
+      }
+      .thumbnail {
+        background-color: inherit;
+        border: 0;
+        .caption {
+          h3 {
+            font-family: $buddy-sans-serif-family;
+            font-weight: bold;
+            color: $buddy-tertiary;
+            font-size: 0.7em;
+            margin-bottom: 0;
+          }
+          p {
+            font-family: $buddy-sans-serif-family;
+            font-size: 0.6em;
+            color: $buddy-dark-accent;
+          }
+        }
+      }
+    }
+
+    .user-quotes {
+      padding: 3em;
+      blockquote {
+        border: 0;
+        background: url("/images/quote.png") top left no-repeat;
+        p {
+          color: $buddy-dark-accent;
+          padding: 2em;
+          padding-left: 0;
+          padding-bottom: 1.5em;
+          margin-top: 1.5em;
+          font-size: 1.1em;
+        }
+        footer {
+          color: $buddy-primary;
+          font-size: 0.7em;
+        }
+      }
+    }
+
+    .recognition {
+      background-color: $buddy-light-accent;
+      font-family: $buddy-sans-serif-family;
+      padding: 2em;
+      font-size: 0.7em;
+      h3 {
+        color: $buddy-primary;
+        font-family: $buddy-sans-serif-family;
+      }
+
+      p {
+        padding: 0 0 6em 2em;
+        padding: 2em 6em 0 0;
+      }
+
+      ul.awards li:first-child {
+        border: 0;
+      }
+      ul.awards {
+        padding-left: 0;
+        list-style: none;
+        li {
+          background: url("/images/award.png") no-repeat 0 0.9em;
+          border-top: 1px dashed #BFBEA9;
+          padding: 0.8em 0 0.8em 2.5em;
+        }
+      }
+    }
+
+    .footer {
+      padding: 3em;
+      background-color: $buddy-dark-accent;
+      font-family: $buddy-sans-serif-family;
+      font-size: 0.7em;
+      color: white;
+      a, a:hover {
+        color: white !important;
+        text-decoration: underline;
+      }
+      img {
+        padding-bottom: 1.5em;
+      }
+      ul {
+        list-style: none;
+      }
+    }
+  }
 }
