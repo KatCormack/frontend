@@ -42,7 +42,6 @@
     "commit": "39176be8911796ddc29fe7150e54d68d28b20b78"
   },
   "_source": "git://github.com/ashleydw/lightbox.git",
-  "_target": "~3.2.0",
-  "_originalSource": "ashleydw/lightbox",
-  "_direct": true
+  "_target": "~3.2",
+  "_originalSource": "ekko-lightbox"
 }
