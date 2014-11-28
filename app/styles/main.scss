@@ -485,6 +485,14 @@ td.expand-link { cursor: pointer; cursor: hand; }
 	line-height: 26px !important; 
 }
 
+a.clinician-btn, a.clinician-btn:hover {
+  color: white;
+  background-color: $buddy-accent !important;
+  padding-top: 5px !important;
+  padding-bottom: 5px !important;
+  margin-top: 10px !important;
+}
+
 a.navbar-brand {
 	padding: 10px;
 }

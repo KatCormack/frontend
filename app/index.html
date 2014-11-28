@@ -76,8 +76,8 @@
             <ul class="nav navbar-nav navbar-right">
               <li ng-if="auth.isClinician()" active-nav="serviceUsers"><a ng-href="/service_users">Service Users</a></li>
               <li ng-if="auth.isClinicianAdmin()" active-nav="clinicians"><a ng-href="/clinicians">Clinicians</a></li>
-              <li ng-if="!auth.isAuthenticated() && isHome" active-nav="undergoingTherapy"><a ng-href="/undergoing-therapy">For people undergoing therapy</a></li>
-              <li ng-if="!auth.isAuthenticated() && isUndergoingTherapy" active-nav="home"><a ng-href="/">For clinicians</a></li>
+              <li ng-if="!auth.isAuthenticated() && isHome" active-nav="undergoingTherapy"><a class="btn clinician-btn" ng-href="/undergoing-therapy">For people undergoing therapy</a></li>
+              <li ng-if="!auth.isAuthenticated() && isUndergoingTherapy" active-nav="home"><a class="btn clinician-btn" ng-href="/">For clinicians</a></li>
               <li ng-if="!auth.isAuthenticated()" active-nav="login"><a ng-href="/login">Login</a></li>
               <li ng-if="auth.isAuthenticated() && auth.isClinician()" class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
