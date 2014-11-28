@@ -1,17 +1,48 @@
-<ul>
-  <li><a ng-click="report('/api/v1/reports/accounts')">Accounts report</a></li>
-  <li>
-    <a href="/api/v1/reports/service_users">Service users</a>
-    <ul>
-      <li><a href="/api/v1/reports/service_user_weekly">Created by week</a></li>
-      <li><a href="/api/v1/reports/service_user_monthly">Created by month</a></li>
-    </ul>
-  </li>
-  <li><a href="/api/v1/reports/clinicians">Clinicians report</a></li>
-  <li><a href="/api/v1/reports/top_clinicians">Top clinicians</a></li>
-</ul>
+<div class="container">
+  <h1>Reports</h1>
+  <div class="row reports">
+    <div class="col-md-4">
+      <fieldset>
+        <legend>Accounts</legend>
+        <form role="form" class="form-horizontal form-group-lg" method="post" action="/api/v1/reports/accounts">
+          <input type="hidden" name="Authorization" value="{{getAuthToken()}}" />
+          <button class="btn btn-primary form-control">Accounts report</button>
+        </form>
+      </fieldset>
+    </div>
+    <div class="col-md-4">
+      <fieldset>
+        <legend>Service Users</legend>
+          <form role="form" class="form-horizontal form-group-lg" method="post" action="/api/v1/reports/service_users">
+            <input type="hidden" name="Authorization" value="{{getAuthToken()}}" />
+            <button class="btn btn-primary form-control">Service Users</button>
+          </form>
 
-  <form method="post" action="/api/v1/reports/accounts">
-    <button>Accounts report</button>
-  </form>
+          <form role="form" class="form-horizontal form-group-lg" method="post" action="/api/v1/reports/service_user_weekly">
+            <input type="hidden" name="Authorization" value="{{getAuthToken()}}" />
+            <button class="btn btn-primary form-control">Created by week</button>
+          </form>
+
+          <form role="form" class="form-horizontal form-group-lg" method="post" action="/api/v1/reports/service_user_monthly">
+            <input type="hidden" name="Authorization" value="{{getAuthToken()}}" />
+            <button class="btn btn-primary form-control">Created by month</button>
+          </form>
+      </fieldset>
+    </div>
+    <div class="col-md-4">
+      <fieldset>
+        <legend>Clinicians</legend>
+          <form role="form" class="form-horizontal form-group-lg" method="post" action="/api/v1/reports/clinicians">
+            <input type="hidden" name="Authorization" value="{{getAuthToken()}}" />
+            <button class="btn btn-primary form-control">Clinicians report</button>
+          </form>
+
+          <form role="form" class="form-horizontal form-group-lg" method="post" action="/api/v1/reports/top_clinicians">
+            <input type="hidden" name="Authorization" value="{{getAuthToken()}}" />
+            <button class="btn btn-primary form-control">Top clinicians</button>
+          </form>
+      </fieldset>
+    </div>
+  </div>
+</div>
 
