@@ -821,6 +821,8 @@ h2.no-results, h1.dashboard-header, .title {
         font-size: 0.8em;
         position: inherit;
         background-image: none;
+        text-shadow: none;
+        filter: none;
         left: 6em;
         top: 0em;
         z-index: 200;
@@ -828,6 +830,11 @@ h2.no-results, h1.dashboard-header, .title {
           text-shadow: none;
           opacity: 1.0;
         }
+      }
+      .carousel-control:focus, .carousel-control:hover {
+        filter: none;
+        opacity: 1.0;
+        color: white !important;
       }
       .carousel-caption {
         text-align: left;
