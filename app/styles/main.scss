@@ -597,6 +597,28 @@ h2.no-results, h1.dashboard-header, .title {
   Home Page styles
 */
 
+@mixin step-display {
+  position: relative;
+  font-family: $buddy-sans-serif-family;
+  font-weight: bolder;
+  .number {
+    position: relative;
+    text-align: center;
+    z-index: 4;
+    font-size: 7em;
+    color: white;
+  }
+  .step-title {
+    position: absolute;
+    text-align: center;
+    z-index: 5;
+    font-size: 2em;
+    color: $buddy-tertiary;
+    width: 100%;
+    top:38%;
+  }
+}
+
 .MainCtrl {
   .home {
     font-family: $buddy-serif-family;
@@ -728,6 +750,225 @@ h2.no-results, h1.dashboard-header, .title {
       }
       ul {
         list-style: none;
+      }
+    }
+
+    .title {
+      margin-top: -40px;
+      padding: 1.5em 15px;
+      background-color: #324D5C;
+    }
+
+    // Main homepage styles
+
+    .features {
+      height: 27em;
+      min-height: 27em;
+      .feature-text {
+        font-size: 1.1em;
+        height: 8em;
+        min-height: 8em;
+      }
+      .features-step {
+        @include step-display;
+      }
+      padding: 3em;
+      background: $buddy-light-accent;
+      p {
+        font-family: $buddy-serif-family;
+        color: $buddy-dark-accent;
+      }
+      .thumbnail {
+        background-color: inherit;
+        border: 0;
+        .caption {
+          h3 {
+            font-family: $buddy-sans-serif-family;
+            font-weight: bold;
+            color: $buddy-tertiary;
+            font-size: 0.7em;
+            margin-bottom: 0;
+          }
+          p {
+            font-family: $buddy-sans-serif-family;
+            font-size: 0.6em;
+            color: $buddy-dark-accent;
+          }
+        }
+      }
+    }
+
+    .vision {
+      height: 800px;
+      min-height: 800px;
+      .vision-step {
+        @include step-display;
+        .number {
+          color: $buddy-light-accent;
+        }
+        .step-title {
+          color: #269EB4;
+        }
+      }
+      img {
+        float: right;
+        // margin-right: 40px;
+      }
+      .carousel .carousel-inner {
+      }
+      .carousel-control {
+        font-family: $buddy-sans-serif-family;
+        font-size: 0.8em;
+        position: inherit;
+        background-image: none;
+        left: 6em;
+        top: 0em;
+        z-index: 200;
+        a {
+          text-shadow: none;
+          opacity: 1.0;
+        }
+      }
+      .carousel-caption {
+        text-align: left;
+        width: 330px;
+        top: 3em;
+        left: 5em;
+
+        h3 {
+          font-family: $buddy-sans-serif-family;
+          color: $buddy-primary;
+        }
+        p {
+          font-family: $buddy-sans-serif-family;
+          color: $buddy-dark-accent;
+          font-size: 0.6em;
+          text-shadow: none;
+        }
+      }
+    }
+
+    .benefits {
+      padding-top: 2em;
+      padding-bottom: 2em;
+      background-color: $buddy-light-accent;
+      .benefits-step {
+        @include step-display;
+        .step-title {
+          color: $buddy-primary;
+        }
+      }
+      blockquote {
+        border: 0;
+        background: url("/images/quote_accent.png") top left no-repeat;
+        p {
+          color: $buddy-dark-accent;
+          padding: 2em;
+          padding-left: 0;
+          padding-bottom: 1.5em;
+          margin-top: 1.5em;
+          font-size: 1.1em;
+        }
+        footer {
+          color: $buddy-primary;
+          font-size: 0.7em;
+        }
+      }
+      .thumbnail {
+        background-color: inherit;
+        border: 0;
+        .caption {
+          h3 {
+            font-family: $buddy-sans-serif-family;
+            font-weight: bold;
+            color: $buddy-primary;
+            font-size: 0.7em;
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+
+    .get-buddy {
+      padding-top: 1em;
+      padding-bottom: 2em;
+      .get-buddy-step {
+        @include step-display;
+        .step-title {
+          color: #7670AE;
+        }
+        .number {
+          color: $buddy-light-accent;
+        }
+      }
+      .buddy-text {
+        padding: 2em 0;
+      }
+      .dotted-boxes div {
+        height: 21em;
+        font-family: $buddy-sans-serif-family;
+        border: 1px dashed $buddy-dark-accent;
+        border-radius: 5px;
+      }
+      .job-title {
+        font-size: 1.1em;
+        color: $buddy-dark-accent;
+      }
+      .phone {
+        color: darken($buddy-light-accent, 30%);
+      }
+      h3 {
+        color: #7670AE;
+        font-family: $buddy-sans-serif-family;
+      }
+      .dense {
+        font-weight: bold;
+      }
+      p {
+        font-family: $buddy-serif-family;
+      }
+    }
+
+    .team {
+      padding-top: 1em;
+      padding-bottom: 3em;
+      .team-step {
+        @include step-display;
+        .step-title {
+          color: #9E54A1;
+        }
+      }
+      .team-text {
+        padding: 2em 0;
+      }
+      img {
+        margin-top: 2em;
+        margin-bottom: 2em;
+      }
+      .more-info {
+        font-family: $buddy-sans-serif-family;
+        font-size: 0.7em;
+        h3 {
+          font-family: $buddy-sans-serif-family;
+          color: #9E54A1;
+        }
+        .text-left {
+          padding-top: 2em;
+          padding-left: 3em;
+        }
+      }
+      background-color: $buddy-light-accent;
+      ul.awards li:first-child {
+        border: 0;
+      }
+      ul.awards {
+        padding-left: 0;
+        list-style: none;
+        li {
+          background: url("/images/award.png") no-repeat 0 0.9em;
+          border-top: 1px dashed #BFBEA9;
+          padding: 0.8em 0 0.8em 2.5em;
+        }
       }
     }
   }
