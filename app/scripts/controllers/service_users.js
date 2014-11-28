@@ -31,12 +31,10 @@ angular.module('buddyClientApp')
 
         $scope.serviceUsers = TeamServiceUser.query({account_id: $scope.user.account_ids[0]}, function() {
             // are we running the tutorial? create an example User
-            var exampleUser = ExampleServiceUser.generate($scope.user);
-            console.log(exampleUser);
-            $scope.serviceUsers.unshift(exampleUser);
-
             var hopscotchState = hopscotch.getState();
             if (hopscotchState === 'welcome-to-buddy:3' || hopscotchState === 'welcome-to-buddy:4') {
+                var exampleUser = ExampleServiceUser.generate($scope.user);
+                $scope.serviceUsers.unshift(exampleUser);
                 hopscotch.startTour(HopscotchTour.tour(), hopscotch.getCurrStepNum());
             }
         });
@@ -72,7 +70,7 @@ angular.module('buddyClientApp')
             serviceUser.deactivated_at = null;
             TeamServiceUser.update({user: serviceUser, id: serviceUser.id, account_id: serviceUser.account_id});
         };
-    }).controller('ServiceUserDiaryCtrl', function($scope, ServiceUser, $state, Entry, Session, ServiceUserGoal, Days, Team, TeamClinician, Goal, ServiceUserSession, Hours, CurrentUser, Auth, ExampleServiceUser) {
+    }).controller('ServiceUserDiaryCtrl', function($scope, ServiceUser, $state, Entry, Session, ServiceUserGoal, Days, Team, TeamClinician, Goal, ServiceUserSession, Hours, CurrentUser, Auth, ExampleServiceUser, HopscotchTour) {
         $scope.Auth = Auth;
         var serviceUserId = $state.params.id || CurrentUser.user().id;
 
@@ -202,6 +200,12 @@ angular.module('buddyClientApp')
                 _.map($scope.goals, function(goal) { goal.removed = !!goal.removed_at; });
             });
         } else {
+            var hopscotchState = hopscotch.getState();
+            console.log(hopscotchState);
+            if (hopscotchState === 'welcome-to-buddy:5' || hopscotchState === 'welcome-to-buddy:6' || hopscotchState === 'welcome-to-buddy:7' || hopscotchState === 'welcome-to-buddy:8') {
+                hopscotch.startTour(HopscotchTour.tour($state, $scope), hopscotch.getCurrStepNum());
+            }
+
             $scope.service_user = ExampleServiceUser.generate(CurrentUser.user().id);
             $scope.sessions = $scope.service_user.sessions;
         }
