@@ -92,6 +92,11 @@ angular.module('buddyClientApp', [
             templateUrl: '/views/login.html',
             controller: 'LoginCtrl',
             activetab: 'login'
+        }).state('anon.undergoingTherapy', {
+            url: '/undergoing-therapy',
+            templateUrl: '/views/service_user_info.html',
+            controller: 'MainCtrl',
+            activetab: 'undergoingTherapy'
         }).state('anon.passwordReset', {
             url: '/passwords/forgot',
             templateUrl: '/views/passwords/forgot.html',
