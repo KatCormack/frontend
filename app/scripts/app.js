@@ -8,8 +8,7 @@ angular.module('buddyClientApp', [
     'ui.router',
     'ui.bootstrap',
     'angularMoment',
-    'angularUtils.filters.ordinalDate',
-    'intercom'
+    'angularUtils.filters.ordinalDate'
 ])
     .constant('APIHost', '')
     .constant('AccessLevels',{
@@ -54,17 +53,22 @@ angular.module('buddyClientApp', [
         '22',
         '23'
     ])
-    .run(function($rootScope, $state, Auth){
+    .run(function($rootScope, $state, Auth, CurrentUser){
         $rootScope._ = _;
         $rootScope.$on('$stateChangeStart', function(event, toState) {
             if (!Auth.authorize(toState.data.access)) {
                 event.preventDefault();
                 $state.go('anon.login');
+            } else {
+                var intercomUser = CurrentUser.intercomUser;
+                intercomUser.app_id = 'nv0lz1xn';
+                window.Intercom("boot", intercomUser);
             }
         });
+
     })
-    .config(function ($urlRouterProvider, $locationProvider, $httpProvider, $stateProvider, AccessLevels, $uiViewScrollProvider, $sceProvider, IntercomProvider) {
-        IntercomProvider.init('nv0lz1xn');
+    .config(function ($urlRouterProvider, $locationProvider, $httpProvider, $stateProvider, AccessLevels, $uiViewScrollProvider, $sceProvider) {
+//        IntercomProvider.init('nv0lz1xn');
         $sceProvider.enabled(false);
         /* without useAnchorScroll() the application scrolls to where
          * the child <ui-view> is. This is not the behaviour that we
