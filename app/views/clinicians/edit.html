@@ -7,7 +7,7 @@
       <div class="form-group required">
         <label for="clinician_first_name" ng-class="{error: errors.first_name}">
           First Name
-          <span class="error-inline" ng-show="errors.first_name">{{ errors.first_name }}</span>
+          <span class="error-inline" ng-if="errors.first_name">{{ errors.first_name }}</span>
         </label>
         <input type="text" ng-model="clinician.first_name" placeholder="" class="form-control input-md" id="clinician_first_name">
       </div>
@@ -16,7 +16,7 @@
       <div class="form-group required">
         <label for="clinician_last_name" ng-class="{error: errors.last_name}">
           Last Name
-          <span class="error-inline" ng-show="errors.last_name">{{ errors.last_name }}</span>
+          <span class="error-inline" ng-if="errors.last_name">{{ errors.last_name }}</span>
         </label>
         <input type="text" ng-model="clinician.last_name" placeholder="" class="form-control input-md" id="clinician_last_name">
       </div>
@@ -25,7 +25,7 @@
       <div class="form-group required">
         <label for="clinician_email" ng-class="{error: errors.email}">
           Email Address
-          <span class="error-inline" ng-show="errors.email">{{ errors.email }}</span>
+          <span class="error-inline" ng-if="errors.email">{{ errors.email }}</span>
         </label>
         <input type="text" ng-model="clinician.email" placeholder="" class="form-control input-md" id="clinician_email">
       </div>
@@ -47,8 +47,8 @@
     <div class="col-md-12">
       <label>
         Service Users ({{ serviceUsers.length }})
-        <span class="error-inline" ng-show="checkUsers() > 0"><br />You must assign a new Primary Clinician or deactivate these users to continue</span>
-        <p id="deactivate-service-users-error" class="error-inline" ng-show="deactivationClicked">To deactivate this clinician please re-assign or deactivate the following service users </p>
+        <span class="error-inline" ng-if="checkUsers() > 0"><br />You must assign a new Primary Clinician or deactivate these users to continue</span>
+        <p id="deactivate-service-users-error" class="error-inline" ng-if="deactivationClicked">To deactivate this clinician please re-assign or deactivate the following service users </p>
       </label>
       <div class="list-group">
         <!-- need a polyfill here for ie7 -->
@@ -78,7 +78,7 @@
           <span class="help-text">
             Choose which team(s) this clinician is a part of
           </span>
-          <span class="error-inline" ng-show="errors.team"><br />You must belong to atleast one team</span>
+          <span class="error-inline" ng-if="errors.team"><br />You must belong to atleast one team</span>
         </label>
       </span>
 
@@ -100,12 +100,12 @@
       </ul>
     </div>
     <div class="col-md-12 text-center footer">
-      <span ng-show="clinician.deactivated_at">
+      <span ng-if="clinician.deactivated_at">
         This user has been deactivated
         <a ng-click="reactivate(clinician)">Reactivate this user</a>
       </span>
 
-      <span ng-hide="clinician.deactivated_at">
+      <span ng-if="!clinician.deactivated_at">
         Has this person left or stopped using Buddy?
         <a ng-click="deactivate($event)">
           Deactivate this user

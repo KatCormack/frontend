@@ -4,6 +4,7 @@ angular.module('buddyClientApp', [
     'ngCookies',
     'ngResource',
     'ngSanitize',
+    'ngAnimate',
     'ui.router',
     'ui.bootstrap',
     'angularMoment',
@@ -62,8 +63,9 @@ angular.module('buddyClientApp', [
             }
         });
     })
-    .config(function ($urlRouterProvider, $locationProvider, $httpProvider, $stateProvider, AccessLevels, $uiViewScrollProvider, IntercomProvider) {
+    .config(function ($urlRouterProvider, $locationProvider, $httpProvider, $stateProvider, AccessLevels, $uiViewScrollProvider, $sceProvider, IntercomProvider) {
         IntercomProvider.init('nv0lz1xn');
+        $sceProvider.enabled(false);
         /* without useAnchorScroll() the application scrolls to where
          * the child <ui-view> is. This is not the behaviour that we
          * want */
@@ -92,6 +94,11 @@ angular.module('buddyClientApp', [
             templateUrl: '/views/login.html',
             controller: 'LoginCtrl',
             activetab: 'login'
+        }).state('anon.undergoingTherapy', {
+            url: '/undergoing-therapy',
+            templateUrl: '/views/service_user_info.html',
+            controller: 'MainCtrl',
+            activetab: 'undergoingTherapy'
         }).state('anon.passwordReset', {
             url: '/passwords/forgot',
             templateUrl: '/views/passwords/forgot.html',
@@ -99,7 +106,7 @@ angular.module('buddyClientApp', [
         }).state('anon.passwordSent', {
             url: '/passwords/sent/:email_or_mobile',
             templateUrl: '/views/passwords/sent.html',
-            controller: 'PasswordSentCtrl',
+            controller: 'PasswordSentCtrl'
         }).state('anon.emailPasswordReset', {
             url: '/p/:userId/:token',
             templateUrl: '/views/passwords/email_reset.html',

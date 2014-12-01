@@ -8,5 +8,9 @@ angular.module('buddyClientApp')
             Auth.logout();
             $state.go('anon.home');
         };
+        $scope.$watch('state.current', function () {
+          $scope.isHome = $state.current.name === 'anon.home';
+          $scope.isUndergoingTherapy = $state.current.name === 'anon.undergoingTherapy';
+        });
     }
 );

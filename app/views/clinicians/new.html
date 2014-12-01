@@ -7,7 +7,7 @@
       <div class="form-group required">
         <label for="clinician_first_name" ng-class="{error: errors.first_name}">
           First Name
-          <span class="error-inline" ng-show="errors.first_name">{{ errors.first_name }}</span>
+          <span class="error-inline" ng-if="errors.first_name">{{ errors.first_name }}</span>
         </label>
         <input type="text" ng-model="clinician.first_name" placeholder="" class="form-control input-md" id="clinician_first_name">
       </div>
@@ -16,7 +16,7 @@
       <div class="form-group required">
         <label for="clinician_last_name" ng-class="{error: errors.last_name}">
           Last Name
-          <span class="error-inline" ng-show="errors.last_name">{{ errors.last_name }}</span>
+          <span class="error-inline" ng-if="errors.last_name">{{ errors.last_name }}</span>
         </label>
         <input type="text" ng-model="clinician.last_name" placeholder="" class="form-control input-md" id="clinician_last_name">
       </div>
@@ -25,7 +25,7 @@
       <div class="form-group required">
         <label for="clinician_email" ng-class="{error: errors.email}">
           Email Address
-          <span class="error-inline" ng-show="errors.email">{{ errors.email }}</span>
+          <span class="error-inline" ng-if="errors.email">{{ errors.email }}</span>
         </label>
         <input type="text" ng-model="clinician.email" placeholder="" class="form-control input-md" id="clinician_email">
       </div>
