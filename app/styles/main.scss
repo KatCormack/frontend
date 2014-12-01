@@ -996,3 +996,19 @@ h2.no-results, h1.dashboard-header, .title {
 }
 
 
+#Intercom {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: block;
+    background-color: $buddy-primary;
+    padding: 8px;
+    border-radius: 3px;
+}
+
+#Intercom .iconic-chat-bubble {
+    fill: #fff;
+    stroke: #fff;
+    
+}
+

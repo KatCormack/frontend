@@ -60,8 +60,10 @@ angular.module('buddyClientApp', [
                 event.preventDefault();
                 $state.go('anon.login');
             } else {
-                var intercomUser = CurrentUser.intercomUser;
+                var intercomUser = CurrentUser.intercomUser();
                 intercomUser.app_id = 'nv0lz1xn';
+                intercomUser.widget = {activator: '#Intercom'};
+                console.log(intercomUser);
                 window.Intercom("boot", intercomUser);
             }
         });
@@ -257,4 +259,12 @@ Array.prototype.remove = function() {
 $(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) {
     event.preventDefault();
     $(this).ekkoLightbox();
+});
+
+$(document).ready(function() {
+    $("#Intercom").click(function(e) {
+        e.preventDefault();
+        Intercom('show');
+    })
+
 });
