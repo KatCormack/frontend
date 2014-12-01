@@ -6,7 +6,10 @@ angular.module('buddyClientApp')
             link: function(scope, element, attrs) {
                 scope.$watch('intercomUser', function(user) {
                     if (user) {
-                        Intercom.boot(user);
+                        if (user.user_id) {
+                            Intercom.boot(user);
+                        }
+
                     }
                 });
             }
