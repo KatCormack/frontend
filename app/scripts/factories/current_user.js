@@ -10,5 +10,12 @@ angular.module('buddyClientApp').
                     return {};
                 }
             },
+            intercomUser: function() {
+                if (LocalService.get('auth_token')) {
+                    return angular.fromJson(LocalService.get('auth_token')).intercom_user;
+                } else {
+                    return {};
+                }
+            }
         };
     });

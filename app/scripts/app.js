@@ -7,7 +7,8 @@ angular.module('buddyClientApp', [
     'ui.router',
     'ui.bootstrap',
     'angularMoment',
-    'angularUtils.filters.ordinalDate'
+    'angularUtils.filters.ordinalDate',
+    'intercom'
 ])
     .constant('APIHost', '')
     .constant('AccessLevels',{
@@ -61,7 +62,8 @@ angular.module('buddyClientApp', [
             }
         });
     })
-    .config(function ($urlRouterProvider, $locationProvider, $httpProvider, $stateProvider, AccessLevels, $uiViewScrollProvider) {
+    .config(function ($urlRouterProvider, $locationProvider, $httpProvider, $stateProvider, AccessLevels, $uiViewScrollProvider, IntercomProvider) {
+        IntercomProvider.init('nv0lz1xn');
         /* without useAnchorScroll() the application scrolls to where
          * the child <ui-view> is. This is not the behaviour that we
          * want */
