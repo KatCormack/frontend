@@ -30,7 +30,7 @@ angular.module('buddyClientApp')
             }
         ];
         $(document).ready(function() {
-            $(window).scroll(function() {
+            var setScrollBorder = function() {
                 var height = $(".title").outerHeight();
                 var scroll = $(window).scrollTop();
                 if (scroll >= height) {
@@ -40,6 +40,11 @@ angular.module('buddyClientApp')
                     $(".navbar").addClass("navbar-pre-title");
                     $(".navbar").removeClass("navbar-post-title");
                 }
+            };
+            setScrollBorder();
+
+            $(window).scroll(function() {
+                setScrollBorder();
             });
         });
     });
