@@ -501,8 +501,12 @@ a:hover {
 	color: #73a4cf !important;
 }
 
-.navbar {
-	border-bottom: 3px solid #465A86 !important;
+.navbar, .MainCtrl .navbar-past-title {
+  border-bottom: 3px solid #465A86 !important;
+}
+
+.MainCtrl .navbar-pre-title {
+  border-bottom: 3px solid $buddy-primary !important;  
 }
 
 .panel-title {
