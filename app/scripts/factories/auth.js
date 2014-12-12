@@ -32,6 +32,7 @@ angular.module('buddyClientApp').
                 return this.isAuthenticated() && CurrentUser.user().type === 'ServiceUser';
             },
             login: function(credentials) {
+                console.log(credentials);
                 var login = $http.post(APIHost + '/api/v1/auth/login', credentials);
                 login.success(function(result) {
                     LocalService.set('auth_token', JSON.stringify(result));
