@@ -11,7 +11,8 @@ angular.module('buddyClientApp')
                     $state.go('user.dashboard');
                 }
 
-            }).error(function() {
+            }).error(function(res) {
+                console.log(res);
                 $scope.login_error = true;
             });
         };
