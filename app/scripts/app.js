@@ -63,7 +63,6 @@ angular.module('buddyClientApp', [
                 var intercomUser = CurrentUser.intercomUser();
                 intercomUser.app_id = 'nv0lz1xn';
                 intercomUser.widget = {activator: '#Intercom'};
-                console.log(intercomUser);
                 window.Intercom("boot", intercomUser);
             }
         });
