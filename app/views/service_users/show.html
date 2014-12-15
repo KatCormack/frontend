@@ -11,6 +11,14 @@
               <span class="next-session" ng-if="!sessionScheduledTime">None</span>
             </span>
           </li>
+          <li class="settings nav-item">
+            <a ng-click="show('settings')">
+              <span class="iconic" data-glyph="cog" title="settings" aria-hidden="true"></span>
+              <span class="title">{{ service_user.full_name }}</span>
+              <span class="buddy-id">{{ service_user.buddy_id }}</span><br />
+              <span class="mobile">{{ service_user.mobile }}</span>
+            </a>
+          </li>
 
           <li class="nextSession nav-item" ng-if="Auth.isClinician()">
             <a ng-click="show('nextSession')">
@@ -20,14 +28,6 @@
                 <span class="next-session" ng-if="sessionScheduledTime">{{ sessionScheduledTime | ordinalDate: "MMMM d 'at' HH:mm" }}</span>
                 <span class="next-session" ng-if="!sessionScheduledTime">None</span>
               </span>
-            </a>
-          </li>
-          <li class="settings nav-item">
-            <a ng-click="show('settings')">
-              <span class="iconic" data-glyph="person-genderless" title="person" aria-hidden="true"></span>
-              <span class="title">{{ service_user.full_name }}</span>
-              <span class="buddy-id">{{ service_user.buddy_id }}</span><br />
-              <span class="mobile">{{ service_user.mobile }}</span>
             </a>
           </li>
           <li class="active diaryEntries nav-item">
@@ -49,12 +49,6 @@
               <span class="title">Session plan</span>
             </a>
           </li>
-          <li class="textMessage nav-item">
-            <a ng-click="show('textMessage')">
-              <span class="iconic" data-glyph="comment-square" title="comment-square" aria-hidden="true"></span>
-              <span class="title">Text Message</span>
-            </a>
-          </li>
           <li class="goals nav-item">
             <a ng-click="show('goals')">
               <span class="iconic" data-glyph="circle-check" title="circle-check" aria-hidden="true"></span>
@@ -66,6 +60,12 @@
                                     'other': '{} goals set'}">
                 </ng-pluralize>
               </span>
+            </a>
+          </li>
+          <li class="textMessage nav-item">
+            <a ng-click="show('textMessage')">
+              <span class="iconic" data-glyph="comment-square" title="comment-square" aria-hidden="true"></span>
+              <span class="title">Text Message</span>
             </a>
           </li>
         </ul>

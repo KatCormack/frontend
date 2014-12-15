@@ -27,6 +27,12 @@
             <input type="hidden" name="Authorization" value="{{getAuthToken()}}" />
             <button class="btn btn-primary form-control">Created by month</button>
           </form>
+
+          <form role="form" class="form-horizontal form-group-lg" method="post" action="/api/v1/reports/feedback">
+            <input type="hidden" name="Authorization" value="{{getAuthToken()}}" />
+            <button class="btn btn-primary form-control">Feedback</button>
+          </form>
+
       </fieldset>
     </div>
     <div class="col-md-4">
@@ -45,4 +51,3 @@
     </div>
   </div>
 </div>
-

@@ -2,7 +2,7 @@
 
 angular.module('buddyClientApp')
     .controller('UserDashboardCtrl', function ($scope, CurrentUser, Entry, ServiceUser, Auth, $state, Clinician, HopscotchTour) {
-        
+
         $scope.user = CurrentUser.user();
         $scope.auth = Auth;
         $scope.search = function() {
@@ -10,6 +10,8 @@ angular.module('buddyClientApp')
         };
 
         $scope.clinicians = Clinician.query();
+        $scope.serviceUsers = ServiceUser.query();
+
         if (hopscotch.getState() === 'welcome-to-buddy:1') {
         	hopscotch.getCurrTour();
         	var tourStep = hopscotch.getCurrStepNum();

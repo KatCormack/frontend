@@ -86,20 +86,10 @@ var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);}if(w.a
           </div>
           <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-              <li ng-if="auth.isClinician()" active-nav="serviceUsers"><a ng-href="/service_users">Service Users</a></li>
-              <li ng-if="auth.isClinicianAdmin()" active-nav="clinicians"><a ng-href="/clinicians">Clinicians</a></li>
               <li ng-if="!auth.isAuthenticated() && isHome" active-nav="undergoingTherapy"><a class="btn clinician-btn" ng-href="/undergoing-therapy">For people undergoing therapy</a></li>
               <li ng-if="!auth.isAuthenticated() && isUndergoingTherapy" active-nav="home"><a class="btn clinician-btn" ng-href="/">For clinicians</a></li>
               <li ng-if="!auth.isAuthenticated()" active-nav="login"><a ng-href="/login">Login</a></li>
-              <li ng-if="auth.isAuthenticated() && auth.isClinician()" class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
-                <ul class="dropdown-menu" role="menu">
-                  <li ng-if="auth.isClinicianAdmin()" active-nav="reports"><a ng-href="/reports">Reports</a></li>
-                  <li><a href="#">Settings</a></li>
-                  <li><a ng-click="logout()">Logout</a></li>
-                </ul>
-              </li>
-              <li><a href="#" ng-click="logout()" ng-if="auth.isServiceUser()">Logout</a></li>
+              <li ng-if="auth.isAuthenticated()"><a ng-click="logout()">Logout</a></li>
             </ul>
           </div>
         </div>
