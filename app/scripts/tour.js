@@ -41,12 +41,14 @@ angular.module('buddyClientApp')
                                 return false;
                             }
                         },
-                        {
+                        /*
+                         {
                             title: "Service Users",
                             content: "All your Service Users are listed under this tab",
                             target: ".nav-service-users",
                             placement: "bottom"
-                        },
+                         },
+                        */
                         {
                             title: "Users",
                             content: "You can reschedule a Service Users next appointment, change their settings or view their diary by clicking on their name",

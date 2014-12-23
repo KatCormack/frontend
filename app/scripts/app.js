@@ -264,6 +264,5 @@ $(document).ready(function() {
     $("#Intercom").click(function(e) {
         e.preventDefault();
         Intercom('show');
-    })
-
+    });
 });
