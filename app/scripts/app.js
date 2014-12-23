@@ -116,6 +116,15 @@ angular.module('buddyClientApp', [
             url: '/p/:userId/:token',
             templateUrl: '/views/passwords/email_reset.html',
             controller: 'EmailPasswordResetCtrl'
+        }).state('anon.help', {
+            url: '/help',
+            templateUrl: '/views/help.html'
+        }).state('anon.terms', {
+            url: '/terms',
+            templateUrl: '/views/terms.html'
+        }).state('anon.privacy', {
+            url: '/privacy',
+            templateUrl: '/views/privacy.html'
         });
 
         $stateProvider.state('user', {
