@@ -80,15 +80,14 @@ var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);}if(w.a
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/dashboard" ng-if="auth.isClinician()"><img src="/images/buddy_logo_white.png"></a>
-            <a class="navbar-brand" href="/" ng-if="auth.isServiceUser()"><img src="/images/buddy_logo_white.png"></a>
-            <a class="navbar-brand" href="/" ng-if="!auth.isAuthenticated()"><img src="/images/buddy_logo_white.png"></a>
+            <a class="navbar-brand" href="/"><img src="/images/buddy_logo_white.png"></a>
           </div>
           <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
               <li ng-if="!auth.isAuthenticated() && isHome" active-nav="undergoingTherapy"><a class="btn clinician-btn" ng-href="/undergoing-therapy">For people undergoing therapy</a></li>
               <li ng-if="!auth.isAuthenticated() && isUndergoingTherapy" active-nav="home"><a class="btn clinician-btn" ng-href="/">For clinicians</a></li>
               <li ng-if="!auth.isAuthenticated()" active-nav="login"><a ng-href="/login">Login</a></li>
+              <li ng-if="auth.isClinician()" active-nav="dashboard"><a ng-href="/dashboard">Dashboard</a></li>
               <li ng-if="auth.isAuthenticated()"><a ng-click="logout()" href="">Logout</a></li>
             </ul>
           </div>
