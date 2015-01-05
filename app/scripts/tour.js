@@ -41,14 +41,12 @@ angular.module('buddyClientApp')
                                 return false;
                             }
                         },
-                        /*
-                         {
-                            title: "Service Users",
-                            content: "All your Service Users are listed under this tab",
-                            target: ".nav-service-users",
+                        {
+                            title: "Users",
+                            content: "Here we have the list of users, you can see just your users by clicking on the sessions tab or all the users in your team by clicking on the A-Z tab",
+                            target: ".navbar-brand",
                             placement: "bottom"
-                         },
-                        */
+                        },
                         {
                             title: "Users",
                             content: "You can reschedule a Service Users next appointment, change their settings or view their diary by clicking on their name",

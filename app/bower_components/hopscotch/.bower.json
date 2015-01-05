@@ -1,15 +1,14 @@
 {
   "name": "hopscotch",
   "homepage": "https://github.com/linkedin/hopscotch",
-  "version": "0.2.2",
-  "_release": "0.2.2",
+  "version": "0.2.3",
+  "_release": "0.2.3",
   "_resolution": {
     "type": "version",
-    "tag": "v0.2.2",
-    "commit": "a7e4f6fab9aa8fd09195ed0ee0c1cf50365233a9"
+    "tag": "v0.2.3",
+    "commit": "728f4a0661ad5a33c7579e66f0cd4f1442fe42b4"
   },
   "_source": "git://github.com/linkedin/hopscotch.git",
   "_target": "~0.2.2",
-  "_originalSource": "hopscotch",
-  "_direct": true
+  "_originalSource": "hopscotch"
 }

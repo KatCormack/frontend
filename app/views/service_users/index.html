@@ -131,7 +131,7 @@
                 </thead>
                 <tbody>
                   <tr ng-repeat="serviceUser in serviceUsers | orderBy:'current_session_time' | filter:{clinician_id: user.id, current_session_time: '!!'}" class="list-row">
-                    <td class="expand-link name"><a ng-href="/service_users/{{serviceUser.id}}">
+                    <td class="expand-link name" ng-class="{example: serviceUser.id == 'example'}"><a ng-href="/service_users/{{serviceUser.id}}">
                         {{ serviceUser.full_name }}<br />
                         <span class="buddy-id">{{ serviceUser.buddy_id }}</span>
                     </a></td>

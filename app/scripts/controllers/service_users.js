@@ -32,10 +32,11 @@ angular.module('buddyClientApp')
         $scope.serviceUsers = TeamServiceUser.query({account_id: $scope.user.account_ids[0]}, function() {
             // are we running the tutorial? create an example User
             var hopscotchState = hopscotch.getState();
-            if (hopscotchState === 'welcome-to-buddy:3' || hopscotchState === 'welcome-to-buddy:4') {
+            console.log(hopscotchState);
+            if (hopscotchState === 'welcome-to-buddy:4') {
                 var exampleUser = ExampleServiceUser.generate($scope.user);
                 $scope.serviceUsers.unshift(exampleUser);
-                hopscotch.startTour(HopscotchTour.tour(), hopscotch.getCurrStepNum());
+                hopscotch.startTour(HopscotchTour.tour(), 4);
             }
         });
 
@@ -201,9 +202,8 @@ angular.module('buddyClientApp')
             });
         } else {
             var hopscotchState = hopscotch.getState();
-            console.log(hopscotchState);
-            if (hopscotchState === 'welcome-to-buddy:5' || hopscotchState === 'welcome-to-buddy:6' || hopscotchState === 'welcome-to-buddy:7' || hopscotchState === 'welcome-to-buddy:8') {
-                hopscotch.startTour(HopscotchTour.tour($state, $scope), hopscotch.getCurrStepNum());
+            if (hopscotchState === 'welcome-to-buddy:5') {
+                hopscotch.startTour(HopscotchTour.tour($state, $scope), 6);
             }
 
             $scope.service_user = ExampleServiceUser.generate(CurrentUser.user().id);
