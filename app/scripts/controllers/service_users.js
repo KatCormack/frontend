@@ -181,7 +181,6 @@ angular.module('buddyClientApp')
                                 counts[idx] = '{width: "' + (parseFloat(count) / parseFloat(entryLength)) * 100 + '%"}';
                             });
                             session.progress = counts;
-                            console.log(session.progress);
                         }
                     });
                     var entryLength = $scope.entries.length;

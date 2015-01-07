@@ -350,6 +350,30 @@ td.expand-link { cursor: pointer; cursor: hand; }
 	display: none;
 }
 
+.add-diary-entry {
+  background: white;
+  margin: 10px 15px 0px 15px;
+  padding-top: 20px;
+  padding-bottom: 10px;
+  margin-left: 0px;
+  border-bottom: 2px solid #dbdbdb;
+}
+.add-diary-entry label {
+  font-size: 0.8em;
+}
+
+.add-diary-entry legend {
+  font-size: 1.2em;
+}
+
+.no-rating {
+  background-color: white;
+}
+
+.no-rating .calendar-top {
+  background-color: #555 !important;
+}
+
 .rating-1.progress-bar, .rating-selector-one.active, .rating-one .calendar-top {
 	background-color: #00B39D !important;
 }

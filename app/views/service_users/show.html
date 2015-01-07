@@ -223,29 +223,33 @@
             </div>
           </div>
           <div class="col-md-12 add-diary-entry" ng-if="Auth.isServiceUser()">
-            <form ng-submit="submitDiaryEntry(currentSession)">
-              <div class="form-group">
-                <textarea ng-model="newDiaryEntry" class="form-control" rows="3"></textarea>
+            <form ng-submit="submitDiaryEntry()">
+              <legend>How was your day today?</legend>
+              <div class="col-md-12">
+                {{ currentDiaryEntry.body }}
               </div>
               <div class="form-group">
-                <label class="radio-inline">
-                  <input type="radio">
+                <textarea ng-model="newDiaryEntry.body" class="form-control" rows="3"></textarea>
+              </div>
+              <div class="form-group">
+                <label class="radio-inline rating-option">
+                  <input type="radio" ng-model="newDiaryEntry.rating" value="1">
                   Well below average
                 </label>
-                <label class="radio-inline">
-                  <input type="radio">
+                <label class="radio-inline rating-option">
+                  <input type="radio" ng-model="newDiaryEntry.rating" value="2">
                   Below average
                 </label>
-                <label class="radio-inline">
-                  <input type="radio">
+                <label class="radio-inline rating-option">
+                  <input type="radio" ng-model="newDiaryEntry.rating" value="3">
                   Average
                 </label>
-                <label class="radio-inline">
-                  <input type="radio">
+                <label class="radio-inline rating-option">
+                  <input type="radio" ng-model="newDiaryEntry.rating" value="4">
                   Above average
                 </label>
-                <label class="radio-inline">
-                  <input type="radio">
+                <label class="radio-inline rating-option">
+                  <input type="radio" ng-model="newDiaryEntry.rating" value="5">
                   Well above average
                 </label>
               </div>
@@ -292,7 +296,7 @@
               </div>
             </div>
             <div ng-repeat="entry in session.entries" class="entry col-md-12"
-                 ng-class="{'{{entry.rating_class}}': true, 'first': $index === 0, 'hidden': diaryFilter != null && diaryFilter !== entry.rating}">
+                 ng-class="{'{{entry.rating_class}}': entry.rating_class, 'first': $index === 0, 'hidden': diaryFilter != null && diaryFilter !== entry.rating, 'no-rating': !entry.rating}">
               <div class="col-md-2">
                 <div class="calendar col-md-12 text-center">
                   <div class="calendar-top">
