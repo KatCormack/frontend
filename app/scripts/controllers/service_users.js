@@ -156,6 +156,17 @@ angular.module('buddyClientApp')
                 };
                 var allEntries = Entry.query({user_id: serviceUserId}, function() {
                     $scope.entries = allEntries;
+                    var today = new Date();
+                    today.setHours(0,0,0,0);
+                    var tomorrow = new Date();
+                    tomorrow.setDate(tomorrow.getDate() + 1);
+                    tomorrow.setHours(0,0,0,0);
+
+                    $scope.currentDiaryEntry = _.find($scope.entries, function(entry) {
+                        return entry.created_at >= today && entry.created_at <= tomorrow;
+                    });
+                    $scope.newDiaryEntry = {};
+
                     $scope.sessions.reverse();
                     var currentIndex = 1;
                     _.each($scope.sessions, function(session) {
