@@ -5,7 +5,7 @@ angular.module('buddyClientApp')
         return $resource(APIHost + '/api/v1/passwords.json');
     })
     .factory('Entry', function($resource, APIHost) {
-        return $resource(APIHost + '/api/v1/entries.json', {id: '@id'}, {update: {method: 'PUT'}});
+        return $resource(APIHost + '/api/v1/entries/:id.json', {id: '@id'}, {update: {method: 'PUT'}});
     })
     .factory('Session', function($resource, APIHost) {
         return $resource(APIHost + '/api/v1/sessions/:id.json', {id: '@id'}, {update: {method: 'PUT'}});

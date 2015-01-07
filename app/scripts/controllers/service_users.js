@@ -149,17 +149,20 @@ angular.module('buddyClientApp')
             });
             $scope.submitDiaryEntry = function() {
                 if ($scope.currentDiaryEntry) {
-                    $scope.newDiaryEntry.rating = $scope.currentDiaryEntry.rating;
                     if ($scope.currentDiaryEntry.body) {
-                        $scope.newDiaryEntry.body = $scope.currentDiaryEntry.body + "\n\n" + $scope.newDiaryEntry;
-                        Entry.update({entry: $scope.newDiaryEntry}, function(res) {
+                        if ($scope.newDiaryEntry.body) {
+                            $scope.newDiaryEntry.body = $scope.currentDiaryEntry.body + "\n\n" + $scope.newDiaryEntry.body;
+                        }
+                        Entry.update({entry: $scope.newDiaryEntry, id: $scope.currentDiaryEntry.id}, function(res) {
                             $scope.currentDiaryEntry = res;
                         });
+                        $scope.newDiaryEntry = {};
                     }
                 } else if (!$scope.currentDiaryEntry || !$scope.currentDiaryEntry.body) {
                     Entry.save({entry: $scope.newDiaryEntry}, function(res) {
                         $scope.currentDiaryEntry = res;
                     });
+                    $scope.newDiaryEntry = {};
 
                 }
             };

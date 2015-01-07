@@ -226,13 +226,10 @@
             <form ng-submit="submitDiaryEntry()">
               <legend ng-if="!currentDiaryEntry">How was your day today?</legend>
               <legend ng-if="currentDiaryEntry">What else did you do today?</legend>
-              <div class="col-md-12">
-                {{ currentDiaryEntry.body }}
-              </div>
               <div class="form-group">
                 <textarea ng-model="newDiaryEntry.body" class="form-control" rows="3"></textarea>
               </div>
-              <div class="form-group">
+              <div class="form-group" ng-if="!currentDiaryEntry.rating">
                 <label class="radio-inline rating-option">
                   <input type="radio" ng-model="newDiaryEntry.rating" value="1">
                   Well below average
