@@ -161,7 +161,7 @@
                 <a ng-click="reactivate(service_user.id)">Reactivate this user</a>
 
               </span>
-              <span class="deactivation-message" ng-if="!service_user.deactivated_at">
+              <span class="deactivation-message" ng-if="!service_user.deactivated_at && Auth.isClinician()">
               Has this person stopped using Buddy?
                 <a ng-href="/service_users/{{service_user.id}}/deactivate?returnTo=%2Fservice_users%2F{{service_user.id}}">
                 Deactivate this user
@@ -222,6 +222,39 @@
               </div>
             </div>
           </div>
+          <div class="col-md-12 add-diary-entry" ng-if="Auth.isServiceUser()">
+            <form ng-submit="submitDiaryEntry(currentSession)">
+              <div class="form-group">
+                <textarea ng-model="newDiaryEntry" class="form-control" rows="3"></textarea>
+              </div>
+              <div class="form-group">
+                <label class="radio-inline">
+                  <input type="radio">
+                  Well below average
+                </label>
+                <label class="radio-inline">
+                  <input type="radio">
+                  Below average
+                </label>
+                <label class="radio-inline">
+                  <input type="radio">
+                  Average
+                </label>
+                <label class="radio-inline">
+                  <input type="radio">
+                  Above average
+                </label>
+                <label class="radio-inline">
+                  <input type="radio">
+                  Well above average
+                </label>
+              </div>
+              <div class="form-group">
+                <input type="submit" value="Save diary entry" class="btn btn-buddy">
+              </div>
+            </form>
+          </div>
+
           <div class="col-md-12 session-container" ng-repeat="session in sessions" ng-class="{closed: !session.visible, present: session.id === 'present'}" ng-click="toggleEntries(session)">
             <div class="col-md-12 session">
               <div class="col-md-2 calendar-container">

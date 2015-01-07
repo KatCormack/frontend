@@ -28,12 +28,31 @@
         <a ng-click="addServiceUser()" href="/service_users/new" class="add-service-user">Add a service user</a></p>
     </div>
     <div class="col-md-6 dashboard-box">
+      <div class="dashboard-icon question-mark-icon text-center">
+        <span class="iconic iconic-md" data-glyph="person-genderless" title="service-users" aria-hidden="true"></span>
+      </div>
+      <p><a href="/service_users">Manage service users</a><br />
+        <span>{{ (serviceUsers | filter: {deactivated_at: null, clinician_id: user.id}).length }} active service users</span></p>
+    </div>
+
+  </div>
+
+
+  <div class="row">
+    <div class="col-md-6 dashboard-box first">
+      <div class="dashboard-icon data-transfer-icon text-center">
+        <span class="iconic iconic-md" data-glyph="settings" title="settings" aria-hidden="true"></span>
+      </div>
+      <p><a href="/settings">Settings</a></p>
+    </div>
+    <div class="col-md-6 dashboard-box">
       <div class="dashboard-icon calendar-icon text-center">
         <span class="iconic iconic-md" data-glyph="calendar" title="calendar" aria-hidden="true"></span>
       </div>
       <p><a href="/clinicians">Manage clinicians</a><br />
         <span>{{ (clinicians | filter: {deactivated_at: null}).length }} active clinicians</span></p>
     </div>
+
   </div>
 
   <div class="row">
@@ -53,21 +72,5 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-md-6 dashboard-box first">
-      <div class="dashboard-icon data-transfer-icon text-center">
-        <span class="iconic iconic-md" data-glyph="settings" title="settings" aria-hidden="true"></span>
-      </div>
-      <p><a href="/settings">Settings</a></p>
-    </div>
-
-    <div class="col-md-6 dashboard-box">
-      <div class="dashboard-icon question-mark-icon text-center">
-        <span class="iconic iconic-md" data-glyph="person-genderless" title="service-users" aria-hidden="true"></span>
-      </div>
-      <p><a href="/service_users">Manage service users</a><br />
-        <span>{{ (serviceUsers | filter: {deactivated_at: null, clinician_id: user.id}).length }} active service users</span></p>
-    </div>
-  </div>
 
 </div>

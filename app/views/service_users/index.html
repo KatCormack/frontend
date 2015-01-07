@@ -44,12 +44,12 @@
                   <span class="buddy-id">{{ serviceUser.buddy_id }}</span>
               </a></td>
               <td class="expand-link reactivate-user" ng-if="serviceUser.current_session_time">
-                <a ng-click="rescheduleSession(serviceUser)">
+                <a ng-click="rescheduleSession(serviceUser)" href="">
                   {{ serviceUser.current_session_time | ordinalDate: 'HH:mm / d MMMM yyyy' }}
                 </a>
               </td>
               <td ng-if="!serviceUser.current_session_time" class="expand-link reactivate-user">
-                <a ng-click="scheduleSession(serviceUser)">Reschedule or deactivate</a>
+                <a ng-click="scheduleSession(serviceUser)" href="">Reschedule or deactivate</a>
               </td>
               <td class="settings expand-link"><a ng-href="/service_users/{{serviceUser.id}}/edit">Settings</a></td>
             </tr>

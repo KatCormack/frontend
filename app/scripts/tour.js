@@ -49,7 +49,7 @@ angular.module('buddyClientApp')
                         },
                         {
                             title: "Users",
-                            content: "You can reschedule a Service Users next appointment, change their settings or view their diary by clicking on their name",
+                            content: "You can reschedule a Service Users next appointment, change their settings or view their diary by clicking on their name. Click on the example user to continue",
                             target: ".list-row .name",
                             placement: "bottom",
                             showNextButton: false,
