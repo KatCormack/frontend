@@ -205,25 +205,40 @@ angular.module('buddyClientApp')
                     $scope.sessions.unshift({id: 'present', entries: allEntries, visible: true});
                     _.each($scope.sessions, function(session) {
                         session.progress = {};
-                        var entryLength = session.entries.length;
+                        var entryLength = _.filter(session.entries, function(entry) { return !!entry.rating;}).length;
                         if (entryLength > 0) {
                             var counts = _.countBy(session.entries, function(entry) {
-                                return 'rating-' + entry.rating;
+                                if (entry.rating) {
+                                    return 'rating-' + entry.rating;
+                                } else {
+                                    return null;
+                                }
                             });
                             _.each(counts, function(count, idx) {
-                                counts[idx] = '{width: "' + (parseFloat(count) / parseFloat(entryLength)) * 100 + '%"}';
+                                if (idx) {
+                                    counts[idx] = '{width: "' + (parseFloat(count) / parseFloat(entryLength)) * 100 + '%"}';
+                                }
                             });
+                            delete counts[null]
                             session.progress = counts;
                         }
                     });
-                    var entryLength = $scope.entries.length;
+                    var entryLength = _.filter($scope.entries, function(entry) { return !!entry.rating;}).length;
                     if (entryLength > 0) {
                         var counts = _.countBy($scope.entries, function(entry) {
-                            return 'rating-' + entry.rating;
+                            if (entry.rating) {
+                                return 'rating-' + entry.rating;
+                            } else {
+                                return null;
+                            }
                         });
                         _.each(counts, function(count, idx) {
-                            counts[idx] = '{width: "' + (parseFloat(count) / parseFloat(entryLength)) * 100 + '%"}';
+                            if (idx) {
+                                counts[idx] = '{width: "' + (parseFloat(count) / parseFloat(entryLength)) * 100 + '%"}';
+                            }
+
                         });
+                        delete counts[null];
                         $scope.progress = counts || {};
                     }
                 });
