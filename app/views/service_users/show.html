@@ -224,7 +224,8 @@
           </div>
           <div class="col-md-12 add-diary-entry" ng-if="Auth.isServiceUser()">
             <form ng-submit="submitDiaryEntry()">
-              <legend>How was your day today?</legend>
+              <legend ng-if="!currentDiaryEntry">How was your day today?</legend>
+              <legend ng-if="currentDiaryEntry">What else did you do today?</legend>
               <div class="col-md-12">
                 {{ currentDiaryEntry.body }}
               </div>

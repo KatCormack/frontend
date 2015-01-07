@@ -147,6 +147,23 @@ angular.module('buddyClientApp')
                 }
 
             });
+            $scope.submitDiaryEntry = function() {
+                if ($scope.currentDiaryEntry) {
+                    $scope.newDiaryEntry.rating = $scope.currentDiaryEntry.rating;
+                    if ($scope.currentDiaryEntry.body) {
+                        $scope.newDiaryEntry.body = $scope.currentDiaryEntry.body + "\n\n" + $scope.newDiaryEntry;
+                        Entry.update({entry: $scope.newDiaryEntry}, function(res) {
+                            $scope.currentDiaryEntry = res;
+                        });
+                    }
+                } else if (!$scope.currentDiaryEntry || !$scope.currentDiaryEntry.body) {
+                    Entry.save({entry: $scope.newDiaryEntry}, function(res) {
+                        $scope.currentDiaryEntry = res;
+                    });
+
+                }
+            };
+
             $scope.sessions = Session.query({user_id: serviceUserId}, function() {
                 $scope.currentSession = $scope.sessions[0];
                 var removeEntries = function(array, entry) {
@@ -155,6 +172,7 @@ angular.module('buddyClientApp')
                     });
                 };
                 var allEntries = Entry.query({user_id: serviceUserId}, function() {
+
                     $scope.entries = allEntries;
                     var today = new Date();
                     today.setHours(0,0,0,0);
@@ -163,7 +181,8 @@ angular.module('buddyClientApp')
                     tomorrow.setHours(0,0,0,0);
 
                     $scope.currentDiaryEntry = _.find($scope.entries, function(entry) {
-                        return entry.created_at >= today && entry.created_at <= tomorrow;
+                        var created_at = moment(entry.created_at);
+                        return created_at >= today && created_at <= tomorrow;
                     });
                     $scope.newDiaryEntry = {};
 
