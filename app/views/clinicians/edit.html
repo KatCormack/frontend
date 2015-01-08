@@ -32,7 +32,7 @@
     </div>
     <div class="col-md-6">
       <div class="form-group required">
-        <label>
+        <label ng-if="!currentUser">
           <input type="checkbox" ng-model="clinician.can_administer_account" value="1" id="clinician_can_administer_account">
           &nbsp; May manage account
         </label>
@@ -71,7 +71,7 @@
       </div>
     </div>
 
-    <div class="col-md-8 footer">
+    <div class="col-md-8 footer" ng-if="!currentUser">
       <span class="teams-header">
         <label ng-class="{error: errors.account_ids}">
           Teams ({{ teams.length }})
@@ -83,13 +83,13 @@
       </span>
 
     </div>
-    <div class="col-md-4 text-right footer">
+    <div class="col-md-4 text-right footer" ng-if="!currentUser">
       <span class="text-right">
         <a ng-click="selectAllTeams()">select all</a>
       </span>
     </div>
 
-    <div class="col-md-12">
+    <div class="col-md-12" ng-if="!currentUser">
       <ul class="list-group">
         <li href="#" class="list-group-item active" ng-repeat="team in teams">
           <input type="checkbox" ng-model="team.selected" ng-change="checkUsers(); checkTeams()">
@@ -99,7 +99,7 @@
         </li>
       </ul>
     </div>
-    <div class="col-md-12 text-center footer">
+    <div class="col-md-12 text-center footer" ng-if="!currentUser">
       <span ng-if="clinician.deactivated_at">
         This user has been deactivated
         <a ng-click="reactivate(clinician)">Reactivate this user</a>

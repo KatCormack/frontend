@@ -158,6 +158,11 @@ angular.module('buddyClientApp', [
             data: {
                 access: AccessLevels.clinician
             }
+        }).state('clinician.settings', {
+            url: '/settings',
+            templateUrl: '/views/clinicians/edit.html',
+            controller: 'EditClinicianCtrl',
+            forCurrentUser: true
         }).state('clinician.serviceUsers', {
             url: '/service_users',
             templateUrl: '/views/service_users/index.html',
