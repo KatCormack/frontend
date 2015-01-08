@@ -270,7 +270,8 @@
                 </div>
               </div>
               <div class="col-md-10 progress-container">
-                <span class="session-details">Session: {{ session.scheduled_time | ordinalDate: 'd MMMM'}}</span>
+                <span class="session-details" ng-if="session.id === 'present'">Session: Present</span>
+                <span class="session-details" ng-if="session.id !== 'present'">Session: {{ session.scheduled_time | ordinalDate: 'd MMMM'}}</span>
                 <div class="row entry-details">
                   <div class="col-md-6">
                     <ng-pluralize count="session.entries.length"

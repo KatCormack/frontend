@@ -219,7 +219,7 @@ angular.module('buddyClientApp')
                                     counts[idx] = '{width: "' + (parseFloat(count) / parseFloat(entryLength)) * 100 + '%"}';
                                 }
                             });
-                            delete counts[null]
+                            delete counts[null];
                             session.progress = counts;
                         }
                     });

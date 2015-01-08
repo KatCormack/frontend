@@ -346,7 +346,7 @@ td.expand-link { cursor: pointer; cursor: hand; }
 	border-bottom: 2px solid #dbdbdb;
 }
 
-.session-container.present .session, .session-container.closed .entry, .entry.hidden {
+.session-container.present .session .calendar, .session-container.closed .entry, .entry.hidden {
 	display: none;
 }
 
