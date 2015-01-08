@@ -270,6 +270,10 @@ angular.module('buddyClientApp')
         var goalTime = new Date();
         goalTime.setMinutes(0);
 
+        $scope.open = function(goal) {
+            goal.opened = true;
+        };
+
         $scope.newGoal = {reminder_type: 'recurring', time: goalTime, text: '', day:{}};
 
         $scope.newGoalSubmit = function() {
