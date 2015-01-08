@@ -53,6 +53,7 @@ angular.module('buddyClientApp')
     .controller('EditClinicianCtrl', function($scope, $state, Team, Clinician, ClinicianServiceUser, TeamClinician, ClinicianServiceUserRelationship, Membership, CurrentUser) {
         if (!$state.params.id) {
             $scope.currentUser = true;
+            $scope.redirectToDashboard = true;
             $state.params.id = CurrentUser.user().id;
         }
         $scope.clinician = Clinician.get({id: $state.params.id}, function() {
@@ -91,8 +92,10 @@ angular.module('buddyClientApp')
             return selectedTeamIds.length;
         };
         $scope.submit = function() {
-            $scope.checkTeams();
-            if ($scope.checkUsers() > 0 || $scope.errors.team) {
+            if (!$scope.currentUser) {
+                $scope.checkTeams();
+            }
+            if (!$scope.currentUser || $scope.checkUsers() > 0 || $scope.errors.team) {
                 Clinician.update({user: $scope.clinician, id: $state.params.id, validate_only: true}, function() {
                 }, function(response) {
                     _.each(response.data, function(value, key) { response.data[key] = value[0]; });
@@ -135,8 +138,12 @@ angular.module('buddyClientApp')
                     _.each(teamsToAdd, function(team) {
                         Membership.save({user_id: $scope.clinician.id, account_id: team});
                     });
+                    if ($scope.redirectToDashboard) {
+                        $state.go('user.dashboard');
+                    } else {
+                        $state.go('clinicianAdmin.clinicians');
+                    }
 
-                    $state.go('clinicianAdmin.clinicians');
                 });
             }
         };
