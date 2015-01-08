@@ -419,7 +419,7 @@
 
           <div class="new-goal col-md-12">
             <h2 class="text-center title">New Goal</h2>
-            <form action="newGoalSubmit()">
+            <form ng-submit="newGoalSubmit()">
               <div class="input-group col-md-8">
                 <input type="text" ng-model="newGoal.text" class="form-control" />
               </div>

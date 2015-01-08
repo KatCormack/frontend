@@ -271,6 +271,14 @@ angular.module('buddyClientApp')
         goalTime.setMinutes(0);
 
         $scope.newGoal = {reminder_type: 'recurring', time: goalTime, text: '', day:{}};
+
+        $scope.newGoalSubmit = function() {
+            ServiceUserGoal.save({user_id: serviceUserId, goal: $scope.newGoal}, function(res) {
+                $scope.goals.push(res);
+                $scope.newGoal = {reminder_type: 'recurring', time: goalTime, text: '', day:{}};
+            });
+        };
+
         _.each(Days, function(day) { $scope.newGoal.day[day] = false; });
         $scope.Days = Days;
 
