@@ -155,12 +155,14 @@ angular.module('buddyClientApp')
                         }
                         Entry.update({entry: $scope.newDiaryEntry, id: $scope.currentDiaryEntry.id}, function(res) {
                             $scope.currentDiaryEntry = res;
+                            $scope.sessions[0].entries[0] = $scope.currentDiaryEntry;
                         });
                         $scope.newDiaryEntry = {};
                     }
                 } else if (!$scope.currentDiaryEntry || !$scope.currentDiaryEntry.body) {
                     Entry.save({entry: $scope.newDiaryEntry}, function(res) {
                         $scope.currentDiaryEntry = res;
+                        $scope.sessions[0].entries.unshift($scope.currentDiaryEntry);
                     });
                     $scope.newDiaryEntry = {};
 
