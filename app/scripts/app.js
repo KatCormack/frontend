@@ -1,5 +1,9 @@
 'use strict';
 
+if (window.location.protocol !== "https:" && window.location.hostname !== "buddyapp.local" ) {
+    window.location.href = "https:" + window.location.href.substring(window.location.protocol.length);
+}
+
 angular.module('buddyClientApp', [
     'ngCookies',
     'ngResource',
