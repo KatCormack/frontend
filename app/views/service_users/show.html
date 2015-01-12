@@ -4,11 +4,13 @@
       <div class="col-md-4" id="diary-menu">
         <ul class="nav nav-stacked buddy-nav" id="sidebar">
           <li class="nextSession nav-item" ng-if="Auth.isServiceUser()">
-            <span class="iconic" data-glyph="calendar" title="calendar" aria-hidden="true"></span>
-            <span class="title">
-              Next session<br />
-              <span class="next-session" ng-if="sessionScheduledTime">{{ sessionScheduledTime | ordinalDate: "MMMM d 'at' HH:mm" }}</span>
-              <span class="next-session" ng-if="!sessionScheduledTime">None</span>
+            <div class="nav-wrapper">
+              <span class="iconic" data-glyph="calendar" title="calendar" aria-hidden="true"></span>
+              <span class="title">
+                Next session<br />
+                <span class="next-session" ng-if="sessionScheduledTime">{{ sessionScheduledTime | ordinalDate: "MMMM d 'at' HH:mm" }}</span>
+                <span class="next-session" ng-if="!sessionScheduledTime">None</span>
+              </div>
             </span>
           </li>
           <li class="settings nav-item">

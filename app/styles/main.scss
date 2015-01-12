@@ -290,7 +290,7 @@ td.expand-link { cursor: pointer; cursor: hand; }
 	font-size: 1.3em;
 }
 
-.nav-stacked li a {
+.nav-stacked li a, .nav-stacked li .nav-wrapper {
 	padding: 15px !important;
 }
 
@@ -549,7 +549,7 @@ a:hover {
 	height: 80px;
 }
 
-h2.no-results, h1.dashboard-header, .title {
+h2.no-results, h1.dashboard-header, .title, .nav-wrapper .iconic {
 	color: $buddy-primary;
 }
 
