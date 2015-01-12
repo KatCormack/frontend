@@ -125,7 +125,7 @@ angular.module('buddyClientApp')
                     $scope.sessionScheduledTime = session.scheduled_time;
                 });
             } else {
-                ServiceUserSession.save({session: session, service_user_id: $scope.user.id}, function(s) {
+                ServiceUserSession.save({session: session, service_user_id: $scope.service_user.id}, function(s) {
                     $scope.sessionScheduledTime = session.scheduled_time;
                     $scope.nextSession = s;
                 });
@@ -204,7 +204,9 @@ angular.module('buddyClientApp')
                     });
 
                     $scope.sessions.reverse();
-                    $scope.sessions.unshift({id: 'present', entries: allEntries, visible: true});
+                    if (moment($scope.currentSession.scheduled_at) < new Date()) {
+                        $scope.sessions.unshift({id: 'present', entries: allEntries, visible: true});
+                    }
                     _.each($scope.sessions, function(session) {
                         session.progress = {};
                         var entryLength = _.filter(session.entries, function(entry) { return !!entry.rating;}).length;

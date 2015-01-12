@@ -126,25 +126,25 @@
                 <input type="text" ng-model="service_user.email" placeholder="" class="form-control input-md" id="service_user_email">
               </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6" ng-if="Auth.isClinician()">
               <div class="form-group">
                 <label for="service_user_nhs_number">NHS Number</label>
                 <input type="text" ng-model="service_user.nhs_number" placeholder="" class="form-control input-md" id="service_user_nhs_number">
               </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6" ng-if="Auth.isClinician()">
               <div class="form-group required">
                 <label for="service_user_clinician">Primary Clinician</label>
                 <select class="form-control" ng-model="service_user.clinician_id" ng-options="clinician.id as clinician.full_name for clinician in clinicians | orderBy: 'last_name' | filter: {deactivated_at: null}"></select>
               </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6" ng-if="Auth.isClinician()">
               <div class="form-group">
                 <label for="service_user_license_expiry_date">License Expiry Date</label>
                 <input type="text" ng-model="service_user.license_expiry_date" placeholder="" class="form-control input-md" id="service_user_license_expiry_date" disabled="disabled">
               </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6" ng-if="Auth.isClinician()">
               <div class="form-group required">
                 <label for="service_user_clinician">Team</label>
                 <select class="form-control" ng-model="service_user.account_id" ng-options="team.id as team.name for team in teams">
@@ -155,7 +155,7 @@
               <hr>
             </div>
 
-            <div class="col-md-12 text-center footer">
+            <div class="col-md-12 text-center footer" ng-if="Auth.isClinician()">
               <span class="deactivation-message" ng-if="service_user.deactivated_at">
                 This user has been deactivated
                 <a ng-click="reactivate(service_user.id)">Reactivate this user</a>

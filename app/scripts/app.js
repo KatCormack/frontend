@@ -95,7 +95,7 @@ angular.module('buddyClientApp', [
             }
         }).state('anon.home', {
             url: '/',
-            templateUrl: 'views/main.html',
+            templateUrl: '/views/main.html',
             controller: 'MainCtrl',
             activetab: 'home'
         }).state('anon.login', {
