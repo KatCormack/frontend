@@ -1,6 +1,8 @@
 'use strict';
 
-if (window.location.protocol !== "https:" && window.location.hostname !== "buddyapp.local" ) {
+if (window.location.protocol !== "https:"
+    && window.location.hostname !== "buddyapp.local"
+    && window.location.hostname.indexOf("ngrok") === -1) {
     window.location.href = "https:" + window.location.href.substring(window.location.protocol.length);
 }
 
