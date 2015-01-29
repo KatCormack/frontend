@@ -409,7 +409,7 @@
                   <input type="text" datepicker-popup="dd/MM/yyyy" is-open="goal.opened" min-date="minDate" ng-required="true" close-text="Close" ng-click="open(goal, $event)" ng-model="goal.time" class="form-control"/>
                 </div>
                 <div class="input-group col-md-12" ng-if="goal.reminder_type === 'recurring' || goal.reminder_type === 'once'">
-                  <timepicker ng-model="goal.time" hour-step="hstep" minute-step="mstep" show-meridian="false"></timepicker>
+                  <timepicker ng-model="goal.time" hour-step="hstep" minute-step="mstep" show-meridian="false" class="goal-time"></timepicker>
                 </div>
                 <div class="input-group col-md-12">
                   <input type="submit" value="Save goal" class="btn-buddy btn">
@@ -444,7 +444,7 @@
                 <input type="text" datepicker-popup="dd/MM/yyyy" is-open="newGoal.opened" min-date="minDate" ng-required="true" close-text="Close" ng-click="open(newGoal, $event)" ng-model="newGoal.time" class="form-control"/>
               </div>
               <div class="input-group col-md-12" ng-if="newGoal.reminder_type === 'regular' || newGoal.reminder_type === 'once'">
-                <timepicker ng-model="newGoal.time" hour-step="hstep" minute-step="mstep" show-meridian="false"></timepicker>
+                <timepicker ng-model="newGoal.time" hour-step="hstep" minute-step="mstep" show-meridian="false" class="goal-time"></timepicker>
               </div>
               <div class="input-group col-md-12">
                 <input type="submit" value="Add Goal" class="btn-buddy btn">
@@ -452,10 +452,10 @@
             </form>
           </div>
 
-          <div class="past-goals col-md-12" ng-if="(goals | filter: {removed_at: '!!'}).length > 0">
+          <div class="past-goals col-md-12" ng-if="(goals | filter: {removed: true}).length > 0">
             <h2 class="title text-center">Past goals</h2>
-            <div class="row" ng-repeat="goal in goals | filter: {removed_at: '!!'}">
-              <div class="col-md-9" ng-if="!goal.editable">
+            <div class="row" ng-repeat="goal in goals | filter: {removed: true}">
+              <div class="col-md-9">
                 <label>
                   <input type="checkbox" ng-model="goal.removed" ng-change="toggleGoalChanged(goal)">
                   {{ goal.text }}

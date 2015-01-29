@@ -262,13 +262,17 @@ angular.module('buddyClientApp')
         }
 
         $scope.toggleGoalChanged = function(goal) {
-            if (goal.removed) {
-                goal.removed_at = new Date();
-            } else {
+            if (goal.removed_at) {
                 goal.removed_at = null;
+            } else {
+                goal.removed_at = new Date();
             }
-            goal.removed = !!goal.removed_at;
-            goal = Goal.update({goal: goal, id: goal.id});
+
+            Goal.update({goal: goal, id: goal.id}, function(res) {
+                goal = res;
+                goal.removed = !!goal.removed_at;
+            });
+
         };
 
         var goalTime = new Date();
