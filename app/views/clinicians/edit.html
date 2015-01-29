@@ -51,19 +51,24 @@
         <p id="deactivate-service-users-error" class="error-inline" ng-if="deactivationClicked">To deactivate this clinician please re-assign or deactivate the following service users </p>
       </label>
       <div class="list-group">
-        <!-- need a polyfill here for ie7 -->
-        <div href="#" class="list-group-item as-table" ng-repeat="serviceUser in serviceUsers | orderBy: 'last_name'" ng-class="{'alert-danger': serviceUser.needsMoving, alert: serviceUser.needsMoving }">
+        <div class="list-group-item as-table" ng-repeat="serviceUser in serviceUsers | orderBy: 'last_name'" ng-class="{'alert-danger': serviceUser.needsMoving || serviceUser.needsMovingForDeactivation, alert: serviceUser.needsMoving || serviceUser.needsMovingForDeactivation }">
           <div class="col-md-4 service-user-list-attribute">
             <label class="list-group-label">
               {{ serviceUser.full_name }}<br />
               <span class="buddy-id">{{ serviceUser.buddy_id }}</span>
             </label>
           </div>
-          <div class="col-md-4 service-user-list-attribute">
-            <a ng-href="/service_users/{{service_user.id}}/deactivate?returnTo=%2Fclinicians%2F{{clinician.id}}%2Fedit">
+          <div class="col-md-4 service-user-list-attribute" ng-if="serviceUser.deactivated_at">
+            <a ng-href="/service_users/{{serviceUser.id}}/deactivate?returnTo=%2Fclinicians%2F{{clinician.id}}%2Fedit">
               Deactivate user
             </a>
           </div>
+          <div class="col-md-4 service-user-list-attribute" ng-if="!serviceUser.deactivated_at">
+            <a ng-href="/service_users/{{serviceUser.id}}/deactivate?returnTo=%2Fclinicians%2F{{clinician.id}}%2Fedit">
+              Reactivate user
+            </a>
+          </div>
+
           <div class="col-md-4">
             <select class="form-control" ng-options="clinician.id as clinician.full_name for clinician in teamClinicians[serviceUser.account_id] | orderBy: 'last_name' | filter: {deactivated_at: null}" ng-model="serviceUser.clinician_id" ng-change="checkUsers()"></select>
           </div>
@@ -102,12 +107,14 @@
     <div class="col-md-12 text-center footer" ng-if="!currentUser">
       <span ng-if="clinician.deactivated_at">
         This user has been deactivated
-        <a ng-click="reactivate(clinician)">Reactivate this user</a>
+        <a href="" ng-click="reactivate($event)">
+          Reactivate this user
+        </a>
       </span>
 
       <span ng-if="!clinician.deactivated_at">
         Has this person left or stopped using Buddy?
-        <a ng-click="deactivate($event)">
+        <a href="" ng-click="deactivate($event)">
           Deactivate this user
         </a>
       </span>

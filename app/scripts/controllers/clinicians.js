@@ -150,15 +150,29 @@ angular.module('buddyClientApp')
         $scope.hasUsers = function() {
             return _.filter($scope.serviceUsers, function(user)  { return user.clinician_id === $scope.clinician.id && !user.deactivated_at; }).length > 0;
         };
+        $scope.needsMovingForDeactivation = function() {
+            _.each($scope.serviceUsers, function(user) {
+                user.needsMovingForDeactivation = (user.clinician_id == $scope.clinician.id);
+            })
+        }
+
         $scope.deactivate = function($event) {
             $event.preventDefault();
             $scope.deactivationClicked = false;
             if ($scope.hasUsers() > 0) {
                 $scope.deactivationClicked = true;
+                $scope.needsMovingForDeactivation();
             } else {
                 $scope.clinician.deactivated_at = new Date();
                 Clinician.update({id: $scope.clinician.id, user: $scope.clinician})
             }
         };
+
+        $scope.reactivate = function($event) {
+            $event.preventDefault();
+            $scope.clinician.deactivated_at = null;
+            Clinician.update({id: $scope.clinician.id, user: $scope.clinician})
+        };
+
 
     });
