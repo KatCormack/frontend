@@ -77,11 +77,11 @@
           <h2 class="text-center title">Next session</h2>
           <form ng-submit="updateSession(nextSession)">
             <div class="form-group">
-              <div class="modal-input-group input-group by-timepicker-in-modal col-md-3">
+              <div class="modal-input-group input-group col-md-3">
                 <input type="text" datepicker-popup="dd/MM/yyyy" is-open="nextSession.opened" min-date="minDate" ng-required="true" close-text="Close" ng-click="open(nextSession, $event)" ng-model="nextSession.scheduled_time" class="form-control" />
               </div>
               <div class="modal-input-group input-group col-md-3">
-                <timepicker ng-model="nextSession.scheduled_time" hour-step="hstep" minute-step="mstep" show-meridian="false"></timepicker>
+                <timepicker ng-model="nextSession.scheduled_time" hour-step="hstep" minute-step="mstep" show-meridian="false" class="time-without-arrows"></timepicker>
               </div>
               <div class="input-group by-timepicker-in-modal col-md-6 text-right">
                 <input type="submit" value="Save changes" class="btn-buddy btn">
@@ -385,33 +385,55 @@
           </div>
 
           <div class="editable-goals col-md-12" ng-if="(goals | filter: {editable: '!!'}).length > 0">
-            <div class="row" ng-repeat="goal in goals | filter: {editable: '!!'}">
+            <div ng-repeat="goal in goals | filter: {editable: '!!'}">
               <form action="updateGoal(goal)">
-                <div class="input-group col-md-8">
-                  <input type="text" ng-model="goal.text" class="form-control" />
-                </div>
-                <div class="input-group col-md-4 text-right">
-                  {{ 140-goal.text.length }}<br />
-                  <a ng-click="showGoalExamples()">Examples</a>
-                </div>
-                <div class="col-md-12">
-                  <label class="radio-inline"><input type="radio" ng-model="goal.reminder_type" value="recurring">Recurring</label>
-                  <label class="radio-inline"><input type="radio" ng-model="goal.reminder_type" value="once">One-off</label>
-                  <label class="radio-inline"><input type="radio" ng-model="goal.reminder_type" value="none">None</label>
-                </div>
-                <div class="col-md-12" ng-if="goal.reminder_type === 'recurring'">
-                  <label class="checkbox-inline" ng-repeat="day in Days">
-                    <input type="checkbox" ng-model="goal.regular_reminder_schedule[day]"/>
-                    {{ day | limitTo: 1 | uppercase }}
-                  </label>
-                </div>
-                <div class="input-group col-md-12" ng-if="goal.reminder_type === 'once'">
-                  <input type="text" datepicker-popup="dd/MM/yyyy" is-open="goal.opened" min-date="minDate" ng-required="true" close-text="Close" ng-click="open(goal, $event)" ng-model="goal.time" class="form-control"/>
-                </div>
-                <div class="input-group col-md-12" ng-if="goal.reminder_type === 'recurring' || goal.reminder_type === 'once'">
-                  <timepicker ng-model="goal.time" hour-step="hstep" minute-step="mstep" show-meridian="false" class="goal-time"></timepicker>
+                <div class="row">
+                  <div class="input-group col-md-8">
+                    <input type="text" ng-model="goal.text" class="form-control" />
+                  </div>
+                  <div class="input-group col-md-4 text-right">
+                    {{ 140-goal.text.length }}<br />
+                    <a ng-click="showGoalExamples()">Examples</a>
+                  </div>
                 </div>
                 <div class="row">
+                  <div class="col-md-12">
+                    <label>How often should a reminder be sent off?</label>
+                  </div>
+                  <div class="col-md-12 text-center">
+                    <label class="radio-inline"><input type="radio" ng-model="goal.reminder_type" value="recurring">Recurring</label>
+                    <label class="radio-inline"><input type="radio" ng-model="goal.reminder_type" value="once">One-off</label>
+                    <label class="radio-inline"><input type="radio" ng-model="goal.reminder_type" value="none">None</label>
+                  </div>
+                </div>
+                <div class="row" ng-if="goal.reminder_type === 'recurring'">
+                  <div class="col-md-12">
+                    <label>On what days should the reminder be sent out?</label>
+                  </div>
+                  <div class="col-md-12 text-center">
+                    <label class="checkbox-inline" ng-repeat="day in Days">
+                      <input type="checkbox" ng-model="goal.regular_reminder_schedule[day]"/>
+                      {{ day | limitTo: 1 | uppercase }}
+                    </label>
+                  </div>
+                </div>
+                <div class="row" ng-if="goal.reminder_type === 'once'">
+                  <div class="input-group col-md-12">
+                    <label>On what day should the reminder be sent out?</label>
+                  </div>
+                  <div class="input-group col-md-4 col-md-push-4">
+                    <input type="text" datepicker-popup="dd/MM/yyyy" is-open="goal.opened" min-date="minDate" ng-required="true" close-text="Close" ng-click="open(goal, $event)" ng-model="goal.time" class="form-control input-medium"/>
+                  </div>
+                </div>
+                <div class="row" ng-if="goal.reminder_type === 'recurring' || goal.reminder_type === 'once'">
+                  <div class="input-group col-md-12">
+                    <label>At what time should the reminder be sent out?</label>
+                  </div>
+                  <div class="input-group col-md-12 goal-time-wrapper" >
+                    <timepicker ng-model="goal.time" hour-step="hstep" minute-step="mstep" show-meridian="false" class="goal-time time-without-arrows"></timepicker>
+                  </div>
+                </div>
+                <div class="row add-goal">
                   <div class="col-md-12 text-center">
                     <a ng-click="cancelEditGoal(goal)">cancel</a>
                     <input type="submit" value="Save goal" class="btn-buddy btn" ng-submit="updateGoal(goal)">
@@ -467,7 +489,7 @@
                   <label>At what time should the reminder be sent out?</label>
                 </div>
                 <div class="input-group col-md-12 goal-time-wrapper" >
-                  <timepicker ng-model="newGoal.time" hour-step="hstep" minute-step="mstep" show-meridian="false" class="goal-time"></timepicker>
+                  <timepicker ng-model="newGoal.time" hour-step="hstep" minute-step="mstep" show-meridian="false" class="goal-time time-without-arrows"></timepicker>
                 </div>
               </div>
               <div class="row">
