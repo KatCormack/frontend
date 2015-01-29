@@ -1035,6 +1035,14 @@ h2.no-results, h1.dashboard-header, .title, .nav-wrapper .iconic {
     color: #fff;
 }
 
-.goal-time .text-center {
+.goal-time tr.text-center {
   display: none;
+}
+
+.goal-time {
+  margin: 0 auto;
+}
+
+.add-goal {
+  margin-top: 5px;
 }
