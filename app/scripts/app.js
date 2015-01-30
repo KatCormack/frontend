@@ -67,7 +67,7 @@ angular.module('buddyClientApp', [
                 $state.go('anon.login');
             } else {
                 var intercomUser = CurrentUser.intercomUser();
-                intercomUser.app_id = 'm7n9opwk';
+                intercomUser.app_id = 'nv0lz1xn';
                 intercomUser.widget = {activator: '#Intercom'};
                 window.Intercom("boot", intercomUser);
             }
