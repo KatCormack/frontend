@@ -95,7 +95,7 @@ angular.module('buddyClientApp')
             if (!$scope.currentUser) {
                 $scope.checkTeams();
             }
-            if (!$scope.currentUser || $scope.checkUsers() > 0 || $scope.errors.team) {
+            if ($scope.errors.team) {
                 Clinician.update({user: $scope.clinician, id: $state.params.id, validate_only: true}, function() {
                 }, function(response) {
                     _.each(response.data, function(value, key) { response.data[key] = value[0]; });
@@ -173,6 +173,5 @@ angular.module('buddyClientApp')
             $scope.clinician.deactivated_at = null;
             Clinician.update({id: $scope.clinician.id, user: $scope.clinician})
         };
-
 
     });
