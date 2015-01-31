@@ -51,16 +51,19 @@ angular.module( 'angularUtils.filters.ordinalDate', [] )
         };
 
         return function(timestamp, format) {
-            var date = new Date(timestamp);
-            var dayOfMonth = date.getDate();
-            var suffix = getOrdinalSuffix(dayOfMonth);
+            if ($("html.lt-ie9").length > 0) {
+                return $filter('date')(timestamp, format);
+            } else {
+                var date = new Date(timestamp);
+                var dayOfMonth = date.getDate();
+                var suffix = getOrdinalSuffix(dayOfMonth);
 
-            var matchingIndices = getIndecesOfDayCharacter(format);
-
-            // now we to insert the suffix at the index(-ces) that we found
-            for (var i = matchingIndices.length; i > 0; i --) {
-                format = insertAtIndex(format, matchingIndices[i-1], suffix);
+                var matchingIndices = getIndecesOfDayCharacter(format);
+                // now we to insert the suffix at the index(-ces) that we found
+                for (var i = matchingIndices.length; i > 0; i--) {
+                    format = insertAtIndex(format, matchingIndices[i-1], suffix);
+                }
+                return $filter('date')(date, format);
             }
-            return $filter('date')(date, format);
         };
     });

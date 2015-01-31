@@ -32,7 +32,6 @@ angular.module('buddyClientApp')
         $scope.serviceUsers = TeamServiceUser.query({account_id: $scope.user.account_ids[0]}, function() {
             // are we running the tutorial? create an example User
             var hopscotchState = hopscotch.getState();
-            console.log(hopscotchState);
             if (hopscotchState === 'welcome-to-buddy:4') {
                 var exampleUser = ExampleServiceUser.generate($scope.user);
                 $scope.serviceUsers.unshift(exampleUser);
