@@ -71,6 +71,12 @@ angular.module('buddyClientApp', [
                 intercomUser.app_id = 'nv0lz1xn';
                 intercomUser.widget = {activator: '#Intercom'};
                 window.Intercom("boot", intercomUser);
+                $rootScope.$watch(function() { return Auth.isClinician }, function() {
+                    $rootScope.$evalAsync(function() { 
+                        window.Intercom("reattach_activator")
+                    } );
+
+                })
             }
         });
 

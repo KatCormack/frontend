@@ -33,7 +33,6 @@
       };
       Intercom.q = [];
         Intercom.c = function(args){
-            console.log(args)
         Intercom.q.push(args)
       };
       return Intercom;
@@ -82,9 +81,7 @@
           IntercomService.init(appID).then(function(intercom) {
             options = options || _options;
             angular.extend(options, { app_id: appID });
-
-              intercom('boot', options);
-              console.log(intercom);
+            intercom('boot', options);
             intercomObj = intercom;
           });
         },
