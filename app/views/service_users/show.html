@@ -301,11 +301,11 @@
               <div class="col-md-2">
                 <div class="calendar col-md-12 text-center">
                   <div class="calendar-top">
-                    {{ entry.created_at | date: 'MMMM' | uppercase }}
+                    {{ entry.created_at | date: 'MMM' | uppercase }}
                   </div>
                   <div class="calendar-bottom">
                     <span class="number">{{ entry.created_at | date: 'dd' }}</span><br />
-                    {{ entry.created_at | date: 'EEEE' | uppercase }}
+                    {{ entry.created_at | date: 'EEE' | uppercase }}
                   </div>
                 </div>
               </div>
