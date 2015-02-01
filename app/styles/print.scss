@@ -1,0 +1,61 @@
+body {
+	padding: 0!important;
+	min-height: 1px!important;
+}
+
+.diary {
+	#sidebar {
+		display: none!important;
+	}
+}
+
+#diaryEntries {
+	display: block!important;
+
+	// Replicating grid layout
+	.col-md-12, .col-md-10, .col-md-2 {
+		float: left;
+	}
+
+	.col-md-2 {
+		width: 16.666666666666664%;
+	}
+
+	.col-md-10 {
+		width: 83.33333333333334%;
+	}
+
+	.col-md-12 {
+		width: 100%;
+	}
+
+	// Top filter block and mood bar
+	.diary-page-contents {
+		display: none!important;
+	}
+	
+	// Add diary entry block
+	.add-diary-entry {
+		display: none!important;
+	}
+
+	// Unselected diary entries
+	.closed {
+		display: none!important;
+	}
+
+	.entry {
+		clear: both;
+		display: block;
+		float: none;
+		overflow: hidden;
+
+		// Attempt to stop single entries breaking on to two pages
+		page-break-inside: avoid;
+	}
+
+	// 'Hide entries' block
+	.entry-details .text-right {
+		display: none!important;
+	}
+}
