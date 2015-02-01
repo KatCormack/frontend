@@ -90,7 +90,7 @@
     </div>
     <div class="col-md-4 text-right footer" ng-if="!currentUser">
       <span class="text-right">
-        <a ng-click="selectAllTeams()">select all</a>
+        <a ng-click="selectAllTeams()" href="#select-all">select all</a>
       </span>
     </div>
 
@@ -107,14 +107,14 @@
     <div class="col-md-12 text-center footer" ng-if="!currentUser">
       <span ng-if="clinician.deactivated_at">
         This user has been deactivated
-        <a href="" ng-click="reactivate($event)">
+        <a href="#" ng-click="reactivate($event)">
           Reactivate this user
         </a>
       </span>
 
       <span ng-if="!clinician.deactivated_at">
         Has this person left or stopped using Buddy?
-        <a href="" ng-click="deactivate($event)">
+        <a href="#" ng-click="deactivate($event)">
           Deactivate this user
         </a>
       </span>

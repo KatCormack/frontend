@@ -71,7 +71,7 @@
     <div class="col-md-12 text-center footer">
       <span ng-if="service_user.deactivated_at">
         This user has been deactivated
-        <a ng-click="reactivate(service_user.id)">Reactivate this user</a>
+        <a href="#" ng-click="reactivate(service_user.id)">Reactivate this user</a>
       </span>
       <span ng-if="!service_user.deactivated_at">
         Has this person stopped using Buddy?
