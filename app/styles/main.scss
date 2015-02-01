@@ -184,7 +184,12 @@ legend h1 {
 
 td.expand-link { cursor: pointer; cursor: hand; }
 
-.navbar-buddy .open > a, .navbar-buddy .open > a:hover, .navbar-buddy .open > a:focus, .navbar-buddy a:hover {
+.navbar-buddy .open > a, 
+.navbar-buddy .open > a:hover, 
+.navbar-buddy .open > a:focus, 
+.navbar-buddy a:hover, 
+.navbar-buddy a:focus, 
+.navbar-buddy a:active {
 	background-color: $buddy-border !important;
 	color: #ddd !important;
 }
@@ -374,63 +379,101 @@ td.expand-link { cursor: pointer; cursor: hand; }
   background-color: #555 !important;
 }
 
-.rating-1.progress-bar, .rating-selector-one.active, .rating-one .calendar-top {
+.rating-selectors {
+  display: table !important;
+  height: 80px;
+
+  .active {
+    color: #fff!important;
+  }
+
+  .rating-selector-all.active {
+    color: #333!important;
+  }
+}
+
+.rating-1.progress-bar, 
+.rating-selector-one.active, 
+.rating-one .calendar-top {
 	background-color: #00B39D !important;
 }
 
-.rating-one, .rating-selector-one:hover {
+.rating-one, 
+.rating-selector-one:hover {
 	background-color: #CAE5E2 !important;
 }
 
-.rating-one .mood, .rating-selector-one {
+.rating-one .mood, 
+.rating-selector-one,
+.rating-selector-one.active:hover {
 	color: #00B39D !important;
 }
 
-.rating-2.progress-bar, .rating-selector-two.active, .rating-two .calendar-top {
+.rating-2.progress-bar, 
+.rating-selector-two.active, 
+.rating-two .calendar-top {
 	background-color: #289EB5 !important;
 }
 
-.rating-two, .rating-selector-two:hover {
+.rating-two, 
+.rating-selector-two:hover {
 	background-color: #D0E2E5 !important;
 }
 
-.rating-two .mood, .rating-selector-two {
+.rating-two .mood, 
+.rating-selector-two,
+.rating-selector-two.active:hover {
 	color: #289EB5 !important;
 }
 
-.rating-3.progress-bar, .rating-selector-three.active, .rating-three .calendar-top {
+.rating-3.progress-bar, 
+.rating-selector-three.active, 
+.rating-three .calendar-top {
 	background-color: #568FC2 !important;
 }
 
-.rating-three, .rating-selector-three:hover {
+.rating-three, 
+.rating-selector-three:hover {
 	background-color: #D7DFE7 !important;
 }
 
-.rating-three .mood, .rating-selector-three {
+.rating-three .mood, 
+.rating-selector-three,
+.rating-selector-three.active:hover {
 	color: #568FC2 !important;
 }
 
-.rating-4.progress-bar, .rating-selector-four.active, .rating-four .calendar-top {
+.rating-4.progress-bar, 
+.rating-selector-four.active, 
+.rating-four .calendar-top {
 	background-color: #7770AE !important;
 }
 
-.rating-four, .rating-selector-four:hover {
+.rating-four, 
+.rating-selector-four:hover {
 	background-color: #DCDBE4 !important;
 }
 
-.rating-four .mood, .rating-selector-four {
+.rating-four .mood, 
+.rating-selector-four,
+.rating-selector-four.active:hover {
 	color: #7770AE !important;
 }
 
-.rating-5.progress-bar, .rating-selector-five.active, .rating-five .calendar-top {
+.rating-5.progress-bar, 
+.rating-selector-five.active, 
+.rating-five .calendar-top {
 	background-color: #9F54A1 !important;
 }
 
-.rating-five, .rating-selector-five:hover {
+.rating-five, 
+.rating-selector-five:hover {
 	background-color: #E2D7E2 !important;
 }
 
-.rating-five .mood, .rating-selector-five {
+.rating-five .mood, 
+.rating-selector-five,
+.rating-selector-five.active:hover {
 	color: #9F54A1 !important;
 }
 
@@ -542,11 +585,6 @@ a:hover {
 	font-style: italic;
 	font-size: 0.9em;
 	margin-top: 10px;
-}
-
-.rating-selectors {
-	display: table !important;
-	height: 80px;
 }
 
 h2.no-results, h1.dashboard-header, .title, .nav-wrapper .iconic {
