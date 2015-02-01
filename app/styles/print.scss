@@ -3,17 +3,42 @@ body {
 	min-height: 1px!important;
 }
 
+// Hiding all navigation elements, except for the client name
 .diary {
-	#sidebar {
+	.nav-item {
 		display: none!important;
 	}
+
+	.nav-stacked li {
+		border: none!important;
+	}
+
+	.settings {
+		display: block!important;
+
+		.iconic, 
+		.mobile {
+			display: none!important;
+		}
+	}
+}
+
+#next-session,
+.diary-page-contents-wrapper {
+	width: 100%!important;
+}
+
+#diary-menu {
+	width: 100%!important;
 }
 
 #diaryEntries {
 	display: block!important;
 
 	// Replicating grid layout
-	.col-md-12, .col-md-10, .col-md-2 {
+	.col-md-12, 
+	.col-md-10, 
+	.col-md-2 {
 		float: left;
 	}
 
