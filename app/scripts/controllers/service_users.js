@@ -326,8 +326,10 @@ angular.module('buddyClientApp')
         $scope.submitSessionPlan = function(session) {
             Session.update({id: session.id, session: session});
         };
-
-
+        $scope.reactivate = function() {
+            $scope.service_user.deactivated_at = null;
+            ServiceUser.update({user: $scope.service_user, id: $scope.service_user.id});
+        };
     }).controller('NewServiceUsersCtrl', function($scope, $state, Team, TeamClinician, CurrentUser, TeamServiceUser, HopscotchTour) {
         if (hopscotch.getState() === 'welcome-to-buddy:2') {
             hopscotch.startTour(HopscotchTour.tour(), 3);
