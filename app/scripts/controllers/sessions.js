@@ -26,6 +26,9 @@ angular.module('buddyClientApp')
         $scope.open = function() {
             $scope.opened = true;
         };
+        $scope.cancel = function() {
+            $modalInstance.dismiss('cancel');
+        };
         $scope.submit = function() {
             ServiceUserSession.save({service_user_id: userId, session: $scope.session}, function(res) {
                 $modalInstance.close(res);
