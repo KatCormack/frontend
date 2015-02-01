@@ -41,7 +41,11 @@ angular.module('buddyClientApp')
             var factory = $scope.user.type === 'Clinician' ? Clinician : ServiceUser;
             factory.update({id: $state.params.userId, token: $state.params.token, user: user}, function() {
                 Auth.login({user_session: $scope.user}).success(function() {
-                    $state.go('user.dashboard');
+                    if ($scope.user.type === 'Clinician') {
+                        $state.go('user.dashboard');
+                    } else {
+                        $state.go('serviceUser.diary');
+                    }
                 });
             }, function(result) {
 
