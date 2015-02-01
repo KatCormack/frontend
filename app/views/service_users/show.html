@@ -14,7 +14,7 @@
             </span>
           </li>
           <li class="settings nav-item">
-            <a ng-click="show('settings')">
+            <a ng-click="show('settings')" href="#">
               <span class="iconic" data-glyph="cog" title="settings" aria-hidden="true"></span>
               <span class="title">{{ service_user.full_name }}</span>
               <span class="buddy-id">{{ service_user.buddy_id }}</span><br />
@@ -23,7 +23,7 @@
           </li>
 
           <li class="nextSession nav-item" ng-if="Auth.isClinician()">
-            <a ng-click="show('nextSession')">
+            <a ng-click="show('nextSession')" href="#">
               <span class="iconic" data-glyph="calendar" title="calendar" aria-hidden="true"></span>
               <span class="title">
                 Next session<br />
@@ -33,7 +33,7 @@
             </a>
           </li>
           <li class="active diaryEntries nav-item" ng-if="Auth.isServiceUser() || current_user.has_caseload">
-            <a ng-click="show('diaryEntries')">
+            <a ng-click="show('diaryEntries')" href="#">
               <span class="iconic" data-glyph="book" title="book" aria-hidden="true"></span>
               <span class="title">Diary entries<br /></span>
               <span class="entry-count">
@@ -45,14 +45,14 @@
               </span>
             </a>
           </li>
-          <li class="sessionPlan nav-item" ng-if="Auth.isServiceUser()">
-            <a ng-click="show('sessionPlan')">
+          <li class="sessionPlan nav-item" ng-if="Auth.isServiceUser()" >
+            <a ng-click="show('sessionPlan')" href="#">
               <span class="iconic" data-glyph="copywriting" title="copywriting" aria-hidden="true"></span>
               <span class="title">Session plan</span>
             </a>
           </li>
           <li class="goals nav-item" ng-if="Auth.isServiceUser() || current_user.has_caseload">
-            <a ng-click="show('goals')">
+            <a ng-click="show('goals')" href="#">
               <span class="iconic" data-glyph="circle-check" title="circle-check" aria-hidden="true"></span>
               <span class="title">Goals<br /></span>
               <span class="goal-count">
@@ -65,7 +65,7 @@
             </a>
           </li>
           <li class="textMessage nav-item" ng-if="Auth.isServiceUser() || current_user.has_caseload">
-            <a ng-click="show('textMessage')">
+            <a ng-click="show('textMessage')" href="#">
               <span class="iconic" data-glyph="comment-square" title="comment-square" aria-hidden="true"></span>
               <span class="title">Text Message</span>
             </a>
@@ -160,7 +160,7 @@
             <div class="col-md-12 text-center footer" ng-if="Auth.isClinician()">
               <span class="deactivation-message" ng-if="service_user.deactivated_at">
                 This user has been deactivated
-                <a ng-click="reactivate(service_user.id)">Reactivate this user</a>
+                <a ng-click="reactivate(service_user.id)" href="#">Reactivate this user</a>
 
               </span>
               <span class="deactivation-message" ng-if="!service_user.deactivated_at && Auth.isClinician()">
@@ -283,7 +283,7 @@
                     </ng-pluralize>
                   </div>
                   <div class="col-md-6 text-right" ng-if="session.entries.length > 0">
-                    <a>
+                    <a href="#">
                       <span ng-if="session.visible">Hide entries</span>
                       <span ng-if="!session.visible">Show entries</span>
                     </a>
@@ -379,7 +379,7 @@
                 </label>
               </div>
               <div class="col-md-1">
-                <a ng-click="editGoal(goal)">edit</a>
+                <a ng-click="editGoal(goal)" href="#">edit</a>
               </div>
             </div>
           </div>
@@ -393,7 +393,7 @@
                   </div>
                   <div class="input-group col-md-4 text-right">
                     {{ 140-goal.text.length }}<br />
-                    <a ng-click="showGoalExamples()">Examples</a>
+                    <a ng-click="showGoalExamples()" href="#">Examples</a>
                   </div>
                 </div>
                 <div class="row">
@@ -435,7 +435,7 @@
                 </div>
                 <div class="row add-goal">
                   <div class="col-md-12 text-center">
-                    <a ng-click="cancelEditGoal(goal)">cancel</a>
+                    <a ng-click="cancelEditGoal(goal)" href="#">cancel</a>
                     <input type="submit" value="Save goal" class="btn-buddy btn" ng-submit="updateGoal(goal)">
                   </div>
                 </div>
@@ -452,7 +452,7 @@
                 </div>
                 <div class="input-group col-md-4 text-right">
                   {{ 140-newGoal.text.length }}<br />
-                  <a ng-click="showGoalExamples()">Examples</a>
+                  <a ng-click="showGoalExamples()" href="#">Examples</a>
                 </div>
               </div>
               <div class="row">
