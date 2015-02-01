@@ -24,7 +24,7 @@
       <div class="dashboard-icon plus-icon text-center">
         <span class="iconic iconic-md" data-glyph="plus" title="plus" aria-hidden="true"></span>
       </div>
-      <p><a href="/clinicians/new">Add a clinician</a> or<br />
+      <div ng-if="user.can_administer_account"><p><a href="/clinicians/new">Add a clinician</a> or<br /></div>
         <a ng-click="addServiceUser()" href="/service_users/new" class="add-service-user">Add a service user</a></p>
     </div>
     <div class="col-md-6 dashboard-box">
@@ -51,8 +51,6 @@
         </div>
         <p><a href="/clinicians">Manage clinicians</a><br />
           <span>{{ (clinicians | filter: {deactivated_at: null}).length }} active clinicians</span></p>
-        </div>
-
       </div>
     </div>
 
@@ -63,20 +61,17 @@
         </div>
         <p><a href="/reports">Download reports</a><br />
           <span>Learn how buddy is being used within your team</span></p>
-        </div>
-        <div class="col-md-6 dashboard-box">
-          <div class="dashboard-icon question-mark-icon text-center">
-            <span class="iconic iconic-md" data-glyph="question-mark" title="question-mark" aria-hidden="true"></span>
-          </div>
-          <p><a href="/tutorial">View the tutorial</a><br />
-            <span>Learn how to get started with Buddy</span></p>
-          </div>
-        </div>
+      </div>
+      <div class="col-md-6 dashboard-box">
+      <div class="dashboard-icon question-mark-icon text-center">
+        <span class="iconic iconic-md" data-glyph="question-mark" title="question-mark" aria-hidden="true"></span>
+      </div>
+      <p><a href="/tutorial">View the tutorial</a><br />
+        <span>Learn how to get started with Buddy</span></p>
       </div>
     </div>
   </div>
-
-    <div ng-if="!user.can_administer_account">
+  <div ng-if="!user.can_administer_account">
     <div class="row">
       <div class="col-md-6 dashboard-box first">
         <div class="dashboard-icon data-transfer-icon text-center">
@@ -90,7 +85,6 @@
         </div>
         <p><a href="/tutorial">View the tutorial</a><br />
           <span>Learn how to get started with Buddy</span></p>
-        </div>
       </div>
     </div>
   </div>

@@ -32,7 +32,7 @@
               </span>
             </a>
           </li>
-          <li class="active diaryEntries nav-item">
+          <li class="active diaryEntries nav-item" ng-if="Auth.isServiceUser() || current_user.has_caseload">
             <a ng-click="show('diaryEntries')">
               <span class="iconic" data-glyph="book" title="book" aria-hidden="true"></span>
               <span class="title">Diary entries<br /></span>
@@ -51,7 +51,7 @@
               <span class="title">Session plan</span>
             </a>
           </li>
-          <li class="goals nav-item">
+          <li class="goals nav-item" ng-if="Auth.isServiceUser() || current_user.has_caseload">
             <a ng-click="show('goals')">
               <span class="iconic" data-glyph="circle-check" title="circle-check" aria-hidden="true"></span>
               <span class="title">Goals<br /></span>
@@ -64,7 +64,7 @@
               </span>
             </a>
           </li>
-          <li class="textMessage nav-item">
+          <li class="textMessage nav-item" ng-if="Auth.isServiceUser() || current_user.has_caseload">
             <a ng-click="show('textMessage')">
               <span class="iconic" data-glyph="comment-square" title="comment-square" aria-hidden="true"></span>
               <span class="title">Text Message</span>
@@ -134,7 +134,7 @@
                 <input type="text" ng-model="service_user.nhs_number" placeholder="" class="form-control input-md" id="service_user_nhs_number">
               </div>
             </div>
-            <div class="col-md-6" ng-if="Auth.isClinician()">
+            <div class="col-md-6" ng-if="Auth.isClinician() && current_user.can_administer_account">
               <div class="form-group required">
                 <label for="service_user_clinician">Primary Clinician</label>
                 <select class="form-control" ng-model="service_user.clinician_id" ng-options="clinician.id as clinician.full_name for clinician in clinicians | orderBy: 'last_name' | filter: {deactivated_at: null}"></select>
@@ -146,7 +146,7 @@
                 <input type="text" ng-model="service_user.license_expiry_date" placeholder="" class="form-control input-md" id="service_user_license_expiry_date" disabled="disabled">
               </div>
             </div>
-            <div class="col-md-6" ng-if="Auth.isClinician()">
+            <div class="col-md-6" ng-if="Auth.isClinician() && current_user.can_administer_account">
               <div class="form-group required">
                 <label for="service_user_clinician">Team</label>
                 <select class="form-control" ng-model="service_user.account_id" ng-options="team.id as team.name for team in teams">
@@ -182,7 +182,7 @@
           </form>
 
         </div>
-        <div class="col-md-12 diary-page-contents-wrapper" id="diaryEntries">
+        <div class="col-md-12 diary-page-contents-wrapper" id="diaryEntries" ng-if="Auth.isServiceUser() || current_user.has_caseload">
           <div class="diary-page-contents col-md-12 text-center">
             <h2 class="title">Diary Entries and Mood Bar</h2>
             <div class="col-md-12">

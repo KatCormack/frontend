@@ -71,6 +71,7 @@ angular.module('buddyClientApp')
             TeamServiceUser.update({user: serviceUser, id: serviceUser.id, account_id: serviceUser.account_id});
         };
     }).controller('ServiceUserDiaryCtrl', function($scope, ServiceUser, $state, Entry, Session, ServiceUserGoal, Days, Team, TeamClinician, Goal, ServiceUserSession, Hours, CurrentUser, Auth, ExampleServiceUser, HopscotchTour) {
+        $scope.current_user = CurrentUser.user();
         $scope.Auth = Auth;
         var serviceUserId = $state.params.id || CurrentUser.user().id;
 
@@ -306,7 +307,11 @@ angular.module('buddyClientApp')
         };
 
         jQuery(document).ready(function() {
-            $scope.show('diaryEntries');
+            if (Auth.isServiceUser() || $scope.current_user.has_caseload) {
+                $scope.show('diaryEntries');
+            } else {
+                $scope.show('settings');
+            }
         });
         $scope.toggleEntries = function(session) {
             session.visible = !session.visible;
