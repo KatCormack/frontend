@@ -79,12 +79,12 @@
 
       <div class="tab-pane" id="sessions">
         <div class="panel-group" id="accordion">
-          <div class="panel panel-default" ng-if="(serviceUsers | filter: {clinician_id: user.id, current_session_time: null}).length > 0">
+          <div class="panel panel-default" ng-if="(serviceUsers | filter: {clinician_id: user.id, current_session_time: null, deactivated_at: null}).length > 0">
             <div class="panel-heading">
               <h4 class="panel-title">
                 <a data-toggle="collapse" data-parent="#accordion" href="#unscheduled">
                   Unscheduled Users
-                  <span class="badge user-count">{{ (serviceUsers | filter: {clinician_id: user.id, current_session_time: null}).length }}</span>
+                  <span class="badge user-count">{{ (serviceUsers | filter: {clinician_id: user.id, current_session_time: null, deactivated_at: null}).length }}</span>
                 </a>
               </h4>
             </div>
@@ -98,7 +98,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr ng-repeat="serviceUser in serviceUsers | orderBy:'last_name' | filter:{clinician_id: user.id, current_session_time: null}" class="list-row">
+                  <tr ng-repeat="serviceUser in serviceUsers | orderBy:'last_name' | filter:{clinician_id: user.id, current_session_time: null, deactivated_at: null}" class="list-row">
                     <td class="expand-link"><a ng-href="/service_users/{{serviceUser.id}}">{{ serviceUser.full_name }}<br />
                         <span class="buddy-id">{{ serviceUser.buddy_id }}</span>
                     </a></td>
@@ -111,7 +111,7 @@
               </table>
             </div>
           </div>
-          <div class="panel panel-default" ng-if="(serviceUsers | filter: {clinician_id: user.id, current_session_time: '!!'}).length > 0">
+          <div class="panel panel-default" ng-if="(serviceUsers | filter: {clinician_id: user.id, current_session_time: '!!', deactivated_at: null}).length > 0">
             <div class="panel-heading active">
               <h4 class="panel-title">
                 <a data-toggle="collapse" data-parent="#accordion" href="#scheduled">
@@ -130,7 +130,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr ng-repeat="serviceUser in serviceUsers | orderBy:'current_session_time' | filter:{clinician_id: user.id, current_session_time: '!!'}" class="list-row">
+                  <tr ng-repeat="serviceUser in serviceUsers | orderBy:'current_session_time' | filter:{clinician_id: user.id, current_session_time: '!!', deactivated_at: null}" class="list-row">
                     <td class="expand-link name" ng-class="{example: serviceUser.id == 'example'}"><a ng-href="/service_users/{{serviceUser.id}}">
                         {{ serviceUser.full_name }}<br />
                         <span class="buddy-id">{{ serviceUser.buddy_id }}</span>
