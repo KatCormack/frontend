@@ -282,21 +282,25 @@ angular.module('buddyClientApp')
             goal.opened = true;
         };
 
-        $scope.newGoal = {reminder_type: 'recurring', time: goalTime, text: '', day:{}};
+        $scope.newGoal = {reminder_type: 'recurring', time: goalTime, text: '', regular_reminder_schedule:{}};
+
         $scope.updateGoal = function(goal) {
-            Goal.save({id: goal.id, goal: goal}, function(res) {
-                goal = res;
+            Goal.update({id: goal.id, goal: goal}, function(res) {
+                res = goal;
+                res.editable = false;
             });
         };
+
 
         $scope.newGoalSubmit = function() {
             ServiceUserGoal.save({user_id: serviceUserId, goal: $scope.newGoal}, function(res) {
                 $scope.goals.push(res);
-                $scope.newGoal = {reminder_type: 'recurring', time: goalTime, text: '', day:{}};
+                $scope.newGoal = {reminder_type: 'recurring', time: goalTime, text: '', regular_reminder_schedule:{}};
+                _.each(Days, function(day) { $scope.newGoal.regular_reminder_schedule[day] = false; });
             });
         };
 
-        _.each(Days, function(day) { $scope.newGoal.day[day] = false; });
+        _.each(Days, function(day) { $scope.newGoal.regular_reminder_schedule[day] = false; });
         $scope.Days = Days;
 
         $scope.show = function(id) {

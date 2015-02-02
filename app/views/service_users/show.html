@@ -368,9 +368,9 @@
         </div>
 
         <div class="col-md-12 diary-page-contents diary-page-contents-wrapper" id="goals">
-          <div class="current-goals col-md-12" ng-if="(goals | filter: {removed_at: null, editable: '!'}).length > 0">
+          <div class="current-goals col-md-12" ng-if="(goals | filter: {removed_at: null, editable: '!true'}).length > 0">
             <h2 class="title text-center">Goals</h2>
-            <div class="row" ng-repeat="goal in goals | filter: {removed_at: null, editable: '!'}">
+            <div class="row" ng-repeat="goal in goals | filter: {removed_at: null, editable: '!true'}">
               <div class="col-md-11">
                 <label>
                   <input type="checkbox" ng-model="goal.removed" ng-change="toggleGoalChanged(goal)">
@@ -384,9 +384,10 @@
             </div>
           </div>
 
-          <div class="editable-goals col-md-12" ng-if="(goals | filter: {editable: '!!'}).length > 0">
-            <div ng-repeat="goal in goals | filter: {editable: '!!'}">
-              <form action="updateGoal(goal)">
+
+          <div class="editable-goals col-md-12" ng-if="(goals | filter: {editable: true}).length > 0">
+            <div ng-repeat="goal in goals | filter: {editable: true}">
+              <form ng-submit="updateGoal(goal)">
                 <div class="row">
                   <div class="input-group col-md-8">
                     <input type="text" ng-model="goal.text" class="form-control" />
@@ -436,7 +437,7 @@
                 <div class="row add-goal">
                   <div class="col-md-12 text-center">
                     <a ng-click="cancelEditGoal(goal)" href="#">cancel</a>
-                    <input type="submit" value="Save goal" class="btn-buddy btn" ng-submit="updateGoal(goal)">
+                    <input type="submit" value="Save goal" class="btn-buddy btn">
                   </div>
                 </div>
               </form>
