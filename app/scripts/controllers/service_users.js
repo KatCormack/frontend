@@ -204,7 +204,7 @@ angular.module('buddyClientApp')
                     });
 
                     $scope.sessions.reverse();
-                    if (moment($scope.currentSession.scheduled_at) < new Date()) {
+                    if (moment($scope.currentSession.scheduled_time) < new Date()) {
                         $scope.sessions.unshift({id: 'present', entries: allEntries, visible: true});
                     }
                     _.each($scope.sessions, function(session) {
