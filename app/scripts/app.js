@@ -73,7 +73,7 @@ angular.module('buddyClientApp', [
                 window.Intercom("boot", intercomUser);
                 $rootScope.$watch(function() { return Auth.isClinician }, function(oldVal, newVal) {
                     if (newVal) {
-                        $rootScope.$evalAsync(function() { 
+                        $rootScope.$evalAsync(function() {
                             window.Intercom("reattach_activator")
                         } );
                     }
@@ -130,6 +130,10 @@ angular.module('buddyClientApp', [
             url: '/p/:userId/:token',
             templateUrl: '/views/passwords/email_reset.html',
             controller: 'EmailPasswordResetCtrl'
+        }).state('anon.phoneResetPassword', {
+            url: '/rst',
+            templateUrl: '/views/passwords/phone_reset.html',
+            controller: 'PhonePasswordResetCtrl'
         }).state('anon.help', {
             url: '/help',
             templateUrl: '/views/help.html'

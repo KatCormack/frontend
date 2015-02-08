@@ -10,6 +10,15 @@ angular.module('buddyClientApp')
         };
     }).controller('PasswordSentCtrl', function($scope, $state) {
         $scope.email_or_mobile = $state.params.email_or_mobile;
+    }).controller('PhonePasswordResetCtrl', function($scope, $state, Password) {
+        $scope.password = {}
+        $scope.reset = function() {
+            var user = Password.query({mobile: $scope.password.mobile, token: $scope.password.token}, function() {
+                $state.go('anon.emailPasswordReset', {userId: user[0].id, token: user[0].password_reset_token});
+            }, function() {
+                $scope.incorrectPassword = true;
+            });
+        };
     }).controller('EmailPasswordResetCtrl', function($scope, Clinician, ServiceUser, $state, Auth, Password) {
         $scope.password = {};
         $scope.forgotPassword = function() {

@@ -1,0 +1,32 @@
+<form class="form-horizontal" ng-submit="reset()" name="loginForm">
+  <fieldset class="col-md-4 col-md-offset-4">
+    <!-- Form Name -->
+    <legend class="text-center">Reset password</legend>
+    <p>Please enter your mobile phone number and the token that was sent to you.</p>
+
+    <p class="alert alert-danger" ng-if="incorrectPassword">Please check you
+    have entered the correct mobile number and token, otherwise,
+    <a href="/passwords/forgot">request a new token</a></p>
+
+
+    <!-- Text input-->
+    <div class="form-group">
+      <div class="col-md-12">
+        <input id="mobile" name="mobile" type="text" placeholder="mobile phone number" class="form-control input-md" ng-model="password.mobile">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-md-12">
+        <input id="token" name="token" type="text" placeholder="token" class="form-control input-md" ng-model="password.token">
+      </div>
+    </div>
+
+
+    <!-- Button -->
+    <div class="form-group">
+      <div class="col-md-12">
+        <input type="submit" value="Reset my password" class="btn btn-buddy btn-block btn-lg">
+      </div>
+    </div>
+  </fieldset>
+</form>
