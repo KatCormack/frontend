@@ -15,7 +15,8 @@ angular.module('buddyClientApp', [
     'ui.router',
     'ui.bootstrap',
     'angularMoment',
-    'angularUtils.filters.ordinalDate'
+    'angularUtils.filters.ordinalDate',
+    'placeholderShim'
 ])
     .constant('APIHost', '')
     .constant('AccessLevels',{
