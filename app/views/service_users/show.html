@@ -14,7 +14,7 @@
             </span>
           </li>
           <li class="settings nav-item">
-            <a ng-click="show('settings')" href="#">
+            <a ng-click="show('settings')" href="#" ng-if="current_user.can_administer_account || current_user.id == service_user.id || current_user.id == service_user.clinician_id">
               <span class="iconic" data-glyph="cog" title="settings" aria-hidden="true"></span>
               <span class="title">{{ service_user.full_name }}</span>
               <span class="buddy-id">{{ service_user.buddy_id }}</span><br />
