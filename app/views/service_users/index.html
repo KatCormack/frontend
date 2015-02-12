@@ -33,15 +33,15 @@
         <table class="table table-bordered  table-striped">
           <thead>
             <tr>
-              <th>Name</th>
+              <th>Buddy ID</th>
               <th>Next session</th>
               <th>Settings</th>
             </tr>
           </thead>
           <tbody>
             <tr ng-repeat="serviceUser in serviceUsers | orderBy:'last_name' | filter:{deactivated_at: null}" class="list-row">
-              <td class="expand-link"><a ng-href="/service_users/{{serviceUser.id}}">{{ serviceUser.full_name }}<br />
-                  <span class="buddy-id">{{ serviceUser.buddy_id }}</span>
+              <td class="expand-link"><a ng-href="/service_users/{{serviceUser.id}}">
+                  {{ serviceUser.buddy_id }}
               </a></td>
               <td class="expand-link reactivate-user" ng-if="serviceUser.current_session_time" ng-click="rescheduleSession(serviceUser)">
                 <a href="#">
@@ -60,15 +60,15 @@
         <table class="table table-bordered  table-striped">
           <thead>
             <tr>
-              <th>Name</th>
+              <th>Buddy ID</th>
               <th>Reactivate user</th>
               <th>Settings</th>
             </tr>
           </thead>
           <tbody>
             <tr ng-repeat="serviceUser in serviceUsers | orderBy:'last_name' | filter:{deactivated_at: '!!'}" class="list-row">
-              <td class="expand-link"><a ng-href="/service_users/{{serviceUser.id}}">{{ serviceUser.full_name }}<br />
-                  <span class="buddy-id">{{ serviceUser.buddy_id }}</span>
+              <td class="expand-link"><a ng-href="/service_users/{{serviceUser.id}}">
+                  {{ serviceUser.buddy_id }}
               </a></td>
               <td class="reactivate-user expand-link" ng-click="reactivate(serviceUser)"><a href="#">Reactivate</a></td>
               <td class="expand-link settings"><a ng-href="/service_users/{{serviceUser.id}}/edit">Settings</a></td>
