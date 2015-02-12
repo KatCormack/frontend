@@ -6,7 +6,9 @@ angular.module('buddyClientApp')
         $scope.button_value = 'Reschedule';
         $scope.hstep = 1;
         $scope.mstep = 15;
-        $scope.session = Session.get({id: sessionId});
+        $scope.session = Session.get({id: sessionId}, function() {
+            $scope.user_id = $scope.session.user_id;
+        });
         $scope.open = function() {
             $scope.opened = true;
         };
@@ -22,6 +24,7 @@ angular.module('buddyClientApp')
         $scope.title = 'Schedule new session';
         $scope.button_value = 'Schedule';
         $scope.session = {};
+        $scope.user_id = userId;
         $scope.session.scheduled_time = moment().add(1, 'months').toDate();
         $scope.open = function() {
             $scope.opened = true;
