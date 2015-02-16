@@ -249,7 +249,16 @@ angular.module('buddyClientApp')
             });
 
             $scope.goals = ServiceUserGoal.query({user_id: serviceUserId}, function() {
-                _.map($scope.goals, function(goal) { goal.removed = !!goal.removed_at; });
+                _.map($scope.goals, function(goal) {
+                    goal.removed = !!goal.removed_at;
+                    if (goal.reminder_type == 'recurring') {
+                        goal.time = moment(new Date()).utc();
+                        goal.time.hours(goal.scheduled_reminder_hour);
+                        goal.time.minutes(goal.scheduled_reminder_minutes);
+                        goal.time = goal.time.local().toDate();
+                    }
+                    goal;
+                });
             });
         } else {
             var hopscotchState = hopscotch.getState();
@@ -285,6 +294,9 @@ angular.module('buddyClientApp')
         $scope.newGoal = {reminder_type: 'recurring', time: goalTime, text: '', regular_reminder_schedule:{}};
 
         $scope.updateGoal = function(goal) {
+            var utcTime = moment(goal.time);
+            goal.scheduled_reminder_hour = utcTime.hours();
+            goal.scheduled_reminder_minutes = utcTime.minutes();
             Goal.update({id: goal.id, goal: goal}, function(res) {
                 res = goal;
                 res.editable = false;
@@ -293,6 +305,9 @@ angular.module('buddyClientApp')
 
 
         $scope.newGoalSubmit = function() {
+            var utcTime = moment($scope.newGoal.time);
+            $scope.newGoal.scheduled_reminder_hour = utcTime.hours();
+            $scope.newGoal.scheduled_reminder_minutes = utcTime.minutes();
             ServiceUserGoal.save({user_id: serviceUserId, goal: $scope.newGoal}, function(res) {
                 $scope.goals.push(res);
                 $scope.newGoal = {reminder_type: 'recurring', time: goalTime, text: '', regular_reminder_schedule:{}};
