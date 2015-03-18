@@ -177,6 +177,26 @@ angular.module('buddyClientApp', [
             data: {
                 access: AccessLevels.clinician
             }
+        }).state('clinician.groups', {
+            url: '/groups' ,
+            templateUrl: '/views/groups/index.html',
+            controller: 'GroupsCtrl'
+        }).state('clinician.newGroup', {
+            url: '/groups/new',
+            templateUrl: '/views/groups/new.html',
+            controller: 'NewGroupCtrl'
+        }).state('clinician.showGroup', {
+            url: '/groups/:id',
+            templateUrl: '/views/groups/show.html',
+            controller: 'GroupCtrl'
+        }).state('clinician.groupGoals', {
+            url: '/groups/:id/goals',
+            templateUrl: '/views/groups/goals.html',
+            controller: 'GroupSessionsCtrl'
+        }).state('clinician.groupSessions', {
+            url: '/groups/:id/sessions',
+            templateUrl: '/views/groups/sessions.html',
+            controller: 'GroupSessionsCtrl'
         }).state('clinician.settings', {
             url: '/settings',
             templateUrl: '/views/clinicians/edit.html',

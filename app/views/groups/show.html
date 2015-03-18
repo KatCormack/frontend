@@ -1,0 +1,46 @@
+<div class="heading col-md-12">
+  <div class="container">
+    <div class="col-md-5 col-md-push-1 heading-unit-header">
+      <h1>{{ group.name }}</h1>
+    </div>
+    <div class="col-md-6 text-right heading-unit">
+      <a ng-href="/groups/{{group.id}}/goals" class="btn btn-buddy">Add a goal</a>
+      <a ng-href="/groups/{{group.id}}/sessions" class="btn btn-buddy">Add a session</a>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="col-md-push-1 col-md-10 list-container">
+    <div class="clinicians">
+      <h2>Clinicians</h2>
+      <ul>
+        <li ng-repeat="clinician in clinicians">
+          {{ clinician.id }} - {{ clinician.full_name }}
+          &nbsp;
+          (<a href="#" ng-click="removeClinician($index)">remove</a>)
+        </li>
+      </ul>
+      <form ng-submit="addUser(newClinician)">
+        <select ng-options="clinician.id as clinician.full_name for clinician in all_clinicians" ng-model="newClinician"></select>
+        <input type="submit" value="Add">
+      </form>
+    </div>
+    <div class="service_users">
+      <h2>Service Users</h2>
+      <ul>
+        <li ng-repeat="service_user in service_users">
+          <a href="/service_users/{{service_user.id}}">
+            {{ service_user.id }} - {{ service_user.full_name }}
+          </a>
+          &nbsp;
+          (<a href="#" ng-click="removeServiceUser($index)">remove</a>)
+        </li>
+      </ul>
+      <form ng-submit="addUser(newServiceUser)">
+        <select ng-options="service_user.id as service_user.full_name for service_user in all_service_users" ng-model="newServiceUser"></select>
+        <input type="submit" value="Add">
+      </form>
+    </div>
+  </div>
+</div>

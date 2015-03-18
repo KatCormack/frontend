@@ -1,0 +1,54 @@
+<form ng-submit="newGoalSubmit()">
+  <div class="row">
+    <div class="input-group col-md-8">
+      <input type="text" ng-model="newGoal.text" class="form-control" />
+    </div>
+    <div class="input-group col-md-4 text-right">
+      {{ 140-newGoal.text.length }}<br />
+      <a ng-click="showGoalExamples()" href="#">Examples</a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <label>How often should a reminder be sent off?</label>
+    </div>
+    <div class="col-md-12 text-center">
+      <label class="radio-inline"><input type="radio" ng-model="newGoal.reminder_type" value="recurring">Recurring</label>
+      <label class="radio-inline"><input type="radio" ng-model="newGoal.reminder_type" value="once">One-off</label>
+      <label class="radio-inline"><input type="radio" ng-model="newGoal.reminder_type" value="none">None</label>
+    </div>
+  </div>
+  <div class="row" ng-if="newGoal.reminder_type === 'recurring'">
+    <div class="col-md-12">
+      <label>On what days should the reminder be sent out?</label>
+    </div>
+    <div class="col-md-12 text-center">
+      <label class="checkbox-inline" ng-repeat="day in Days">
+        <input type="checkbox" ng-model="newGoal.regular_reminder_schedule[day]"/>
+        {{ day | limitTo: 1 | uppercase }}
+      </label>
+    </div>
+  </div>
+  <div class="row" ng-if="newGoal.reminder_type === 'once'">
+    <div class="input-group col-md-12">
+      <label>On what day should the reminder be sent out?</label>
+    </div>
+    <div class="input-group col-md-4 col-md-push-4">
+      <input type="text" datepicker-popup="dd/MM/yyyy" is-open="newGoal.opened" min-date="minDate" ng-required="true" close-text="Close" ng-click="open(newGoal, $event)" ng-model="newGoal.time" class="form-control input-medium"/>
+    </div>
+  </div>
+  <div class="row" ng-if="newGoal.reminder_type === 'recurring' || newGoal.reminder_type === 'once'">
+    <div class="input-group col-md-12">
+      <label>At what time should the reminder be sent out?</label>
+    </div>
+    <div class="input-group col-md-12 goal-time-wrapper" >
+      <timepicker ng-model="newGoal.time" hour-step="hstep" minute-step="mstep" show-meridian="false" class="goal-time time-without-arrows"></timepicker>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-group col-md-12 text-center">
+      <input type="submit" value="Add Goal" class="btn-buddy btn add-goal">
+    </div>
+  </div>
+
+</form>

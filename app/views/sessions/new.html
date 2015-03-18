@@ -1,0 +1,13 @@
+<form ng-submit="updateSession(nextSession)">
+  <div class="form-group">
+    <div class="modal-input-group input-group col-md-3">
+      <input type="text" datepicker-popup="dd/MM/yyyy" is-open="nextSession.opened" min-date="minDate" ng-required="true" close-text="Close" ng-click="open(nextSession, $event)" ng-model="nextSession.scheduled_time" class="form-control" />
+    </div>
+    <div class="modal-input-group input-group col-md-3">
+      <timepicker ng-model="nextSession.scheduled_time" hour-step="hstep" minute-step="mstep" show-meridian="false" class="time-without-arrows"></timepicker>
+    </div>
+    <div class="input-group by-timepicker-in-modal col-md-6 text-right">
+      <input type="submit" value="Save changes" class="btn-buddy btn">
+    </div>
+  </div>
+</form>

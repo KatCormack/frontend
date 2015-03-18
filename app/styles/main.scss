@@ -47,7 +47,7 @@ legend {
 	padding-bottom: 5px;
 }
 
-.NewServiceUsersCtrl, .EditServiceUserCtrl, .LoginCtrl, .DeactivateServiceUserCtrl, .NewClinicianCtrl, .EditClinicianCtrl, .ServiceUserDiaryCtrl, .UserDashboardCtrl {
+.NewServiceUsersCtrl, .EditServiceUserCtrl, .LoginCtrl, .DeactivateServiceUserCtrl, .NewClinicianCtrl, .EditClinicianCtrl, .ServiceUserDiaryCtrl, .UserDashboardCtrl, .NewGroupCtrl, .GroupGoalsCtrl, .GroupSessionsCtrl {
 	background-color: #eee;
 }
 
@@ -55,7 +55,7 @@ legend {
 	margin-bottom: 0px;
 }
 
-body.ServiceUsersCtrl, body.SearchCtrl, body.CliniciansCtrl, body.ServiceUserDiaryCtrl  {
+body.ServiceUsersCtrl, body.SearchCtrl, body.CliniciansCtrl, body.ServiceUserDiaryCtrl, body.GroupCtrl, body.GroupsCtrl  {
 	padding-top: 56px;
 }
 

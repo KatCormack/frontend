@@ -54,4 +54,16 @@ angular.module('buddyClientApp')
     })
     .factory('Goal', function($resource, APIHost) {
         return $resource(APIHost + '/api/v1/goals/:id.json', {id: '@id'}, {update: {method: 'PUT'}});
+    })
+    .factory('Group', function($resource, APIHost) {
+        return $resource(APIHost + '/api/v1/groups/:id.json', {id: '@id'}, {update: {method: 'PUT'}});
+    })
+    .factory('GroupServiceUser', function($resource, APIHost) {
+        return $resource(APIHost + '/api/v1/groups/:group_id/service_users.json', {group_id: '@group_id'}, {update: {method: 'PUT'}});
+    })
+    .factory('GroupClinician', function($resource, APIHost) {
+        return $resource(APIHost + '/api/v1/groups/:group_id/clinicians.json', {group_id: '@group_id'}, {update: {method: 'PUT'}});
+    })
+    .factory('GroupMembership', function($resource, APIHost) {
+        return $resource(APIHost + '/api/v1/groups/:group_id/group_memberships/:id.json', {group_id: '@group_id'}, {update: {method: 'PUT'}});
     });

@@ -1,0 +1,24 @@
+<div class="col-md-6 col-md-push-3 form-container">
+  <legend>
+    <h1>Add a group</h1>
+  </legend>
+  <form ng-submit="submit()">
+    <div class="col-md-12">
+      <div class="form-group required">
+        <label for="group_name" ng-class="{error: errors.name}">
+          Name
+          <span class="error-inline" ng-if="errors.name">{{ errors.name }}</span>
+        </label>
+        <input type="text" ng-model="group.name" placeholder="" class="form-control input-md" id="group_name">
+      </div>
+      <div class="col-md-12 footer">
+        <div class="col-md-6 text-right">
+          <input type="submit" class="btn btn-buddy right create-group" value="Create group">
+        </div>
+        <div class="col-md-6 cancel-button">
+          <a href="/dashboard">Cancel</a>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
