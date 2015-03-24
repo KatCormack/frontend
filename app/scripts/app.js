@@ -192,7 +192,7 @@ angular.module('buddyClientApp', [
         }).state('clinician.groupGoals', {
             url: '/groups/:id/goals',
             templateUrl: '/views/groups/goals.html',
-            controller: 'GroupSessionsCtrl'
+            controller: 'GroupGoalsCtrl'
         }).state('clinician.groupSessions', {
             url: '/groups/:id/sessions',
             templateUrl: '/views/groups/sessions.html',
