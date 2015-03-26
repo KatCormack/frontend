@@ -42,7 +42,7 @@ angular.module('buddyClientApp').
 
 
         $scope.remove = function(user, type, idx) {
-            GroupMembership.delete({group_id: $scope.group.id, id: user.id}, function() {
+            GroupMembership.remove({group_id: $scope.group.id, id: user.id}, function() {
                 if (type === 'service_user') {
                     $scope.service_users.splice(idx, 1);
                 } else {
