@@ -25,7 +25,9 @@ angular.module('buddyClientApp')
         $scope.button_value = 'Schedule';
         $scope.session = {};
         $scope.user_id = userId;
-        $scope.session.scheduled_time = moment().add(1, 'months').toDate();
+        $scope.session.scheduled_time = moment().add(1, 'months').toDate().toString();
+        $scope.hstep = 1;
+        $scope.mstep = 15;
         $scope.open = function() {
             $scope.opened = true;
         };
