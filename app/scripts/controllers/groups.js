@@ -4,11 +4,11 @@ angular.module('buddyClientApp').
     controller('GroupsCtrl', function($scope, Group) {
         $scope.groups = Group.query();
     }).
-    controller('NewGroupCtrl', function($scope, Group) {
+    controller('NewGroupCtrl', function($scope, Group, $state) {
         $scope.group = {};
         $scope.submit = function() {
-            Group.save({group: $scope.group}, function() {
-
+            Group.save({group: $scope.group}, function(res) {
+                $state.go('clinician.showGroup', {id: res.id});
             });
         };
     }).
