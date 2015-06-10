@@ -345,6 +345,7 @@
             <div class="form-group" ng-if="service_user.type_of_message=='custom'">
               <div class="col-md-push-1 col-md-10">
                 <textarea class="form-control" ng-model="service_user.daily_entry_text_message"></textarea>
+                {{ 160 - service_user.daily_entry_text_message }} characters remaining
               </div>
             </div>
             <div class="form-group">
